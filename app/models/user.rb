@@ -6,5 +6,5 @@ class User < ActiveRecord::Base
 
   has_many :interests, dependent: :destroy
   has_many :movies, through: :interests
-
+#2do
 end
