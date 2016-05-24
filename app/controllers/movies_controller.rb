@@ -1,8 +1,9 @@
 class MoviesController < ApplicationController
 
   def index
+    @movies = policy_scope(Movie)
     title = params[:title]
-    @movies = title.nil? ? Movie.all : Movie.where('title LIKE ? OR original_title LIKE ?', "%#{title}%", "%#{title}%")
+    @movies = @movies.where('title ILIKE ? OR original_title ILIKE ?', "%#{title}%", "%#{title}%") if title
     respond_to do |format|
       format.html
       format.json
@@ -12,6 +13,7 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+    authorize @movie
     respond_to do |format|
       format.html
       format.json
