@@ -1,3 +1,29 @@
-// Place all the styles related to the movies controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.movie-info-container {
+  display: flex;
+  justify-content: flex-center;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+.movie-poster-show {
+  flex: 0 1 200px;
+  margin: 0 auto;
+}
+.movie-basic-info {
+  flex: 1 1 250px;
+  margin-left: 10px;
+}
+.score-container {
+  flex: 0 0 auto;
+  margin-left: 10px;
+}
+
+//2do : move to config/_variables
+$star-gray: rgba(0, 0, 0, .2);
+$star-yellow: #FFB400;
+
+.rating-enabled {
+  color: $star-yellow;
+}
+.rating-enabled {
+  color: $star-gray;
+}
