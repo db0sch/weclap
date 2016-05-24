@@ -12,6 +12,7 @@ class InterestsController < ApplicationController
     @interest.movie = @movie
     @interest.user = current_user
     authorize @interest     
+    # authorize @movie    
     if @interest.save
       redirect_to movie_path(@movie)
     else

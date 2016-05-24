@@ -7,5 +7,6 @@ class InterestPolicy < ApplicationPolicy
 
   def create?
     !user.interests.map(&:movie).include?(record.movie)
+    # !user.interests.map(&:movie).include?(record)
   end
 end
