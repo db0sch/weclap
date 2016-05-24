@@ -1,0 +1,88 @@
+.movie-item {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+}
+
+/* Body design */
+.movie-item-body {
+  flex: 1 1 auto;
+}
+.movie-item-body h3 {
+  font-weight: bold;
+  font-size: 23px;
+  margin-top: 0;
+}
+.movie-item-body p {
+  font-weight: lighter;
+  color: #999999;
+  margin-bottom: 0;
+}
+
+/* movie-item image */
+.movie-item-image {
+  border-radius: 10px;
+  margin-right: 20px;
+  width: 50px;
+}
+
+/* Upvote design */
+.movie-item-upvote {
+  padding-right: 20px;
+  text-align: center;
+  transition: all 0.15s ease;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 20px;
+}
+.movie-item-count {
+  margin: 2px 0 0;
+}
+.movie-item-arrow {
+  transition: all 0.15s ease;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid transparent;
+  border-bottom: 9px solid black;
+  border-radius: 2px;
+  margin: auto;
+}
+
+/* Controls design */
+.movie-item-controls {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0px;
+}
+.movie-item-controls a {
+  padding: 0 20px;
+  font-size: 17px;
+  color: #E6E6E6;
+}
+.movie-item-controls a:hover {
+  color: #D3473C !important
+}
+.movie-item-controls-hidden a {
+  color: transparent;
+  font-size: 15px;
+  transition: all 0.15s ease;
+  border-color: transparent;
+}
+
+/* Hover effects */
+.movie-item:hover {
+  background: #f7f7fa;
+  cursor: pointer;
+}
+.movie-item-upvote:hover {
+  color: #5898f1;
+  cursor: pointer;
+}
+.movie-item:hover .movie-item-upvote { transform: scale(1.2) }
+.movie-item:hover .movie-item-controls-hidden a { color: #E6E6E6 }
+.movie-item-upvote:hover .movie-item-arrow { border-bottom: 9px solid #5898f1 }
