@@ -1,0 +1,7 @@
+<%# render 'shared/movie_list, list: @movies' %>
+<h3>Movies</h3>
+<ul>
+  <% @movies.each do |movie| %>
+    <li><%= link_to movie.title, movie %></li>
+  <% end %>
+</ul>
