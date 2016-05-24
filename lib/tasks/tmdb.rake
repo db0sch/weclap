@@ -8,25 +8,24 @@ namespace :tmdb do
   task seed_db: :environment do
     Tmdb::Api.key(ENV['TMDB_API_KEY'])
     count = 1
-    p Tmdb::Movie.popular.count
-    fargo = Tmdb::Movie.crew(275)
-    p fargo
-    Tmdb::Movie.popular.each do |popular|
 
-      def get_youtube(title)
-        titleplus = title.gsub(" ", "+")
-        trailer = Nokogiri::HTML(open("https://www.youtube.com/results?search_query=#{titleplus}+trailer")).search(".yt-lockup-title").children.attribute('href').value.gsub("watch?v=","")
-        if !trailer.nil?
-          return trailer
-        else
-          return ''
-        end
+    def get_youtube(title)
+      titleplus = title.gsub(" ", "+")
+      trailer = Nokogiri::HTML(open("https://www.youtube.com/results?search_query=#{titleplus}+trailer")).search(".yt-lockup-title").children.attribute('href').value.gsub("watch?v=","")
+      if !trailer.nil?
+        return trailer
+      else
+        return ''
       end
+    end
 
-      count += 1
-      film = Tmdb::Movie.detail(popular.id)
+    p Tmdb::Movie.top_rated.count
+    api_url = "http://api.themoviedb.org/3/list/522effe419c2955e9922fcf3?sort_by=popularity.desc&api_key=#{ENV['TMDB_API_KEY']}"
 
-      movie = Movie.new({
+    open(api_url) do |stream|
+      quote = JSON.parse(stream.read)
+      quote['items'].each do |film|
+        movie = Movie.new({
         title: film['title'],
         original_title: film['original_title'],
         runtime: film['runtime'],
@@ -45,15 +44,29 @@ namespace :tmdb do
         production_countries: film['production_countries'],
         release_date: film['release_date'],
         spoken_languages: film['spoken_languages'],
-        credits: {cast: Tmdb::Movie.casts(popular.id), crew: Tmdb::Movie.crew(popular.id)},
-        trailer_url: "https://www.youtube.com/embed/#{get_youtube(film['title'])}",
+        credits: {cast: Tmdb::Movie.casts(film['id']), crew: Tmdb::Movie.crew(film['id'])},
+        trailer_url: "https://www.youtube.com/embed#{get_youtube(film['title'])}",
         website_url: "http://www.imdb.com/title/#{film['imdb_id']}",
         cnc_url: "http://vad.cnc.fr/titles?search=#{film['title'].gsub(" ", "+")}&format="
         })
-      movie.save
-      sleep 5
-      p movie.title
+        movie.save
+        sleep 5
+        p movie.title
     end
+
+
+
+
+
+    # Tmdb::Movie.popular.each do |popular|
+
+
+
+    #   count += 1
+    #   film = Tmdb::Movie.detail(popular.id)
+
+
+     end
   end
 
 end
