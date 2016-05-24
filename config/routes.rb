@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index] do
     resources :watchlists, only: [:index]
   end
+  resources :interests, only: [:create, :update, :destroy]
   root to: 'pages#home'
 
 
