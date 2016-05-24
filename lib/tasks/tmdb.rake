@@ -22,14 +22,14 @@ namespace :tmdb do
 
     open(api_url) do |stream|
       quote = JSON.parse(stream.read)
-      quote['items'].first(20).each do |film|
+      quote['items'].each do |film|
         movie = Movie.new({
         title: film['title'],
         original_title: film['original_title'],
         runtime: film['runtime'],
         tagline: film['tagline'],
         genres: film['genres'],
-        poster_url: film['poster_path'],
+        poster_url: "http://image.tmdb.org/t/p/w500/" + film['poster_path'],
         imdb_id: film['imdb_id'],
         imdb_score: film['imdb_score'],
         tmdb_id: film['tmdb_id'],
