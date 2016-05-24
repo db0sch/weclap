@@ -1,1 +1,39 @@
-Movie description for <strong><%= @movie.title %></strong>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+          <div class="movie-info-container">
+            <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/200x300" : @movie.poster_url), size: "200x300", alt: "", class: "img-responsive movie-poster-show") %>
+            <div class="movie-basic-info">
+              <h2><%= @movie.title %></h2>
+              <p>Released on <strong><%= @movie.release_date %></strong></p>
+              <p>Directed by </p>
+              <p>Lasts <strong><%= @movie.runtime %></strong></p>
+              <p>Cast </p>
+            </div>
+            <div class="score-container">
+              <% if @movie.popularity %>
+                <span class="score-value">score <%= "%1.1f" % @movie.popularity %></span>
+                <% (1..5).each do |score| %>
+                  <%= icon 'hand-spock-o', class: score <= (@movie.popularity / 2).round ? 'rating-enabled' : 'rating-disabled' %>
+                <% end %>
+              <% else %>
+                No score available...
+              <% end %>
+              <% if false %>
+                <%# button_to 'add to watchlist', interests_path %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h4>Synopsis</h4>
+        <p><%= @movie.overview %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">SHOWS &amp; STREAMINGS</div>
+    </div>
+  </div>
+</div>
