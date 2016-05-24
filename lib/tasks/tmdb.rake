@@ -1,119 +1,72 @@
+
+require 'open-uri'
+require 'nokogiri'
+require 'csv'
+
 namespace :tmdb do
   desc "TODO"
   task seed_db: :environment do
-    p ENV['TMDB_API_KEY']
     Tmdb::Api.key(ENV['TMDB_API_KEY'])
-
     count = 1
-    count += 1
-    film = Tmdb::Movie.detail(count)
 
-    p film
-    # Tmdb::Movie.casts(550)
+    def get_youtube(title)
+      titleplus = title.gsub(" ", "+")
+      trailer = Nokogiri::HTML(open("https://www.youtube.com/results?search_query=#{titleplus}+trailer")).search(".yt-lockup-title").children.attribute('href').value.gsub("watch?v=","")
+      if !trailer.nil?
+        return trailer
+      else
+        return ''
+      end
+    end
 
-    # def find_director(count)
-    #   Tmdb::Movie.crew(550).each do |c|
-    #     return c['name'] if c['job'].include?("Director") && c['department'].include?("Directing")
-    #   end
-    # end
+    p Tmdb::Movie.top_rated.count
+    api_url = "http://api.themoviedb.org/3/list/522effe419c2955e9922fcf3?sort_by=popularity.desc&api_key=#{ENV['TMDB_API_KEY']}"
 
-    # p find_director(550)
-
-
-
-
-  # create_table "movies", force: :cascade do |t|
-  #   t.string   "title"
-  #   t.string   "original_title"
-  #   t.date     "released_fr"
-  #   t.integer  "runtime"
-  #   t.string   "tagline"
-  #   t.string   "genre"
-  #   t.text     "credits"
-  #   t.string   "poster_url"
-  #   t.string   "trailer_url"
-  #   t.string   "website_url"
-  #   t.string   "imdb_id"
-  #   t.integer  "imdb_score"
-  #   t.string   "cnc_url"
-  #   t.integer  "tmdb_id"
-  #   t.datetime "created_at",           null: false
-  #   t.datetime "updated_at",           null: false
-  #   t.string   "adult"
-  #   t.integer  "budget"
-  #   t.string   "genres"
-  #   t.text     "overview"
-  #   t.float    "popularity"
-  #   t.string   "original_language"
-  #   t.string   "poster_path"
-  #   t.text     "production_countries"
-  #   t.string   "release_date"
-  #   t.text     "spoken_languages"
-
-
-    # Movie.new({
-    #   title:              film["Fight Club"],
-    #   original_title:     film["original_title"],
-    #   released_fr:        film["release_date"],
-    #   runtime:            film["runtime"],
-    #   tagline:            film["tagline"],
-    #   summary:            film["overview"],
-    #   genre:              film["genres"],
-    #   parental_rating:    film["adult"],
-    #   credits:            {Tmdb::Movie.crew(count), Tmdb::Movie.casts(count)},
-    #   poster_url:         film["poster_path"],
-    #   trailer_url:        film["adult"],
-    #   website_url:        film["adult"],
-    #   imdb_id:            film["adult"],
-    #   imdb_score:         film["popularity"],
-    #   cnc_url:            film["adult"],
-    #   tmdb_id:            film["id"]
-    # })
-
-    # Movie.new()
-    # t.string   "title"
-    # t.string   "original_title"
-    # t.date     "released_fr"
-    # t.integer  "runtime"
-    # t.string   "tagline"
-    # t.text     "summary"
-    # t.string   "genre"
-    # t.integer  "parental_rating"
-    # t.text     "credits"
-    # t.string   "poster_url"
-    # t.string   "trailer_url"
-    # t.string   "website_url"
-    # t.string   "imdb_id"
-    # t.integer  "imdb_score"
-    # t.string   "cnc_url"
-    # t.integer  "tmdb_id"
-    # t.datetime "created_at",      null: false
-    # t.datetime "updated_at",      null: false
-
-
- # "backdrop_path"=>"/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg",
- #  "genres"=>[{"id"=>18, "name"=>"Drama"}],
- #  "homepage"=>"http://www.foxmovies.com/movies/fight-club", "id"=>550, "imdb_id"=>"tt0137523",
- #  "original_language"=>"en", "original_title"=>"Fight Club",
- #  "overview"=>"A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.",
- #  "popularity"=>4.517329, "poster_path"=>"/811DjJTon9gD6hZ8nCjSitaIXFQ.jpg",
- #   "production_companies"=>[{"name"=>"Regency Enterprises", "id"=>508},
- #    {"name"=>"Fox 2000 Pictures", "id"=>711}, {"name"=>"Taurus Film", "id"=>20555},
- #    {"name"=>"Linson Films", "id"=>54050}, {"name"=>"Atman Entertainment", "id"=>54051},
- #     {"name"=>"Knickerbocker Films", "id"=>54052}], "
- #     production_countries"=>[{"iso_3166_1"=>"DE", "name"=>"Germany"}, {"iso_3166_1"=>"US", "name"=>"United States of America"}],
- #     "release_date"=>"1999-10-14", "revenue"=>100853753, "runtime"=>139,
- #     "spoken_languages"=>[{"iso_639_1"=>"en", "name"=>"English"}],
- #     "status"=>"Released", "tagline"=>"How much can you know about yourself if you've never been in a fight?",
- #      "title"=>"Fight Club", "video"=>false, "vote_average"=>8.0, "vote_count"=>4808}
+    open(api_url) do |stream|
+      quote = JSON.parse(stream.read)
+      quote['items'].each do |film|
+        movie = Movie.new({
+        title: film['title'],
+        original_title: film['original_title'],
+        runtime: film['runtime'],
+        tagline: film['tagline'],
+        genres: film['genres'],
+        poster_url: film['poster_url'],
+        imdb_id: film['imdb_id'],
+        imdb_score: film['imdb_score'],
+        tmdb_id: film['tmdb_id'],
+        adult: film['adult'],
+        budget: film['budget'],
+        overview: film['overview'],
+        popularity: film['popularity'],
+        original_language: film['original_language'],
+        poster_path: film['poster_url'],
+        production_countries: film['production_countries'],
+        release_date: film['release_date'],
+        spoken_languages: film['spoken_languages'],
+        credits: {cast: Tmdb::Movie.casts(film['id']), crew: Tmdb::Movie.crew(film['id'])},
+        trailer_url: "https://www.youtube.com/embed#{get_youtube(film['title'])}",
+        website_url: "http://www.imdb.com/title/#{film['imdb_id']}",
+        cnc_url: "http://vad.cnc.fr/titles?search=#{film['title'].gsub(" ", "+")}&format="
+        })
+        movie.save
+        sleep 5
+        p movie.title
+    end
 
 
 
 
-{"adult"=>false, "backdrop_path"=>"/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg", "belongs_to_collection"=>nil, "budget"=>63000000, "genres"=>[{"id"=>18, "name"=>"Drama"}], "homepage"=>"http://www.foxmovies.com/movies/fight-club", "id"=>550, "imdb_id"=>"tt0137523", "original_language"=>"en", "original_title"=>"Fight Club", "overview"=>"A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.", "popularity"=>4.517329, "poster_path"=>"/811DjJTon9gD6hZ8nCjSitaIXFQ.jpg", "production_companies"=>[{"name"=>"Regency Enterprises", "id"=>508}, {"name"=>"Fox 2000 Pictures", "id"=>711}, {"name"=>"Taurus Film", "id"=>20555}, {"name"=>"Linson Films", "id"=>54050}, {"name"=>"Atman Entertainment", "id"=>54051}, {"name"=>"Knickerbocker Films", "id"=>54052}], "production_countries"=>[{"iso_3166_1"=>"DE", "name"=>"Germany"}, {"iso_3166_1"=>"US", "name"=>"United States of America"}], "release_date"=>"1999-10-14", "revenue"=>100853753, "runtime"=>139, "spoken_languages"=>[{"iso_639_1"=>"en", "name"=>"English"}], "status"=>"Released", "tagline"=>"How much can you know about yourself if you've never been in a fight?", "title"=>"Fight Club", "video"=>false, "vote_average"=>8.0, "vote_count"=>4808}
-"David Fincher"
+
+    # Tmdb::Movie.popular.each do |popular|
 
 
+
+    #   count += 1
+    #   film = Tmdb::Movie.detail(popular.id)
+
+
+     end
   end
 
 end
