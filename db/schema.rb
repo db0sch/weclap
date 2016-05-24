@@ -11,10 +11,78 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520193725) do
+ActiveRecord::Schema.define(version: 20160523205130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "interests", force: :cascade do |t|
+    t.datetime "watched_on"
+    t.integer  "user_id"
+    t.integer  "movie_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "interests", ["movie_id"], name: "index_interests_on_movie_id", using: :btree
+  add_index "interests", ["user_id"], name: "index_interests_on_user_id", using: :btree
+
+  create_table "movies", force: :cascade do |t|
+    t.string   "title"
+    t.string   "original_title"
+    t.date     "released_fr"
+    t.integer  "runtime"
+    t.string   "tagline"
+    t.text     "summary"
+    t.string   "genre"
+    t.integer  "parental_rating"
+    t.text     "credits"
+    t.string   "poster_url"
+    t.string   "trailer_url"
+    t.string   "website_url"
+    t.string   "imdb_id"
+    t.integer  "imdb_score"
+    t.string   "cnc_url"
+    t.integer  "tmdb_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "providers", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shows", force: :cascade do |t|
+    t.datetime "starts_at"
+    t.integer  "movie_id"
+    t.integer  "theater_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "shows", ["movie_id"], name: "index_shows_on_movie_id", using: :btree
+  add_index "shows", ["theater_id"], name: "index_shows_on_theater_id", using: :btree
+
+  create_table "streamings", force: :cascade do |t|
+    t.string   "consumption"
+    t.string   "link"
+    t.integer  "price"
+    t.integer  "movie_id"
+    t.integer  "provider_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "streamings", ["movie_id"], name: "index_streamings_on_movie_id", using: :btree
+  add_index "streamings", ["provider_id"], name: "index_streamings_on_provider_id", using: :btree
+
+  create_table "theaters", force: :cascade do |t|
+    t.string   "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -29,9 +97,23 @@ ActiveRecord::Schema.define(version: 20160520193725) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "address"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "picture"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "token"
+    t.datetime "token_expiry"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "interests", "movies"
+  add_foreign_key "interests", "users"
+  add_foreign_key "shows", "movies"
+  add_foreign_key "shows", "theaters"
+  add_foreign_key "streamings", "movies"
+  add_foreign_key "streamings", "providers"
 end
