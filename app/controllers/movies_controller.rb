@@ -1,15 +1,14 @@
 class MoviesController < ApplicationController
 
   def index
-    @movies = Movies.all
-    # @movies = policy_scope(Movie)
-    # title = params[:title]
-    # @movies = @movies.where('title ILIKE ? OR original_title ILIKE ?', "%#{title}%", "%#{title}%") if title
-    # respond_to do |format|
-    #   format.html
-    #   format.json
-    #   format.js
-    # end
+    @movies = policy_scope(Movie)
+    title = params[:title]
+    @movies = @movies.where('title ILIKE ? OR original_title ILIKE ?', "%#{title}%", "%#{title}%") if title
+    respond_to do |format|
+      format.html
+      format.json
+      format.js
+    end
   end
 
   def show
