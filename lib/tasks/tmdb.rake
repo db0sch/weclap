@@ -18,20 +18,18 @@ namespace :tmdb do
         return ''
       end
     end
-
-    p Tmdb::Movie.top_rated.count
     api_url = "http://api.themoviedb.org/3/list/522effe419c2955e9922fcf3?sort_by=popularity.desc&api_key=#{ENV['TMDB_API_KEY']}"
 
     open(api_url) do |stream|
       quote = JSON.parse(stream.read)
-      quote['items'].each do |film|
+      quote['items'].first(20).each do |film|
         movie = Movie.new({
         title: film['title'],
         original_title: film['original_title'],
         runtime: film['runtime'],
         tagline: film['tagline'],
         genres: film['genres'],
-        poster_url: film['poster_url'],
+        poster_url: film['poster_path'],
         imdb_id: film['imdb_id'],
         imdb_score: film['imdb_score'],
         tmdb_id: film['tmdb_id'],
@@ -49,6 +47,8 @@ namespace :tmdb do
         website_url: "http://www.imdb.com/title/#{film['imdb_id']}",
         cnc_url: "http://vad.cnc.fr/titles?search=#{film['title'].gsub(" ", "+")}&format="
         })
+        movie.valid?
+        p movie.errors.full_messages
         movie.save
         sleep 5
         p movie.title
