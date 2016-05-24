@@ -1,6 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
-require "WEBrick"
+# require "WEBrick"
 
 # imdb, rotten tomatoes
 def search_vod(query)
