@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160523205130) do
+ActiveRecord::Schema.define(version: 20160524101626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,9 +33,7 @@ ActiveRecord::Schema.define(version: 20160523205130) do
     t.date     "released_fr"
     t.integer  "runtime"
     t.string   "tagline"
-    t.text     "summary"
     t.string   "genre"
-    t.integer  "parental_rating"
     t.text     "credits"
     t.string   "poster_url"
     t.string   "trailer_url"
@@ -44,8 +42,18 @@ ActiveRecord::Schema.define(version: 20160523205130) do
     t.integer  "imdb_score"
     t.string   "cnc_url"
     t.integer  "tmdb_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "adult"
+    t.integer  "budget"
+    t.string   "genres"
+    t.text     "overview"
+    t.float    "popularity"
+    t.string   "original_language"
+    t.string   "poster_path"
+    t.text     "production_countries"
+    t.string   "release_date"
+    t.text     "spoken_languages"
   end
 
   create_table "providers", force: :cascade do |t|
