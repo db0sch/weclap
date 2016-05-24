@@ -8,5 +8,5 @@ class Movie < ActiveRecord::Base
   has_many :streamings, dependent: :destroy
   has_many :providers, through: :streamings
 
-  validates :imdb_id, uniqueness: true
+  # validates :imdb_id, uniqueness: true
 end
