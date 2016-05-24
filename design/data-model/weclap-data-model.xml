@@ -48,7 +48,7 @@
         <datatype>VARCHAR</datatype>
         <default>NULL</default></row>
         <row name="released_fr" null="1" autoincrement="0">
-          <datatype>TIMESTAMP</datatype>
+          <datatype>DATE</datatype>
           <default>NULL</default></row>
           <row name="runtime" null="0" autoincrement="0">
             <datatype>INT</datatype>
@@ -86,6 +86,9 @@
                               <row name="cnc_url" null="1" autoincrement="0">
                                 <datatype>VARCHAR</datatype>
                                 <default>NULL</default></row>
+                                <row name="tmdb_id" null="0" autoincrement="0">
+                                  <datatype>INT</datatype>
+                                </row>
                                 <key type="PRIMARY" name="">
                                   <part>id</part>
                                 </key>
@@ -121,14 +124,14 @@
                                         <datatype>INT</datatype>
                                         <relation table="theaters" row="id" />
                                       </row>
-                                      <row name="showtimes" null="1" autoincrement="0">
-                                        <datatype>VARCHAR</datatype>
+                                      <row name="starts_at" null="1" autoincrement="0">
+                                        <datatype>TIMESTAMP</datatype>
                                         <default>NULL</default></row>
                                         <key type="PRIMARY" name="">
                                           <part>id</part>
                                         </key>
                                       </table>
-                                      <table x="75" y="21" name="users">
+                                      <table x="61" y="107" name="users">
                                         <row name="id" null="0" autoincrement="1">
                                           <datatype>INT</datatype>
                                           <default>NULL</default></row>

@@ -19,6 +19,7 @@ gem 'simple_form'
 gem 'autoprefixer-rails'
 gem 'pundit'
 gem 'geocoder'
+gem 'omniauth-facebook'
 
 
 group :development, :test do
