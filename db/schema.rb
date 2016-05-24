@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524101626) do
+ActiveRecord::Schema.define(version: 20160524204838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20160524101626) do
     t.string   "original_language"
     t.string   "poster_path"
     t.text     "production_countries"
-    t.string   "release_date"
     t.text     "spoken_languages"
+    t.date     "release_date"
   end
 
   create_table "providers", force: :cascade do |t|
