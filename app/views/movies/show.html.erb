@@ -1,1 +1,3 @@
 Movie description for <strong><%= @movie.title %></strong>
+
+<%= link_to "Add to watchlist", interests_path(movie_id: @movie), method: :post, class: "btn btn-success" %>

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :movies, only: [:show, :index]
   resources :users, only: [:index] 
   get '/users/:user_id/watchlist' => 'interests#index'
+  resources :interests, only: [:create, :update, :destroy]
   root to: 'pages#home'
 
 
