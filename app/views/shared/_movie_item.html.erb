@@ -1,0 +1,22 @@
+<div class="col-xs-12">
+  <div class="movie-item">
+    <% if movie.poster_url %>
+      <%= image_tag "http://image.tmdb.org/t/p/w500/" + movie.poster_url, alt: movie.title, class: "movie-item-image hidden-xs" %>
+
+    <% else %>
+      <%= image_tag "http://placehold.it/40x60", alt: "placeholder", class: "movie-item-image hidden-xs" %>
+    <% end %>
+    <!-- <img src="http://placehold.it/40x60" alt="kudoz" class="movie-item-image hidden-xs"> -->
+    <div class='movie-item-body'>
+      <h3><%= link_to movie.title, movie %></h3>
+<!--       <p>Réal: Steven Spielberg</p> -->
+    </div>
+    <ul class="list-inline movie-item-controls hidden-sm hidden-xs">
+    <% if current_user.movies.include?(movie) %>
+      <li><a href=""><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></a></li>
+    <% else %>
+      <%= link_to "Add to watchlist", interests_path(movie_id: movie), method: :post, class: "btn btn-success" %>
+    <% end %>
+    </ul>
+  </div>
+</div>

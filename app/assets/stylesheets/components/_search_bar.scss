@@ -1,0 +1,34 @@
+.movie-search-bar-form {
+  display: flex;
+}
+
+.movie-search-field {
+  margin-right: 0px;
+  flex: 1 0 300px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  transition: all 0.15s ease;
+  line-height: 40px;
+  font-weight: lighter;
+  padding: 0 10px;
+  font-size: 14px;
+  outline: none;
+  color: #666666;
+  border: 1px solid white;
+}
+
+.movie-search-button {
+  margin-left: 0px;
+  flex: 0 1 100px;
+  z-index: 1;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.movie-search-field:focus  {
+  border: 1px solid #CCCCCC;
+}
