@@ -8,17 +8,25 @@ namespace :tmdb do
   task seed_db: :environment do
     Tmdb::Api.key(ENV['TMDB_API_KEY'])
     count = 1
+    p Tmdb::Movie.popular.count
+    fargo = Tmdb::Movie.crew(275)
+    p fargo
     Tmdb::Movie.popular.each do |popular|
+
       def get_youtube(title)
         titleplus = title.gsub(" ", "+")
-        trailer = Nokogiri::HTML(open("https://www.youtube.com/results?search_query=#{titleplus}")).search(".yt-lockup-title").children.attribute('href').value.gsub("watch?v=","")
-        return trailer
+        trailer = Nokogiri::HTML(open("https://www.youtube.com/results?search_query=#{titleplus}+trailer")).search(".yt-lockup-title").children.attribute('href').value.gsub("watch?v=","")
+        if !trailer.nil?
+          return trailer
+        else
+          return ''
+        end
       end
 
       count += 1
-      film = Tmdb::Movie.detail(count)
+      film = Tmdb::Movie.detail(popular.id)
 
-      film = Movie.new({
+      movie = Movie.new({
         title: film['title'],
         original_title: film['original_title'],
         runtime: film['runtime'],
@@ -37,13 +45,14 @@ namespace :tmdb do
         production_countries: film['production_countries'],
         release_date: film['release_date'],
         spoken_languages: film['spoken_languages'],
-        credits: {cast: Tmdb::Movie.casts(count), crew: Tmdb::Movie.crew(count)},
+        credits: {cast: Tmdb::Movie.casts(popular.id), crew: Tmdb::Movie.crew(popular.id)},
         trailer_url: "https://www.youtube.com/embed/#{get_youtube(film['title'])}",
         website_url: "http://www.imdb.com/title/#{film['imdb_id']}",
         cnc_url: "http://vad.cnc.fr/titles?search=#{film['title'].gsub(" ", "+")}&format="
         })
-      film.save
-      sleep 2
+      movie.save
+      sleep 5
+      p movie.title
     end
   end
 
