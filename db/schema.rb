@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524204838) do
+ActiveRecord::Schema.define(version: 20160524220331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 20160524204838) do
     t.string   "trailer_url"
     t.string   "website_url"
     t.string   "imdb_id"
-    t.integer  "imdb_score"
     t.string   "cnc_url"
     t.integer  "tmdb_id"
     t.datetime "created_at",           null: false
@@ -54,6 +53,7 @@ ActiveRecord::Schema.define(version: 20160524204838) do
     t.text     "production_countries"
     t.text     "spoken_languages"
     t.date     "release_date"
+    t.float    "imdb_score"
   end
 
   create_table "providers", force: :cascade do |t|

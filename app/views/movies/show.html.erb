@@ -14,11 +14,10 @@
               <p>Cast </p>
             </div>
             <div class="score-container">
-
               <% if @movie.imdb_score %>
-                <span class="score-value">score <%= "%1.1f" % @movie.imdb_score %></span>
-                <% (0..4).each do |score| %>
-                  <%= icon 'hand-spock-o', class: score <= (@movie.imdb_score).round ? 'rating-enabled' : 'rating-disabled' %>
+                <span class="score-value">score <%= "%1.1f" % (@movie.imdb_score / 2) %></span>
+                <% (1..5).each do |score| %>
+                  <%= icon 'hand-spock-o', class: score >= (@movie.imdb_score / 2).round ? 'rating-enabled' : 'rating-disabled'%>
                 <% end %>
               <% else %>
                 No score available...

@@ -33,7 +33,7 @@ namespace :tmdb do
         genres: film['genres'],
         poster_url: "http://image.tmdb.org/t/p/w500/" + film['poster_path'],
         imdb_id: film['imdb_id'],
-        imdb_score: film['imdb_score'],
+        imdb_score: film['vote_average'],
         tmdb_id: film['id'],
         adult: film['adult'],
         budget: film['budget'],
