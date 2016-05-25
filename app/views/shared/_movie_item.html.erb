@@ -15,7 +15,7 @@
     <% if current_user.movies.include?(movie) %>
       <div class='starrr' <%= "id = #{interest.id}" unless interest.nil?  %>></div>
     <% else %>
-      <%= link_to "Add to watchlist", interests_path(movie_id: movie), method: :post, remote: true, class: "btn btn-success", id: "movie-add-#{movie.id}" %>
+      <%= link_to "Add to watchlist", interests_path(movie_id: movie), method: :post, remote: true, class: "movie-add-btn", id: "movie-add-#{movie.id}" %>
     <% end %>
     </ul>
   </div>
