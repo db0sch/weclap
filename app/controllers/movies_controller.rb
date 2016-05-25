@@ -15,7 +15,9 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     authorize @movie
-    @rating = @movie.interests.reduce { |sum, i| sum += i.rating } / @movie.interests.count if @movie.interests.any?
+    # @rating = @movie.interests.reduce { |sum, i| sum += i.rating } / @movie.interests.count if @movie.interests.any?
+    sum = @movie.interests.reduce(0) { |sum, i| sum + i.rating if i.rating }
+    @rating = (sum / @movie.interests.count) if sum
     respond_to do |format|
       format.html
       format.json
