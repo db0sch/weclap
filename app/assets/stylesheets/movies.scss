@@ -1,20 +1,42 @@
+.movie-wrapper {
+  background-color: $gray-lighter;
+  padding: 10px 0;
+}
 .movie-info-container {
-  display: flex;
-  justify-content: flex-center;
-  flex-wrap: wrap;
+  // display: flex;
+  // justify-content: flex-center;
+  // flex-wrap: wrap;
+  // margin: 0 50px;
+}
+.boxing {
+  box-shadow: 1px 1px 2px #aaa;
+  border-radius: 4px;
   margin: 10px 0;
+  background-color: white;
+  padding: 20px 10px;
 }
 .movie-poster-show {
-  flex: 0 1 200px;
+//  flex: 0 1 200px;
   margin: 0 auto;
 }
 .movie-basic-info {
-  flex: 1 1 250px;
+//  flex: 1 1 250px;
   margin-left: 10px;
 }
 .score-container {
-  flex: 0 0 auto;
+ // flex: 0 0 auto;
   margin-left: 10px;
+}
+.youtube-trailer {
+
+}
+.movie-media-display {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  li {
+    margin: 0 10px;
+  }
 }
 
 //2do : move to config/_variables
@@ -24,6 +46,6 @@ $star-yellow: #FFB400;
 .rating-enabled {
   color: $star-yellow;
 }
-.rating-enabled {
+.rating-disabled {
   color: $star-gray;
 }
