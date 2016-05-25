@@ -1,7 +1,9 @@
-<div class="container">
-  <div class="row">
-    <% list.each do |movie| %>
-      <%= render 'shared/movie_item', movie: movie %>
-    <% end %>
+<div class="wrapper-movie-list">
+  <div class="container padded">
+    <div class="row">
+      <% list.each do |movie| %>
+        <%= render 'shared/movie_item', movie: movie %>
+      <% end %>
+    </div>
   </div>
 </div>

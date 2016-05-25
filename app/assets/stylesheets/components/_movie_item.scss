@@ -1,9 +1,17 @@
+
+.wrapper-movie-list {
+  background-color: #BFCDCF;
+}
+
 .movie-item {
   display: flex;
   align-items: center;
   padding: 20px;
   border-radius: 3px;
   transition: all 0.15s ease;
+  background-color: #F4F4F4;
+  border: 1px solid #949494;
+  margin: 4px;
 }
 
 /* Body design */
@@ -11,9 +19,8 @@
   flex: 1 1 auto;
 }
 .movie-item-body h3 {
-  font-weight: bold;
-  font-size: 23px;
-  margin-top: 0;
+  font-weight: 200;
+  font-size: 24px;
 }
 .movie-item-body p {
   font-weight: lighter;
