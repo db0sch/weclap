@@ -1,15 +1,16 @@
 <div class="banner" style="background: linear-gradient(-225deg, rgba(0, 0, 0, 0) 0%, rgba(0,54,61,0.6) 50%), url(<%= image_path('background.jpg') %>);margin-top: -70px;">
   <div class="banner-content">
-    <h1>Find movies anywhere, anytime</h1>
-    <p>The ultimate watchlist that connects your friends and favorite movies</p>
+    <h2>The <strong>ultimate connected <u>Watchlist</u></strong> </h2>
+    <p>Find movies, anyhere, anytime</p>
     <button class="banner-central-button">Let's clap!</button>
   </div>
 </div>
+
 <div class="wrapper-gray padded">
   <div class="container text-center padded features">
     <div class="row">
       <div class="col-xs-12 col-sm-8 col-md-4">
-        <div class="card">
+        <div class="card" id="discover">
         <div class="card-title"><h2>Discover</h2></div>
           <div class="card-content">
             <p>A wide array of movies, just <strong>pick your favorites</strong> and fill your watchlist!</p>
@@ -20,8 +21,9 @@
         <div class="card">
           <div class="card-title"><h2>Plan</h2></div>
             <div class="card-content">
-              <p>Watch directly <strong>VOD</strong> from home or <strong>plan movie nights</strong> ar your local cinema</p>
-              <p><%= current_user.friends if !current_user.nil? %></p>
+
+              <p>Watch directly <strong>VOD</strong> from home or <strong>plan movie nights</strong> at your local cinema</p>
+
             </div>
           </div>
       </div>
@@ -37,8 +39,18 @@
   </div>
 </div>
 
-<div class="banner">
-
+<div class="wrapper-multidevice">
+  <div class="title-multidevice text-center" id="soon">
+    <%= image_tag("soon.png")%>
+  </div>
+  <div class="container text-center" id="multiplatform">
+    <%= image_tag("clap_iOS.png")%>
+  </div>
 </div>
+
+
+
+
+
 
 

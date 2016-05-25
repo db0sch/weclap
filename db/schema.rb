@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(version: 20160525132004) do
   create_table "movies", force: :cascade do |t|
     t.string   "title"
     t.string   "original_title"
-    t.date     "released_fr"
     t.integer  "runtime"
     t.string   "tagline"
     t.string   "genre"
