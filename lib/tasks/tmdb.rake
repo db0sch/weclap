@@ -10,7 +10,7 @@ namespace :tmdb do
     count = 1
 
     def get_youtube(title)
-      titleplus = title.gsub(" ", "+")
+      titleplus = title.gsub(" ", "+").gsub(/[^[:ascii:]]/, "+")
       trailer = Nokogiri::HTML(open("https://www.youtube.com/results?search_query=#{titleplus}+trailer")).search(".yt-lockup-title").children.attribute('href').value.gsub("watch?v=","")
       if !trailer.nil?
         return trailer
@@ -22,17 +22,19 @@ namespace :tmdb do
 
     open(api_url) do |stream|
       quote = JSON.parse(stream.read)
-      quote['items'].first(20).each do |film|
+      quote['items'].each do |filmid|
+        open("https://api.themoviedb.org/3/movie/#{filmid['id']}?api_key=#{ENV['TMDB_API_KEY']}") do |fim|
+        film = JSON.parse(fim.read)
         movie = Movie.new({
         title: film['title'],
         original_title: film['original_title'],
         runtime: film['runtime'],
         tagline: film['tagline'],
         genres: film['genres'],
-        poster_url: film['poster_path'],
+        poster_url: "http://image.tmdb.org/t/p/w500/" + film['poster_path'],
         imdb_id: film['imdb_id'],
-        imdb_score: film['imdb_score'],
-        tmdb_id: film['tmdb_id'],
+        imdb_score: film['vote_average'],
+        tmdb_id: film['id'],
         adult: film['adult'],
         budget: film['budget'],
         overview: film['overview'],
@@ -52,6 +54,7 @@ namespace :tmdb do
         movie.save
         sleep 5
         p movie.title
+      end
     end
 
 
