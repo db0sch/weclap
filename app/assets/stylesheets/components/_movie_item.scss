@@ -93,3 +93,16 @@
 .movie-item:hover .movie-item-upvote { transform: scale(1.2) }
 .movie-item:hover .movie-item-controls-hidden a { color: #E6E6E6 }
 .movie-item-upvote:hover .movie-item-arrow { border-bottom: 9px solid #5898f1 }
+
+a.movie-add-btn {
+  width: 150px;
+  font-size: 12px;
+  background-color: $blue;
+}
+
+a.movie-added-btn {
+  width: 150px;
+  font-size: 12px;
+  background-color: $green;
+}
+

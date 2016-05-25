@@ -1,5 +1,5 @@
 <div class="col-xs-12">
-  <div class="movie-item">
+  <div class="movie-item" <%= "id = movie-#{interest.id}" unless interest.nil?  %>>
     <% if movie.poster_url %>
       <%= image_tag movie.poster_url, alt: movie.title, class: "movie-item-image hidden-xs" %>
 
@@ -13,9 +13,9 @@
     </div>
     <ul class="list-inline movie-item-controls hidden-sm hidden-xs">
     <% if current_user.movies.include?(movie) %>
-      <li><a href=""><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></a></li>
+      <div class='starrr' <%= "id = #{interest.id}" unless interest.nil?  %>></div>
     <% else %>
-      <%= link_to "Add to watchlist", interests_path(movie_id: movie), method: :post, class: "btn btn-success" %>
+      <%= link_to "Add to watchlist", interests_path(movie_id: movie), method: :post, remote: true, class: "movie-add-btn", id: "movie-add-#{movie.id}" %>
     <% end %>
     </ul>
   </div>

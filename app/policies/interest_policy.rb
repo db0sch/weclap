@@ -9,4 +9,8 @@ class InterestPolicy < ApplicationPolicy
     !user.interests.map(&:movie).include?(record.movie)
     # !user.interests.map(&:movie).include?(record)
   end
+
+  def update?
+    record.user == user
+  end
 end
