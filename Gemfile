@@ -20,6 +20,7 @@ gem 'autoprefixer-rails'
 gem 'pundit'
 gem 'geocoder'
 gem 'omniauth-facebook'
+gem 'rails-assets-starrr', source: 'https://rails-assets.org'
 
 
 group :development, :test do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524220331) do
+ActiveRecord::Schema.define(version: 20160525101829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20160524220331) do
     t.integer  "movie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "rating"
   end
 
   add_index "interests", ["movie_id"], name: "index_interests_on_movie_id", using: :btree
@@ -30,7 +31,6 @@ ActiveRecord::Schema.define(version: 20160524220331) do
   create_table "movies", force: :cascade do |t|
     t.string   "title"
     t.string   "original_title"
-    t.date     "released_fr"
     t.integer  "runtime"
     t.string   "tagline"
     t.string   "genre"
