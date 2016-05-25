@@ -20,7 +20,11 @@ gem 'autoprefixer-rails'
 gem 'pundit'
 gem 'geocoder'
 gem 'omniauth-facebook'
-
+gem 'rails-assets-starrr', source: 'https://rails-assets.org'
+gem 'fb_graph'
+gem 'rest-client'
+gem 'awesome_print'
+gem "koala"
 
 group :development, :test do
   gem 'binding_of_caller'

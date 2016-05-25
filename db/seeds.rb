@@ -11,8 +11,9 @@ require 'faker'
 10.times do
   movie = Movie.new(
     title: Faker::Book.title,
-    released_fr: Faker::Date.between(60.years.ago, Date.today),
+    release_date: Faker::Date.between(60.years.ago, Date.today),
     runtime: rand(180))
   movie.save
 end
+
 

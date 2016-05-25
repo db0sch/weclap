@@ -4,6 +4,7 @@ class MoviesController < ApplicationController
     @movies = policy_scope(Movie)
     title = params[:title]
     @movies = @movies.where('title ILIKE ? OR original_title ILIKE ?', "%#{title}%", "%#{title}%") if title
+
     respond_to do |format|
       format.html
       format.json
