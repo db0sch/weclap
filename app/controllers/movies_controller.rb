@@ -15,7 +15,11 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     authorize @movie
-    @rating = @movie.interests.reduce { |sum, i| sum += i.rating } / @movie.interests.count if @movie.interests.any?
+    # sum = @movie.interests.reduce(0) { |sum, i| sum + i.rating if i.rating }
+    # @rating = (sum / @movie.interests.count) if sum
+    @location = current_user.address
+    # @shows = find_showtimes_of_the_day(@location, @movie)
+    @original_title = @movie.original_title unless @movie.original_title.blank? || @movie.title.casecmp(@movie.original_title) == 0
     respond_to do |format|
       format.html
       format.json
