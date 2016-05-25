@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  after_commit :check_friendships
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -19,24 +21,31 @@ class User < ActiveRecord::Base
       user.password = Devise.friendly_token[0,20]  # Fake password for validation
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
-      user.full_name = auth.info.first_name + " " + auth.info.last_name
+      user.fullname = auth.info.first_name + " " + auth.info.last_name
       user.picture = auth.info.image
       user.token = auth.credentials.token
       user.token_expiry = Time.at(auth.credentials.expires_at)
       data = JSON.parse(RestClient.get "https://graph.facebook.com/#{user.uid}/invitable_friends?limit=5000&access_token=#{user.token}&l")
-      friends = []
+      friendslist = []
       data["data"].each do |d|
-        friends << d['name']
+         friendslist << d['name']
       end
-      friends.each do |f|
-        User.all.each do |u|
-          if u["first_name"] + " " + u["last_name"] == f
-            Friendship.new(u.id, User.find_by_full_name(f))
-          end
-        end
+      user.friendslist = friendslist.to_s
+    end
+  end
 
-      user.friends = friends
+  private
+
+  def check_friendships
+    JSON.parse(friendslist).each do |f|
+      User.all.each do |u|
+        if u.first_name + " " + u.last_name == f
+          Friendship.create({friend_id: u.id, buddy_id: self.id})
+        end
       end
     end
   end
+
 end
+
+
