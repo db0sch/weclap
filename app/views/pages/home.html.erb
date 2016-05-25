@@ -21,6 +21,7 @@
           <div class="card-title"><h2>Plan</h2></div>
             <div class="card-content">
               <p>Watch directly <strong>VOD</strong> from home or <strong>plan movie nights</strong> ar your local cinema</p>
+              <p><%= current_user.friends if !current_user.nil? %></p>
             </div>
           </div>
       </div>

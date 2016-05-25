@@ -9,7 +9,6 @@ class User < ActiveRecord::Base
 
   def self.find_for_facebook_oauth(auth)
     access_token = auth.credentials.token
-    binding.pry
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
@@ -21,6 +20,12 @@ class User < ActiveRecord::Base
       user.picture = auth.info.image
       user.token = auth.credentials.token
       user.token_expiry = Time.at(auth.credentials.expires_at)
+      data = JSON.parse(RestClient.get "https://graph.facebook.com/#{user.uid}/invitable_friends?limit=5000&access_token=#{user.token}&l")
+      friends = []
+      data["data"].each do |d|
+        friends << d['name']
+      end
+      user.friends = friends
     end
   end
 end

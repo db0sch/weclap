@@ -21,8 +21,9 @@ gem 'pundit'
 gem 'geocoder'
 gem 'omniauth-facebook'
 gem 'fb_graph'
-gem 'restclient'
+gem 'rest-client'
 gem 'awesome_print'
+gem "koala"
 
 
 group :development, :test do
