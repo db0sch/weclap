@@ -5,7 +5,7 @@
         <div class="movie-info-container boxing">
           <div class="movie-basic-info">
             <span class="movie-title"><%= @movie.title %></span>
-            <span class="movie-release-year">(<%= @movie.release_date[/\A(\d+)/] %>)</span>
+            <span class="movie-release-year"><%= "(#{@movie.release_date.year})" if @movie.release_date %></span>
             <br>
             <% if @movie.imdb_id %>
               <span class="imdbRatingPlugin" data-user="" data-title="<%= @movie.imdb_id %>" data-style="p4">
@@ -14,10 +14,7 @@
                 <% end %>
               </span>
             <% end %>
-            <% if !@movie.original_title.blank? && @movie.title.casecmp(@movie.original_title) != 0 %>
-              <span>aka <%= @movie.original_title %></span>
-              <br>
-            <% end %>
+            <%= "<span>aka #{@original_title}</span><br>" if @original_title %>
             <span class="duration-minutes"><%= @movie.runtime %> min</span> |
             <span class="parental-rating"><%= @movie.adult ? 'Adult' : 'For all' %></span> |
             <span class="people-list">Directed by <%= '2do_director' %></span>
@@ -43,9 +40,8 @@
               <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/204x300" : "http://image.tmdb.org/t/p/w500/" + @movie.poster_url), size: "204x300", alt: "2do", class: "img-responsive movie-poster-show") %>
             </li>
             <li class="youtube-trailer">
-<!--               <iframe height="300" width="533" src="https://www.youtube.com/embed/gAUxw4umkdY" frameborder="0" allowfullscreen></iframe>
- -->
-             </li>
+              <iframe height="300" width="533" src="<%= @movie.trailer_url%>" frameborder="0" allowfullscreen></iframe>
+            </li>
           </ul>
         </div>
       </div>
@@ -72,8 +68,40 @@
           <div class="container text-center">
             <div class="tab-content" id="shows">
               <p>Here are the nearby theaters showing the movie and their showtimes</p>
+<!--               <form id="" action="">
+                <span id="showtimes-location-wrapper">
+                  <span class="display-location"></span>
+                  <span class="edit-location">
+                    <input type="text" placeholder="Postal Code" name="zipcode" value="">
+                  </span>
+
+                </span>
+              </form>
+ -->
+<!--
+<form id="set-location-form" class="location" action="/showtimes/change-state-and-redirect">
+  <input name="ref_" value="sh_chg" type="hidden">
+
+  <span class="location-no-wrap">
+    <span class="location-display" style="display: none;">Chicago IL US</span>
+    <span class="location-edit" style="display: inline;">
+
+      <input type="text" placeholder="Postal Code" name="zipcode" value="">
+    </span>
+    <span class="edit-hide" style="display: none;">
+      <a href="/showtimes/set-location?ref_=sh_chg" class="edit" data-tag="allcinemas-showtimes">Change</a>
+    </span>
+    <span class="edit-show" style="display: none;"><input type="submit" class="btn small disabled" value="Go" disabled="disabled"> <a class="edit" href="/showtimes/set-location">[X]</a></span>
+  </span>
+</form>
+ -->
+              <% if @location %>
+
+              <% else %>
+
+              <% end %>
             </div>
-            <div class="tab-content hidden" id="projects">
+            <div class="tab-content hidden" id="streamings">
               <p>Here are the VOD platforms that rent/sell the movie</p>
             </div>
           </div>
@@ -84,13 +112,13 @@
 </div>
 
 <script>
-  (function(d,s,id) {
-    var js,stags = d.getElementsByTagName(s)[0];
+  (function(d, s, id) {
+    var js, stags = d.getElementsByTagName(s)[0];
     if(d.getElementById(id)) {return;}
     js = d.createElement(s);
     js.id = id;
     js.src = "http://g-ec2.images-amazon.com/images/G/01/imdb/plugins/rating/js/rating.min.js";
-    stags.parentNode.insertBefore(js,stags);
+    stags.parentNode.insertBefore(js, stags);
   })
   (document, 'script', 'imdb-rating-api');
 </script>
