@@ -17,6 +17,9 @@
   -webkit-transition: 3s;
   transition: 1s;
   padding-top: 21px;
+  padding-bottom: 21px;
+  background: rgba(126, 155, 159, 0.5);
+
 }
 
 /* Optional class to fix the navbar on top */
@@ -31,6 +34,7 @@
 /* Navbar logo */
 .navbar-wagon-brand img {
   width: 67px;
+  height: 67px;
   border: 1px solid white;
 }
 

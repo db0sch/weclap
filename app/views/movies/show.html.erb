@@ -1,42 +1,99 @@
-<div class="container">
+<div class="movie-wrapper">
+  <div class="container">
     <div class="row">
-        <div class="col-xs-12">
-          <div class="movie-info-container">
-            <iframe width="400" height="300" src="<%= @movie.trailer_url %>?rel=0&amp;showinfo=0" showinfo=0 frameborder="0" allowfullscreen></iframe>
-            <div>
-            <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/200x300" : @movie.poster_url), size: "200x300", alt: "", class: "img-responsive movie-poster-show") %>
-            </div>
-            <div class="movie-basic-info">
-              <h2><%= @movie.title %></h2>
-              <p>Released on <strong><%= @movie.release_date %></strong></p>
-              <p>Directed by </p>
-              <p>Lasts <strong><%= @movie.runtime %></strong></p>
-              <p>Cast </p>
-            </div>
-            <div class="score-container">
-              <% if @movie.imdb_score %>
-                <span class="score-value">score <%= "%1.1f" % (@movie.imdb_score / 2) %></span>
-                <% (1..5).each do |score| %>
-                  <%= icon 'hand-spock-o', class: score >= (@movie.imdb_score / 2).round ? 'rating-enabled' : 'rating-disabled'%>
-                <% end %>
-              <% else %>
-                No score available...
-              <% end %>
-              <% if false %>
-                <%# button_to "Add to watchlist", interests_path(movie_id: @movie), class: "btn btn-success" %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-    </div>
-    <div class="row">
+
+
       <div class="col-xs-12">
-        <h4>Synopsis</h4>
-        <p><%= @movie.overview %></p>
+        <div class="movie-info-container boxing">
+          <div class="movie-basic-info">
+            <span class="movie-title"><%= @movie.title %></span>
+            <span class="movie-release-year">(<%= @movie.release_date[/\A(\d+)/] %>)</span>
+            <br>
+            <% if @movie.imdb_id %>
+              <span class="imdbRatingPlugin" data-user="" data-title="<%= @movie.imdb_id %>" data-style="p4">
+                <%= link_to "http://www.imdb.com/title/#{@movie.imdb_id}/?ref_=plg_rt_1" do %>
+                   <%= image_tag("http://g-ecx.images-amazon.com/images/G/01/imdb/plugins/rating/images/imdb_31x14.png", alt: "#{@movie.title} on IMDb") %>
+                <% end %>
+              </span>
+            <% end %>
+            <% if !@movie.original_title.blank? && @movie.title.casecmp(@movie.original_title) != 0 %>
+              <span>aka <%= @movie.original_title %></span>
+              <br>
+            <% end %>
+            <span class="duration-minutes"><%= @movie.runtime %> min</span> |
+            <span class="parental-rating"><%= @movie.adult ? 'Adult' : 'For all' %></span> |
+            <span class="people-list">Directed by <%= '2do_director' %></span>
+            <br>
+            <span>Starring <%= '2do_tom_cruise' %></span>
+          </div>
+
+          <div class="score-container">
+            <% if @rating %>
+              <% (1..5).each do |score| %>
+                <%= icon 'hand-spock-o', class: score <= rating.round ? 'rating-enabled' : 'rating-disabled' %>
+
+              <% end %>
+            <% end %>
+            <% if true %>
+              <%= button_to "Add to watchlist", interests_path(movie_id: @movie), class: "btn btn-success" %>
+            <% else %>
+
+            <% end %>
+          </div>
+
+          <ul class="movie-media-display list-inline">
+            <li>
+              <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/204x300" : "http://image.tmdb.org/t/p/w500/" + @movie.poster_url), size: "204x300", alt: "2do", class: "img-responsive movie-poster-show") %>
+            </li>
+            <li class="youtube-trailer">
+<!--               <iframe height="300" width="533" src="https://www.youtube.com/embed/gAUxw4umkdY" frameborder="0" allowfullscreen></iframe>
+ -->
+             </li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12">SHOWS &amp; STREAMINGS</div>
+      <div class="col-xs-12">
+        <div class="movie-synopsis boxing">
+          <h4>Synopsis</h4>
+          <p><%= @movie.overview %></p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="boxing">
+          <div class="tabs">
+            <a class="tab active" data-target="#shows">
+              <div class="tab-header">Shows</div>
+            </a>
+            <a class="tab" data-target="#streamings">
+              <div class="tab-header">Streamings</div>
+            </a>
+          </div>
+          <div class="container text-center">
+            <div class="tab-content" id="shows">
+              <p>Here are the nearby theaters showing the movie and their showtimes</p>
+            </div>
+            <div class="tab-content hidden" id="projects">
+              <p>Here are the VOD platforms that rent/sell the movie</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<script>
+  (function(d,s,id) {
+    var js,stags = d.getElementsByTagName(s)[0];
+    if(d.getElementById(id)) {return;}
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "http://g-ec2.images-amazon.com/images/G/01/imdb/plugins/rating/js/rating.min.js";
+    stags.parentNode.insertBefore(js,stags);
+  })
+  (document, 'script', 'imdb-rating-api');
+</script>

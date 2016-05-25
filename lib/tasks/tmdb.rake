@@ -45,7 +45,7 @@ namespace :tmdb do
         release_date: film['release_date'],
         spoken_languages: film['spoken_languages'],
         credits: {cast: Tmdb::Movie.casts(film['id']), crew: Tmdb::Movie.crew(film['id'])},
-        trailer_url: "https://www.youtube.com/embed#{get_youtube(film['title'])}",
+        trailer_url: "https://www.youtube.com/embed#{get_youtube(film['title'])}?rel=0&amp;showinfo=0",
         website_url: "http://www.imdb.com/title/#{film['imdb_id']}",
         cnc_url: "http://vad.cnc.fr/titles?search=#{film['title'].gsub(" ", "+")}&format="
         })

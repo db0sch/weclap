@@ -1,6 +1,5 @@
+
 <div class="navbar-wagon">
-
-
   <!-- Center Navigation -->
   <div class="navbar-wagon-center hidden-xs hidden-sm">
     <%= image_tag "logo.png", class: "clap-logo" %>
@@ -51,7 +50,7 @@
     <% else %>
 
       <!-- Login text link -->
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
 
     <% end %>
   </div>
@@ -68,3 +67,4 @@
     </div>
   </div>
 </div>
+
