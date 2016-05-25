@@ -90,6 +90,12 @@
   color: #5898f1;
   cursor: pointer;
 }
+
+#add_to_watchlist {
+  font-size: xx-large;
+  color: #528FC1;
+}
+
 .movie-item:hover .movie-item-upvote { transform: scale(1.2) }
 .movie-item:hover .movie-item-controls-hidden a { color: #E6E6E6 }
 .movie-item-upvote:hover .movie-item-arrow { border-bottom: 9px solid #5898f1 }
