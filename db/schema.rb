@@ -12,11 +12,21 @@
 # It's strongly recommended that you check this file into your version control system.
 
 
-ActiveRecord::Schema.define(version: 20160525132004) do
+ActiveRecord::Schema.define(version: 20160525164957) do
 
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer  "buddy_id"
+    t.integer  "friend_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "friendships", ["buddy_id"], name: "index_friendships_on_buddy_id", using: :btree
+  add_index "friendships", ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
 
   create_table "interests", force: :cascade do |t|
     t.datetime "watched_on"
@@ -33,6 +43,7 @@ ActiveRecord::Schema.define(version: 20160525132004) do
   create_table "movies", force: :cascade do |t|
     t.string   "title"
     t.string   "original_title"
+    t.date     "released_fr"
     t.integer  "runtime"
     t.string   "tagline"
     t.string   "genre"
@@ -116,7 +127,8 @@ ActiveRecord::Schema.define(version: 20160525132004) do
     t.string   "token"
     t.datetime "token_expiry"
     t.string   "access_token"
-    t.string   "friends"
+    t.string   "friendslist"
+    t.string   "fullname"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
