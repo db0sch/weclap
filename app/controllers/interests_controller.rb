@@ -13,12 +13,23 @@ class InterestsController < ApplicationController
     @interest.movie = @movie
     @interest.user = current_user
     authorize @interest     
-    # authorize @movie    
+
     if @interest.save
-      redirect_to movie_path(@movie)
+      respond_to do |format|
+        format.html { redirect_to users_path(current_user) }
+        format.js  # <-- will render `app/views/reviews/create.js.erb`
+      end
     else
-      raise
-    end
+      respond_to do |format|
+        format.html { render 'movies/index' }
+        format.js  # <-- idem
+      end
+    end    
+    # if @interest.save
+    #   redirect_to movie_path(@movie)
+    # else
+    #   raise
+    # end
   end
 
   def update
