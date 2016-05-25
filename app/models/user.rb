@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
       user.password = Devise.friendly_token[0,20]  # Fake password for validation
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
+      user.full_name = auth.info.first_name + " " + auth.info.last_name
       user.picture = auth.info.image
       user.token = auth.credentials.token
       user.token_expiry = Time.at(auth.credentials.expires_at)
@@ -27,7 +28,15 @@ class User < ActiveRecord::Base
       data["data"].each do |d|
         friends << d['name']
       end
+      friends.each do |f|
+        User.all.each do |u|
+          if u["first_name"] + " " + u["last_name"] == f
+            Friendship.new(u.id, User.find_by_full_name(f))
+          end
+        end
+
       user.friends = friends
+      end
     end
   end
 end
