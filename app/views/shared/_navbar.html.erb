@@ -24,18 +24,21 @@
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
-          <%= link_to root_path, class: "navbar-wagon-brand" do %>
-            <%= image_tag current_user.picture, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <%# link_to root_path, class: "navbar-wagon-brand" do %>
+            <%# image_tag current_user.picture, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <%# end %>         
+          <%= link_to root_path, class: "navbar-wagon-brand dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" do %>
+            <%= image_tag current_user.picture, class: "avatar" %>
           <% end %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
               <%= link_to "#" do %>
-                <i class="fa fa-user"></i> <%= t ".profile", default: "Profile" %>
+                <i class="fa fa-user"></i> <%= t ".friends", default: "Friends" %>
               <% end %>
             </li>
             <li>
-              <%= link_to "#" do %>
-                <i class="fa fa-home"></i>  <%= t ".profile", default: "Home" %>
+              <%= link_to watchlist_path(current_user) do %>
+                <i class="fa fa-home"></i>  <%= t ".watchlist", default: "Watchlist" %>
               <% end %>
             </li>
             <li>
