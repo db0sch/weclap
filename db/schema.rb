@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524220331) do
+ActiveRecord::Schema.define(version: 20160525153139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer  "buddy_id"
+    t.integer  "friend_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "friendships", ["buddy_id"], name: "index_friendships_on_buddy_id", using: :btree
+  add_index "friendships", ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
 
   create_table "interests", force: :cascade do |t|
     t.datetime "watched_on"
@@ -30,6 +40,7 @@ ActiveRecord::Schema.define(version: 20160524220331) do
   create_table "movies", force: :cascade do |t|
     t.string   "title"
     t.string   "original_title"
+    t.date     "released_fr"
     t.integer  "runtime"
     t.string   "tagline"
     t.string   "genre"
@@ -38,6 +49,7 @@ ActiveRecord::Schema.define(version: 20160524220331) do
     t.string   "trailer_url"
     t.string   "website_url"
     t.string   "imdb_id"
+    t.integer  "imdb_score"
     t.string   "cnc_url"
     t.integer  "tmdb_id"
     t.datetime "created_at",           null: false
@@ -50,9 +62,8 @@ ActiveRecord::Schema.define(version: 20160524220331) do
     t.string   "original_language"
     t.string   "poster_path"
     t.text     "production_countries"
+    t.string   "release_date"
     t.text     "spoken_languages"
-    t.date     "release_date"
-    t.float    "imdb_score"
   end
 
   create_table "providers", force: :cascade do |t|
@@ -112,6 +123,8 @@ ActiveRecord::Schema.define(version: 20160524220331) do
     t.string   "last_name"
     t.string   "token"
     t.datetime "token_expiry"
+    t.string   "access_token"
+    t.string   "friends"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :interests, dependent: :destroy
   has_many :movies, through: :interests
+  has_many :friends, class_name: 'Friendship', foreign_key: 'friend_id'
+  has_many :buddies, class_name: 'Friendship', foreign_key: 'buddy_id'
 
   def self.find_for_facebook_oauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
