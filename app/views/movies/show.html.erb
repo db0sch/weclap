@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-xs-12">
           <div class="movie-info-container">
-            <iframe width="400" height="300" src="<%= @movie.trailer_url %>?rel=0&amp;showinfo=0" showinfo=0 frameborder="0" allowfullscreen></iframe>
+            <iframe width="400" height="300" src="<%= @movie.trailer_url %>?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
             <div>
             <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/200x300" : @movie.poster_url), size: "200x300", alt: "", class: "img-responsive movie-poster-show") %>
             </div>
@@ -13,6 +13,7 @@
               <p>Lasts <strong><%= @movie.runtime %></strong></p>
               <p>Cast </p>
             </div>
+
             <div class="score-container">
               <% if @movie.imdb_score %>
                 <span class="score-value">score <%= "%1.1f" % (@movie.imdb_score / 2) %></span>
@@ -23,6 +24,7 @@
                 No score available...
               <% end %>
               <% if false %>
+
                 <%# button_to "Add to watchlist", interests_path(movie_id: @movie), class: "btn btn-success" %>
               <% end %>
             </div>

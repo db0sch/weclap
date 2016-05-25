@@ -20,6 +20,9 @@ gem 'autoprefixer-rails'
 gem 'pundit'
 gem 'geocoder'
 gem 'omniauth-facebook'
+gem 'fb_graph'
+gem 'restclient'
+gem 'awesome_print'
 
 
 group :development, :test do
