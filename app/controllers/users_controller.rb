@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-    def facebook
+
+  def facebook
     user = User.find_for_facebook_oauth(request.env['omniauth.auth'])
 
     if user.persisted?
@@ -11,3 +12,4 @@ class UsersController < ApplicationController
     end
   end
 end
+
