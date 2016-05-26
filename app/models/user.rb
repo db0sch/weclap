@@ -26,9 +26,17 @@ class User < ActiveRecord::Base
       user.token = auth.credentials.token
       user.token_expiry = Time.at(auth.credentials.expires_at)
       data = JSON.parse(RestClient.get "https://graph.facebook.com/#{user.uid}/invitable_friends?limit=5000&access_token=#{user.token}&l")
+      datadev = JSON.parse(RestClient.get "https://graph.facebook.com/#{user.uid}/friends?limit=5000&access_token=#{user.token}&l")
       friendslist = []
-      data["data"].each do |d|
-         friendslist << d['name']
+      if !data.nil?
+        data["data"].each do |d|
+           friendslist << d['name']
+        end
+      end
+      if !datadev.nil?
+        datadev["data"].each do |d|
+           friendslist << d['name']
+        end
       end
       user.friendslist = friendslist.to_s
     end
