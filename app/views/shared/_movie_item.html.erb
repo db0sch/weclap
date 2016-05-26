@@ -9,7 +9,15 @@
     <!-- <img src="http://placehold.it/40x60" alt="kudoz" class="movie-item-image hidden-xs"> -->
     <div class='movie-item-body'>
       <h3><%= link_to movie.title, movie %></h3>
-<!--       <p>Réal: Steven Spielberg</p> -->
+      <div class="crew">
+        <p id="directed">Directed by:</p>
+        <p>Cast:</p>
+      </div>
+      <div class="movie-infos">
+        <p id="year_released"><%= link_to movie.release_date.year %></p>
+        <i class="fa fa-clock-o" aria-hidden="true" id="clock"></i>
+        <p><%= link_to movie.runtime %> min</p>
+      </div>
     </div>
     <ul class="list-inline movie-item-controls hidden-sm hidden-xs">
     <% if current_user.movies.include?(movie) %>
