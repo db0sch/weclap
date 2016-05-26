@@ -6,34 +6,49 @@
 .movie-item {
   display: flex;
   align-items: center;
-  padding: 20px;
-  border-radius: 3px;
   transition: all 0.15s ease;
   background-color: #F4F4F4;
   border: 1px solid #949494;
   margin: 4px;
 }
 
+.movie-item-image {
+  margin-right: 20px;
+  width: 100px;
+  box-shadow: 4px 0px 3px 0px #B5B5B5;
+}
+
+.movie-infos {
+  display: flex;
+}
+
+#year_released {
+  margin-right: 15px;
+}
+
+#clock {
+  margin: 3px 5px;
+}
+
 /* Body design */
 .movie-item-body {
   flex: 1 1 auto;
 }
-.movie-item-body h3 {
+.movie-item-body {
+  h3 {
   font-weight: 200;
   font-size: 24px;
+  }
+  a {
+  color: #636363;
+  font-weight: 200;
+  }
 }
 .movie-item-body p {
   font-weight: lighter;
-  color: #999999;
-  margin-bottom: 0;
+  color: #404040;
 }
 
-/* movie-item image */
-.movie-item-image {
-  border-radius: 10px;
-  margin-right: 20px;
-  width: 50px;
-}
 
 /* Upvote design */
 .movie-item-upvote {
@@ -72,7 +87,7 @@
   color: #E6E6E6;
 }
 .movie-item-controls a:hover {
-  color: #D3473C !important
+  color: #6C7A7A !important
 }
 .movie-item-controls-hidden a {
   color: transparent;
@@ -101,14 +116,30 @@
 .movie-item-upvote:hover .movie-item-arrow { border-bottom: 9px solid #5898f1 }
 
 a.movie-add-btn {
-  width: 150px;
-  font-size: 12px;
-  background-color: $blue;
+  font-size: 30px;
+  color: $blue;
+  opacity: 0.5;
+  text-decoration: none;
 }
 
+// a.movie-add-btn.disabled:hover {
+//   font-size: 30px;
+//   color: $blue;
+//   opacity: 1;
+// }
+
 a.movie-added-btn {
-  width: 150px;
-  font-size: 12px;
-  background-color: $green;
+  font-size: 30px;
+  color: $green;
 }
+
+.crew {
+  font-size: 12px;
+}
+
+#directed {
+  margin-bottom: 0px;
+}
+
+
 

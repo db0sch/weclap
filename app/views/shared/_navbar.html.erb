@@ -19,26 +19,33 @@
       <% end %>
 
       <!-- Button (call-to-action) -->
+<<<<<<< HEAD
       <%= link_to t(".top_call_to_action", default: "Post stuff"), "#", class: "navbar-wagon-item navbar-wagon-button btn" %>
       <%= link_to destroy_user_session_path, method: :delete do %>
                 <i class="fa fa-sign-out"></i>  <%= t ".sign_out", default: "Log out" %>
               <% end %>
+=======
+      <%= link_to t(".top_call_to_action", default: "Watchlist"), watchlist_path(current_user), class: "navbar-wagon-item navbar-wagon-button btn" %>
+>>>>>>> master
 
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
-          <%= link_to root_path, class: "navbar-wagon-brand" do %>
-            <%= image_tag current_user.picture, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <%# link_to root_path, class: "navbar-wagon-brand" do %>
+            <%# image_tag current_user.picture, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <%# end %>         
+          <%= link_to root_path, class: "navbar-wagon-brand dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" do %>
+            <%= image_tag current_user.picture, class: "avatar" %>
           <% end %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
               <%= link_to "#" do %>
-                <i class="fa fa-user"></i> <%= t ".profile", default: "Profile" %>
+                <i class="fa fa-user"></i> <%= t ".friends", default: "Friends" %>
               <% end %>
             </li>
             <li>
-              <%= link_to "#" do %>
-                <i class="fa fa-home"></i>  <%= t ".profile", default: "Home" %>
+              <%= link_to watchlist_path(current_user) do %>
+                <i class="fa fa-home"></i>  <%= t ".watchlist", default: "Watchlist" %>
               <% end %>
             </li>
             <li>
