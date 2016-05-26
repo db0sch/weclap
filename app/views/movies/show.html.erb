@@ -34,6 +34,7 @@
           <div>
             <% if true %>
               <%= button_to "Add to watchlist", interests_path(movie_id: @movie), class: "btn btn-success" %>
+              <%= link_to "Back", "javascript:history.back()", class: "btn btn-secondary" %>
             <% else %>
 
             <% end %>
