@@ -7,7 +7,7 @@
         <div class="movie-info-container boxing">
           <div class="movie-basic-info">
             <span class="movie-title"><%= @movie.title %></span>
-            <span class="movie-release-year"><%= " (#{@movie.release_date.year})" if @movie.release_date %></span>
+            <span class="movie-release-year"><%= " (#{@movie.release_date.to_date.year})" if @movie.release_date %></span>
             <span class="score-container">
               <% if @rating %>
                 <% (1..5).each do |score| %>

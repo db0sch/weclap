@@ -1,5 +1,5 @@
 <div class="col-xs-12">
-  <div class="movie-item" <%= "id = movie-#{interest.id}" unless interest.nil?  %>>
+  <div class="movie-item" <%= "id = movie-#{interest.id}" unless interest.nil?  %> >
     <% if movie.poster_url %>
       <%= image_tag movie.poster_url, alt: movie.title, class: "movie-item-image hidden-xs" %>
 
@@ -19,29 +19,34 @@
         <p><%= link_to movie.runtime %> min</p>
       </div>
     </div>
-    <ul class="list-inline movie-item-controls hidden-sm hidden-xs">
-    <% if current_user.movies.include?(movie) %>
-      <div class='starrr' <%= "id = #{interest.id}" unless interest.nil?  %>></div>
-      <%= link_to icon('times'), interest_path(interest), method: :delete, remote: true, data: { confirm: "Are you sure?" } unless interest.nil? %>
-    <% else %>
-      <%= link_to icon('plus-circle'), interests_path(movie_id: movie), method: :post, remote: true, class: "movie-add-btn", id: "movie-add-#{movie.id}" %>
-    <% end %>
-    <div id="avatar_down">
+    <div class="movie-item-social">
+      <ul class="list-inline movie-item-controls movie-rating hidden-sm hidden-xs">
+        <% if current_user.movies.include?(movie) %>
+          <div class='starrr' <%= "id = #{interest.id}" unless interest.nil?  %>></div>
+          <%= link_to icon('times'), interest_path(interest), method: :delete, remote: true, data: { confirm: "Are you sure?" } unless interest.nil? %>
+        <% else %>
+          <%= link_to icon('plus-circle'), interests_path(movie_id: movie), method: :post, remote: true, class: "movie-add-btn", id: "movie-add-#{movie.id}" %>
+        <% end %>
 
 
-      <% if !@friends.nil? %>
-        <% @friends.each do |b| %>
-          <% User.find(b).interests.each do |interest| %>
-            <% if movie.id == interest.id %>
-               <%= image_tag User.find(b).picture, class: "avatar" %>
+  <!--     <i class="fa fa-plus-circle" aria-hidden="true" id="add_to_watchlist"></i> -->
+      </ul>
+      <div class="movie-social">
+
+
+        <% if !@friends.nil? %>
+          <% @friends.each do |b| %>
+            <% User.find(b).interests.each do |interest| %>
+              <% if movie.id == interest.id %>
+
+                 <%= link_to image_tag(User.find(b).picture, class: "avatar"), user_friendships_path(current_user) %>
+
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
-
-<!--     <i class="fa fa-plus-circle" aria-hidden="true" id="add_to_watchlist"></i> -->
-    </ul>
   </div>
 </div>
 
