@@ -1,0 +1,8 @@
+<% if @interest.errors.any? %>
+  console.log('error');
+  // faire apparaitre une modal ou un popover
+<% else %>
+  console.log('success');
+  console.log('#movie-' + <%= @interest_id %>);
+  $('#movie-' + <%= @interest_id %>).slideUp();
+<% end %>

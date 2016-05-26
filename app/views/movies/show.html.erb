@@ -44,7 +44,7 @@
               <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/204x300" : "http://image.tmdb.org/t/p/w500/" + @movie.poster_url), size: "204x300", alt: "2do", class: "img-responsive movie-poster-show") %>
             </li>
             <li class="youtube-trailer">
-              <iframe height="300" width="533" src="<%= @movie.trailer_url%>" frameborder="0" allowfullscreen></iframe>
+              <iframe height="300" width="533" src="<%= @movie.trailer_url%>?&showinfo=0" frameborder="0" allowfullscreen></iframe>
             </li>
           </ul>
         </div>
