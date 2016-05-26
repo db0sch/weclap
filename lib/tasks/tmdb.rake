@@ -10,7 +10,7 @@ namespace :tmdb do
 
 
   desc "Get from TMDb the N yearly best rated movies for the last X years"
-  task :seed_yb_movies, :years do |t, args|
+  task seed_yb_movies: :environment, :years do |t, args|
     years = args[:years].to_i
     date = Date.today.year
 
@@ -22,7 +22,7 @@ namespace :tmdb do
   end
 
   desc "Get from TMDb the movies released for the last X months"
-  task :seed_rf_movies, :months do |t, args|
+  task seed_rf_movies: :environment, :months do |t, args|
     months = args[:months].to_i
     date = months.months.ago.to_date
 
