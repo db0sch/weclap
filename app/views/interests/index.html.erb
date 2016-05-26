@@ -1,23 +1,24 @@
-<%= render 'shared/interests_list', list: @watchlist %>
+
+  <%= render 'shared/interests_list', list: @watchlist %>
 
 
-<% content_for(:after_js) do %>
-  <%= javascript_tag do %>
-    $('.starrr').starrr({
-      change: function(e, value){
-        console.log(e.currentTarget.id);
-        console.log("This is value:" + value);
-        var rating = {"rating": value};
-        $.ajax({
-           type: "PATCH",
-           url: "/interests/" + e.currentTarget.id,
-           data: rating,
-           success: function(data) {
-             console.log("Successfully created gist at " + data.html_url)
-             $('#movie-' + e.currentTarget.id).slideUp();
-           }
-        });
-      }
-    });
+  <% content_for(:after_js) do %>
+    <%= javascript_tag do %>
+      $('.starrr').starrr({
+        change: function(e, value){
+          console.log(e.currentTarget.id);
+          console.log("This is value:" + value);
+          var rating = {"rating": value};
+          $.ajax({
+             type: "PATCH",
+             url: "/interests/" + e.currentTarget.id,
+             data: rating,
+             success: function(data) {
+               console.log("Successfully created gist at " + data.html_url)
+               $('#movie-' + e.currentTarget.id).slideUp();
+             }
+          });
+        }
+      });
+    <% end %>
   <% end %>
-<% end %>
