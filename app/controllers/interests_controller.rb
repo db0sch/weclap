@@ -6,6 +6,7 @@ class InterestsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @watchlist = @user.interests
+    @friends = my_friends_finder
   end
 
   def create
@@ -62,6 +63,22 @@ class InterestsController < ApplicationController
 
     def set_interest
       @interest = Interest.find(params[:id])
+    end
+
+    def my_friends_finder
+    friend_ids = []
+
+      if !current_user.buddies.nil?
+        current_user.buddies.each do |buddy|
+          friend_ids << buddy.friend_id
+        end
+      end
+      if !current_user.friends.nil?
+        current_user.friends.each do |buddy|
+          friend_ids << buddy.buddy_id
+        end
+      end
+      friend_ids
     end
 
 end
