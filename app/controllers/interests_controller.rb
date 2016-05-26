@@ -36,12 +36,7 @@ class InterestsController < ApplicationController
     authorize @interest
     @interest.rating = params[:rating]
     @interest.watched_on = Time.now
-    if @interest.save
-
-    else
-      flash[:alert] = "Oups. Something went wrong."
-      redirect_to 
-    end
+    @interest.save
   end
 
   def destroy
