@@ -26,19 +26,19 @@
         <div class="dropdown">
           <%# link_to root_path, class: "navbar-wagon-brand" do %>
             <%# image_tag current_user.picture, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
-          <%# end %>         
+          <%# end %>
           <%= link_to root_path, class: "navbar-wagon-brand dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" do %>
             <%= image_tag current_user.picture, class: "avatar" %>
           <% end %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
               <%= link_to "#" do %>
-                <i class="fa fa-user"></i> <%= t ".friends", default: "Friends" %>
+                <i class="fa fa-users"></i> <%= t ".friends", default: "Friends" %>
               <% end %>
             </li>
             <li>
               <%= link_to watchlist_path(current_user) do %>
-                <i class="fa fa-home"></i>  <%= t ".watchlist", default: "Watchlist" %>
+                <i class="fa fa-film"></i>  <%= t ".watchlist", default: "Watchlist" %>
               <% end %>
             </li>
             <li>
