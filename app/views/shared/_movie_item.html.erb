@@ -27,13 +27,17 @@
       <%= link_to icon('plus-circle'), interests_path(movie_id: movie), method: :post, remote: true, class: "movie-add-btn", id: "movie-add-#{movie.id}" %>
     <% end %>
     <div id="avatar_down">
-    <% @friends.each do |b| %>
-      <% User.find(b).interests.each do |interest| %>
-        <% if movie.id == interest.id %>
-           <%= image_tag User.find(b).picture, class: "avatar" %>
+
+
+      <% if !@friends.nil? %>
+        <% @friends.each do |b| %>
+          <% User.find(b).interests.each do |interest| %>
+            <% if movie.id == interest.id %>
+               <%= image_tag User.find(b).picture, class: "avatar" %>
+            <% end %>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
     </div>
 
 <!--     <i class="fa fa-plus-circle" aria-hidden="true" id="add_to_watchlist"></i> -->
