@@ -1,10 +1,9 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+
 $(function(){
   $(".tab").on("click", function(e){
-    $($('.active').data('target')).addClass('hidden');
+    $($('.active').data('target')).slideUp(800);
     $('.active').removeClass('active');
+    $($(this).data('target')).slideDown(800);
     $(this).addClass('active');
-    $($(this).data('target')).removeClass('hidden');
   });
 });

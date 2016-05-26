@@ -1,0 +1,12 @@
+<div class="theater-container">
+  <div class="theater-description">
+    <span class="theater-name"><%= theater.name %></span>
+    <span class="theater-address"><%= theater.address %></span>
+    <span class="theater-distance">(<%= 1 %> km)</span>
+  </div>
+  <div class="list-inline showtime-list">
+    <p class="showtime-item">
+      <%= shows.map{ |show| show.starts_at.strftime("%H:%M") }.join(' | ') %>
+    </p>
+  </div>
+</div>

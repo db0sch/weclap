@@ -22,6 +22,14 @@
 .movie-basic-info {
 //  flex: 1 1 250px;
   margin-left: 10px;
+  font-size: 14px;
+  font-weight: lighter;
+  color: $gray-light;
+  .movie-title, .movie-release-year {
+    font-size: 24px;
+    font-weight: normal;
+    color: $gray-dark;
+  }
 }
 .score-container {
  // flex: 0 0 auto;

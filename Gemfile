@@ -25,6 +25,7 @@ gem 'fb_graph'
 gem 'rest-client'
 gem 'awesome_print'
 gem "koala"
+gem 'nokogiri'
 
 group :development, :test do
   gem 'binding_of_caller'
