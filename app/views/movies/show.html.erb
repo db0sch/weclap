@@ -7,14 +7,21 @@
         <div class="movie-info-container boxing">
           <div class="movie-basic-info">
             <span class="movie-title"><%= @movie.title %></span>
-            <span class="movie-release-year"><%= "(#{@movie.release_date.year})" if @movie.release_date %></span>
+            <span class="movie-release-year"><%= " (#{@movie.release_date.year})" if @movie.release_date %></span>
+            <span class="score-container">
+              <% if @rating %>
+                <% (1..5).each do |score| %>
+                  <%= icon 'hand-spock-o', class: score <= @rating.round ? 'rating-enabled' : 'rating-disabled' %>
+                <% end %>
+              <% end %>
+            </span>
             <br>
             <% if @movie.imdb_id %>
               <span class="imdbRatingPlugin" data-user="" data-title="<%= @movie.imdb_id %>" data-style="p4">
                 <%= link_to "http://www.imdb.com/title/#{@movie.imdb_id}/?ref_=plg_rt_1" do %>
                    <%= image_tag("http://g-ecx.images-amazon.com/images/G/01/imdb/plugins/rating/images/imdb_31x14.png", alt: "#{@movie.title} on IMDb") %>
                 <% end %>
-              </span>
+              </span> |
             <% end %>
             <%= "<span>aka #{@original_title}</span><br>" if @original_title %>
             <span class="duration-minutes"><%= @movie.runtime %> min</span> |
@@ -24,15 +31,10 @@
             <span>Starring <%= '2do_tom_cruise' %></span>
           </div>
 
-          <div class="score-container">
-            <% if @rating %>
-              <% (1..5).each do |score| %>
-                <%= icon 'hand-spock-o', class: score <= rating.round ? 'rating-enabled' : 'rating-disabled' %>
-
-              <% end %>
-            <% end %>
+          <div>
             <% if true %>
               <%= button_to "Add to watchlist", interests_path(movie_id: @movie), class: "btn btn-success" %>
+              <%= link_to "Back", "javascript:history.back()", class: "btn btn-secondary" %>
             <% else %>
 
             <% end %>
@@ -43,7 +45,7 @@
               <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/204x300" : "http://image.tmdb.org/t/p/w500/" + @movie.poster_url), size: "204x300", alt: "2do", class: "img-responsive movie-poster-show") %>
             </li>
             <li class="youtube-trailer">
-              <iframe height="300" width="533" src="<%= @movie.trailer_url%>" frameborder="0" allowfullscreen></iframe>
+              <iframe height="300" width="533" src="<%= @movie.trailer_url%>?&showinfo=0" frameborder="0" allowfullscreen></iframe>
             </li>
           </ul>
         </div>
@@ -68,9 +70,8 @@
               <div class="tab-header">Streamings</div>
             </a>
           </div>
-          <div class="container text-center">
+          <div class="container">
             <div class="tab-content" id="shows">
-              <p>Here are the nearby theaters showing the movie and their showtimes</p>
 <!--               <form id="" action="">
                 <span id="showtimes-location-wrapper">
                   <span class="display-location"></span>
@@ -99,10 +100,14 @@
 </form>
  -->
               <% if @location %>
-
               <% else %>
-
               <% end %>
+              <ul class="list-unstyled">
+                <% @shows.each do |theater, shows| %>
+                  <li><%= render 'theater', theater: theater, shows: shows %></li>
+                <% end %>
+              </ul>
+              <div class="theater-map"></div>
             </div>
             <div class="tab-content hidden" id="streamings">
               <p>Here are the VOD platforms that rent/sell the movie</p>

@@ -240,6 +240,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   koala
+  nokogiri
   omniauth-facebook
   pg
   pry-byebug

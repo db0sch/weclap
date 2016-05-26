@@ -12,7 +12,7 @@ class InterestsController < ApplicationController
     @interest = Interest.new
     @interest.movie = @movie
     @interest.user = current_user
-    authorize @interest     
+    authorize @interest
 
     if @interest.save
       respond_to do |format|
@@ -24,7 +24,7 @@ class InterestsController < ApplicationController
         format.html { render 'movies/index' }
         format.js  # <-- idem
       end
-    end    
+    end
     # if @interest.save
     #   redirect_to movie_path(@movie)
     # else
@@ -35,12 +35,24 @@ class InterestsController < ApplicationController
   def update
     authorize @interest
     @interest.rating = params[:rating]
-    @interest.watched_on = Time.now
+    @interest.watched_on = Time.zone.now
     @interest.save
   end
 
   def destroy
-
+    authorize @interest
+    @interest_id = @interest.id
+    if @interest.destroy
+      respond_to do |format|
+        format.html { redirect_to watchlist_path(current_user) }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { render  } # gérer l'erreur.
+        format.js
+      end
+    end
   end
 
   private
