@@ -240,6 +240,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   koala
+  nokogiri
   omniauth-facebook
   pg
   pry-byebug
@@ -257,6 +258,9 @@ DEPENDENCIES
   spring
   themoviedb
   uglifier
+
+RUBY VERSION
+   ruby 2.3.0p0
 
 BUNDLED WITH
    1.12.4
