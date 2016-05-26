@@ -1,0 +1,30 @@
+<div class="col-xs-12">
+  <div class="movie-item" <%= "id = movie-#{interest.id}" unless interest.nil?  %>>
+
+
+    <!-- img FB -->
+    <div>
+    <% if friend.picture %>
+      <%= image_tag friend.picture, alt: friend.fullname, class: "movie-item-image hidden-xs" %>
+    <% else %>
+      <%= image_tag "http://placehold.it/40x60", alt: "placeholder", class: "movie-item-image hidden-xs" %>
+    <% end %>
+    </div>
+    <!-- Fullname -->
+    <div class='movie-item-body'>
+      <h3><%= friend.fullname %></h3>
+    </div>
+    <!-- movies in commun -->
+    <% friend.interests.each do |movie| %>
+        <% current_user.interests.each do |cumovie| %>
+          <% if cumovie.movie_id == movie.movie_id %>
+          <div>
+          <%= image_tag Movie.find(movie.movie_id).poster_url, class: "movie-item-image hidden-xs" %>
+          </div>
+        <% end %>
+      <% end  %>
+     <% end  %>
+    <!-- movies.all button -->
+
+  </div>
+</div>
