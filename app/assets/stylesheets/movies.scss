@@ -8,43 +8,68 @@
   // flex-wrap: wrap;
   // margin: 0 50px;
 }
+
+.container-movie-infos {
+  display: flex;
+  justify-content: flex-start;
+  color: #6C7A7A;
+  font-weight: lighter;
+  font-size: 14px;
+  margin-left: 11px;
+}
+
 .boxing {
   box-shadow: 1px 1px 2px #aaa;
   border-radius: 4px;
   margin: 10px 0;
   background-color: white;
-  padding: 20px 10px;
+  padding: 23px 24px 41px 25px;
+  h4 {
+    color: black;
+  }
+  p {
+    color: black;
+  }
 }
+
 .movie-poster-show {
 //  flex: 0 1 200px;
   margin: 0 auto;
 }
 .movie-basic-info {
-//  flex: 1 1 250px;
+  display: flex;
+  flex: 1 1 250px;
   margin-left: 10px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: lighter;
   color: $gray-light;
   .movie-title, .movie-release-year {
     font-size: 24px;
     font-weight: normal;
     color: $gray-dark;
+    margin-right: 10px;
   }
 }
 .score-container {
  // flex: 0 0 auto;
   margin-left: 10px;
+  margin-top: 3px;
 }
 .youtube-trailer {
 
 }
 .movie-media-display {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  justify-content: space-around;
   li {
     margin: 0 10px;
   }
+}
+
+.movie-media-container {
+  margin-top: 23px;
+  display: flex;
+  justify-content: center;
 }
 
 //2do : move to config/_variables
@@ -57,3 +82,28 @@ $star-yellow: #FFB400;
 .rating-disabled {
   color: $star-gray;
 }
+
+.container-synopsis {
+  margin-left: 16px;
+  margin-right: 10px;
+  h4 {
+
+  }
+  p {
+    font-weight: 100;
+  }
+}
+
+.theater-container {
+  font-size: small;
+  font-weight: 500;
+}
+
+.showtime-item {
+  color: #6C7A7A;
+  font-weight: 300;
+  margin-left: 10px;
+  margin-bottom: 23px;
+}
+
+
