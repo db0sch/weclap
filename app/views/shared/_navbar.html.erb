@@ -55,7 +55,26 @@
     <% else %>
 
       <!-- Login text link -->
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
+      <%# link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
+      <button type="button" class="navbar-wagon-item navbar-wagon-button btn" data-toggle="modal" data-target=".login-modal-sm">Sign in with Facebook</button>
+      <!-- Modal -->
+
+      <div class="modal fade login-modal-sm" id='LogInModal' tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-xs-12 text-center">
+                  <h4>Sign in with Facebook</h4>
+                  <%= link_to user_facebook_omniauth_authorize_path do %>
+                    <%= image_tag('login_fb_small') %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <% end %>
   </div>
@@ -72,4 +91,5 @@
     </div>
   </div>
 </div>
+
 
