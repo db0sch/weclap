@@ -45,7 +45,7 @@ class InterestsController < ApplicationController
   end
 
   def destroy
-
+    
   end
 
   private
