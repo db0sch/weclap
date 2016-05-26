@@ -7,7 +7,7 @@
         <div class="movie-info-container boxing">
           <div class="movie-basic-info">
             <span class="movie-title"><%= @movie.title %></span>
-            <span class="movie-release-year"><%= "(#{@movie.release_date.year})" if @movie.release_date %></span>
+            <span class="movie-release-year"><%= "(#{@movie.release_date.to_date.year})" if @movie.release_date %></span>
             <br>
             <% if @movie.imdb_id %>
               <span class="imdbRatingPlugin" data-user="" data-title="<%= @movie.imdb_id %>" data-style="p4">
@@ -43,7 +43,7 @@
               <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/204x300" : "http://image.tmdb.org/t/p/w500/" + @movie.poster_url), size: "204x300", alt: "2do", class: "img-responsive movie-poster-show") %>
             </li>
             <li class="youtube-trailer">
-              <iframe height="300" width="533" src="<%= @movie.trailer_url%>" frameborder="0" allowfullscreen></iframe>
+              <iframe height="300" width="533" src="<%= @movie.trailer_url%>?&showinfo=0" frameborder="0" allowfullscreen></iframe>
             </li>
           </ul>
         </div>

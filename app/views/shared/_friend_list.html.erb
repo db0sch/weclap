@@ -1,0 +1,9 @@
+<div class="wrapper-movie-list">
+  <div class="container padded">
+    <div class="row">
+      <% list.each do |friend| %>
+        <%= render 'shared/friend_item', friend: friend, interest: nil %>
+      <% end %>
+    </div>
+  </div>
+</div>
