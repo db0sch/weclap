@@ -1,9 +1,11 @@
-<div class="container">
-  <div class="row">
-    <% list.each do |interest| %>
-      <% unless interest.watched_on %>
-        <%= render 'shared/movie_item', movie: interest.movie, interest: interest %> 
+<div class="wrapper-movie-list">
+  <div class="container">
+    <div class="row">
+      <% list.each do |interest| %>
+        <% unless interest.watched_on %>
+          <%= render 'shared/movie_item', movie: interest.movie, interest: interest %> 
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 </div>
