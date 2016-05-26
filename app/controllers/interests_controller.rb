@@ -40,7 +40,19 @@ class InterestsController < ApplicationController
   end
 
   def destroy
-
+    authorize @interest
+    @interest_id = @interest.id
+    if @interest.destroy
+      respond_to do |format|
+        format.html { redirect_to watchlist_path(current_user) }
+        format.js 
+      end
+    else
+      respond_to do |format|
+        format.html { render  } # gérer l'erreur.
+        format.js
+      end
+    end
   end
 
   private
