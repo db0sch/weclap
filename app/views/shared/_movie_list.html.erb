@@ -1,7 +1,7 @@
 <div class="container padded">
   <div class="row">
     <% list.each do |movie| %>
-      <%= render 'shared/movie_item', movie: movie, interest: nil %>
+      <%= render 'shared/movie_item', movie: movie, friends: @friends, interest: nil %>
     <% end %>
   </div>
 </div>

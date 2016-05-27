@@ -1,0 +1,14 @@
+<div class="provider-container">
+  <div class="provider-description">
+    <span class="provider-name"><%= provider.name %></span>
+  </div>
+  <div class="streaming-list">
+    <p class="streaming-item">
+      <% streamings.each do |strm| %>
+        <%= link_to strm.link do %>
+          <%= "#{strm.consumption} (€ #{'%.2f' % (strm.price / 100.0)})" %>
+        <% end %>
+      <% end %>
+    </p>
+  </div>
+</div>

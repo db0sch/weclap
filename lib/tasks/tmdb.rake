@@ -8,8 +8,7 @@ namespace :tmdb do
     scrape_and_persist_movies(url, 'items')
   end
 
-
-  desc "Get from TMDb the N yearly best rated movies for the last X years"
+  desc "Get from TMDb the yearly best rated movies for the last X years"
   task :seed_yb_movies, [:years] => :environment do |t, args|
     years = args[:years].to_i
     date = Date.today.year
@@ -30,9 +29,9 @@ namespace :tmdb do
     url = BASE_URL + "discover/movie?primary_release_date.gte=#{date.to_s}&primary_release_date.lte=#{Date.today.to_s}.desc&api_key=#{ENV['TMDB_API_KEY']}"
     scrape_and_persist_movies(url, 'results')
   end
-
 end
 
+# private
 # Service methods
 def get_youtube(title)
   titleplus = title.gsub(" ", "+").gsub(/[^[:ascii:]]/, "+")
@@ -53,13 +52,18 @@ end
 def scrape_and_persist_movies(url, item_container_string)
   Tmdb::Api.key(ENV['TMDB_API_KEY'])
   count = 0
-  movies_response = RestClient.get url
-  return 'Cannot reach properly the TMDb api' unless movies_response.code == 200
+  begin
+    movies_response = RestClient.get url
+    fail unless movies_response.code == 200
+  rescue
+    puts "Could not reach the TMDb API with the URL: #{url}"
+    return
+  end
   quote = JSON.parse(movies_response.body)[item_container_string]
   return unless quote
   quote.each do |filmid|
     movie_response = RestClient.get BASE_URL + "movie/#{filmid['id']}?api_key=#{ENV['TMDB_API_KEY']}"
-    continue unless movie_response.code == 200
+    next unless movie_response.code == 200
     film = JSON.parse(movie_response.body)
     movie = Movie.new({
       title: film['title'],
@@ -83,7 +87,7 @@ def scrape_and_persist_movies(url, item_container_string)
       credits: {cast: Tmdb::Movie.casts(film['id']), crew: Tmdb::Movie.crew(film['id'])},
       trailer_url: "https://www.youtube.com/embed#{get_youtube(film['title'])}?rel=0&amp;showinfo=0",
       website_url: "http://www.imdb.com/title/#{film['imdb_id']}",
-      cnc_url: "http://vad.cnc.fr/titles?search=#{film['title'].gsub(" ", "+")}&format="
+      cnc_url: "http://vad.cnc.fr/titles?search=#{film['title'].gsub(" ", "+")}&format=4002"
     })
     puts "#{count += 1}. #{movie.title}"
     movie.valid? ? movie.save : (puts "---> Not persisted: " + movie.errors.full_messages.to_s)
