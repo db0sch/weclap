@@ -27,14 +27,13 @@
   h4 {
     color: black;
   }
-  p {
-    color: black;
-  }
 }
 
 .movie-poster-show {
-//  flex: 0 1 200px;
   margin: 0 auto;
+  height: 300px;
+  box-shadow: 4px 0px 3px 0px #B5B5B5;
+  border-radius: 3px;
 }
 .movie-basic-info {
   display: flex;
@@ -54,10 +53,20 @@
  // flex: 0 0 auto;
   margin-left: 10px;
   margin-top: 3px;
+  display: flex;
+  justify-content: space-between;
+  width: 406px;;
 }
 .youtube-trailer {
 
 }
+
+.plus-button-movie-show {
+  font-size: xx-large;
+  margin-top: -9px;
+  opacity: 0.8;
+}
+
 .movie-media-display {
   display: flex;
   justify-content: space-around;
@@ -69,7 +78,7 @@
 .movie-media-container {
   margin-top: 23px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 //2do : move to config/_variables
@@ -84,14 +93,25 @@ $star-yellow: #FFB400;
 }
 
 .container-synopsis {
-  margin-left: 16px;
-  margin-right: 10px;
+  margin-left: 33px;
+  margin-right: 71px;
   h4 {
 
   }
   p {
     font-weight: 100;
   }
+}
+
+.movie-synopsis {
+  box-shadow: 1px 1px 2px #aaa;
+  border-radius: 4px;
+  margin: 0;
+  background-color: white;
+  padding-top: 37px;
+  padding-bottom: 36px;
+  padding-left: 25px;
+  height: 225px;
 }
 
 .theater-container {
@@ -101,9 +121,27 @@ $star-yellow: #FFB400;
 
 .showtime-item {
   color: #6C7A7A;
-  font-weight: 300;
-  margin-left: 10px;
+  margin-left: 4px;
   margin-bottom: 23px;
+  margin-top: 2px;
 }
 
+.movie-poster-contaoner {
+  height: 200px;
+}
 
+.theater-name {
+  font-weight: 700;
+}
+
+.theater-address {
+  font-weight: 300;
+}
+
+.tabs {
+  margin-bottom: 17px;
+}
+
+.tab-active {
+  background-color: #634949;
+}
