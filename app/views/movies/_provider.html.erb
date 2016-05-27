@@ -5,7 +5,7 @@
   <div class="streaming-list">
     <p class="streaming-item">
       <% streamings.each do |strm| %>
-        <%= link_to strm.link do %>
+        <%= link_to strm.link, target: "#{provider.name}" do %>
           <%= "#{strm.consumption} (€ #{'%.2f' % (strm.price / 100.0)})" %>
         <% end %>
       <% end %>
