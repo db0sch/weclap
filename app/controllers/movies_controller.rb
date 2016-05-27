@@ -1,5 +1,4 @@
 class MoviesController < ApplicationController
-  include MovieScraper
 
   def index
     @movies = policy_scope(Movie)
