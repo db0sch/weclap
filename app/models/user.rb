@@ -47,21 +47,21 @@ class User < ActiveRecord::Base
 
   def check_friendships
 
-      data = JSON.parse(RestClient.get "https://graph.facebook.com/#{self.uid}/invitable_friends?limit=5000&access_token=#{self.token}&l")
-      datadev = JSON.parse(RestClient.get "https://graph.facebook.com/#{self.uid}/friends?limit=5000&access_token=#{self.token}&l")
-      friendslist = []
-      if !data.nil?
-        data["data"].each do |d|
-           friendslist << d['name']
-        end
-      end
+      # data = JSON.parse(RestClient.get "https://graph.facebook.com/#{self.uid}/invitable_friends?limit=5000&access_token=#{self.token}&l")
+      # datadev = JSON.parse(RestClient.get "https://graph.facebook.com/#{self.uid}/friends?limit=5000&access_token=#{self.token}&l")
+      # friendslist = []
+      # if !data.nil?
+      #   data["data"].each do |d|
+      #      friendslist << d['name']
+      #   end
+      # end
 
-      if !datadev.nil?
-        datadev["data"].each do |d|
-           friendslist << d['name']
-        end
-      end
-      self.friendslist = friendslist.to_s
+      # if !datadev.nil?
+      #   datadev["data"].each do |d|
+      #      friendslist << d['name']
+      #   end
+      # end
+      # self.friendslist = friendslist.to_s
 
 
     unless friendslist.blank?
