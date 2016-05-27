@@ -2,7 +2,7 @@
 <div class="navbar-wagon">
   <!-- Center Navigation -->
   <div class="navbar-wagon-center hidden-xs hidden-sm">
-    <%= link_to watchlist_path(current_user) do %>
+    <%= link_to(user_signed_in? ? watchlist_path(current_user) : root_path) do %>
       <%= image_tag "logo.png", class: "clap-logo" %>
     <% end %>
   </div>
