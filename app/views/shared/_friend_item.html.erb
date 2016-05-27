@@ -71,22 +71,22 @@
         <div>
           <h3>Your commun movies</h3>
           <% commun_movies.each do |movie_id| %>
-
-            <%= link_to  movie_path(movie_id) do %>
-            <div class="flex-box-center">
-              <div class="">
-              <% movie = Movie.find(movie_id) %>
-              <%= image_tag(movie.poster_url, class: "movie-item-image hidden-xs")%>
-                <div class="relative">
-                  <div class="abolute">
-                  <span><%= movie.title %></span>
-                  </div>
-                  <div class="abolute">
-                  <span><%= movie.release_date.to_date.year %></span>
+            <div>
+              <%= link_to  movie_path(movie_id) do %>
+                <div class="modal-item">
+                  <div class="modal-item-group-one">
+                    <div class="modal-item-body">
+                      <% movie = Movie.find(movie_id) %>
+                      <%= image_tag(movie.poster_url, class: "movie-item-image hidden-xs")%>
+                    </div>
+                    <div class="modal-item-body">
+                      <span><%= movie.title %>
+                      <br>
+                      <%= movie.release_date.to_date.year %></span>
+                    </div>
                   </div>
                 </div>
-              </div>
-               <% end %>
+              <% end %>
             </div>
           <% end %>
         </div>
@@ -95,19 +95,27 @@
           <h3>The other movies of <%= friend.first_name %></h3>
           <% friend.interests.each do |movie| %>
             <% if !commun_movies.include?(movie.movie_id) %>
-              <div class="flex-box-center">
-                <%= link_to  movie_path(movie.movie_id) do %>
+              <div>
+                  <div class="modal-item">
+                    <div class="modal-item-group-one">
+                      <div class="modal-item-body">
+                        <% movie = Movie.find(movie.movie_id) %>
+                        <%= link_to (image_tag(movie.poster_url, class: "movie-item-image hidden-xs")), movie_path(movie)%>
+                      </div>
+                      <div class="modal-item-body">
+                        <span><%= movie.title %>
+                        <br>
+                        <%= movie.release_date.to_date.year %></span>
+                      </div>
+                    </div>
+                    <div class="modal-item-body" id="modal-end">
+                      <span><%= link_to icon('plus-circle'), interests_path(movie_id: movie), method: :post, remote: true, class: "movie-add-btn", id: "movie-add-#{movie.id}" %></span>
+                    </div>
+                  </div>
 
-                  <% movie = Movie.find(movie.movie_id) %>
-                  <%= image_tag(movie.poster_url, class: "movie-item-image hidden-xs")%>
-                    <span><%= movie.title %></span>
-                    <span><%= movie.release_date.to_date.year %></span>
-                    <span><%= link_to icon('plus-circle'), interests_path(movie_id: movie), method: :post, remote: true, class: "movie-add-btn", id: "movie-add-#{movie.id}" %></span>
-                <% end %>
+                <% #end %>
               </div>
             <% end %>
-
-
           <% end %>
         </div>
 

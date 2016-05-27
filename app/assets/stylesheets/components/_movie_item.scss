@@ -157,5 +157,24 @@ a.movie-added-btn {
   margin-bottom: 0px;
 }
 
+.modal-item-body {
+  flex: 0 0 auto;
+}
+#modal-end {
+  margin-right: 10px;
+}
 
-
+.modal-item {
+  display: flex;
+  align-items: center;
+  transition: all 0.15s ease;
+  background-color: #F4F4F4;
+  border: 1px solid #949494;
+  margin: 4px;
+  justify-content: space-between;
+  .modal-item-group-one {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
