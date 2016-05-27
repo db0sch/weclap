@@ -104,7 +104,7 @@ module MovieScraper
         production_countries: film['production_countries'],
         release_date: film['release_date'],
         spoken_languages: film['spoken_languages'],
-        credits: { cast: get_cast(film['id']), crew: get_crew(film['id']) },
+        credits: { cast: get_cast(film['id']), crew: get_crew(film['id']) }.to_json,
         trailer_url: "https://www.youtube.com/embed#{get_youtube(film['title'])}?rel=0&amp;showinfo=0",
         website_url: "http://www.imdb.com/title/#{film['imdb_id']}",
         cnc_url: "http://vad.cnc.fr/titles?search=#{film['title'].gsub(" ", "+")}&format=4002"
