@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :interests, only: [:create, :update, :destroy]
   root to: 'pages#home'
 
+  get '/webhook/' => 'bots#webhook', as: 'webhook'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
