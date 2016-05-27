@@ -9,13 +9,13 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
     <%= stylesheet_link_tag    'application', media: 'all' %>
   </head>
-  <body>
+  <body class="<%= controller_name %>-<%= action_name%>">
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
     <div class="main">
       <%= yield %>
     </div>
-    <%= render 'shared/footer' %>    
+    <%= render 'shared/footer' %>
     <%= javascript_include_tag 'application' %>
     <%= yield(:after_js) %>
   </body>

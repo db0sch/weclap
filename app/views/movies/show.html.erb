@@ -1,29 +1,33 @@
 <div class="movie-wrapper">
   <div class="container">
     <div class="row">
-
-
-      <div class="col-xs-12">
+<!--     <%= link_to "Back", "javascript:history.back()", class: "navbar-wagon-button" %> -->
+      <div class="col-xs-12 col-sm-8">
         <div class="movie-info-container boxing">
           <div class="movie-basic-info">
             <span class="movie-title"><%= @movie.title %></span>
-            <span class="movie-release-year"><%= " (#{@movie.release_date.year})" if @movie.release_date %></span>
+            <span class="movie-release-year"><%= " (#{@movie.release_date.to_date.year})" if @movie.release_date %></span>
             <span class="score-container">
               <% if @rating %>
                 <% (1..5).each do |score| %>
                   <%= icon 'hand-spock-o', class: score <= @rating.round ? 'rating-enabled' : 'rating-disabled' %>
                 <% end %>
               <% end %>
-            </span>
-            <br>
-            <% if @movie.imdb_id %>
-              <span class="imdbRatingPlugin" data-user="" data-title="<%= @movie.imdb_id %>" data-style="p4">
-                <%= link_to "http://www.imdb.com/title/#{@movie.imdb_id}/?ref_=plg_rt_1" do %>
-                   <%= image_tag("http://g-ecx.images-amazon.com/images/G/01/imdb/plugins/rating/images/imdb_31x14.png", alt: "#{@movie.title} on IMDb") %>
+              <% if @movie.imdb_id %>
+                <span class="imdbRatingPlugin" data-user="" data-title="<%= @movie.imdb_id %>" data-style="p4">
+                  <%= link_to "http://www.imdb.com/title/#{@movie.imdb_id}/?ref_=plg_rt_1" do %>
+                     <%= image_tag("http://g-ecx.images-amazon.com/images/G/01/imdb/plugins/rating/images/imdb_31x14.png", alt: "#{@movie.title} on IMDb") %>
+                  <% end %>
+                </span> |
+                <% if true %>
+                  <%= link_to icon('plus-circle'), interests_path(movie_id: @movie) %>
                 <% end %>
-              </span> |
-            <% end %>
+              <% end %>
+            </span>
             <%= "<span>aka #{@original_title}</span><br>" if @original_title %>
+          </div>
+
+          <div class="container-movie-infos">
             <span class="duration-minutes"><%= @movie.runtime %> min</span> |
             <span class="parental-rating"><%= @movie.adult ? 'Adult' : 'For all' %></span> |
             <span class="people-list">Directed by <%= '2do_director' %></span>
@@ -31,36 +35,23 @@
             <span>Starring <%= '2do_tom_cruise' %></span>
           </div>
 
-          <div>
-            <% if true %>
-              <%= button_to "Add to watchlist", interests_path(movie_id: @movie), class: "btn btn-success" %>
-              <%= link_to "Back", "javascript:history.back()", class: "btn btn-secondary" %>
-            <% else %>
+          <div class="movie-media-container">
+<!--               <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/204x300" : "http://image.tmdb.org/t/p/w500/" + @movie.poster_url), size: "204x300", alt: "2do", class: "img-responsive movie-poster-show") %> -->
 
-            <% end %>
-          </div>
-
-          <ul class="movie-media-display list-inline">
-            <li>
-              <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/204x300" : "http://image.tmdb.org/t/p/w500/" + @movie.poster_url), size: "204x300", alt: "2do", class: "img-responsive movie-poster-show") %>
-            </li>
-            <li class="youtube-trailer">
               <iframe height="300" width="533" src="<%= @movie.trailer_url%>?&showinfo=0" frameborder="0" allowfullscreen></iframe>
-            </li>
-          </ul>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
+
         <div class="movie-synopsis boxing">
-          <h4>Synopsis</h4>
-          <p><%= @movie.overview %></p>
+          <div class="container-synopsis">
+            <h4>Synopsis</h4>
+            <p><%= @movie.overview %></p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
+
+
+      <div class="col-xs-12 col-sm-4">
         <div class="boxing">
           <div class="tabs">
             <a class="tab <%= 'active' if @shows.any? %>" data-target="#shows">
@@ -70,38 +61,39 @@
               <div class="tab-header">Streamings</div>
             </a>
           </div>
-          <div class="container">
-            <div class="tab-content" id="shows">
-<!--               <form id="" action="">
-                <span id="showtimes-location-wrapper">
-                  <span class="display-location"></span>
-                  <span class="edit-location">
-                    <input type="text" placeholder="Postal Code" name="zipcode" value="">
-                  </span>
-
+          <div class="tab-content" id="shows">
+    <!--               <form id="" action="">
+              <span id="showtimes-location-wrapper">
+                <span class="display-location"></span>
+                <span class="edit-location">
+                  <input type="text" placeholder="Postal Code" name="zipcode" value="">
                 </span>
-              </form>
- -->
-<!--
-<form id="set-location-form" class="location" action="/showtimes/change-state-and-redirect">
-  <input name="ref_" value="sh_chg" type="hidden">
 
-  <span class="location-no-wrap">
+              </span>
+            </form>
+    -->
+    <!--
+    <form id="set-location-form" class="location" action="/showtimes/change-state-and-redirect">
+    <input name="ref_" value="sh_chg" type="hidden">
+
+    <span class="location-no-wrap">
     <span class="location-display" style="display: none;">Chicago IL US</span>
     <span class="location-edit" style="display: inline;">
 
-      <input type="text" placeholder="Postal Code" name="zipcode" value="">
+    <input type="text" placeholder="Postal Code" name="zipcode" value="">
     </span>
     <span class="edit-hide" style="display: none;">
-      <a href="/showtimes/set-location?ref_=sh_chg" class="edit" data-tag="allcinemas-showtimes">Change</a>
+    <a href="/showtimes/set-location?ref_=sh_chg" class="edit" data-tag="allcinemas-showtimes">Change</a>
     </span>
     <span class="edit-show" style="display: none;"><input type="submit" class="btn small disabled" value="Go" disabled="disabled"> <a class="edit" href="/showtimes/set-location">[X]</a></span>
-  </span>
-</form>
- -->
-              <% if @location %>
-              <% else %>
-              <% end %>
+    </span>
+    </form>
+    -->
+            <% if @location %>
+            <% else %>
+            <% end %>
+            <div class="container-movie-times">
+
               <ul class="list-unstyled">
                 <% @shows.each do |theater, shows| %>
                   <li><%= render 'theater', theater: theater, shows: shows %></li>
@@ -116,6 +108,10 @@
                 <% end %>
               </ul>
             </div>
+            <div class="theater-map"></div>
+          </div>
+          <div class="tab-content hidden" id="streamings">
+            <p>Here are the VOD platforms that rent/sell the movie</p>
           </div>
         </div>
       </div>
@@ -123,14 +119,17 @@
   </div>
 </div>
 
+
+
+
 <script>
   (function(d, s, id) {
-    var js, stags = d.getElementsByTagName(s)[0];
-    if(d.getElementById(id)) {return;}
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "http://g-ec2.images-amazon.com/images/G/01/imdb/plugins/rating/js/rating.min.js";
-    stags.parentNode.insertBefore(js, stags);
+  var js, stags = d.getElementsByTagName(s)[0];
+  if(d.getElementById(id)) {return;}
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "http://g-ec2.images-amazon.com/images/G/01/imdb/plugins/rating/js/rating.min.js";
+  stags.parentNode.insertBefore(js, stags);
   })
   (document, 'script', 'imdb-rating-api');
 </script>

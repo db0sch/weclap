@@ -31,7 +31,7 @@ namespace :tmdb do
   end
 end
 
-private
+# private
 # Service methods
 def get_youtube(title)
   titleplus = title.gsub(" ", "+").gsub(/[^[:ascii:]]/, "+")

@@ -19,7 +19,7 @@
   padding-top: 21px;
   padding-bottom: 21px;
   background: rgba(126, 155, 159, 0.5);
-
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* Optional class to fix the navbar on top */
@@ -142,21 +142,21 @@
 .navbar-wagon-dropdown-menu {
   margin-top: 15px;
   margin-right: 15px;
-  box-shadow: 1px 1px 4px #000000;
+  box-shadow: 1px 2px 1px #ABABAB;
   /* border-color: #E6E6E6; */
-  background-color: rgba(241, 241, 241, 0.18);
+  background-color: #F1F1F1;
 }
 .navbar-wagon-dropdown-menu li > a {
   transition: color 0.3s ease;
   font-weight: lighter !important;
-  color: #C1C1C1 !important;
+  color: #615E5E !important;
   font-size: 15px !important;
   line-height: 22px !important;
   padding: 10px 20px;
 }
 .navbar-wagon-dropdown-menu li > a:hover {
   background: transparent !important;
-  color: white !important;
+  color: #6C7A7A !important;
 }
 .navbar-wagon-dropdown-menu:before {
   content: ' ';

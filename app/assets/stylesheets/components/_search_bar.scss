@@ -1,3 +1,7 @@
+.container-search-bar {
+  padding-top: 28px;
+}
+
 .movie-search-bar-form {
   display: flex;
   margin: 20px 0px;
@@ -17,7 +21,7 @@
   font-size: 14px;
   outline: none;
   color: #666666;
-  border: 1px solid white;
+  border: none;
 }
 
 .movie-search-button {
@@ -30,6 +34,32 @@
   border-bottom-left-radius: 0px;
 }
 
-.movie-search-field:focus  {
-  border: 1px solid #CCCCCC;
+
+#search-button {
+  color: white;
+  background-color: #31708f;
+  margin-left: 0px;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 1 100px;
+  flex: 0 1 100px;
+  z-index: 1;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border: none;
+}
+
+#search-button:hover {
+  color: white;
+  background-color: #31708f;
+  margin-left: 0px;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 1 100px;
+  flex: 0 1 100px;
+  z-index: 1;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
