@@ -18,9 +18,9 @@
                   <%= link_to "http://www.imdb.com/title/#{@movie.imdb_id}/?ref_=plg_rt_1" do %>
                      <%= image_tag("http://g-ecx.images-amazon.com/images/G/01/imdb/plugins/rating/images/imdb_31x14.png", alt: "#{@movie.title} on IMDb") %>
                   <% end %>
-                </span> |
+                </span>
                 <% if true %>
-                  <%= link_to icon('plus-circle'), interests_path(movie_id: @movie) %>
+                  <%= link_to icon('plus-circle'), interests_path(movie_id: @movie), method: :post, remote: true, class:"plus-button-movie-show" %>
                 <% end %>
               <% end %>
             </span>
@@ -36,19 +36,21 @@
           </div>
 
           <div class="movie-media-container">
-<!--               <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/204x300" : "http://image.tmdb.org/t/p/w500/" + @movie.poster_url), size: "204x300", alt: "2do", class: "img-responsive movie-poster-show") %> -->
-
-              <iframe height="300" width="533" src="<%= @movie.trailer_url%>?&showinfo=0" frameborder="0" allowfullscreen></iframe>
+            <div class="movie-poster-container">
+              <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/204x300" : "http://image.tmdb.org/t/p/w500/" + @movie.poster_url), size: "204x300", alt: "2do", class: "img-responsive movie-poster-show") %>
+            </div>
+              <iframe height="300" width="477" src="<%= @movie.trailer_url%>?&showinfo=0" frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
 
-        <div class="movie-synopsis boxing">
+        <div class="movie-synopsis">
           <div class="container-synopsis">
             <h4>Synopsis</h4>
             <p><%= @movie.overview %></p>
           </div>
         </div>
       </div>
+
 
       <div class="col-xs-12 col-sm-4">
         <div class="boxing">
@@ -60,8 +62,39 @@
               <div class="tab-header">Streamings</div>
             </a>
           </div>
-          <div class="tab-content <%= 'hidden' unless @shows.any? %>" id="shows">
+          <div class="tab-content" id="shows">
+    <!--               <form id="" action="">
+              <span id="showtimes-location-wrapper">
+                <span class="display-location"></span>
+                <span class="edit-location">
+                  <input type="text" placeholder="Postal Code" name="zipcode" value="">
+                </span>
+
+              </span>
+            </form>
+    -->
+    <!--
+    <form id="set-location-form" class="location" action="/showtimes/change-state-and-redirect">
+    <input name="ref_" value="sh_chg" type="hidden">
+
+    <span class="location-no-wrap">
+    <span class="location-display" style="display: none;">Chicago IL US</span>
+    <span class="location-edit" style="display: inline;">
+
+    <input type="text" placeholder="Postal Code" name="zipcode" value="">
+    </span>
+    <span class="edit-hide" style="display: none;">
+    <a href="/showtimes/set-location?ref_=sh_chg" class="edit" data-tag="allcinemas-showtimes">Change</a>
+    </span>
+    <span class="edit-show" style="display: none;"><input type="submit" class="btn small disabled" value="Go" disabled="disabled"> <a class="edit" href="/showtimes/set-location">[X]</a></span>
+    </span>
+    </form>
+    -->
+            <% if @location %>
+            <% else %>
+            <% end %>
             <div class="container-movie-times">
+
               <ul class="list-unstyled">
                 <% @shows.each do |theater, shows| %>
                   <li><%= render 'theater', theater: theater, shows: shows %></li>
@@ -69,14 +102,17 @@
               </ul>
               <div class="theater-map"></div>
             </div>
+            <div class="tab-content hidden" id="streamings">
+              <ul class="list-unstyled">
+                <% @streamings.each do |provider, streamings| %>
+                  <li><%= render 'provider', provider: provider, streamings: streamings %></li>
+                <% end %>
+              </ul>
+            </div>
             <div class="theater-map"></div>
           </div>
-          <div class="tab-content <%= 'hidden' if @shows.any? %>" id="streamings">
-            <ul class="list-unstyled">
-              <% @streamings.each do |provider, streamings| %>
-                <li><%= render 'provider', provider: provider, streamings: streamings %></li>
-              <% end %>
-            </ul>
+          <div class="tab-content hidden" id="streamings">
+            <p>Here are the VOD platforms that rent/sell the movie</p>
           </div>
         </div>
       </div>

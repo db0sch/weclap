@@ -11,6 +11,19 @@
   border: 1px solid #949494;
   margin: 4px;
 }
+
+.movie-item:hover {
+  cursor: pointer;
+  border: solid 5px #BFCDCF;
+  transition: 0.3;
+    h3 a {
+    color: #6C7A7A;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
+
+
 .movie-item-social {
   display: flex;
   flex-direction: column;
@@ -19,6 +32,15 @@
   background-color: #F4F4F4;
   margin: 4px;
 }
+
+.movie-item-social:hover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.15s ease;
+  margin: 4px;
+}
+
 .movie-rating {
   display: flex;
   margin: 4px;
@@ -100,10 +122,11 @@
 .movie-item-controls a {
   padding: 0 20px;
   font-size: 17px;
-  color: #E6E6E6;
+  color: rgba(123, 118, 118, 0.77);
 }
 .movie-item-controls a:hover {
-  color: #6C7A7A !important
+  color: #1C3C56 !important;
+  opacity: 0.8;
 }
 .movie-item-controls-hidden a {
   color: transparent;
@@ -113,10 +136,7 @@
 }
 
 /* Hover effects */
-.movie-item:hover {
-  background: #f7f7fa;
-  cursor: pointer;
-}
+
 .movie-item-upvote:hover {
   color: #5898f1;
   cursor: pointer;
@@ -138,11 +158,15 @@ a.movie-add-btn {
   text-decoration: none;
 }
 
-// a.movie-add-btn.disabled:hover {
-//   font-size: 30px;
-//   color: $blue;
-//   opacity: 1;
-// }
+.movie-add-btn {
+  color: #383838;
+}
+
+.movie-add-btn:hover {
+  color: black;
+}
+
+
 
 a.movie-added-btn {
   font-size: 30px;
