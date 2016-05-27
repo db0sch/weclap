@@ -15,8 +15,11 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     authorize @movie
-    # sum = @movie.interests.reduce(0) { |sum, i| sum + i.rating if i.rating }
-    # @rating = (sum / @movie.interests.count) if sum && @movie.interests.any?
+    credits = JSON.parse(@movie.credits)
+    @directors = credits['crew']['Director'].join(', ') unless credits['crew'].blank?
+    @actors = credits['cast'].join(', ')
+    @genres = JSON.parse(@movie.genres).join(', ')
+    @clap_score = @movie.clap_score
     @location = current_user.address
     @shows = MovieScraper::find_showtimes_of_the_day(@location || '75001', @movie, 5)
     @streamings = MovieScraper::find_streamings_for(@movie) || {}
