@@ -16,6 +16,10 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     authorize @movie
+    @directors = @movie.credits[:crew]["Director"].join(', ') unless @movie.credits[:crew].blank?
+    @actors = @movie.credits[:cast].join(', ')
+    @genres = @movie.genres.join(', ')
+
     # sum = @movie.interests.reduce(0) { |sum, i| sum + i.rating if i.rating }
     # @rating = (sum / @movie.interests.count) if sum && @movie.interests.any?
     @location = current_user.address

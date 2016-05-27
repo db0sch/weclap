@@ -30,9 +30,10 @@
           <div class="container-movie-infos">
             <span class="duration-minutes"><%= @movie.runtime %> min</span> |
             <span class="parental-rating"><%= @movie.adult ? 'Adult' : 'For all' %></span> |
-            <span class="people-list">Directed by <%= '2do_director' %></span>
+            <span class="people-list">Directed by: <%= @directors %></span>
             <br>
-            <span>Starring <%= '2do_tom_cruise' %></span>
+            <span> Starring: <%= @actors %> </span>
+            <p> Genre: <%= @genres %></p>
           </div>
 
           <div class="movie-media-container">

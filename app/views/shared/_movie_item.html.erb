@@ -10,8 +10,8 @@
     <div class='movie-item-body'>
       <h3><%= link_to movie.title, movie %></h3>
       <div class="crew">
-        <p id="directed">Directed by:</p>
-        <p>Cast:</p>
+        <p id="directed">Directed by: <%= @directors %></p>
+        <p>Cast: <%= @actors %></p>
       </div>
       <div class="movie-infos">
         <p id="year_released"><%= link_to movie.release_date.to_date.year %></p>
