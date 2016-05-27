@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
     if !friendslist.nil?
       JSON.parse(friendslist).each do |f|
         User.all.each do |u|
-          if u.first_name + " " + u.last_name == f
+          if u.fullname == f
             Friendship.create({friend_id: u.id, buddy_id: self.id})
           end
         end
