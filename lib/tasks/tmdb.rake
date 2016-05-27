@@ -1,5 +1,3 @@
-include MovieScraper
-
 BASE_URL = "http://api.themoviedb.org/3/"
 
 namespace :tmdb do
