@@ -14,7 +14,7 @@ class MovieScraper
         t.search(".showtimes meta").each do |h|
           shows[theater] << Show.create(starts_at: Time.zone.parse(h.attribute('content').value), movie: movie, theater: theater)
         end
-        break if idx >= limit + 1
+        break if idx >= limit - 1
       end
       shows
     end
@@ -91,7 +91,7 @@ class MovieScraper
           original_title: film['original_title'],
           runtime: film['runtime'],
           tagline: film['tagline'],
-          genres: film['genres'].map { |genre| genre.values.last }.to_s,
+          genres: film['genres'].map { |genre| genre.values.last }.to_json,
           poster_url: film['poster_path'] ? "http://image.tmdb.org/t/p/w500" + film['poster_path'] : nil,
           imdb_id: film['imdb_id'],
           imdb_score: film['vote_average'],

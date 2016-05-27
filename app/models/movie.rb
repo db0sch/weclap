@@ -9,4 +9,16 @@ class Movie < ActiveRecord::Base
   has_many :providers, through: :streamings
 
   validates :imdb_id, uniqueness: true
+
+  def clap_score
+    sum = 0.0
+    count = 0
+    interests.each do |i|
+      if i.rating
+        sum += i.rating
+        count += 1
+      end
+    end
+    sum / count unless count == 0
+  end
 end
