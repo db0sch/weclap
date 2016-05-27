@@ -71,13 +71,20 @@
         <div>
           <h3>Your commun movies</h3>
           <% commun_movies.each do |movie_id| %>
+
             <%= link_to  movie_path(movie_id) do %>
             <div class="flex-box-center">
-              <div class="flex-item-center">
+              <div class="">
               <% movie = Movie.find(movie_id) %>
               <%= image_tag(movie.poster_url, class: "movie-item-image hidden-xs")%>
-                <span><%= movie.title %></span>
-                <span><%= movie.release_date.to_date.year %></span>
+                <div class="relative">
+                  <div class="abolute">
+                  <span><%= movie.title %></span>
+                  </div>
+                  <div class="abolute">
+                  <span><%= movie.release_date.to_date.year %></span>
+                  </div>
+                </div>
               </div>
                <% end %>
             </div>
