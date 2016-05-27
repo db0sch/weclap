@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
       friendslist = []
       if !data.nil?
         data["data"].each do |d|
-           friendslist << d['name']
+           friendslist << d['name'] 
         end
       end
       if !datadev.nil?
@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   private
 
   def check_friendships
-    if !friendslist.nil?
+    unless friendslist.blank?
       JSON.parse(friendslist).each do |f|
         User.all.each do |u|
           if u.first_name + " " + u.last_name == f

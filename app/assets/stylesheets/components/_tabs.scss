@@ -5,10 +5,11 @@ $red: #CA0C0C;
   // background: #53443F;
   display: flex;
   justify-content: center;
+  font-weight: 100;
   // padding: 10px 10px 0 10px
 }
 .tabs a {
-  color: $red;
+  color: #503C3C;
 }
 .tabs a:hover {
   cursor: pointer;
@@ -23,24 +24,26 @@ $red: #CA0C0C;
 .tabs p {
   opacity: 0.5;
   margin-bottom: 0;
+  font-weight: lighter;
 }
 .tab {
   // background: #756A66;
   flex: 0 0 30%;
   text-align: center;
   padding: 10px 0;
-  border: 1px solid $red;
+  border: 1px solid #5F4444;
 }
 .tab:first-child {
-  border-radius: 10px 0 0 10px;
+  border-radius: 4px 0 0 4px;
 }
 .tab:last-child {
-  border-radius: 0 10px 10px 0;
+  border-radius: 0 4px 4px 0;
 }
 .tab.active {
-  background: $red;
+  background: #503C3C;
   color: white;
 }
 .tab-content {
   padding-top: 10px;
 }
+

@@ -2,7 +2,9 @@
 <div class="navbar-wagon">
   <!-- Center Navigation -->
   <div class="navbar-wagon-center hidden-xs hidden-sm">
-    <%= image_tag "logo.png", class: "clap-logo" %>
+    <%= link_to watchlist_path(current_user) do %>
+      <%= image_tag "logo.png", class: "clap-logo" %>
+    <% end %>
   </div>
 
   <!-- Right Navigation -->
@@ -67,7 +69,7 @@
                 <div class="col-xs-12 text-center">
                   <h4>Sign in with Facebook</h4>
                   <%= link_to user_facebook_omniauth_authorize_path do %>
-                    <%= image_tag('login_fb_small') %>
+                    <%= image_tag('login_fb_small.png') %>
                   <% end %>
                 </div>
               </div>

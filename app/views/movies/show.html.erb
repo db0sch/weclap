@@ -18,9 +18,9 @@
                   <%= link_to "http://www.imdb.com/title/#{@movie.imdb_id}/?ref_=plg_rt_1" do %>
                      <%= image_tag("http://g-ecx.images-amazon.com/images/G/01/imdb/plugins/rating/images/imdb_31x14.png", alt: "#{@movie.title} on IMDb") %>
                   <% end %>
-                </span> |
+                </span>
                 <% if true %>
-                  <%= link_to icon('plus-circle'), interests_path(movie_id: @movie) %>
+                  <%= link_to icon('plus-circle'), interests_path(movie_id: @movie), class:"plus-button-movie-show" %>
                 <% end %>
               <% end %>
             </span>
@@ -36,13 +36,14 @@
           </div>
 
           <div class="movie-media-container">
-<!--               <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/204x300" : "http://image.tmdb.org/t/p/w500/" + @movie.poster_url), size: "204x300", alt: "2do", class: "img-responsive movie-poster-show") %> -->
-
-              <iframe height="300" width="533" src="<%= @movie.trailer_url%>?&showinfo=0" frameborder="0" allowfullscreen></iframe>
+            <div class="movie-poster-container">
+              <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/204x300" : "http://image.tmdb.org/t/p/w500/" + @movie.poster_url), size: "204x300", alt: "2do", class: "img-responsive movie-poster-show") %>
+            </div>
+              <iframe height="300" width="477" src="<%= @movie.trailer_url%>?&showinfo=0" frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
 
-        <div class="movie-synopsis boxing">
+        <div class="movie-synopsis">
           <div class="container-synopsis">
             <h4>Synopsis</h4>
             <p><%= @movie.overview %></p>
