@@ -54,10 +54,10 @@
       <div class="col-xs-12 col-sm-4">
         <div class="boxing">
           <div class="tabs">
-            <a class="tab active" data-target="#shows">
+            <a class="tab <%= 'active' if @shows.any? %>" data-target="#shows">
               <div class="tab-header">Shows</div>
             </a>
-            <a class="tab" data-target="#streamings">
+            <a class="tab <%='active' unless @shows.any? %>" data-target="#streamings">
               <div class="tab-header">Streamings</div>
             </a>
           </div>
@@ -97,6 +97,14 @@
               <ul class="list-unstyled">
                 <% @shows.each do |theater, shows| %>
                   <li><%= render 'theater', theater: theater, shows: shows %></li>
+                <% end %>
+              </ul>
+              <div class="theater-map"></div>
+            </div>
+            <div class="tab-content hidden" id="streamings">
+              <ul class="list-unstyled">
+                <% @streamings.each do |provider, streamings| %>
+                  <li><%= render 'provider', provider: provider, streamings: streamings %></li>
                 <% end %>
               </ul>
             </div>
