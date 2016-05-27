@@ -26,6 +26,7 @@ gem 'rest-client'
 gem 'awesome_print'
 gem "koala"
 gem 'nokogiri'
+gem 'facebook-messenger'
 
 group :development, :test do
   gem 'binding_of_caller'
