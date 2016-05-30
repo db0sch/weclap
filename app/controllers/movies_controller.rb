@@ -5,15 +5,11 @@ class MoviesController < ApplicationController
     title = params[:title]
     @movies = @movies.where('title ILIKE ? OR original_title ILIKE ?', "%#{title}%", "%#{title}%") if title
     @friends = my_friends_finder
-    respond_to do |format|
-      format.html
-      format.json
-      format.js
-    end
   end
 
   def show
     @movie = Movie.find(params[:id])
+    @display_shows = display_shows_tab?(@movie)
     @friends = my_friends_finder
     credits = @movie.credits
 
@@ -23,17 +19,15 @@ class MoviesController < ApplicationController
     @clap_score = @movie.clap_score
     @location = current_user.zip_code
     @city = current_user.city
-    @shows = MovieScraper::find_showtimes_of_the_day(@location, @city, @movie, 5)
-    @streamings = MovieScraper::find_streamings_for(@movie) || {}
     @original_title = @movie.original_title unless @movie.original_title.blank? || @movie.title.casecmp(@movie.original_title) == 0
+    # execute in background
+# 2do
+    @streamings = MovieScraper::find_streamings_for(@movie) || {}
+#
+    GetShowtimesJob.set(wait: 1.seconds).perform_later(@movie.id, @location, current_user.id)
+    @shows = []
 
     authorize @movie
-
-    respond_to do |format|
-      format.html
-      format.json
-      format.js
-    end
   end
 
   def my_friends_finder
@@ -50,5 +44,11 @@ class MoviesController < ApplicationController
       end
     end
     friend_ids
+  end
+
+  private
+
+  def display_shows_tab?(movie)
+    movie.release_date > 3.months.ago
   end
 end
