@@ -1,0 +1,20 @@
+<% if @shows.any? %>
+  <!-- The map will be drawn in this div -->
+  <div id="map"></div>
+
+  <!-- Require jQuery and Google map For rails javascript lib -->
+  <script src="https://wagon-google-maps-markers.herokuapp.com/assets/application-5034196864c74ae1cc5f12e6d1f71223.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+    $(document).on('ready', function() {
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: { id: 'map' } }, function(){
+        markers = handler.addMarkers(<%= raw build_markers_for_shows(@shows).to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      });
+    })
+  </script>
+<% end %>
+
+
