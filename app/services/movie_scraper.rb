@@ -1,20 +1,47 @@
 class MovieScraper
   class << self
-    def find_showtimes_of_the_day(zip_code, movie, limit)
+    def find_showtimes_of_the_day(zip_code, city, movie, limit)
       shows = {}
       url = "http://www.imdb.com/showtimes/title/#{movie.imdb_id}/FR/#{zip_code}"
       response = RestClient.get url
       return unless response.code == 200
       theaters = Nokogiri::HTML(response.body).search(".list_item")
-      theaters.each_with_index do |t, idx|
+
+      # First we go through each theater from IMDB and find or create them
+      # We then create an array of [[TheaterInstance, NokogiriData], [TheaterInstance, NokogiriData]]
+      theaters_data = theaters.map do |t|
         name = t.search(".fav_box").text.strip
         address = t.search(".address").text.strip.gsub(/\n/, "").gsub(/ +/, " ").gsub(/.{17}$/,"")
-        theater = Theater.where(name: name).where(address: address).first_or_create(name: name, address: address)
+        [Theater.where(name: name).where(address: address).first_or_create(name: name, address: address), t]
+      end
+
+      # Then we fetch the nearest theaters
+      nearest_theaters = Theater.near("#{zip_code} #{city}", 2)
+      # Then we select the nearest theaters that were also found by IMDB
+      nearest_data = theaters_data.select do |theater_data|
+        record = theater_data[0]
+        nearest_theaters.include?(record)
+      end
+
+      # If we don't have 5 theaters yet, we try to take more from IMDB
+      # The breaker is ugly as fuck but prevents infinite looping in some cases
+      breaker = 0
+      while nearest_data.size < 5 && breaker <= 5
+        theaters_data.each do |theater_data|
+          record = theater_data[0]
+          nearest_data << theater_data unless nearest_data.include?(record)
+        end
+        breaker += 1
+      end
+
+      # Then we have this list of nearest theaters and their nokogiri data, we take the first 5
+      nearest_data.take(5).each do |data|
+        theater = data[0]
+        t = data[1]
         shows[theater] ||= []
         t.search(".showtimes meta").each do |h|
           shows[theater] << Show.create(starts_at: Time.zone.parse(h.attribute('content').value), movie: movie, theater: theater)
         end
-        break if idx >= limit - 1
       end
       shows
     end

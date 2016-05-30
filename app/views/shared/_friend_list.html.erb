@@ -2,7 +2,22 @@
   <div class="container padded">
     <div class="row">
       <% list.each do |friend| %>
-        <%= render 'shared/friend_item', friend: friend, interest: nil %>
+        <% commun_movies = [] %>
+        <!-- movies in commun -->
+        <% friend.interests.each do |movie| %>
+          <% if movie.watched_on.nil? %>
+            <% current_user.interests.each do |cumovie| %>
+              <% if cumovie.movie_id == movie.movie_id %>
+                  <% commun_movies << movie.movie_id %>
+              <% end %>
+            <% end  %>
+          <% end %>
+        <% end  %>
+
+        <div id="friend-<%= friend.id %>">
+          <%= render 'shared/friend_item', friend: friend, commun_movies: commun_movies, interest: nil %>
+        </div>
+        <%= render 'shared/friend_modal', friend: friend, commun_movies: commun_movies, interest: nil %>
       <% end %>
     </div>
   </div>
