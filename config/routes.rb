@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # get '/webhook/' => 'bots#webhook', as: 'webhook'
 
   require "sidekiq/web"
-  authenticate :user, lambda { |u| u.admin } do
+  authenticate :user, lambda { |u| u } do
     mount Sidekiq::Web => '/sidekiq'
   end
 

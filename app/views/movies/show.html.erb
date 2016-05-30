@@ -42,7 +42,7 @@
             <div class="movie-poster-container">
               <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/204x300" : "http://image.tmdb.org/t/p/w500/" + @movie.poster_url), size: "204x300", alt: "2do", class: "img-responsive movie-poster-show") %>
             </div>
-              <iframe height="300" width="477" src="<%= @movie.trailer_url%>?&showinfo=0" frameborder="0" allowfullscreen></iframe>
+            <iframe height="300" width="477" src="<%# @movie.trailer_url%>" frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
 
@@ -57,24 +57,22 @@
       <div class="col-xs-12 col-sm-4">
         <div class="boxing">
           <div class="tabs">
-            <a class="tab <%= 'active' if @shows.any? %>" data-target="#shows">
+            <a class="tab <%= 'active' if @display_shows %>" data-target="#shows">
               <div class="tab-header">Shows</div>
             </a>
-            <a class="tab <%='active' unless @shows.any? %>" data-target="#streamings">
+            <a class="tab <%='active' unless @display_shows %>" data-target="#streamings">
               <div class="tab-header">Streamings</div>
             </a>
           </div>
-          <div class="tab-content <%= 'hidden' unless @shows.any? %>" id="shows">
+          <div class="tab-content <%= 'hidden' unless @display_shows %>" id="shows">
             <div class="container-movie-times">
-              <ul class="list-unstyled">
-                <% @shows.each do |theater, shows| %>
-                  <li><%= render 'theater', theater: theater, shows: shows %></li>
-                <% end %>
+              <ul class="list-unstyled" id="shows_in_theaters">
+                <li class="loader"></li>
               </ul>
               <div class="theater-map"></div>
             </div>
           </div>
-          <div class="tab-content <%= 'hidden' if @shows.any? %>" id="streamings">
+          <div class="tab-content <%= 'hidden' if @display_shows %>" id="streamings">
             <ul class="list-unstyled">
               <% @streamings.each do |provider, streamings| %>
                 <li><%= render 'provider', provider: provider, streamings: streamings %></li>
@@ -87,14 +85,43 @@
   </div>
 </div>
 
-<script>
-  (function(d, s, id) {
-  var js, stags = d.getElementsByTagName(s)[0];
-  if(d.getElementById(id)) {return;}
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "http://g-ec2.images-amazon.com/images/G/01/imdb/plugins/rating/js/rating.min.js";
-  stags.parentNode.insertBefore(js, stags);
-  })
-  (document, 'script', 'imdb-rating-api');
-</script>
+
+<% content_for(:after_js) do %>
+  <script src="https://js.pusher.com/3.1/pusher.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      Pusher.logToConsole = true;
+      var pusher = new Pusher("<%= ENV['pusher_key'] %>", {
+        cluster: 'eu',
+        encrypted: true
+      });
+      var channel = pusher.subscribe('showtimes');
+      channel.bind('display', function(data) {
+        if(data.user_id === <%= current_user.id %>) {
+          $('#shows_in_theaters').html(data['shows_html'])
+        }
+        console.log(data)
+      });
+    });
+  </script>
+
+  <script>
+    (function(d, s, id) { // IMDb rating
+      var js, stags = d.getElementsByTagName(s)[0];
+      if(d.getElementById(id)) {return;}
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "http://g-ec2.images-amazon.com/images/G/01/imdb/plugins/rating/js/rating.min.js";
+      stags.parentNode.insertBefore(js, stags);
+    })
+    (document, 'script', 'imdb-rating-api');
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      $('iframe').attr('src', "<%= @movie.trailer_url%>?&showinfo=0");
+    })
+  </script>
+
+<% end %>
