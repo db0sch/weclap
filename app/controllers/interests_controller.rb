@@ -10,15 +10,31 @@ class InterestsController < ApplicationController
   end
 
   def create
+    @friend = User.where(id: my_friends_finder).find(params[:friend_id])
+
     @interest = Interest.new
     @interest.movie = @movie
     @interest.user = current_user
     authorize @interest
 
     if @interest.save
+      current_user.interests.reload
+      @friend.interests.reload
+
+      @commun_movies = []
+      @friend.interests.each do |movie|
+        if movie.watched_on.nil?
+          current_user.interests.each do |cumovie|
+            if cumovie.movie_id == movie.movie_id
+              @commun_movies << movie.movie_id
+            end
+          end
+        end
+      end
+
       respond_to do |format|
         format.html { redirect_to users_path(current_user) }
-        format.js  # <-- will render `app/views/reviews/create.js.erb`
+        format.js  # <-- will render `app/views/interests/create.js.erb`
       end
     else
       respond_to do |format|
@@ -57,6 +73,7 @@ class InterestsController < ApplicationController
   end
 
   private
+
     def set_movie
       @movie = Movie.find(params[:movie_id])
     end
