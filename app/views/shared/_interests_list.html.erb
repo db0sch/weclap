@@ -5,5 +5,13 @@
         <%= render 'shared/movie_item', movie: interest.movie, interest: interest %>
       <% end %>
     <% end %>
+    <% list.each do |interest| %>
+      <% if interest.watched_on %>
+        <h3 class="text-center">Seen</h3>
+        <div class="opacity">
+          <%= render 'shared/movie_item', movie: interest.movie, interest: interest %>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>
