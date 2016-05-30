@@ -33,5 +33,6 @@ module Weclap
     config.active_record.raise_in_transactional_callbacks = true
 
     config.autoload_paths += %W(#{config.root}/app/services)
+    config.active_job.queue_adapter = :sidekiq
   end
 end
