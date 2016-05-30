@@ -32,15 +32,12 @@
   <!--     <i class="fa fa-plus-circle" aria-hidden="true" id="add_to_watchlist"></i> -->
       </ul>
       <div class="movie-social">
-
-
         <% if !@friends.nil? %>
           <% @friends.each do |b| %>
+
             <% User.find(b).interests.each do |interest| %>
-              <% if movie.id == interest.id %>
-
+              <% if movie.id == interest.movie_id %>
                  <%= link_to image_tag(User.find(b).picture, class: "avatar"), user_friendships_path(current_user) %>
-
               <% end %>
             <% end %>
           <% end %>
