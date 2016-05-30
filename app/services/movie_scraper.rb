@@ -118,7 +118,7 @@ class MovieScraper
           original_title: film['original_title'],
           runtime: film['runtime'],
           tagline: film['tagline'],
-          genres: film['genres'].map { |genre| genre.values.last }.to_json,
+          genres: film['genres'].map { |genre| genre.values.last },
           poster_url: film['poster_path'] ? "http://image.tmdb.org/t/p/w500" + film['poster_path'] : nil,
           imdb_id: film['imdb_id'],
           imdb_score: film['vote_average'],
@@ -132,7 +132,7 @@ class MovieScraper
           production_countries: film['production_countries'],
           release_date: film['release_date'],
           spoken_languages: film['spoken_languages'],
-          credits: { cast: get_cast(film['id']), crew: get_crew(film['id']) }.to_json,
+          credits: { cast: get_cast(film['id']), crew: get_crew(film['id']) },
           trailer_url: "https://www.youtube.com/embed#{get_youtube(film['title'])}?rel=0&amp;showinfo=0",
           website_url: "http://www.imdb.com/title/#{film['imdb_id']}",
           cnc_url: "http://vad.cnc.fr/titles?search=#{film['title'].gsub(" ", "+")}&format=4002"

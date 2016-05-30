@@ -15,11 +15,11 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
 
-    credits = JSON.parse(@movie.credits)
+    credits = @movie.credits
 
     @directors = credits['crew']['Director'].join(', ') unless credits['crew'].blank?
     @actors = credits['cast'].join(', ')
-    @genres = JSON.parse(@movie.genres).join(', ')
+    @genres = @movie.genres.join(', ')
     @clap_score = @movie.clap_score
     @location = current_user.zip_code
     @city = current_user.city
