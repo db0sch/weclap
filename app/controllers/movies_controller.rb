@@ -14,7 +14,7 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
-
+    @friends = my_friends_finder
     credits = @movie.credits
 
     @directors = credits['crew']['Director'].join(', ') unless credits['crew'].blank?

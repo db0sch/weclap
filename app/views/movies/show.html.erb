@@ -20,12 +20,40 @@
                   <% end %>
                 </span>
 
+
+                <div class='inline-flex'>
+                <div class="movie-social movie-item-controls">
+                  <% if !@friends.nil? %>
+                    <% @friends.each do |b| %>
+                      <% User.find(b).interests.each do |interest| %>
+                        <% if interest.watched_on.nil? %>
+                          <% if @movie.id == interest.movie_id %>
+                             <%= link_to image_tag(User.find(b).picture, class: "avatar"), user_friendships_path(current_user) %>
+                          <% end %>
+                        <% else %>
+                          <% if @movie.id == interest.movie_id %>
+                             <%= link_to user_friendships_path(current_user), style: "text-decoration: none;" do %>
+                                <div style="background-image: url(<%= image_path(User.find(b).picture)%>)" class="avatar rating rating-container">
+                                  <div class="rating-gradient"> </div>
+                                  <div id="rating"><%= interest.rating %>/5</div>
+                                </div>
+                             <% end %>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </div>
+
+
+                <div>
                 <% if current_user.movies.include?(@movie) %>
                   <%= link_to icon('check-circle'), interests_path(movie_id: @movie), method: :post, remote: true, class:"movie-added-btn plus-button-movie-show" %>
                 <% else %>
                   <%= link_to icon('plus-circle'), interests_path(movie_id: @movie), method: :post, remote: true, class:"plus-button-movie-show", id: "movie-add-#{@movie.id}" %>
                 <% end %>
-
+                </div>
+                </div>
 
 
               <% end %>
