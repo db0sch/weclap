@@ -9,12 +9,10 @@ end
 include Facebook::Messenger
 
 Bot.on :message do |message|
-  fbid = message.sender['id']
-  user = User.where(uid: fbid)
-  response = RestClient.get "https://graph.facebook.com/v2.6/10208235975350862?fields=first_name,last_name,profile_pic&access_token=#{ENV['FB_ACCESS_TOKEN']}"
+  messenger_id = message.sender['id']
+  response = RestClient.get "https://graph.facebook.com/v2.6/#{messenger_id}?fields=first_name,last_name,profile_pic&access_token=#{ENV['FB_ACCESS_TOKEN']}"
   repos = JSON.parse(response)
   user = User.where(first_name: repos["first_name"]).where(last_name: repos["last_name"]).first
-  p user
 
   puts "Received #{message.text} from #{message.sender}"
 
@@ -24,9 +22,10 @@ Bot.on :message do |message|
     Bot.deliver(
       recipient: message.sender,
       message: {
-        text: "Hello you"
+        text: "Hello #{user.first_name}"
       }
     )
+
   when /list/i
     interestslist = user.interests
     interestslist.each do |interest|
@@ -38,78 +37,84 @@ Bot.on :message do |message|
         }
       )
     end
-  when /something humans like/i
-    Bot.deliver(
-      recipient: message.sender,
-      message: {
-        text: 'I found something humans seem to like:'
-      }
-    )
-
-    Bot.deliver(
-      recipient: message.sender,
-      message: {
-        attachment: {
-          type: 'image',
-          payload: {
-            url: 'https://i.imgur.com/iMKrDQc.gif'
-          }
-        }
-      }
-    )
-
-    Bot.deliver(
-      recipient: message.sender,
-      message: {
-        attachment: {
-          type: 'template',
-          payload: {
-            template_type: 'button',
-            text: 'Did human like it?',
-            buttons: [
-              { type: 'postback', title: 'Yes', payload: 'HUMAN_LIKED' },
-              { type: 'postback', title: 'No', payload: 'HUMAN_DISLIKED' }
-            ]
-          }
-        }
-      }
-    )
   else
     movies = Movie.where('title ILIKE ? OR original_title ILIKE ?', "%#{message.text}%", "%#{message.text}%")
-    movies.each do |movie|
+    if movies.empty?
       Bot.deliver(
         recipient: message.sender,
         message: {
-          text: "#{movie.title}"
+          #text: "hello #{user.first_name}"
+          text: "Sorry. No film found for #{message.text}"
         }
       )
+    else
+      movie_array = []
+      movies.each do |movie|
+        movie_array << {
+          "title":"#{movie.title}",
+          "image_url":"#{movie.poster_url}",
+          "subtitle":"Directed by...",
+          "buttons":[
+            {
+              "type":"web_url",
+              "url":"#{movie.website_url}",
+              "title":"Show IMDB"
+            },
+            {
+              "type":"postback",
+              "title":"Add to watchlist",
+              "payload":{"movie_id":"#{movie.id}"}.to_json
+            }              
+          ]
+        }
+      end
     end
-    # Bot.deliver(
-    #   recipient: message.sender,
-    #   message: {
-    #     text: 'You are now marked for extermination.'
-    #   }
-    # )
-
-    # Bot.deliver(
-    #   recipient: message.sender,
-    #   message: {
-    #     text: 'Have a nice day.'
-    #   }
-    # )
+      Bot.deliver(
+        recipient: message.sender,
+        # message: {
+        #   text: "#{movie.title}"
+        # }
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload": {
+                "template_type":"generic",
+                "elements":movie_array
+              }
+            }
+          }
+      )
   end
 end
 
 Bot.on :postback do |postback|
-  case postback.payload
-  when 'HUMAN_LIKED'
-    text = 'That makes bot happy!'
-  when 'HUMAN_DISLIKED'
-    text = 'Oh.'
+
+  messenger_id = postback.messaging['sender']['id']
+  recipient_id = postback.messaging['recipient']['id']
+  response = RestClient.get "https://graph.facebook.com/v2.6/#{messenger_id}?fields=first_name,last_name,profile_pic&access_token=#{ENV['FB_ACCESS_TOKEN']}"
+  repos = JSON.parse(response)
+  user = User.where(first_name: repos["first_name"]).where(last_name: repos["last_name"]).first
+
+  payload_hash = JSON.parse(postback.payload)
+
+  case payload_hash.keys.first
+  when "movie_id"
+    interest = Interest.new
+    p "this is the movie i want: #{Movie.find(payload_hash["movie_id"]).title}" 
+    interest.movie = Movie.find(payload_hash["movie_id"])
+    interest.user = user
+    if interest.save
+      text = "#{interest.movie.title} has been added to your watchlist"
+    else
+      text = "Sorry. Something went wrong"
+    end
+
+  else
+    text = 'Oups'
   end
 
   Bot.deliver(
-    recipient: postback.sender,
+    recipient: postback.messaging['sender'],
     message: {
       text: text
     }
