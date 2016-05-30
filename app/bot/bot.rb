@@ -16,74 +16,134 @@ Bot.on :message do |message|
 
   puts "Received #{message.text} from #{message.sender}"
 
+  interestslist = user.interests
+  users_movies = []
+  interestslist.each do |interest|
+    users_movies << interest.movie
+  end
 
-  case message.text
-  when /hello/i
+  if user.nil?
     Bot.deliver(
       recipient: message.sender,
       message: {
-        text: "Hello #{user.first_name}"
+        text: "Please, sign in with Facebook on https://www.weclap.co"
       }
     )
-
-  when /list/i
-    interestslist = user.interests
-    interestslist.each do |interest|
-      Bot.deliver(
-        recipient: message.sender,
-        message: {
-          #text: "hello #{user.first_name}"
-          text: "#{interest.movie.title}"
-        }
-      )
-    end
   else
-    movies = Movie.where('title ILIKE ? OR original_title ILIKE ?', "%#{message.text}%", "%#{message.text}%")
-    if movies.empty?
+    case message.text
+    when /hello/i
       Bot.deliver(
         recipient: message.sender,
         message: {
-          #text: "hello #{user.first_name}"
-          text: "Sorry. No film found for #{message.text}"
+          text: "Hello #{user.first_name}"
         }
       )
-    else
+
+#change the url for watch the film
+    when /watchlist/i
       movie_array = []
-      movies.each do |movie|
-        movie_array << {
-          "title":"#{movie.title}",
-          "image_url":"#{movie.poster_url}",
-          "subtitle":"Directed by...",
-          "buttons":[
-            {
-              "type":"web_url",
-              "url":"#{movie.website_url}",
-              "title":"Show IMDB"
-            },
-            {
-              "type":"postback",
-              "title":"Add to watchlist",
-              "payload":{"movie_id":"#{movie.id}"}.to_json
-            }              
-          ]
-        }
+      interestslist = user.interests
+      counter = 0
+      interestslist.each do |interest|
+        if counter < 10
+          movie_array << {
+            "title":"#{interest.movie.title}",
+            "image_url":"#{interest.movie.poster_url}",
+            "subtitle":"Directed by...",
+            "buttons":[
+              {
+                "type":"web_url",
+                "url":"#{interest.movie.website_url}",
+                "title":"Show IMDB"
+              },
+              {
+                "type":"web_url",
+                "url":"#{interest.movie.website_url}",
+                "title":"Watch the film"
+              },            
+            ]
+          }
+        end
+        counter = counter + 1
       end
-    end
       Bot.deliver(
-        recipient: message.sender,
-        # message: {
-        #   text: "#{movie.title}"
-        # }
-          "message":{
-            "attachment":{
-              "type":"template",
-              "payload": {
-                "template_type":"generic",
-                "elements":movie_array
+          recipient: message.sender,
+          # message: {
+          #   text: "#{movie.title}"
+          # }
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload": {
+                  "template_type":"generic",
+                  "elements":movie_array
+                }
               }
             }
+        )
+
+
+
+    when /list/i
+      interestslist = user.interests
+      interestslist.each do |interest|
+        Bot.deliver(
+          recipient: message.sender,
+          message: {
+            #text: "hello #{user.first_name}"
+            text: "#{interest.movie.title}"
           }
-      )
+        )
+      end    
+    else
+      movies = Movie.where('title ILIKE ? OR original_title ILIKE ?', "%#{message.text}%", "%#{message.text}%")
+      if movies.empty?
+        Bot.deliver(
+          recipient: message.sender,
+          message: {
+            #text: "hello #{user.first_name}"
+            text: "Sorry. No film found for #{message.text}"
+          }
+        )
+      else
+        movie_array = []
+        movies.each do |movie|
+          next if users_movies.include?(movie)
+          movie_array << {
+            "title":"#{movie.title}",
+            "image_url":"#{movie.poster_url}",
+            "subtitle":"Directed by...",
+            "buttons":[
+              {
+                "type":"web_url",
+                "url":"#{movie.website_url}",
+                "title":"Show IMDB"
+              },
+              {
+                "type":"postback",
+                "title":"Add to watchlist",
+                "payload":{"movie_id":"#{movie.id}"}.to_json
+              }              
+            ]
+          }
+        end
+      end
+        Bot.deliver(
+          recipient: message.sender,
+          # message: {
+          #   text: "#{movie.title}"
+          # }
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload": {
+                  "template_type":"generic",
+                  "elements":movie_array
+                }
+              }
+            }
+        )
+    end
   end
 end
 
