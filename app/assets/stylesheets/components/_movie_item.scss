@@ -202,3 +202,113 @@ a.movie-added-btn {
     justify-content: flex-start;
   }
 }
+
+.ribbon{
+  right: 50px;
+  top: 5px;
+  position: absolute;
+
+  z-index: 1;
+  color: #eee;
+  font-size: 2em;
+  cursor: pointer;
+  width: 1.5em;
+  line-height: 0.5em;
+  -webkit-transition: line-height 0.5s;
+  transition: line-height 0.5s;
+}
+.ribbon:after {
+  content: "";
+  font-size: 0.5em;
+  position: absolute;
+  height:  4.8em;
+  border: 1.5em solid #F44336;
+  z-index: -1;
+  top: -1em;
+  border-top-width: 1.5em;
+  border-bottom-color: transparent;
+  right: 0;
+  -webkit-transition: height 0.5s;
+  transition: height 0.5s;
+}
+.ribbon:before {
+  content: "";
+  font-size: 0.5em;
+  position: absolute;
+  border-style: solid;
+  border-color: transparent transparent #B71C1C transparent;
+  top: -1em;
+  right: 2.8em;
+  border-width: 0 0 1em 0.7em;
+  z-index: -1;
+}
+.ribbon:hover:after{
+  border: 1.5em solid #EF5350;
+  border-bottom-color: transparent;
+  height: 5em;
+  -webkit-transition: height 0.5s;
+  transition: height 0.5s;
+}
+.ribbon:hover{
+  line-height: 0.9em;
+  color: #333;
+  -webkit-transition: line-height 0.5s;
+  transition: line-height 0.5s;
+}
+
+.ribbon-left{
+  right: 80px;
+  top: 5px;
+  position: absolute;
+
+  z-index: 1;
+  color: #eee;
+  font-size: 2em;
+  cursor: pointer;
+  width: 1.5em;
+  line-height: 0.5em;
+  -webkit-transition: line-height 0.5s;
+  transition: line-height 0.5s;
+}
+.ribbon-left:after {
+  content: "";
+  font-size: 0.5em;
+  position: absolute;
+  height:  4.8em;
+  border: 1.5em solid #0BD00E;
+  z-index: -1;
+  top: -1em;
+  border-top-width: 1.5em;
+  border-bottom-color: transparent;
+  right: 0;
+  -webkit-transition: height 0.5s;
+  transition: height 0.5s;
+}
+.ribbon-left:before {
+  content: "";
+  font-size: 0.5em;
+  position: absolute;
+  border-style: solid;
+  border-color: transparent transparent #019A0B transparent;
+  top: -1em;
+  right: 2.8em;
+  border-width: 0 0 1em 0.7em;
+  z-index: -1;
+}
+.ribbon-left:hover:after{
+  border: 1.5em solid #48D206;
+  border-bottom-color: transparent;
+  height: 5em;
+  -webkit-transition: height 0.5s;
+  transition: height 0.5s;
+}
+.ribbon-left:hover{
+  line-height: 0.9em;
+  color: #333;
+  -webkit-transition: line-height 0.5s;
+  transition: line-height 0.5s;
+}
+
+.opacity {
+  opacity: 0.5;
+}

@@ -1,5 +1,6 @@
 .avatar {
   width: 30px;
+  height: 30px;
   border-radius: 50%;
 }
 .avatar-large {
@@ -21,4 +22,36 @@
 
 #avatar_down {
   position: bottom;
+}
+
+.rating {
+
+  background-size: cover;
+  background-position: center center;
+
+  // background-color: grey;
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.rating-gradient {
+  background-color: white;
+  opacity: 0.7;
+  border-radius: 50%;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+
+}
+#rating {
+  z-index: 10;
+  color: black;
+  text-decoration: none;
 }
