@@ -31,7 +31,7 @@
 
   <!--     <i class="fa fa-plus-circle" aria-hidden="true" id="add_to_watchlist"></i> -->
       </ul>
-      <div class="movie-social">
+      <div class="movie-social movie-item-controls">
         <% if !@friends.nil? %>
           <% @friends.each do |b| %>
             <% User.find(b).interests.each do |interest| %>
