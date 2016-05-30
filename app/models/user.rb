@@ -11,6 +11,14 @@ class User < ActiveRecord::Base
   has_many :friends, class_name: 'Friendship', foreign_key: 'friend_id'
   has_many :buddies, class_name: 'Friendship', foreign_key: 'buddy_id'
 
+  geocoded_by :address do |obj,results|
+    if geo = results.first
+      obj.city    = geo.city
+      obj.zip_code = geo.postal_code
+    end
+  end
+  after_validation :geocode, if: :address_changed?
+
   def self.find_for_facebook_oauth(auth)
     access_token = auth.credentials.token
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
