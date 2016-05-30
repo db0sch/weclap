@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160525170649) do
+ActiveRecord::Schema.define(version: 20160530091055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,8 +43,7 @@ ActiveRecord::Schema.define(version: 20160525170649) do
     t.string   "original_title"
     t.integer  "runtime"
     t.string   "tagline"
-    t.string   "genre"
-    t.text     "credits"
+    t.json     "credits"
     t.string   "poster_url"
     t.string   "trailer_url"
     t.string   "website_url"
@@ -55,7 +54,7 @@ ActiveRecord::Schema.define(version: 20160525170649) do
     t.datetime "updated_at",           null: false
     t.string   "adult"
     t.integer  "budget"
-    t.string   "genres"
+    t.json     "genres"
     t.text     "overview"
     t.float    "popularity"
     t.string   "original_language"
