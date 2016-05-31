@@ -125,7 +125,7 @@
   <script type="text/javascript">
     $(document).ready(function() {
       Pusher.logToConsole = true;
-      var pusher = new Pusher("<%= ENV['pusher_key'] %>", {
+      var pusher = new Pusher("<%= ENV['PUSHER_KEY'] %>", {
         cluster: 'eu',
         encrypted: true
       });
@@ -135,7 +135,7 @@
       channel.bind('refresh_showtimes', function(data) {
         if(data.user_id === <%= current_user.id %>) {
           var showsContainer = $('#shows_in_theaters');
-          if(data.theaters_json.count > 0) {
+          if(data.theaters_json.length > 0) {
             showsContainer.html(data['shows_html']);
             showsContainer.parent().append('<div class="theater-map" id="map"></div>')
             // Handle google maps display of theaters
