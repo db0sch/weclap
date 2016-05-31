@@ -154,6 +154,7 @@ Bot.on :message do |message|
       end   
     else
       movies = Movie.where('title ILIKE ? OR original_title ILIKE ?', "%#{message.text}%", "%#{message.text}%")
+      movie_array = []
       if movies.empty?
         Bot.deliver(
           recipient: message.sender,
@@ -163,7 +164,6 @@ Bot.on :message do |message|
           }
         )
       else
-        movie_array = []
         movies.each do |movie|
           next if users_movies.include?(movie)
           movie_array << {
