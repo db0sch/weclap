@@ -16,12 +16,6 @@ Bot.on :message do |message|
 
   puts "Received #{message.text} from #{message.sender}"
 
-  users_movies = []
-  unless user.interests.empty?
-    user.interests.each do |interest|
-      users_movies << interest.movie
-    end
-  end
 
   if user.nil?
     Bot.deliver(
@@ -30,7 +24,16 @@ Bot.on :message do |message|
         text: "Please, sign in with Facebook on https://www.weclap.co"
       }
     )
+    
   else
+    
+    users_movies = []
+    unless user.interests.empty?
+      user.interests.each do |interest|
+        users_movies << interest.movie
+      end
+    end
+
     case message.text
     when /hello/i
       Bot.deliver(
