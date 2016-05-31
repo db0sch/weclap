@@ -29,7 +29,7 @@ class MoviesController < ApplicationController
 # 2do
     @streamings = MovieScraper::find_streamings_for(@movie) || {}
 #
-    GetShowtimesJob.set(wait: 1.seconds).perform_later(@movie.id, @location, current_user.id)
+    GetShowtimesJob.set(wait: 1.seconds).perform_later(@location, @city, @movie.id, current_user.id)
     @shows = []
 
     authorize @movie
