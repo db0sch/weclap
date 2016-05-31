@@ -29,4 +29,21 @@ namespace :tmdb do
     url = BASE_URL + "discover/movie?primary_release_date.gte=#{date.to_s}&primary_release_date.lte=#{Date.today.to_s}.desc&api_key=#{ENV['TMDB_API_KEY']}"
     MovieScraper::scrape_and_persist_movies(url, 'results')
   end
+
+  desc "Get from TMDb the best movies"
+  task :seed_vbm_movies => :environment do
+    url = BASE_URL + "list/51ef79e5e24fab0e7745682f?sort_by=popularity.desc&api_key=#{ENV['TMDB_API_KEY']}"
+    MovieScraper::scrape_and_persist_movies(url, 'results')
+  end
+
+  desc "Get from TMDb the best movies"
+  task :seed_onth_movies => :environment do
+    url = BASE_URL + "movie/now_playing?&api_key=#{ENV['TMDB_API_KEY']}"
+    MovieScraper::scrape_and_persist_movies(url, 'results')
+   (2..42).each do |p|
+    url = BASE_URL + "movie/now_playing?page=#{p}&api_key=#{ENV['TMDB_API_KEY']}"
+    MovieScraper::scrape_and_persist_movies(url, 'results')
+    end
+  end
+
 end
