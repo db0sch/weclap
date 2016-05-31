@@ -3,7 +3,16 @@
 <head>
   <title>Are you lost ? (500)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+
   <style>
+  @import "config/variables";
+  @import "config/bootstrap_variables";
+  @import "bootstrap-sprockets";
+  @import "bootstrap";
+  @import "font-awesome-sprockets";
+  @import "font-awesome";
+  @import "starrr";
+
   body {
     background-color: #BFCDCF;
     color: #2E2F30;
@@ -52,15 +61,26 @@
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
   }
 
+  h1 {
+    font-size: 56px;
+  }
+  button {
+    font-size: 50px;
+    font-family: ;
+  }
+  a:hover {
+    opacity: 0.5;
+  }
   </style>
 </head>
 
 <body>
+
   <!-- This file lives in public/500.html -->
   <div>
     <div>
       <h1>If you're lost</h1>
-      <a href="/"><button>Go home</button></a>
+      <a href="/"><button class="btn btn-primary">Go home</button></a>
       <img src="images/nbn.jpg" alt="">
     </div>
 
