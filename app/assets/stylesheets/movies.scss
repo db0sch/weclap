@@ -1,5 +1,5 @@
 .movie-wrapper {
-  background-color: $gray-lighter;
+  background-color: #778899;
   padding: 10px 0;
 }
 .movie-info-container {
@@ -7,6 +7,15 @@
   // justify-content: flex-center;
   // flex-wrap: wrap;
   // margin: 0 50px;
+}
+
+#movie-infos-small {
+  margin-left: -35px;
+  margin-bottom: -10px;
+  strong {
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.71);
+  }
 }
 
 .container-movie-infos {
@@ -22,12 +31,14 @@
   box-shadow: 1px 1px 2px #aaa;
   border-radius: 4px;
   margin: 10px 0;
+  margin-left: -19px;
   background-color: white;
   padding: 23px 24px 41px 25px;
   h4 {
     color: black;
   }
 }
+
 
 .movie-poster-show {
   margin: 0 auto;
@@ -49,14 +60,20 @@
     margin-right: 10px;
   }
 }
-.score-container {
- // flex: 0 0 auto;
-  margin-left: 10px;
-  margin-top: 3px;
+
+.movie-info-left {
+  flex: 1;
   display: flex;
-  justify-content: space-between;
-  width: 406px;;
+  align-items: center;
 }
+.movie-info-right {
+  display: flex;
+  align-items: center;
+  .imdbRatingPlugin, .inline-flex {
+    padding: 0 10px;
+  }
+}
+
 .youtube-trailer {
 
 }
@@ -109,9 +126,9 @@ $star-yellow: #FFB400;
   margin: 0;
   background-color: white;
   padding-top: 37px;
-  padding-bottom: 36px;
   padding-left: 25px;
-  height: 225px;
+  height: 334px;
+  margin-left: -19px;
 }
 
 .theater-container {
@@ -148,4 +165,19 @@ $star-yellow: #FFB400;
 
 .inline-flex {
   display: inline-flex
+}
+
+#shows_in_theaters {
+  overflow: scroll;
+  height: 357px;
+}
+
+#clock-duration-inline {
+  margin-right: 6px;
+  color: black;
+}
+
+.parental-rating {
+  color: black;
+  font-weight: 700;
 }

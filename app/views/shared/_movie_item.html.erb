@@ -1,5 +1,5 @@
 <%= link_to movie_path(movie.id) do %>
-  <div class="col-xs-12">
+  <div class="col-xs-10 col-xs-offset-1">
     <div  class="movie-item" <%= "id = movie-#{interest.id}" unless interest.nil?  %> >
 
       <% if movie.poster_url %>
@@ -32,9 +32,9 @@
             <%= link_to icon('plus-circle'), interests_path(movie_id: movie), method: :post, remote: true, class: "movie-add-btn", id: "movie-add-#{movie.id}" %>
           <% end %>
           <% if !movie.streamings.empty?  %>
-            <a href=<%=movie_path(movie.id)%> class="ribbon"><i class="fa fa-television"></i></a>
+            <a href=<%=movie_path(movie.id)%> class="ribbon"><i class="fa fa-television" style="margin-left: 3px"></i></a>
           <% elsif !movie.theaters.empty?%>
-            <a href=<%=movie_path(movie.id)%> class="ribbon-left"> <i class="fa fa-film"></i></a>
+            <a href=<%=movie_path(movie.id)%> class="ribbon-left"> <i class="fa fa-film" style="margin-left: 1px"></i></a>
           <% end %>
         </ul>
 

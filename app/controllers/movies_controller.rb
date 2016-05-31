@@ -19,8 +19,8 @@ class MoviesController < ApplicationController
     credits = @movie.credits
 
     @directors = credits['crew']['Director'].join(', ') unless credits['crew'].blank?
-    @actors = credits['cast'].join(', ')
-    @genres = @movie.genres.join(', ')
+    @actors = credits['cast'].take(5).join(', ')
+    @genres = @movie.genres.take(2).join(', ')
     @clap_score = @movie.clap_score
     @location = current_user.zip_code
     @city = current_user.city

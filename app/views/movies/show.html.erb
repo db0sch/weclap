@@ -2,28 +2,33 @@
   <div class="container">
     <div class="row">
       <%= render 'shared/search_bar' %>
-      <div class="col-xs-12 col-sm-8">
+      <div class="col-xs-12  col-sm-8">
         <div class="movie-info-container boxing">
           <div class="movie-basic-info">
-            <span class="movie-title"><%= @movie.title %></span>
-            <span class="movie-release-year"><%= " (#{@movie.release_date.to_date.year})" if @movie.release_date %></span>
-            <span class="score-container">
-              <% if @clap_score %>
-                <% (1..5).each do |score| %>
-                  <%= icon 'hand-spock-o', class: score <= @clap_score.round ? 'rating-enabled' : 'rating-disabled' %>
-                <% end %>
-              <% end %>
+            <div class="movie-info-left">
+              <span class="movie-title"><%= @movie.title%><%= " (#{@movie.release_date.to_date.year})" if @movie.release_date %></span>
               <% if @movie.imdb_id %>
                 <span class="imdbRatingPlugin" data-user="" data-title="<%= @movie.imdb_id %>" data-style="p4">
                   <%= link_to "http://www.imdb.com/title/#{@movie.imdb_id}/?ref_=plg_rt_1" do %>
                      <%= image_tag("http://g-ecx.images-amazon.com/images/G/01/imdb/plugins/rating/images/imdb_31x14.png", alt: "#{@movie.title} on IMDb") %>
                   <% end %>
                 </span>
+              <% end %>
+            </div>
+<!--             <span class="movie-release-year"><%#= " (#{@movie.release_date.to_date.year})" if @movie.release_date %></span> -->
+            <div class="movie-info-right">
+              <% if @clap_score %>
+                <span class="score-container">
+                    <% (1..5).each do |score| %>
+                      <%= icon 'hand-spock-o', class: score <= @clap_score.round ? 'rating-enabled' : 'rating-disabled' %>
+                    <% end %>
+                </span>
+              <% end %>
 
-
+              <% if @movie.imdb_id %>
                 <div class='inline-flex'>
-                  <div class="movie-social movie-item-controls">
-                    <% if !@friends.nil? %>
+                  <% if !@friends.nil? %>
+                    <div class="movie-social movie-item-controls">
                       <% @friends.each do |b| %>
                         <% User.find(b).interests.each do |interest| %>
                           <% if interest.watched_on.nil? %>
@@ -34,42 +39,41 @@
                             <% if @movie.id == interest.movie_id %>
                                <%= link_to user_friendships_path(current_user), style: "text-decoration: none;" do %>
                                   <div style="background-image: url(<%= image_path(User.find(b).picture)%>)" class="avatar rating rating-container">
-                                    <div class="rating-gradient"> </div>
-                                    <div id="rating"><%= interest.rating %>/5</div>
                                   </div>
                                <% end %>
                             <% end %>
                           <% end %>
                         <% end %>
                       <% end %>
+                    </div>
+                  <% end %>
+                  <div>
+                    <% if current_user.movies.include?(@movie) %>
+                      <%= link_to icon('check-circle'), interests_path(movie_id: @movie), method: :post, remote: true, class:"movie-added-btn plus-button-movie-show" %>
+                    <% else %>
+                      <%= link_to icon('plus-circle'), interests_path(movie_id: @movie), method: :post, remote: true, class:"plus-button-movie-show", id: "movie-add-#{@movie.id}" %>
                     <% end %>
                   </div>
-
-
-                <div>
-                <% if current_user.movies.include?(@movie) %>
-                  <%= link_to icon('check-circle'), interests_path(movie_id: @movie), method: :post, remote: true, class:"movie-added-btn plus-button-movie-show" %>
-                <% else %>
-                  <%= link_to icon('plus-circle'), interests_path(movie_id: @movie), method: :post, remote: true, class:"plus-button-movie-show", id: "movie-add-#{@movie.id}" %>
-                <% end %>
                 </div>
-                </div>
-
 
               <% end %>
+            </div>
             </span>
             <%= "<span>aka #{@original_title}</span><br>" if @original_title %>
           </div>
 
           <div class="container-movie-infos">
-            <p>
-              <span class="duration-minutes"><%= @movie.runtime %> min</span> |
-              <span class="parental-rating"><%= @movie.adult ? 'Adult' : 'For all' %></span> |
-              <span>Genres: <%= @genres %></span>
-            </p>
-            <p class="people-list">Directed by: <%= @directors %></p>
-            <p>Starring: <%= @actors %></p>
+            <ul style="list-style-type: none" id="movie-infos-small">
 
+
+              <span>
+              <li><strong>Genres: </strong><%= @genres %> |
+              <strong>Directed by:</strong> <%= @directors %> |
+              <i class="fa fa-clock-o" id="clock-duration-inline"><span></i><%= @movie.runtime %> min </span> |
+                <span class="parental-rating"><%= @movie.adult ? 'Adult' : 'For all' %></span></li>
+              </span>
+              <li><strong>Starring:</strong> <%= @actors %></li>
+            </ul>
           </div>
 
           <div class="movie-media-container">
