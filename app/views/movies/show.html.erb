@@ -1,7 +1,6 @@
 <div class="movie-wrapper">
   <div class="container">
     <div class="row">
-      <%# link_to "Back", "javascript:history.back()", class: "navbar-wagon-button" %>
       <div class="col-xs-12 col-sm-8">
         <div class="movie-info-container boxing">
           <div class="movie-basic-info">
@@ -76,7 +75,7 @@
             <div class="movie-poster-container">
               <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/204x300" : "http://image.tmdb.org/t/p/w500/" + @movie.poster_url), size: "204x300", alt: "2do", class: "img-responsive movie-poster-show") %>
             </div>
-            <iframe height="300" width="477" src="<%# @movie.trailer_url%>" frameborder="0" allowfullscreen></iframe>
+            <iframe height="300" width="477" frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
 
@@ -103,7 +102,7 @@
               <ul class="list-unstyled" id="shows_in_theaters">
                 <li class="loader"></li>
               </ul>
-              <div class="theater-map"></div>
+              <div class="theater-map" id='map'></div>
             </div>
           </div>
           <div class="tab-content <%= 'hidden' if @display_shows %>" id="streamings">
@@ -113,7 +112,6 @@
               <% end %>
             </ul>
           </div>
-            <%= render 'map', shows: @shows %>
         </div>
       </div>
     </div>
@@ -123,6 +121,7 @@
 
 <% content_for(:after_js) do %>
   <script src="https://js.pusher.com/3.1/pusher.min.js"></script>
+  <script src="https://wagon-google-maps-markers.herokuapp.com/assets/application-5034196864c74ae1cc5f12e6d1f71223.js" type="text/javascript"></script>
 
   <script type="text/javascript">
     $(document).ready(function() {
@@ -135,8 +134,14 @@
       channel.bind('display', function(data) {
         if(data.user_id === <%= current_user.id %>) {
           $('#shows_in_theaters').html(data['shows_html'])
+
+          var handler = Gmaps.build('Google');
+          handler.buildMap({ internal: { id: 'map' } }, function() {
+            markers = handler.addMarkers(data.theaters_json);
+            handler.bounds.extendWith(markers);
+            handler.fitMapToBounds();
+          });
         }
-        console.log(data)
       });
     });
   </script>
