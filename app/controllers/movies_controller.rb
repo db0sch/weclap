@@ -26,11 +26,8 @@ class MoviesController < ApplicationController
     @city = current_user.city
     @original_title = @movie.original_title unless @movie.original_title.blank? || @movie.title.casecmp(@movie.original_title) == 0
     # execute in background
-# 2do
-    @streamings = MovieScraper::find_streamings_for(@movie) || {}
-#
     GetShowtimesJob.set(wait: 1.seconds).perform_later(@location, @city, @movie.id, current_user.id)
-    @shows = []
+    GetStreamingsJob.set(wait: 1.seconds).perform_later(@movie.id, current_user.id)
 
     authorize @movie
   end

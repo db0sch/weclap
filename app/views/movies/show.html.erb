@@ -107,14 +107,12 @@
               <ul class="list-unstyled" id="shows_in_theaters">
                 <li class="loader"></li>
               </ul>
-              <div class="theater-map" id='map'></div>
+              <!-- <div class="theater-map" id='map'></div> -->
             </div>
           </div>
           <div class="tab-content <%= 'hidden' if @display_shows %>" id="streamings">
-            <ul class="list-unstyled">
-              <% @streamings.each do |provider, streamings| %>
-                <li><%= render 'provider', provider: provider, streamings: streamings %></li>
-              <% end %>
+            <ul class="list-unstyled" id="streamings_per_provider">
+              <li class="loader"></li>
             </ul>
           </div>
         </div>
@@ -131,21 +129,36 @@
   <script type="text/javascript">
     $(document).ready(function() {
       Pusher.logToConsole = true;
-      var pusher = new Pusher("<%= ENV['pusher_key'] %>", {
+      var pusher = new Pusher("<%= ENV['PUSHER_KEY'] %>", {
         cluster: 'eu',
         encrypted: true
       });
-      var channel = pusher.subscribe('showtimes');
-      channel.bind('display', function(data) {
+      // Subscribe to the channel
+      var channel = pusher.subscribe('watching_events_channel');
+      // Listen to showtimes refresh event
+      channel.bind('refresh_showtimes', function(data) {
         if(data.user_id === <%= current_user.id %>) {
-          $('#shows_in_theaters').html(data['shows_html'])
-
-          var handler = Gmaps.build('Google');
-          handler.buildMap({ internal: { id: 'map' } }, function() {
-            markers = handler.addMarkers(data.theaters_json);
-            handler.bounds.extendWith(markers);
-            handler.fitMapToBounds();
-          });
+          var showsContainer = $('#shows_in_theaters');
+          if(data.theaters_json.length > 0) {
+            showsContainer.html(data['shows_html']);
+            showsContainer.parent().append('<div class="theater-map" id="map"></div>')
+            // Handle google maps display of theaters
+            $('#shows_in_theaters').html(data['shows_html'])
+            var handler = Gmaps.build('Google');
+            handler.buildMap({ internal: { id: 'map' } }, function() {
+              markers = handler.addMarkers(data.theaters_json);
+              handler.bounds.extendWith(markers);
+              handler.fitMapToBounds();
+            });
+          } else {
+            showsContainer.parent().html('<div class="text-center">No showtimes</div>')
+          }
+        }
+      });
+      // Listen to streamings refresh event
+      channel.bind('refresh_streamings', function(data) {
+        if(data.user_id === <%= current_user.id %>) {
+          $('#streamings_per_provider').html(data['streamings_html'])
         }
       });
     });
