@@ -96,6 +96,7 @@ class MovieScraper
 
     def scrape_and_persist_movies(url, item_container_string)
       Tmdb::Api.key(ENV['TMDB_API_KEY'])
+      Tmdb::Api.language("fr")
       count = 0
       begin
         movies_response = RestClient.get url
