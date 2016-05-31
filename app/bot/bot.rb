@@ -16,11 +16,6 @@ Bot.on :message do |message|
 
   puts "Received #{message.text} from #{message.sender}"
 
-  interestslist = user.interests
-  users_movies = []
-  interestslist.each do |interest|
-    users_movies << interest.movie
-  end
 
   if user.nil?
     Bot.deliver(
@@ -29,7 +24,16 @@ Bot.on :message do |message|
         text: "Please, sign in with Facebook on https://www.weclap.co"
       }
     )
+    
   else
+    
+    users_movies = []
+    unless user.interests.empty?
+      user.interests.each do |interest|
+        users_movies << interest.movie
+      end
+    end
+
     case message.text
     when /hello/i
       Bot.deliver(
@@ -42,29 +46,37 @@ Bot.on :message do |message|
 #change the url for watch the film
     when /watchlist/i
       movie_array = []
-      interestslist = user.interests
-      counter = 0
-      interestslist.each do |interest|
-        if counter < 10
-          movie_array << {
-            "title":"#{interest.movie.title}",
-            "image_url":"#{interest.movie.poster_url}",
-            "subtitle":"Directed by...",
-            "buttons":[
-              {
-                "type":"web_url",
-                "url":"#{interest.movie.website_url}",
-                "title":"Show IMDB"
-              },
-              {
-                "type":"web_url",
-                "url":"#{interest.movie.website_url}",
-                "title":"Watch the film"
-              },            
-            ]
+      if user.interests.empty?
+        Bot.deliver(
+          recipient: message.sender,
+          message: {
+            text: "Sorry buddy, your watchlist is empty."
           }
+        )
+      else
+        counter = 0
+        user.interests.each do |interest|
+          if counter < 10
+            movie_array << {
+              "title":"#{interest.movie.title}",
+              "image_url":"#{interest.movie.poster_url}",
+              "subtitle":"Directed by...",
+              "buttons":[
+                {
+                  "type":"web_url",
+                  "url":"#{interest.movie.website_url}",
+                  "title":"Show IMDB"
+                },
+                {
+                  "type":"web_url",
+                  "url":"#{interest.movie.website_url}",
+                  "title":"Watch the film"
+                },            
+              ]
+            }
+          end
+          counter = counter + 1
         end
-        counter = counter + 1
       end
       Bot.deliver(
           recipient: message.sender,
@@ -85,16 +97,24 @@ Bot.on :message do |message|
 
 
     when /list/i
-      interestslist = user.interests
-      interestslist.each do |interest|
+      if user.interests.empty?
         Bot.deliver(
           recipient: message.sender,
           message: {
-            #text: "hello #{user.first_name}"
-            text: "#{interest.movie.title}"
+            text: "Sorry buddy, your watchlist is empty."
           }
         )
-      end    
+      else
+        user.interests.each do |interest|
+          Bot.deliver(
+            recipient: message.sender,
+            message: {
+              #text: "hello #{user.first_name}"
+              text: "#{interest.movie.title}"
+            }
+          )
+        end 
+      end   
     else
       movies = Movie.where('title ILIKE ? OR original_title ILIKE ?', "%#{message.text}%", "%#{message.text}%")
       if movies.empty?

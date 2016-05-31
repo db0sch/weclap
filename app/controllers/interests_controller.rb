@@ -10,7 +10,8 @@ class InterestsController < ApplicationController
   end
 
   def create
-    @friend = User.where(id: my_friends_finder).find(params[:friend_id])
+
+    @friend = User.where(id: my_friends_finder).find(params[:friend_id]) if params[:friend_id]
 
     @interest = Interest.new
     @interest.movie = @movie
@@ -19,14 +20,16 @@ class InterestsController < ApplicationController
 
     if @interest.save
       current_user.interests.reload
-      @friend.interests.reload
+        if @friend
+        @friend.interests.reload
 
-      @commun_movies = []
-      @friend.interests.each do |movie|
-        if movie.watched_on.nil?
-          current_user.interests.each do |cumovie|
-            if cumovie.movie_id == movie.movie_id
-              @commun_movies << movie.movie_id
+        @commun_movies = []
+        @friend.interests.each do |movie|
+          if movie.watched_on.nil?
+            current_user.interests.each do |cumovie|
+              if cumovie.movie_id == movie.movie_id
+                @commun_movies << movie.movie_id
+              end
             end
           end
         end
