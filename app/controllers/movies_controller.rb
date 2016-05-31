@@ -5,6 +5,11 @@ class MoviesController < ApplicationController
     title = params[:title]
     @movies = @movies.where('title ILIKE ? OR original_title ILIKE ?', "%#{title}%", "%#{title}%") if title
     @friends = my_friends_finder
+    # respond_to do |format|
+    #   format.html
+    #   format.json
+    #   format.js
+    # end
   end
 
   def show
