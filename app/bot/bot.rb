@@ -105,7 +105,7 @@ Bot.on :message do |message|
           }
         )
       else
-        interestslist.each do |interest|
+        user.interests.each do |interest|
           Bot.deliver(
             recipient: message.sender,
             message: {
