@@ -109,7 +109,7 @@ $star-yellow: #FFB400;
   margin: 0;
   background-color: white;
   padding-top: 37px;
-  padding-bottom: 36px;
+  padding-bottom: 235px;
   padding-left: 25px;
   height: 225px;
 }
@@ -148,4 +148,9 @@ $star-yellow: #FFB400;
 
 .inline-flex {
   display: inline-flex
+}
+
+#shows_in_theaters {
+  overflow: scroll;
+  height: 357px;
 }

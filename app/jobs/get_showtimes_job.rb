@@ -4,7 +4,7 @@ class GetShowtimesJob < ActiveJob::Base
   def perform(zip_code, city, movie_id, user_id)
     movie = Movie.find(movie_id)
     puts "Search showtimes for #{movie.title} near: #{zip_code} (#{city})"
-    shows = MovieScraper::find_showtimes_of_the_day(zip_code, city, movie, 4)
+    shows = MovieScraper::find_showtimes_of_the_day(zip_code, city, movie, 7)
     rendered_data = JobController.new.index(shows)
     PusherClient.get.trigger('showtimes', 'display', { user_id: user_id,  shows_html: rendered_data, theaters_json: theater_locations_to_json(shows.keys) })
   end
