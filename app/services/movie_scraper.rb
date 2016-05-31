@@ -16,7 +16,7 @@ class MovieScraper
       end
 
       # Then we fetch the nearest theaters
-      nearest_theaters = Theater.near("#{zip_code} #{city}", 2)
+      nearest_theaters = Theater.near("#{zip_code} #{city}", 10)
       # Then we select the nearest theaters that were also found by IMDB
       nearest_data = theaters_data.select do |theater_data|
         record = theater_data[0]
@@ -33,7 +33,6 @@ class MovieScraper
         end
         breaker += 1
       end
-
       # Then we have this list of nearest theaters and their nokogiri data, we take the first 5
       nearest_data.take(limit).each do |data|
         theater = data[0]
