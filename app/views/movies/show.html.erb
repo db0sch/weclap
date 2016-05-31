@@ -1,6 +1,7 @@
 <div class="movie-wrapper">
   <div class="container">
     <div class="row">
+      <%= render 'shared/search_bar' %>
       <div class="col-xs-12 col-sm-8">
         <div class="movie-info-container boxing">
           <div class="movie-basic-info">
@@ -21,28 +22,28 @@
 
 
                 <div class='inline-flex'>
-                <div class="movie-social movie-item-controls">
-                  <% if !@friends.nil? %>
-                    <% @friends.each do |b| %>
-                      <% User.find(b).interests.each do |interest| %>
-                        <% if interest.watched_on.nil? %>
-                          <% if @movie.id == interest.movie_id %>
-                             <%= link_to image_tag(User.find(b).picture, class: "avatar"), user_friendships_path(current_user) %>
-                          <% end %>
-                        <% else %>
-                          <% if @movie.id == interest.movie_id %>
-                             <%= link_to user_friendships_path(current_user), style: "text-decoration: none;" do %>
-                                <div style="background-image: url(<%= image_path(User.find(b).picture)%>)" class="avatar rating rating-container">
-                                  <div class="rating-gradient"> </div>
-                                  <div id="rating"><%= interest.rating %>/5</div>
-                                </div>
-                             <% end %>
+                  <div class="movie-social movie-item-controls">
+                    <% if !@friends.nil? %>
+                      <% @friends.each do |b| %>
+                        <% User.find(b).interests.each do |interest| %>
+                          <% if interest.watched_on.nil? %>
+                            <% if @movie.id == interest.movie_id %>
+                               <%= link_to image_tag(User.find(b).picture, class: "avatar"), user_friendships_path(current_user) %>
+                            <% end %>
+                          <% else %>
+                            <% if @movie.id == interest.movie_id %>
+                               <%= link_to user_friendships_path(current_user), style: "text-decoration: none;" do %>
+                                  <div style="background-image: url(<%= image_path(User.find(b).picture)%>)" class="avatar rating rating-container">
+                                    <div class="rating-gradient"> </div>
+                                    <div id="rating"><%= interest.rating %>/5</div>
+                                  </div>
+                               <% end %>
+                            <% end %>
                           <% end %>
                         <% end %>
                       <% end %>
                     <% end %>
-                  <% end %>
-                </div>
+                  </div>
 
 
                 <div>
