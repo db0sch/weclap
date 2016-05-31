@@ -125,7 +125,7 @@
   <script type="text/javascript">
     $(document).ready(function() {
       Pusher.logToConsole = true;
-      var pusher = new Pusher("<%= ENV['pusher_key'] %>", {
+      var pusher = new Pusher("<%= ENV['PUSHER_KEY'] %>", {
         cluster: 'eu',
         encrypted: true
       });
