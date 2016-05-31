@@ -26,7 +26,7 @@ class MovieScraper
       # If we don't have 5 theaters yet, we try to take more from IMDB
       # The breaker is ugly as fuck but prevents infinite looping in some cases
       breaker = 0
-      while nearest_data.size < 5 && breaker <= 5
+      while nearest_data.size < limit && breaker <= limit - 1
         theaters_data.each do |theater_data|
           record = theater_data[0]
           nearest_data << theater_data unless nearest_data.include?(record)
@@ -35,7 +35,7 @@ class MovieScraper
       end
 
       # Then we have this list of nearest theaters and their nokogiri data, we take the first 5
-      nearest_data.take(5).each do |data|
+      nearest_data.take(limit).each do |data|
         theater = data[0]
         t = data[1]
         shows[theater] ||= []
