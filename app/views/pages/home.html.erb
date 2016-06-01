@@ -3,7 +3,24 @@
     <h2>The <strong>ultimate connected <u>Watchlist</u></strong> </h2>
     <p>Find movies, anyhere, anytime</p>
 
-    <button class="banner-central-button">Let's clap!</button>
+    <button type="button" class="banner-central-button" data-toggle="modal" data-target=".login-modal-sm">Let's clap!</button>
+    
+    <div class="modal fade login-modal-sm" id='LogInModal' tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-xs-12 text-center">
+                  <h5>You need to be logged in to continue</h5>
+                  <%= link_to user_facebook_omniauth_authorize_path do %>
+                    <%= image_tag('login_fb_small.png') %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
   </div>
 </div>

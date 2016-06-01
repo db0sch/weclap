@@ -6,7 +6,7 @@
     var watched_list = $('div#watched-movie-list');
 
     $('#unwatched-movie-list .watched-movie').each(function(idx, movie_item) {
-      $(movie_item).parent().appendTo($(watched_list));
+      $(movie_item).appendTo($(watched_list));
     });
 
     var items = $('.starrr');
@@ -29,7 +29,7 @@
                   setTimeout(function() {
                     $(myItem).find('#movie-just-been-watched').remove();
                     $(myItem).addClass('watched-movie');
-                    $(myItem).parent().prependTo($(watched_list));
+                    $(myItem).prependTo($(watched_list));
                   }, 3000);
                 }
               }

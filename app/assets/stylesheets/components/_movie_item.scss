@@ -1,14 +1,9 @@
-
-.wrapper-movie-list {
-  background-color: #BFCDCF;
-}
-
 .movie-item {
   display: flex;
   align-items: center;
   transition: all 0.15s ease;
-  background-color: white;
-  border-right: 7px solid white;
+  background-color: #e6e6e6;
+  border-right: 7px solid #e6e6e6;
   box-shadow: 0px 0px 1px 0px #81819E;
   margin: 4px;
 }
@@ -22,6 +17,9 @@
     color: #272822;
     font-weight: bold;
     text-decoration: none;
+  }
+  .movie-item-image{
+     opacity: 1;
   }
 }
 
@@ -55,7 +53,9 @@
   margin-right: 20px;
   width: 100px;
   box-shadow: 4px 0px 3px 0px #B5B5B5;
+  opacity: 0.9;
 }
+
 
 .movie-infos {
   display: flex;
@@ -240,19 +240,6 @@ a.movie-added-btn {
   border-width: 0 0 1em 0.7em;
   z-index: -1;
 }
-.ribbon:hover:after{
-  border: 1.5em solid #EF5350;
-  border-bottom-color: transparent;
-  height: 5em;
-  -webkit-transition: height 0.5s;
-  transition: height 0.5s;
-}
-.ribbon:hover{
-  line-height: 0.9em;
-  color: #333;
-  -webkit-transition: line-height 0.5s;
-  transition: line-height 0.5s;
-}
 
 .ribbon-left{
   right: 80px;
@@ -282,30 +269,8 @@ a.movie-added-btn {
   -webkit-transition: height 0.5s;
   transition: height 0.5s;
 }
-.ribbon-left:before {
-  content: "";
-  font-size: 0.5em;
-  position: absolute;
-  border-style: solid;
-  border-color: transparent transparent #455645 transparent;
-  top: -1em;
-  right: 2.8em;
-  border-width: 0 0 1em 0.7em;
-  z-index: -1;
-}
-.ribbon-left:hover:after{
-  border: 1.5em solid #48D206;
-  border-bottom-color: transparent;
-  height: 5em;
-  -webkit-transition: height 0.5s;
-  transition: height 0.5s;
-}
-.ribbon-left:hover{
-  line-height: 0.9em;
-  color: #333;
-  -webkit-transition: line-height 0.5s;
-  transition: line-height 0.5s;
-}
+
+
 
 .watched-movie {
   opacity: 0.5;
@@ -320,7 +285,7 @@ a.movie-added-btn {
 }
 
 .title-seen {
-  color: #455645;
+  color: #ffffff;
   font-weight: 100;
   opacity: 0.8;
 }

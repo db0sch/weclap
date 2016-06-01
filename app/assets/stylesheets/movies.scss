@@ -1,5 +1,5 @@
 .movie-wrapper {
-  background-color: #778899;
+  background: linear-gradient(#778899, #333333);
   padding: 10px 0;
 }
 .movie-info-container {
@@ -31,14 +31,19 @@
   box-shadow: 1px 1px 2px #aaa;
   border-radius: 4px;
   margin: 10px 0;
-  margin-left: -19px;
-  background-color: white;
+  background-color: #F4F4F4;
   padding: 23px 24px 41px 25px;
+  box-shadow: -1px 2px 4px -0.9px rgba(0, 0, 0, 0.7) inset;
   h4 {
     color: black;
   }
 }
 
+#boxing-show {
+  margin-left: -18px;
+  margin-right: -18px;
+  min-height: 456px;
+}
 
 .movie-poster-show {
   margin: 0 auto;
@@ -124,11 +129,12 @@ $star-yellow: #FFB400;
   box-shadow: 1px 1px 2px #aaa;
   border-radius: 4px;
   margin: 0;
-  background-color: white;
+  background-color: #F4F4F4;
   padding-top: 37px;
   padding-left: 25px;
-  height: 334px;
-  margin-left: -19px;
+  padding-bottom: 37px;
+  min-height: 322px;
+  box-shadow: -1px 2px 4px -0.9px rgba(0, 0, 0, 0.7) inset;
 }
 
 .theater-container {
@@ -155,13 +161,6 @@ $star-yellow: #FFB400;
   font-weight: 300;
 }
 
-.tabs {
-  margin-bottom: 17px;
-}
-
-.tab-active {
-  background-color: #634949;
-}
 
 .inline-flex {
   display: inline-flex
@@ -180,4 +179,56 @@ $star-yellow: #FFB400;
 .parental-rating {
   color: black;
   font-weight: 700;
+}
+
+.section-title {
+  font-size: 20px;
+  border-bottom: solid 1px;
+  padding-bottom: 15px;
+  margin-top: 5px;
+  // margin-left: 116px;
+  // margin-right: 116px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 100;
+  opacity: 0.8;
+}
+.tabs-title {
+  font-size: 20px;
+  padding-bottom: 3px;
+  margin-top: 3px;
+
+  padding-bottom: 15px;
+  // margin-left: 116px;
+  // margin-right: 116px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 100;
+  opacity: 0.8;
+
+}
+
+.flex-tabs {
+  display: flex;
+  justify-content: space-between;
+}
+.flex-tab-item {
+  flex: 0 0 25%;
+  padding-bottom: 0px;
+}
+.tab-active-search {
+  border-bottom: solid 1px;
+}
+
+.none {
+  background: none;
+  border: none;
+}
+
+.none:hover {
+  padding-bottom: 3px;
+   border-bottom: solid 1px white;
+}
+.none:focus {
+  outline-width: 0;
 }
