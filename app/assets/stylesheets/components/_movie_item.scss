@@ -220,7 +220,7 @@ a.movie-added-btn {
   font-size: 0.5em;
   position: absolute;
   height:  4.8em;
-  border: 1.5em solid #F44336;
+  border: 1.5em solid #a91b10;
   z-index: -1;
   top: -1em;
   border-top-width: 1.5em;
@@ -228,17 +228,6 @@ a.movie-added-btn {
   right: 0;
   -webkit-transition: height 0.5s;
   transition: height 0.5s;
-}
-.ribbon:before {
-  content: "";
-  font-size: 0.5em;
-  position: absolute;
-  border-style: solid;
-  border-color: transparent transparent #B71C1C transparent;
-  top: -1em;
-  right: 2.8em;
-  border-width: 0 0 1em 0.7em;
-  z-index: -1;
 }
 
 .ribbon-left{
