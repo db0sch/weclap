@@ -50,6 +50,30 @@ Bot.on :message do |message|
         message: {
           text: "Hello #{user.first_name}"
         }
+      )      
+      Bot.deliver(
+        "recipient": message.sender,
+        "message":{
+          "attachment":{
+            "type":"template",
+            "payload":{
+              "template_type":"button",
+              "text":"What do you want to do next?",
+              "buttons":[
+                {
+                  "type":"postback",
+                  "title":"Search a film",
+                  "payload":{"search":"true"}.to_json
+                },
+                {
+                  "type":"postback",
+                  "title":"Help",
+                  "payload":{"help":"true"}.to_json
+                }
+              ]
+            }
+          }
+        }
       )
 
 #change the url for watch the film
@@ -79,7 +103,7 @@ Bot.on :message do |message|
                 {
                   "type":"web_url",
                   "url":"#{interest.movie.website_url}",
-                  "title":"Watch the film"
+                  "title":{"movie_id":"#{movie.id}"}.to_json
                 },
               ]
             }
@@ -239,7 +263,10 @@ Bot.on :postback do |postback|
         text = "Sorry. Something went wrong"
       end
     end
-
+  when "search"
+    text = "Send me the film title, or just a word, and I'll start searching. :)"
+  when "help"
+    text = "To search for a film, just send me the title.\n You can also type these commands:\n- \"Hello\": I'm very polite\n- \"List\": Show your watchlist\n- \"Watchlist\": Show the first 10 movies of your watchlist in cards\n- \"Help\": To list all the commands"
   else
     text = 'Oups, something went wrong.'
   end
