@@ -45,36 +45,11 @@ Bot.on :message do |message|
 
     case message.text.downcase
     when /hello/i
-      Bot.deliver(
-        recipient: message.sender,
-        message: {
-          text: "Hello #{user.first_name}"
-        }
-      )      
-      Bot.deliver(
-        "recipient": message.sender,
-        "message":{
-          "attachment":{
-            "type":"template",
-            "payload":{
-              "template_type":"button",
-              "text":"What do you want to do next?",
-              "buttons":[
-                {
-                  "type":"postback",
-                  "title":"Search a film",
-                  "payload":{"search":"true"}.to_json
-                },
-                {
-                  "type":"postback",
-                  "title":"Help",
-                  "payload":{"help":"true"}.to_json
-                }
-              ]
-            }
-          }
-        }
-      )
+      say_hello(user, message)
+    when "yo"
+      say_hello(user, message)
+    when "bonjour"
+      say_hello(user, message)
 
 #change the url for watch the film
     when /watchlist/i
@@ -97,13 +72,8 @@ Bot.on :message do |message|
               "buttons":[
                 {
                   "type":"web_url",
-                  "url":"#{interest.movie.website_url}",
-                  "title":"Show IMDB"
-                },
-                {
-                  "type":"web_url",
-                  "url":"#{interest.movie.website_url}",
-                  "title":{"movie_id":"#{movie.id}"}.to_json
+                  "url":"https://weclap.co/movies/#{interest.movie.id}",
+                  "title":"Details"
                 },
               ]
             }
@@ -199,8 +169,8 @@ Bot.on :message do |message|
             "buttons":[
               {
                 "type":"web_url",
-                "url":"#{movie.website_url}",
-                "title":"Show IMDB"
+                "url":"https://weclap.co/movies/#{movie.id}",
+                "title":"Details"
               },
               {
                 "type":"postback",
@@ -285,4 +255,40 @@ end
 
 Bot.on :delivery do |delivery|
   puts "Delivered message(s) #{delivery.ids}"
+end
+
+private
+
+def say_hello(user, message)
+  Bot.deliver(
+    recipient: message.sender,
+    message: {
+      text: "Hello #{user.first_name}"
+    }
+  )      
+  Bot.deliver(
+    "recipient": message.sender,
+    "message":{
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"button",
+          "text":"What do you want to do next?",
+          "buttons":[
+            {
+              "type":"postback",
+              "title":"Search a film",
+              "payload":{"search":"true"}.to_json
+            },
+            {
+              "type":"postback",
+              "title":"Help",
+              "payload":{"help":"true"}.to_json
+            }
+          ]
+        }
+      }
+    }
+  )
+  
 end
