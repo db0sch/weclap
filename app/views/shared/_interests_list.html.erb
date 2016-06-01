@@ -1,5 +1,8 @@
 <div class="container padded">
   <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+    <h3 class="section-title">Your Watchlist</h3>
+    </div>
     <% list.each do |interest| %>
       <% unless interest.watched_on %>
         <%= render 'shared/movie_item', movie: interest.movie, interest: interest %>
@@ -7,7 +10,9 @@
     <% end %>
   </div>
   <div class="row">
-    <h3 class="title-seen text-center">Watched</h3>
+    <div class="col-xs-10 col-xs-offset-1">
+    <h3 class="section-title">Watched</h3>
+    </div>
     <% list.each do |interest| %>
       <% if interest.watched_on %>
         <div class="opacity">

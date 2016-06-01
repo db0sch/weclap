@@ -181,3 +181,41 @@ $star-yellow: #FFB400;
   color: black;
   font-weight: 700;
 }
+
+.section-title {
+  font-size: 20px;
+  border-bottom: solid 1px;
+  padding-bottom: 15px;
+  margin-top: 5px;
+  // margin-left: 116px;
+  // margin-right: 116px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 100;
+  opacity: 0.8;
+}
+.tabs-title {
+  font-size: 20px;
+  padding-bottom: 3px;
+  margin-top: 3px;
+
+  padding-bottom: 15px;
+  // margin-left: 116px;
+  // margin-right: 116px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 100;
+  opacity: 0.8;
+
+}
+
+.flex-tabs {
+  display: flex;
+  justify-content: space-between;
+}
+.flex-tab-item {
+  flex: 0 0 25%;
+}
+.tab-active-search {
+  border-bottom: solid 1px;
+}
