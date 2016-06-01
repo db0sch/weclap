@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <%= render 'shared/search_bar' %>
-      <div class="col-xs-12  col-sm-8">
+      <div class="col-xs-12  col-sm-8 <%#= 'no-right-padded' unless request.user_agent =~ /Mobile|webOS/ %>">
         <div class="movie-info-container boxing">
           <div class="movie-basic-info">
             <div class="movie-info-left">
@@ -91,8 +91,8 @@
         </div>
       </div>
 
-      <div class="col-xs-12 col-sm-4">
-        <div class="boxing">
+      <div class="col-xs-12 col-sm-4 <%#= 'no-left-padded' unless request.user_agent =~ /Mobile|webOS/ %>">
+        <div class="boxing" id="boxing-show">
           <div class="tabs">
             <a class="tab <%= 'active' if @display_shows %>" data-target="#shows">
               <div class="tab-header"><i class="fa fa-film" aria-hidden="true" style="font-size: x-large;"></i></div>

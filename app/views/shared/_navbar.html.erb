@@ -26,9 +26,9 @@
       <%# end %>
 
       <!-- Button (call-to-action) -->
-      <%= link_to t(".top_call_to_action", default: "Movies"), movies_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
+      <%= button_to t(".top_call_to_action", default: "Movies"), movies_path, method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
 
-      <%= link_to t(".top_call_to_action", default: "Watchlist"), watchlist_path(current_user), class: "navbar-wagon-item navbar-wagon-button btn" %>
+      <%= button_to t(".top_call_to_action", default: "Watchlist"), watchlist_path(current_user), method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
 
 
       <!-- Profile picture and dropdown -->
@@ -84,14 +84,29 @@
 
   <!-- Dropdown list appearing on mobile only -->
   <div class="navbar-wagon-item hidden-md hidden-lg">
+    <% if user_signed_in? %>
     <div class="dropdown">
       <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
-      <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-        <li><a href="#">Some mobile link</a></li>
-        <li><a href="#">Other one</a></li>
-        <li><a href="#">Other one</a></li>
+      <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu" id="dropdown_smartphone">
+
+        <li>
+          <%= link_to user_friendships_path(current_user) do %>
+            <i class="fa fa-users"></i> <%= t ".friends", default: "Friends" %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to watchlist_path(current_user) do %>
+            <i class="fa fa-film"></i>  <%= t ".watchlist", default: "Watchlist" %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+            <i class="fa fa-sign-out"></i>  <%= t ".sign_out", default: "Log out" %>
+          <% end %>
+        </li>
       </ul>
     </div>
+    <% end %>
   </div>
 </div>
 
