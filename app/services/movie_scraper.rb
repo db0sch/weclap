@@ -62,7 +62,8 @@ class MovieScraper
       doc.search(".film-title-search").each do |element|
         local_url = CGI::escapeHTML(element.attribute('href').value).gsub(/°/, '&deg;')
         title = local_url.match(/\=(.+)/)[0].gsub("_", " ").gsub("=", "")
-        url = "http://vad.cnc.fr/#{local_url}"
+
+        url = 'http://vad.cnc.fr/' + local_url.gsub(/(\?.*)/, '')
         begin
           movies_response = RestClient.get url
           fail unless movies_response.code == 200
@@ -96,7 +97,7 @@ class MovieScraper
 
     def scrape_and_persist_movies(url, item_container_string)
       Tmdb::Api.key(ENV['TMDB_API_KEY'])
-      Tmdb::Api.language("fr")
+      #Tmdb::Api.language("fr")
       count = 0
       begin
         movies_response = RestClient.get url
