@@ -31,7 +31,6 @@
   box-shadow: 1px 1px 2px #aaa;
   border-radius: 4px;
   margin: 10px 0;
-  margin-left: -19px;
   background-color: #F4F4F4;
   padding: 23px 24px 41px 25px;
   box-shadow: -1px 2px 4px -0.9px rgba(0, 0, 0, 0.7) inset;
@@ -40,6 +39,11 @@
   }
 }
 
+#boxing-show {
+  margin-left: -18px;
+  margin-right: -18px;
+  min-height: 456px;
+}
 
 .movie-poster-show {
   margin: 0 auto;
@@ -128,8 +132,8 @@ $star-yellow: #FFB400;
   background-color: #F4F4F4;
   padding-top: 37px;
   padding-left: 25px;
-  height: 324px;
-  margin-left: -19px;
+  padding-bottom: 37px;
+  min-height: 322px;
   box-shadow: -1px 2px 4px -0.9px rgba(0, 0, 0, 0.7) inset;
 }
 
