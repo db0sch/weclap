@@ -1,10 +1,15 @@
 
 <div class="navbar-wagon">
   <!-- Center Navigation -->
-  <div class="navbar-wagon-center hidden-xs hidden-sm">
+  <div class="navbar-wagon-left hidden-xs hidden-sm">
+    <!-- navbar element empty -->
     <%= link_to(user_signed_in? ? watchlist_path(current_user) : root_path) do %>
       <%= image_tag "logo.png", class: "clap-logo" %>
     <% end %>
+  </div>
+
+  <div class="navbar-wagon-center hidden-xs hidden-sm">
+
   </div>
 
   <!-- Right Navigation -->
@@ -13,14 +18,15 @@
     <% if user_signed_in? %>
 
       <!-- Notification -->
-      <%= link_to "#", class: "navbar-wagon-item navbar-wagon-link" do %>
-        <div class="badge-container">
+      <%#link_to "#", class: "navbar-wagon-item navbar-wagon-link" do %>
+        <!-- <div class="badge-container"> -->
           <!-- <i class="fa fa-envelope-o" style=" color:whitesmoke;"></i> -->
           <!-- <div class="badge badge-blue">3</div> -->
-        </div>
-      <% end %>
+        <!-- </div> -->
+      <%# end %>
 
       <!-- Button (call-to-action) -->
+      <%= link_to t(".top_call_to_action", default: "Movies"), movies_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
 
       <%= link_to t(".top_call_to_action", default: "Watchlist"), watchlist_path(current_user), class: "navbar-wagon-item navbar-wagon-button btn" %>
 
@@ -53,30 +59,25 @@
           </ul>
         </div>
       </div>
-
     <% else %>
+      <!-- <button type="button" class="navbar-wagon-item navbar-wagon-button btn" data-toggle="modal" data-target=".login-modal-sm">Sign in with Facebook</button> -->
 
-      <!-- Login text link -->
-      <%# link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
-      <button type="button" class="navbar-wagon-item navbar-wagon-button btn" data-toggle="modal" data-target=".login-modal-sm">Sign in with Facebook</button>
-      <!-- Modal -->
-
-      <div class="modal fade login-modal-sm" id='LogInModal' tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+<!--       <div class="modal fade login-modal-sm" id='LogInModal' tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm">
           <div class="modal-content">
             <div class="modal-body">
               <div class="row">
                 <div class="col-xs-12 text-center">
                   <h4>Sign in with Facebook</h4>
-                  <%= link_to user_facebook_omniauth_authorize_path do %>
-                    <%= image_tag('login_fb_small.png') %>
-                  <% end %>
+                  <%# link_to user_facebook_omniauth_authorize_path do %>
+                    <%# image_tag('login_fb_small.png') %>
+                  <%# end %>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
     <% end %>
   </div>

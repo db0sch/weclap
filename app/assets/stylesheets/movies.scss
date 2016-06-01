@@ -32,8 +32,9 @@
   border-radius: 4px;
   margin: 10px 0;
   margin-left: -19px;
-  background-color: white;
+  background-color: #F4F4F4;
   padding: 23px 24px 41px 25px;
+  box-shadow: -1px 2px 4px -0.9px rgba(0, 0, 0, 0.7) inset;
   h4 {
     color: black;
   }
@@ -124,11 +125,12 @@ $star-yellow: #FFB400;
   box-shadow: 1px 1px 2px #aaa;
   border-radius: 4px;
   margin: 0;
-  background-color: white;
+  background-color: #F4F4F4;
   padding-top: 37px;
   padding-left: 25px;
-  height: 334px;
+  height: 324px;
   margin-left: -19px;
+  box-shadow: -1px 2px 4px -0.9px rgba(0, 0, 0, 0.7) inset;
 }
 
 .theater-container {
@@ -155,13 +157,6 @@ $star-yellow: #FFB400;
   font-weight: 300;
 }
 
-.tabs {
-  margin-bottom: 17px;
-}
-
-.tab-active {
-  background-color: #634949;
-}
 
 .inline-flex {
   display: inline-flex
