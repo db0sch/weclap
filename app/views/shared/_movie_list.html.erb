@@ -1,4 +1,4 @@
-<div class="container padded">
+<div class="container padded" id="scrollable-list">
   <div class="row">
     <% list.each do |movie| %>
       <%= render 'shared/movie_item', movie: movie, friends: @friends, interest: nil %>
