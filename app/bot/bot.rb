@@ -188,8 +188,10 @@ Bot.on :message do |message|
           }
         )
       else
+        counter = 0
         movies.each do |movie|
           next if users_movies.include?(movie)
+          if counter < 10
           movie_array << {
             "title":"#{movie.title}",
             "image_url":"#{movie.poster_url}",
@@ -207,6 +209,8 @@ Bot.on :message do |message|
               }
             ]
           }
+          counter = counter + 1
+          end
         end
       end
       if movie_array.empty?
