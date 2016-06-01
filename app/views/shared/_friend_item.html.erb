@@ -14,15 +14,15 @@
       <h3><%= friend.fullname %></h3>
     </div>
   <!-- common moovies -->
-    <% if commun_movies.length < 7 %>
-      <% commun_movies.each do |movie_id| %>
+    <% if common_movies.length < 7 %>
+      <% common_movies.each do |movie_id| %>
         <div>
           <%= link_to image_tag(Movie.find(movie_id).poster_url, class: "movie-item-image hidden-xs"), movie_path(movie_id) %>
         </div>
       <% end %>
     <% else %>
-      <div class="btn"> You have <%= commun_movies.length - 5 %> other movies in commun</div>
-      <% commun_movies.take(5).each do |movie_id| %>
+      <div class="btn"> You have <%= common_movies.length - 5 %> other movies in common</div>
+      <% common_movies.take(5).each do |movie_id| %>
         <div>
         <%= link_to image_tag(Movie.find(movie_id).poster_url, class: "movie-item-image hidden-xs"), movie_path(movie_id) %>
         </div>

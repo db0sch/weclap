@@ -23,12 +23,12 @@ class InterestsController < ApplicationController
         if @friend
         @friend.interests.reload
 
-        @commun_movies = []
+        @common_movies = []
         @friend.interests.each do |movie|
           if movie.watched_on.nil?
             current_user.interests.each do |cumovie|
               if cumovie.movie_id == movie.movie_id
-                @commun_movies << movie.movie_id
+                @common_movies << movie.movie_id
               end
             end
           end
