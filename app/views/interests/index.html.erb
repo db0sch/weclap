@@ -3,17 +3,25 @@
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
-    $('.starrr').starrr({
-      change: function(e, value){
-        var rating = {"rating": value};
-        $.ajax({
-           type: "PATCH",
-           url: "/interests/" + e.currentTarget.id,
-           data: rating,
-           success: function(data) {
-             $('#movie-' + e.currentTarget.id).slideUp();
-           }
-        });
+    var items = $('.starrr');
+    $.each(items, function(index, item) {
+      var score = $(item).attr('data-rating');
+      if(score > 0) {
+        $(item).starrr({ rating: score, readOnly: true });
+      } else {
+        $(item).starrr({
+          change: function(e, value){
+            var ratng = {"rating": value};
+            $.ajax({
+               type: "PATCH",
+               url: "/interests/" + e.currentTarget.id,
+               data: ratng,
+               success: function(data) {
+                 $('#movie-' + e.currentTarget.id).slideUp();
+               }
+            });
+          }
+        })
       }
     });
   <% end %>

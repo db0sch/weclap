@@ -1,14 +1,7 @@
 <%= link_to movie_path(movie.id) do %>
   <div class="col-xs-10 col-xs-offset-1">
-    <div  class="movie-item" <%= "id = movie-#{interest.id}" unless interest.nil?  %> >
-
-      <% if movie.poster_url %>
-        <%= image_tag movie.poster_url, alt: movie.title, class: "movie-item-image hidden-xs" %>
-
-      <% else %>
-        <%= image_tag "http://placehold.it/40x60", alt: "placeholder", class: "movie-item-image hidden-xs" %>
-      <% end %>
-      <!-- <img src="http://placehold.it/40x60" alt="kudoz" class="movie-item-image hidden-xs"> -->
+    <div class="movie-item" <%= "id = movie-#{interest.id}" unless interest.nil? %> >
+      <%= image_tag movie.poster_url ? movie.poster_url : "http://placehold.it/40x60", alt: movie.title, class: "movie-item-image hidden-xs" %>
       <div class='movie-item-body'>
         <h3><%= movie.title %></h3>
         <div class="crew">
@@ -19,13 +12,12 @@
           <p id="year_released"><%= link_to movie.release_date.to_date.year %></p>
           <i class="fa fa-clock-o" aria-hidden="true" id="clock"></i>
           <p><%= movie.runtime %> min</p>
-
         </div>
       </div>
       <div class="movie-item-social">
-        <ul class="list-inline movie-item-controls movie-rating hidden-sm hidden-xs">
-          <% if current_user.movies.include?(movie)%>
-            <div class='starrr' <%= "id = #{interest.id}" unless interest.nil?  %>>
+        <div class="list-inline movie-item-controls movie-rating hidden-sm hidden-xs">
+          <% if current_user.movies.include?(movie) %>
+            <div class='starrr' <%= interest ? "id=#{interest.id} #{'data-rating=' + interest.rating.to_s if interest.rating}" : '' %> >
             </div>
             <%= link_to icon('times'), interest_path(interest), method: :delete, remote: true, data: { confirm: "Are you sure?" } unless interest.nil? %>
           <% else %>
@@ -36,11 +28,7 @@
           <% elsif !movie.theaters.empty?%>
             <a href=<%=movie_path(movie.id)%> class="ribbon-left"> <i class="fa fa-film" style="margin-left: 1px"></i></a>
           <% end %>
-        </ul>
-
-
-    <!--     <i class="fa fa-plus-circle" aria-hidden="true" id="add_to_watchlist"></i> -->
-
+        </div>
         <div class="movie-social movie-item-controls">
           <% if !@friends.nil? %>
             <% @friends.each do |b| %>
