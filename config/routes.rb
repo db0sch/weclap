@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   get '/users/:user_id/watchlist' => 'interests#index', as: 'watchlist'
 
   resources :interests, only: [:create, :update, :destroy]
+
+  authenticated :user do
+    root 'interests#index', as: :authenticated_root
+  end
   root to: 'pages#home'
 
   mount Facebook::Messenger::Server, at: 'bot'

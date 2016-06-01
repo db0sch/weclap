@@ -4,7 +4,7 @@ class InterestsController < ApplicationController
   skip_after_action :verify_policy_scoped, only: :index
 
   def index
-    @user = User.find(params[:user_id])
+    @user = params[:user_id] ? User.find(params[:user_id]) : current_user
     @watchlist = @user.interests
     @friends = my_friends_finder
   end
@@ -23,12 +23,12 @@ class InterestsController < ApplicationController
         if @friend
         @friend.interests.reload
 
-        @commun_movies = []
+        @common_movies = []
         @friend.interests.each do |movie|
           if movie.watched_on.nil?
             current_user.interests.each do |cumovie|
               if cumovie.movie_id == movie.movie_id
-                @commun_movies << movie.movie_id
+                @common_movies << movie.movie_id
               end
             end
           end
