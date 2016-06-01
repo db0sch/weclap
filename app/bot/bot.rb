@@ -24,9 +24,9 @@ Bot.on :message do |message|
         text: "Please, sign in with Facebook on https://www.weclap.co"
       }
     )
-    
+
   else
-    
+
   unless message.attachments.nil?
 
     Bot.deliver(
@@ -80,7 +80,7 @@ Bot.on :message do |message|
                   "type":"web_url",
                   "url":"#{interest.movie.website_url}",
                   "title":"Watch the film"
-                },            
+                },
               ]
             }
           end
@@ -108,7 +108,7 @@ Bot.on :message do |message|
         message: {
           text: "Hey buddy, want to know how I work?"
         }
-      )      
+      )
       Bot.deliver(
         recipient: message.sender,
         message: {
@@ -150,8 +150,8 @@ Bot.on :message do |message|
               text: "- #{interest.movie.title}"
             }
           )
-        end 
-      end   
+        end
+      end
     else
       movies = Movie.where('title ILIKE ? OR original_title ILIKE ?', "%#{message.text}%", "%#{message.text}%")
       movie_array = []
@@ -180,7 +180,7 @@ Bot.on :message do |message|
                 "type":"postback",
                 "title":"Add to watchlist",
                 "payload":{"movie_id":"#{movie.id}"}.to_json
-              }              
+              }
             ]
           }
         end
