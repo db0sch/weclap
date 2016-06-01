@@ -5,7 +5,7 @@
       <div class='movie-item-body'>
         <h3><%= movie.title %></h3>
         <div class="crew">
-          <p id="directed">Directed by:<%= movie.credits['crew']['Director'].join(', ') unless movie.credits['crew'].blank?%></p>
+          <p id="directed">Directed by: <%= movie.credits['crew']['Director'].join(', ') unless movie.credits['crew'].blank?%></p>
           <p>Cast: <%= movie.credits['cast'].take(5).join(', ')%></p>
         </div>
         <div class="movie-infos">

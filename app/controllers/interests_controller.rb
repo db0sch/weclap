@@ -4,7 +4,7 @@ class InterestsController < ApplicationController
   skip_after_action :verify_policy_scoped, only: :index
 
   def index
-    @user = User.find(params[:user_id])
+    @user = params[:user_id] ? User.find(params[:user_id]) : current_user
     @watchlist = @user.interests
     @friends = my_friends_finder
   end
