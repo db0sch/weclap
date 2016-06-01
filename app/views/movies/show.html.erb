@@ -15,7 +15,6 @@
                 </span>
               <% end %>
             </div>
-<!--             <span class="movie-release-year"><%#= " (#{@movie.release_date.to_date.year})" if @movie.release_date %></span> -->
             <div class="movie-info-right">
               <% if @clap_score %>
                 <span class="score-container">
@@ -107,7 +106,6 @@
               <ul class="list-unstyled" id="shows_in_theaters">
                 <li class="loader"></li>
               </ul>
-              <!-- <div class="theater-map" id='map'></div> -->
             </div>
           </div>
           <div class="tab-content <%= 'hidden' if @display_shows %>" id="streamings">
@@ -158,7 +156,12 @@
       // Listen to streamings refresh event
       channel.bind('refresh_streamings', function(data) {
         if(data.user_id === <%= current_user.id %>) {
-          $('#streamings_per_provider').html(data['streamings_html'])
+          var streamingContainer = $('#streamings_per_provider');
+          if(data['streamings_html'].length > 0) {
+            streamingContainer.html(data['streamings_html']);
+          } else {
+            streamingContainer.parent().html('<div class="text-center">No streamings available</div>');
+          }
         }
       });
     });
