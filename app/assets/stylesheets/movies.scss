@@ -223,8 +223,11 @@ $star-yellow: #FFB400;
 .none {
   background: none;
   border: none;
+  border-bottom: solid 1px transparent;
 }
-
+.underline {
+  border-bottom: solid 1px white;
+}
 .none:hover {
   padding-bottom: 3px;
    border-bottom: solid 1px white;

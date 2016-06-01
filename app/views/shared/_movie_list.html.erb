@@ -6,7 +6,7 @@
           <li>
             <form action="/movies" method="get">
               <input name="results" class="hidden">
-              <button type="submit" class="none">
+              <button type="submit" class="none <%= 'underline' if params[:results] %>">
                 <h3 class="tabs-title flex-tab-item">Results</h3>
               </button>
             </form>
@@ -14,23 +14,24 @@
           <li>
             <form action="/movies" method="get">
               <input name="top100" class="hidden">
-              <button type="submit" class="none">
-                <h3 class="tabs-title flex-tab-item">Top 100 Imdb</h3>
+              <button type="submit" class="none <%= 'underline' if params[:top100] %>">
+                <h3 class="tabs-title flex-tab-item ">Top 100 Imdb</h3>
               </button>
             </form>
           </li>
           <li>
             <form action="/movies" method="get">
               <input name="ontheater" class="hidden">
-              <button type="submit" class="none">
+              <button type="submit" class="none <%= 'underline' if params[:ontheater] %>">
                 <h3 class="tabs-title flex-tab-item">On theater</h3>
               </button>
             </form>
           </li>
+
           <li>
             <form action="/movies" method="get">
               <input name="onvod" class="hidden">
-              <button type="submit" class="none">
+              <button type="submit" class="none <%= 'underline' if params[:onvod] %>">
                 <h3 class="tabs-title flex-tab-item">On VOD</h3>
               </button>
             </form>
