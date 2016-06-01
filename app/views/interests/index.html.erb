@@ -3,6 +3,12 @@
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
+    var watched_list = $('div#watched-movie-list');
+
+    $('#unwatched-movie-list .watched-movie').each(function(idx, movie_item) {
+      $(movie_item).parent().appendTo($(watched_list));
+    });
+
     var items = $('.starrr');
     $.each(items, function(index, item) {
       var score = $(item).attr('data-rating');
@@ -10,18 +16,21 @@
         $(item).starrr({ rating: score, readOnly: true });
       } else {
         $(item).starrr({
-          change: function(e, value){
-            var ratng = {"rating": value};
+          change: function(e, value) {
+            var ratng = { "rating": value };
             $.ajax({
-               type: "PATCH",
-               url: "/interests/" + e.currentTarget.id,
-               data: ratng,
-               success: function(data) {
-                 $('#movie-' + e.currentTarget.id).slideUp();
-               }
+              type: "PATCH",
+              url: "/interests/" + e.currentTarget.id,
+              data: ratng,
+              success: function(data) {
+                var item = $('#movie-' + e.currentTarget.id);
+                $(item).addClass('watched-movie');
+                $(item).parent().prependTo($(watched_list));
+//                $.starrr({ rating: ratng, readOnly: true });
+              }
             });
           }
-        })
+        });
       }
     });
   <% end %>

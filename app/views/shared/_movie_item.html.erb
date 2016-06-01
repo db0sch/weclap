@@ -1,6 +1,6 @@
 <%= link_to movie_path(movie.id) do %>
   <div class="col-xs-10 col-xs-offset-1">
-    <div class="movie-item" <%= "id = movie-#{interest.id}" unless interest.nil? %> >
+    <div <%=raw interest.nil? ? "class=\"movie-item\"" : "class=\"movie-item #{'un' unless interest.watched_on}watched-movie\" id=movie-#{interest.id}" %>>
       <%= image_tag movie.poster_url ? movie.poster_url : "http://placehold.it/40x60", alt: movie.title, class: "movie-item-image hidden-xs" %>
       <div class='movie-item-body'>
         <h3><%= movie.title %></h3>
@@ -33,7 +33,6 @@
           <% if !@friends.nil? %>
             <% @friends.each do |b| %>
               <% User.find(b).interests.each do |interest| %>
-
                 <% if interest.watched_on.nil? %>
                   <% if movie.id == interest.movie_id %>
                      <%= link_to image_tag(User.find(b).picture, class: "avatar"), user_friendships_path(current_user) %>

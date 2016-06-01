@@ -1,19 +1,11 @@
 <div class="container padded">
-  <div class="row">
+  <div class="row" id="unwatched-movie-list">
     <% list.each do |interest| %>
-      <% unless interest.watched_on %>
-        <%= render 'shared/movie_item', movie: interest.movie, interest: interest %>
-      <% end %>
+      <%= render 'shared/movie_item', movie: interest.movie, interest: interest %>
     <% end %>
   </div>
-  <div class="row">
-    <h3 class="title-seen text-center">Watched</h3>
-    <% list.each do |interest| %>
-      <% if interest.watched_on %>
-        <div class="opacity">
-          <%= render 'shared/movie_item', movie: interest.movie, interest: interest %>
-        </div>
-      <% end %>
-    <% end %>
+  <h3 class="title-seen text-center">Watched</h3>
+  <div class="row" id="watched-movie-list">
   </div>
 </div>
+
