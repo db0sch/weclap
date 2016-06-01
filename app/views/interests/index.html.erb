@@ -10,7 +10,7 @@
     });
 
     var items = $('.starrr');
-    $.each(items, function(index, item) {
+    $(items).each(function(index, item) {
       var score = $(item).attr('data-rating');
       if(score > 0) {
         $(item).starrr({ rating: score, readOnly: true });
@@ -23,10 +23,15 @@
               url: "/interests/" + e.currentTarget.id,
               data: ratng,
               success: function(data) {
-                var item = $('#movie-' + e.currentTarget.id);
-                $(item).addClass('watched-movie');
-                $(item).parent().prependTo($(watched_list));
-//                $.starrr({ rating: ratng, readOnly: true });
+                var myItem = $('#movie-' + e.currentTarget.id);
+                if($(myItem).find('.movie-rating #movie-just-been-watched').length === 0) {
+                  $(myItem).find('.movie-rating').prepend('<div id="movie-just-been-watched">Watched</div>')
+                  setTimeout(function() {
+                    $(myItem).find('#movie-just-been-watched').remove();
+                    $(myItem).addClass('watched-movie');
+                    $(myItem).parent().prependTo($(watched_list));
+                  }, 3000);
+                }
               }
             });
           }
