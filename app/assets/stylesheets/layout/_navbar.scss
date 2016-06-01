@@ -42,17 +42,22 @@
   width: 175px;
 }
 
+.navbar-wagon-left {
+  flex: 0 0 30%;
+}
+
 .navbar-wagon-center {
   flex: 1 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: -314px;
+  // margin-right: -314px;
 }
 
 
 /* Navbar right section (with form, links, button) */
 .navbar-wagon-right {
+  flex: 0 0 30%;
   display: flex;
   align-items: center;
   justify-content: space-between;
