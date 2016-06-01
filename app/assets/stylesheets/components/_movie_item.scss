@@ -1,8 +1,3 @@
-
-.wrapper-movie-list {
-  background-color: #BFCDCF;
-}
-
 .movie-item {
   display: flex;
   align-items: center;
@@ -245,19 +240,6 @@ a.movie-added-btn {
   border-width: 0 0 1em 0.7em;
   z-index: -1;
 }
-.ribbon:hover:after{
-  border: 1.5em solid #EF5350;
-  border-bottom-color: transparent;
-  height: 5em;
-  -webkit-transition: height 0.5s;
-  transition: height 0.5s;
-}
-.ribbon:hover{
-  line-height: 0.9em;
-  color: #333;
-  -webkit-transition: line-height 0.5s;
-  transition: line-height 0.5s;
-}
 
 .ribbon-left{
   right: 80px;
@@ -287,30 +269,8 @@ a.movie-added-btn {
   -webkit-transition: height 0.5s;
   transition: height 0.5s;
 }
-.ribbon-left:before {
-  content: "";
-  font-size: 0.5em;
-  position: absolute;
-  border-style: solid;
-  border-color: transparent transparent #455645 transparent;
-  top: -1em;
-  right: 2.8em;
-  border-width: 0 0 1em 0.7em;
-  z-index: -1;
-}
-.ribbon-left:hover:after{
-  border: 1.5em solid #48D206;
-  border-bottom-color: transparent;
-  height: 5em;
-  -webkit-transition: height 0.5s;
-  transition: height 0.5s;
-}
-.ribbon-left:hover{
-  line-height: 0.9em;
-  color: #333;
-  -webkit-transition: line-height 0.5s;
-  transition: line-height 0.5s;
-}
+
+
 
 .opacity {
   opacity: 0.5;
