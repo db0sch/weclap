@@ -29,6 +29,7 @@
                   setTimeout(function() {
                     $(myItem).find('#movie-just-been-watched').remove();
                     $(myItem).addClass('watched-movie');
+                    $(myItem).removeClass('unwatched-movie');
                     $(myItem).prependTo($(watched_list));
                   }, 3000);
                 }
