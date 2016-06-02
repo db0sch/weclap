@@ -3,10 +3,10 @@ class Movie < ActiveRecord::Base
   has_many :users, through: :interests
 
   has_many :shows, dependent: :destroy
-  has_many :theaters, through: :shows
+  has_many :theaters, -> { distinct }, through: :shows
 
   has_many :streamings, dependent: :destroy
-  has_many :providers, through: :streamings
+  has_many :providers, -> { distinct }, through: :streamings
 
   validates :imdb_id, uniqueness: true
 
