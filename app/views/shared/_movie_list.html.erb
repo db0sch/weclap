@@ -36,15 +36,14 @@
           </form>
         </li>
       </ul>
-    <% if @movies.empty? %>
-      <h3 class="section-title">Try another request</h3>
-    <% else %>
-
-
-      <% list.each do |movie| %>
-        <%= render 'shared/movie_item', movie: movie, friends: @friends, interest: nil %>
+      <% if @movies.empty? %>
+        <h3 class="section-title">Try another request</h3>
+      <% else %>
+        <% list.each do |movie| %>
+          <%= render 'shared/movie_item', movie: movie, friends: @friends, interest: nil %>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 </div>
 <a href="#" class="back-to-top"><i class="fa fa-arrow-circle-up" id="back_to_top_arrow" ></i></a>
