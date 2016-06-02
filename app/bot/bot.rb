@@ -65,10 +65,11 @@ Bot.on :message do |message|
         counter = 0
         user.interests.each do |interest|
           if counter < 10
+            director = interest.movie.credits['crew']['Director'].join(', ') unless interest.movie.credits['crew'].blank?
             movie_array << {
               "title":"#{interest.movie.title}",
               "image_url":"#{interest.movie.poster_url}",
-              "subtitle":"Directed by" + interest.movie.credits['crew']['Director'].join(', ') unless credits['crew'].blank?,
+              "subtitle":"Directed by" + director,
               "buttons":[
                 {
                   "type":"web_url",
@@ -162,23 +163,24 @@ Bot.on :message do |message|
         movies.each do |movie|
           next if users_movies.include?(movie)
           if counter < 10
-          movie_array << {
-            "title":"#{movie.title}",
-            "image_url":"#{movie.poster_url}",
-            "subtitle":"Directed by" + "Directed by" + movie.credits['crew']['Director'].join(', ') unless credits['crew'].blank?,
-            "buttons":[
-              {
-                "type":"web_url",
-                "url":"https://weclap.co/movies/#{movie.id}",
-                "title":"Details"
-              },
-              {
-                "type":"postback",
-                "title":"Add to watchlist",
-                "payload":{"movie_id":"#{movie.id}"}.to_json
-              }
-            ]
-          }
+            director = movie.credits['crew']['Director'].join(', ') unless movie.credits['crew'].blank?
+            movie_array << {
+              "title":"#{movie.title}",
+              "image_url":"#{movie.poster_url}",
+              "subtitle":"Directed by" + "Directed by" + director ,
+              "buttons":[
+                {
+                  "type":"web_url",
+                  "url":"https://weclap.co/movies/#{movie.id}",
+                  "title":"Details"
+                },
+                {
+                  "type":"postback",
+                  "title":"Add to watchlist",
+                  "payload":{"movie_id":"#{movie.id}"}.to_json
+                }
+              ]
+            }
           counter = counter + 1
           end
         end
