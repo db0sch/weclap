@@ -11,6 +11,7 @@ class MoviesController < ApplicationController
     @movies = Movie.select{ |m| !m.shows.blank? } if ontheater
     @movies = Movie.select{ |m| !m.streamings.blank? } if onvod
     @friends = my_friends_finder
+    @movies.take(100)
     # respond_to do |format|
     #   format.html
     #   format.json
