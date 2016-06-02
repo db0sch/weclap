@@ -46,4 +46,14 @@ namespace :tmdb do
     end
   end
 
+  desc "Get from TMDb the best movies"
+  task :seed_topr_movies => :environment do
+    url = BASE_URL + "movie/top_rated?&api_key=#{ENV['TMDB_API_KEY']}"
+    MovieScraper::scrape_and_persist_movies(url, 'results')
+   (2..62).each do |p|
+    url = BASE_URL + "movie/top_rated?page=#{p}&api_key=#{ENV['TMDB_API_KEY']}"
+    MovieScraper::scrape_and_persist_movies(url, 'results')
+    end
+  end
+
 end
