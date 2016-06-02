@@ -68,7 +68,7 @@ Bot.on :message do |message|
             movie_array << {
               "title":"#{interest.movie.title}",
               "image_url":"#{interest.movie.poster_url}",
-              "subtitle":"Directed by...",
+              "subtitle":"Directed by" + interest.movie.credits['crew']['Director'].join(', ') unless credits['crew'].blank?,
               "buttons":[
                 {
                   "type":"web_url",
@@ -165,7 +165,7 @@ Bot.on :message do |message|
           movie_array << {
             "title":"#{movie.title}",
             "image_url":"#{movie.poster_url}",
-            "subtitle":"Directed by...",
+            "subtitle":"Directed by" + "Directed by" + movie.credits['crew']['Director'].join(', ') unless credits['crew'].blank?,
             "buttons":[
               {
                 "type":"web_url",
