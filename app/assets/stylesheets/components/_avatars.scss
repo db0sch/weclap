@@ -32,6 +32,10 @@
   // background-color: grey;
 }
 
+
+
+
+
 .rating-container {
   display: flex;
   align-items: center;
@@ -54,4 +58,13 @@
   z-index: 10;
   color: black;
   text-decoration: none;
+  position: absolute;
+  left: 8px;
+  bottom: 2px;
+}
+
+#star-rating {
+  font-size: 9px;
+  position: absolute;
+  bottom: 12px;
 }
