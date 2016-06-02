@@ -3,7 +3,13 @@ class MoviesController < ApplicationController
   def index
     @movies = policy_scope(Movie)
     title = params[:title]
+    top100 = params[:top100]
+    ontheater = params[:ontheater]
+    onvod = params[:onvod]
     @movies = @movies.where('title ILIKE ? OR original_title ILIKE ?', "%#{title}%", "%#{title}%") if title
+    @movies = @movies.where('imdb_score > 5').where('imdb_score < 10').order('imdb_score DESC').take(100) if top100
+    @movies = Movie.select{ |m| !m.shows.blank? } if ontheater
+    @movies = Movie.select{ |m| !m.streamings.blank? } if onvod
     @friends = my_friends_finder
     # respond_to do |format|
     #   format.html
@@ -28,6 +34,7 @@ class MoviesController < ApplicationController
     # execute in background
     GetShowtimesJob.set(wait: 1.seconds).perform_later(@location, @city, @movie.id, current_user.id)
     GetStreamingsJob.set(wait: 1.seconds).perform_later(@movie.id, current_user.id)
+    # GetStreamingsJob.set(wait: 1.seconds).perform_later(@movie.id, current_user.id)
 
     authorize @movie
   end

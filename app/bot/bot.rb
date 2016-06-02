@@ -45,12 +45,11 @@ Bot.on :message do |message|
 
     case message.text.downcase
     when /hello/i
-      Bot.deliver(
-        recipient: message.sender,
-        message: {
-          text: "Hello #{user.first_name}"
-        }
-      )
+      say_hello(user, message)
+    when "yo"
+      say_hello(user, message)
+    when "bonjour"
+      say_hello(user, message)
 
 #change the url for watch the film
     when /watchlist/i
@@ -73,13 +72,8 @@ Bot.on :message do |message|
               "buttons":[
                 {
                   "type":"web_url",
-                  "url":"#{interest.movie.website_url}",
-                  "title":"Show IMDB"
-                },
-                {
-                  "type":"web_url",
-                  "url":"#{interest.movie.website_url}",
-                  "title":"Watch the film"
+                  "url":"https://weclap.co/movies/#{interest.movie.id}",
+                  "title":"Details"
                 },
               ]
             }
@@ -164,8 +158,10 @@ Bot.on :message do |message|
           }
         )
       else
+        counter = 0
         movies.each do |movie|
           next if users_movies.include?(movie)
+          if counter < 10
           movie_array << {
             "title":"#{movie.title}",
             "image_url":"#{movie.poster_url}",
@@ -173,8 +169,8 @@ Bot.on :message do |message|
             "buttons":[
               {
                 "type":"web_url",
-                "url":"#{movie.website_url}",
-                "title":"Show IMDB"
+                "url":"https://weclap.co/movies/#{movie.id}",
+                "title":"Details"
               },
               {
                 "type":"postback",
@@ -183,6 +179,8 @@ Bot.on :message do |message|
               }
             ]
           }
+          counter = counter + 1
+          end
         end
       end
       if movie_array.empty?
@@ -239,7 +237,10 @@ Bot.on :postback do |postback|
         text = "Sorry. Something went wrong"
       end
     end
-
+  when "search"
+    text = "Send me the film title, or just a word, and I'll start searching. :)"
+  when "help"
+    text = "To search for a film, just send me the title.\n You can also type these commands:\n- \"Hello\": I'm very polite\n- \"List\": Show your watchlist\n- \"Watchlist\": Show the first 10 movies of your watchlist in cards\n- \"Help\": To list all the commands"
   else
     text = 'Oups, something went wrong.'
   end
@@ -254,4 +255,40 @@ end
 
 Bot.on :delivery do |delivery|
   puts "Delivered message(s) #{delivery.ids}"
+end
+
+private
+
+def say_hello(user, message)
+  Bot.deliver(
+    recipient: message.sender,
+    message: {
+      text: "Hello #{user.first_name}"
+    }
+  )      
+  Bot.deliver(
+    "recipient": message.sender,
+    "message":{
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"button",
+          "text":"What do you want to do next?",
+          "buttons":[
+            {
+              "type":"postback",
+              "title":"Search a film",
+              "payload":{"search":"true"}.to_json
+            },
+            {
+              "type":"postback",
+              "title":"Help",
+              "payload":{"help":"true"}.to_json
+            }
+          ]
+        }
+      }
+    }
+  )
+  
 end

@@ -272,8 +272,16 @@ a.movie-added-btn {
 
 
 
-.opacity {
+.watched-movie {
   opacity: 0.5;
+}
+
+#movie-just-been-watched {
+  background-color: #fd986f;
+  color: white;
+  margin-right: 10px;
+  border-radius: 5px;
+  padding: 5px 15px;
 }
 
 .title-seen {

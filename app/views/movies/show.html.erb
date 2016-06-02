@@ -104,7 +104,8 @@
           <div class="tab-content <%= 'hidden' unless @display_shows %>" id="shows">
             <div class="container-movie-times">
               <ul class="list-unstyled" id="shows_in_theaters">
-                <li class="loader"></li>
+                <!-- <li class="loader"></li> -->
+                <%=h @streamings %>
               </ul>
             </div>
           </div>
