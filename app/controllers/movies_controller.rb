@@ -34,6 +34,7 @@ class MoviesController < ApplicationController
     # execute in background
     GetShowtimesJob.set(wait: 1.seconds).perform_later(@location, @city, @movie.id, current_user.id)
     GetStreamingsJob.set(wait: 1.seconds).perform_later(@movie.id, current_user.id)
+    # GetStreamingsJob.set(wait: 1.seconds).perform_later(@movie.id, current_user.id)
 
     authorize @movie
   end

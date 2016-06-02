@@ -3,25 +3,39 @@
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
+    var watched_list = $('div#watched-movie-list');
+
+    $('#unwatched-movie-list .watched-movie').each(function(idx, movie_item) {
+      $(movie_item).appendTo($(watched_list));
+    });
+
     var items = $('.starrr');
-    $.each(items, function(index, item) {
+    $(items).each(function(index, item) {
       var score = $(item).attr('data-rating');
       if(score > 0) {
         $(item).starrr({ rating: score, readOnly: true });
       } else {
         $(item).starrr({
-          change: function(e, value){
-            var ratng = {"rating": value};
+          change: function(e, value) {
+            var ratng = { "rating": value };
             $.ajax({
-               type: "PATCH",
-               url: "/interests/" + e.currentTarget.id,
-               data: ratng,
-               success: function(data) {
-                 $('#movie-' + e.currentTarget.id).slideUp();
-               }
+              type: "PATCH",
+              url: "/interests/" + e.currentTarget.id,
+              data: ratng,
+              success: function(data) {
+                var myItem = $('#movie-' + e.currentTarget.id);
+                if($(myItem).find('.movie-rating #movie-just-been-watched').length === 0) {
+                  $(myItem).find('.movie-rating').prepend('<div id="movie-just-been-watched">Watched</div>')
+                  setTimeout(function() {
+                    $(myItem).find('#movie-just-been-watched').remove();
+                    $(myItem).addClass('watched-movie');
+                    $(myItem).prependTo($(watched_list));
+                  }, 3000);
+                }
+              }
             });
           }
-        })
+        });
       }
     });
   <% end %>

@@ -1,63 +1,63 @@
-<%= link_to movie_path(movie.id) do %>
-  <div class="col-xs-10 col-xs-offset-1">
-    <div class="movie-item" <%= "id = movie-#{interest.id}" unless interest.nil? %> >
-      <%= image_tag movie.poster_url ? movie.poster_url : "http://placehold.it/40x60", alt: movie.title, class: "movie-item-image hidden-xs" %>
-      <div class='movie-item-body'>
-        <h3><%= movie.title %></h3>
-        <div class="crew">
-          <p id="directed">Directed by: <%= movie.credits['crew']['Director'].join(', ') unless movie.credits['crew'].blank?%></p>
-          <p>Cast: <%= movie.credits['cast'].take(5).join(', ')%></p>
+<div <%=raw interest.nil? ? "class=\"movie-item\"" : "class=\"movie-item #{'un' unless interest.watched_on}watched-movie\" id=movie-#{interest.id}" %>>
+  <%= link_to movie_path(movie.id) do %>
+    <%= image_tag movie.poster_url ? movie.poster_url : "http://placehold.it/40x60", alt: movie.title, class: "movie-item-image hidden-xs" %>
+  <% end %>
+  <div class='movie-item-body'>
+    <h3><%= link_to movie.title, movie_path(movie.id) %></h3>
+    <div class="crew">
+      <p id="directed">Directed by: <%= movie.credits['crew']['Director'].join(', ') unless movie.credits['crew'].blank?%></p>
+      <p>Cast: <%= movie.credits['cast'].take(5).join(', ')%></p>
+    </div>
+    <div class="movie-infos">
+      <p id="year_released"><%= link_to movie.release_date.to_date.year %></p>
+      <i class="fa fa-clock-o" aria-hidden="true" id="clock"></i>
+      <p><%= movie.runtime %> min</p>
+    </div>
+  </div>
+  <div class="movie-item-social">
+    <div class="list-inline movie-item-controls movie-rating hidden-sm hidden-xs">
+      <% if current_user.movies.include?(movie) %>
+        <div class='starrr' <%= interest ? "id=#{interest.id} #{'data-rating=' + interest.rating.to_s if interest.rating}" : '' %> >
         </div>
-        <div class="movie-infos">
-          <p id="year_released"><%= link_to movie.release_date.to_date.year %></p>
-          <i class="fa fa-clock-o" aria-hidden="true" id="clock"></i>
-          <p><%= movie.runtime %> min</p>
-        </div>
-      </div>
-      <div class="movie-item-social">
-        <div class="list-inline movie-item-controls movie-rating hidden-sm hidden-xs">
-          <% if current_user.movies.include?(movie) %>
-            <div class='starrr' <%= interest ? "id=#{interest.id} #{'data-rating=' + interest.rating.to_s if interest.rating}" : '' %> >
-            </div>
-            <%= link_to icon('times'), interest_path(interest), method: :delete, remote: true unless interest.nil? %>
-          <% else %>
-            <%= link_to icon('plus-circle'), interests_path(movie_id: movie), method: :post, remote: true, class: "movie-add-btn", id: "movie-add-#{movie.id}" %>
-          <% end %>
-          <% if !movie.streamings.empty?  %>
-            <a href=<%=movie_path(movie.id)%> class="ribbon"><i class="fa fa-television" style="margin-left: 3px"></i></a>
-          <% elsif !movie.theaters.empty?%>
-            <a href=<%=movie_path(movie.id)%> class="ribbon-left"> <i class="fa fa-film" style="margin-left: 2px"></i></a>
-          <% end %>
-        </div>
-        <div class="movie-social movie-item-controls">
-          <% if !@friends.nil? %>
-            <% @friends.each do |b| %>
-              <% User.find(b).interests.each do |interest| %>
-
-                <% if interest.watched_on.nil? %>
-                  <% if movie.id == interest.movie_id %>
-                     <%= link_to image_tag(User.find(b).picture, class: "avatar"), user_friendships_path(current_user) %>
-                  <% end %>
-                <% else %>
-                  <% if movie.id == interest.movie_id %>
-                     <%= link_to user_friendships_path(current_user), style: "text-decoration: none;" do %>
-                        <div style="background-image: url(<%= image_path(User.find(b).picture)%>)" class="avatar rating rating-container">
-                          <div class="rating-gradient">
-                          </div>
-                          <div id="rating"><%= interest.rating %>/5
-                          </div>
-                        </div>
-                     <% end %>
-                  <% end %>
-                <% end %>
+        <%= link_to icon('times'), interest_path(interest), method: :delete, remote: true unless interest.nil? %>
+      <% else %>
+        <%= link_to icon('plus-circle'), interests_path(movie_id: movie), method: :post, remote: true, class: "movie-add-btn", id: "movie-add-#{movie.id}" %>
+      <% end %>
+      <% if !movie.streamings.empty?  %>
+        <a href=<%=movie_path(movie.id)%> class="ribbon"><i class="fa fa-television" style="margin-left: 3px"></i></a>
+      <% elsif !movie.theaters.empty?%>
+        <a href=<%=movie_path(movie.id)%> class="ribbon-left"> <i class="fa fa-film" style="margin-left: 2px"></i></a>
+      <% end %>
+    </div>
+    <div class="movie-social movie-item-controls">
+      <% if !@friends.nil? %>
+        <% @friends.each do |b| %>
+          <% User.find(b).interests.each do |interest| %>
+            <% if interest.watched_on.nil? %>
+              <% if movie.id == interest.movie_id %>
+                 <%= link_to image_tag(User.find(b).picture, class: "avatar"), user_friendships_path(current_user) %>
+              <% end %>
+            <% else %>
+              <% if movie.id == interest.movie_id %>
+                 <%= link_to user_friendships_path(current_user), style: "text-decoration: none;" do %>
+                    <div style="background-image: url(<%= image_path(User.find(b).picture)%>)" class="avatar rating rating-container">
+                      <div class="rating-gradient">
+                      </div>
+                      <div id="rating"><%= interest.rating %>/5
+                      </div>
+                    </div>
+                 <% end %>
               <% end %>
             <% end %>
           <% end %>
-        </div>
-      </div>
+        <% end %>
+      <% end %>
     </div>
   </div>
 <% end %>
 
 
+
+
+</div>
 
