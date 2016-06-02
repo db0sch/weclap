@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
       user.fullname = auth.info.first_name + " " + auth.info.last_name
-      user.picture = auth.info.image
+      user.picture = auth.info.image.gsub("http://", "https://")
       user.token = auth.credentials.token
       user.token_expiry = Time.at(auth.credentials.expires_at)
       data = JSON.parse(RestClient.get "https://graph.facebook.com/#{user.uid}/invitable_friends?limit=5000&access_token=#{user.token}&l")
