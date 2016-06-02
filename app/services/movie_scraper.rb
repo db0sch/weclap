@@ -1,6 +1,6 @@
 class MovieScraper
   class << self
-    def find_showtimes_of_the_day(zip_code, city, movie, limit)
+    def find_showtimes_of_the_day(zip_code, city, movie, limit, no_nearing = false)
       shows = {}
       url = "http://www.imdb.com/showtimes/title/#{movie.imdb_id}/FR/#{zip_code}"
       response = RestClient.get url
@@ -15,24 +15,29 @@ class MovieScraper
         [Theater.where(name: name).where(address: address).first_or_create(name: name, address: address), t]
       end
 
-      # Then we fetch the nearest theaters
-      nearest_theaters = Theater.near("#{zip_code} #{city}", 50, units: :km)
-      # Then we select the nearest theaters that were also found by IMDB
-      nearest_data = theaters_data.select do |theater_data|
-        record = theater_data[0]
-        nearest_theaters.include?(record)
+      unless no_nearing
+        # Then we fetch the nearest theaters
+        nearest_theaters = Theater.near("#{zip_code} #{city}", 50, units: :km)
+        # Then we select the nearest theaters that were also found by IMDB
+        nearest_data = theaters_data.select do |theater_data|
+          record = theater_data[0]
+          nearest_theaters.include?(record)
+        end
+
+        # If we don't have N theaters yet, we try to take more from IMDB
+        # The breaker is ugly as fuck but prevents infinite looping in some cases
+        breaker = 0
+        while nearest_data.size < limit && breaker <= limit - 1
+          theaters_data.each do |theater_data|
+            record = theater_data[0]
+            nearest_data << theater_data unless nearest_data.include?(record)
+          end
+          breaker += 1
+        end
+      else
+        nearest_data = theaters_data
       end
 
-      # If we don't have N theaters yet, we try to take more from IMDB
-      # The breaker is ugly as fuck but prevents infinite looping in some cases
-      breaker = 0
-      while nearest_data.size < limit && breaker <= limit - 1
-        theaters_data.each do |theater_data|
-          record = theater_data[0]
-          nearest_data << theater_data unless nearest_data.include?(record)
-        end
-        breaker += 1
-      end
       # Then we have this list of nearest theaters and their nokogiri data, we take the first N
       nearest_data.take(limit).each do |data|
         theater = data[0]
@@ -86,7 +91,7 @@ class MovieScraper
             prvdr = Provider.where(name: provider).first_or_create(name: provider)
             streamings[prvdr] ||= []
             if (strmng = Streaming.where(movie: movie).where(provider: prvdr).where(consumption: type).first)
-              strmng.update(price: price, link: provider_link) # update
+              strmng.update(price: price, link: provider_link) if strmng.price != price || strmng.link != provider_link # update
             else
               strmng = Streaming.create(consumption: type, link: provider_link, price: price, movie: movie, provider: prvdr) # create
             end
@@ -180,13 +185,5 @@ class MovieScraper
       crew.each { |member| p_crew.key?(member['job']) ? p_crew[member['job']] << member['name'] : p_crew[member['job']] = [member['name']] }
       p_crew
     end
-
-    # def get_genres_for(ids)
-    #   ids.map { |id| @genres[id] }
-    # end
-
-    # def retrieve_all_genres
-    #   @genres ||= Tmdb::Genre.list['genres']
-    # end
   end
 end
