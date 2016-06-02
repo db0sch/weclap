@@ -69,7 +69,7 @@ Bot.on :message do |message|
             movie_array << {
               "title":"#{interest.movie.title}",
               "image_url":"#{interest.movie.poster_url}",
-              "subtitle":"Directed by" + director,
+              "subtitle":"Directed by " + director,
               "buttons":[
                 {
                   "type":"web_url",
@@ -167,7 +167,7 @@ Bot.on :message do |message|
             movie_array << {
               "title":"#{movie.title}",
               "image_url":"#{movie.poster_url}",
-              "subtitle":"Directed by" + "Directed by" + director ,
+              "subtitle":"Directed by " + director ,
               "buttons":[
                 {
                   "type":"web_url",
