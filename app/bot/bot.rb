@@ -65,10 +65,11 @@ Bot.on :message do |message|
         counter = 0
         user.interests.each do |interest|
           if counter < 10
+            director = interest.movie.credits['crew']['Director'].join(', ') unless interest.movie.credits['crew'].blank?
             movie_array << {
               "title":"#{interest.movie.title}",
               "image_url":"#{interest.movie.poster_url}",
-              "subtitle":"Directed by...",
+              "subtitle":"Directed by " + director,
               "buttons":[
                 {
                   "type":"web_url",
@@ -118,7 +119,7 @@ Bot.on :message do |message|
       Bot.deliver(
         recipient: message.sender,
         message: {
-          text: "Just try! B|"
+          text: "Just try!"
         }
       )
 
@@ -162,23 +163,24 @@ Bot.on :message do |message|
         movies.each do |movie|
           next if users_movies.include?(movie)
           if counter < 10
-          movie_array << {
-            "title":"#{movie.title}",
-            "image_url":"#{movie.poster_url}",
-            "subtitle":"Directed by...",
-            "buttons":[
-              {
-                "type":"web_url",
-                "url":"https://weclap.co/movies/#{movie.id}",
-                "title":"Details"
-              },
-              {
-                "type":"postback",
-                "title":"Add to watchlist",
-                "payload":{"movie_id":"#{movie.id}"}.to_json
-              }
-            ]
-          }
+            director = movie.credits['crew']['Director'].join(', ') unless movie.credits['crew'].blank?
+            movie_array << {
+              "title":"#{movie.title}",
+              "image_url":"#{movie.poster_url}",
+              "subtitle":"Directed by " + director ,
+              "buttons":[
+                {
+                  "type":"web_url",
+                  "url":"https://weclap.co/movies/#{movie.id}",
+                  "title":"Details"
+                },
+                {
+                  "type":"postback",
+                  "title":"Add to watchlist",
+                  "payload":{"movie_id":"#{movie.id}"}.to_json
+                }
+              ]
+            }
           counter = counter + 1
           end
         end
@@ -237,7 +239,7 @@ Bot.on :postback do |postback|
         text = "Sorry. Something went wrong"
       end
     end
-  when "search"
+  when "find"
     text = "Send me the film title, or just a word, and I'll start searching. :)"
   when "help"
     text = "To search for a film, just send me the title.\n You can also type these commands:\n- \"Hello\": I'm very polite\n- \"List\": Show your watchlist\n- \"Watchlist\": Show the first 10 movies of your watchlist in cards\n- \"Help\": To list all the commands"
@@ -265,7 +267,13 @@ def say_hello(user, message)
     message: {
       text: "Hello #{user.first_name}"
     }
-  )      
+  )
+  Bot.deliver(
+    recipient: message.sender,
+    message: {
+      text: "You can send me 'help' anytime, and I'll help you to interact with me."
+    }
+  )       
   Bot.deliver(
     "recipient": message.sender,
     "message":{
@@ -277,8 +285,8 @@ def say_hello(user, message)
           "buttons":[
             {
               "type":"postback",
-              "title":"Search a film",
-              "payload":{"search":"true"}.to_json
+              "title":"Find a movie",
+              "payload":{"find":"true"}.to_json
             },
             {
               "type":"postback",
