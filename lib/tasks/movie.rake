@@ -26,7 +26,7 @@ namespace :movie do
             if movie.streamings.empty? || movie.streamings.last.created_at < Date.tomorrow
               MovieScraper::find_streamings_for(movie)
             end
-            puts '%5i' % "#{index + 1}" + ". #{movie.title} => found #{pluralize(movie.streamings.count, 'streaming available')}"
+            puts '%5i' % "#{index + 1}" + ". #{movie.title} => found #{pluralize(movie.streamings.count, 'available streaming')}"
           rescue
             puts '%5i' % "#{index + 1}" + ". An error prevented from retrieving any streamings for #{movie.title}"
           end

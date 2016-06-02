@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   mount Facebook::Messenger::Server, at: 'bot'
 
   require "sidekiq/web"
-  authenticate :user, lambda { |u| u } do
+  authenticate :user, lambda { |u| u.admin } do
     mount Sidekiq::Web => '/sidekiq'
   end
 end
