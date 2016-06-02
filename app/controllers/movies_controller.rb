@@ -6,7 +6,7 @@ class MoviesController < ApplicationController
     top100 = params[:top100]
     ontheater = params[:ontheater]
     onvod = params[:onvod]
-    @movies = Movie.where('title ILIKE ? OR original_title ILIKE ?', "%#{title}%", "%#{title}%") if title
+    @movies = Movie.where('title ILIKE ? OR original_title ILIKE ?', "%#{title}%", "%#{title}%") unless title.blank?
     @movies = Movie.select{ |m| imdb250top.include?(m.imdb_id) } if top100
     @movies = Movie.select{ |m| !m.shows.blank? } if ontheater
     @movies = Movie.select{ |m| !m.streamings.blank? } if onvod
