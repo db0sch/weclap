@@ -40,22 +40,18 @@
           </div>
         <% end %>
       <!-- uncommon movies --> <!-- uncommon movies except movies i saw or movies he saw -->
-        <% uncommon_movies = [] %>
-        <% friend.interests.each do |movie| %>
-          <% if !current_user.interests.find_by_movie_id(movie.id).nil? && current_user.interests.find_by_movie_id(movie.id).watched_on.nil?%>
-          <%  %>
-          <% uncommon_movies << movie if !common_movies.include?(movie.movie_id) %>
-          <% end %>
+        <% uncommon_movies = friend.interests.select do |interest| %>
+          <% movie = interest.movie %>
+          <% !common_movies.include?(movie.id) && interest.watched_on.nil? %>
         <% end %>
         <!-- no uncommon movies -->
         <% if uncommon_movies.empty? %>
           <div><h4><%= friend.first_name %> hasn't other movies</h4></div>
         <!-- uncommon movies -->
         <% else %>
-
           <div>
-          <h4>The other movies of <%= friend.first_name %></h4>
-           <% uncommon_movies.each do |movie| %>
+            <h4>The other movies of <%= friend.first_name %></h4>
+            <% uncommon_movies.each do |movie| %>
               <div>
                 <div class="modal-item">
                   <div class="modal-item-group-one">
