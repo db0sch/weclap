@@ -8,7 +8,7 @@
         <% common_movies = [] %>
         <!-- movies in common -->
         <% friend.interests.each do |movie| %>
-          <% p "list ami" %>
+
           <% if movie.watched_on.nil? %>
             <% current_user.interests.each do |cumovie| %>
               <% if cumovie.watched_on.nil? %>
