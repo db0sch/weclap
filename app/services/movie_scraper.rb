@@ -17,15 +17,13 @@ class MovieScraper
 
       # Then we fetch the nearest theaters
       nearest_theaters = Theater.near("#{zip_code} #{city}", 50, units: :km)
-puts "Found #{nearest_theaters.size} theaters within 20 ? from #{zip_code} #{city} / #{theaters_data.count}"
       # Then we select the nearest theaters that were also found by IMDB
       nearest_data = theaters_data.select do |theater_data|
         record = theater_data[0]
         nearest_theaters.include?(record)
       end
-puts "Intersect theaters to #{nearest_data.size} before retrieving their showtimes"
 
-      # If we don't have 5 theaters yet, we try to take more from IMDB
+      # If we don't have N theaters yet, we try to take more from IMDB
       # The breaker is ugly as fuck but prevents infinite looping in some cases
       breaker = 0
       while nearest_data.size < limit && breaker <= limit - 1
