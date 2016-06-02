@@ -269,7 +269,11 @@ a.movie-added-btn {
   -webkit-transition: height 0.5s;
   transition: height 0.5s;
 }
-
+.cross {
+  top: 5px;
+  right: 2px;
+  position: absolute;
+}
 
 
 .watched-movie {
