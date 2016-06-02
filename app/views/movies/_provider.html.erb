@@ -4,9 +4,12 @@
   </div>
   <div class="streaming-list">
     <p class="streaming-item">
-      <% streamings.each do |strm| %>
-        <%= link_to strm.link, target: "#{provider.name}" do %>
-          <%= "#{strm.consumption} (€ #{'%.2f' % (strm.price / 100.0)})" %>
+      <%= link_to streamings[0].link, target: "#{provider.name}" do %>
+        <%= "#{streamings[0].consumption} (€ #{'%.2f' % (streamings[0].price / 100.0)})" %>
+      <% end %>
+      <% if streamings[1] %>
+        <%= link_to streamings[1].link, target: "#{provider.name}" do %>
+          - <%= "#{streamings[1].consumption} (€ #{'%.2f' % (streamings[1].price / 100.0)})" %>
         <% end %>
       <% end %>
     </p>
