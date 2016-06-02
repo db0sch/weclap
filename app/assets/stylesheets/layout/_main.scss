@@ -2,3 +2,25 @@
   min-height: calc(100vh - 140px);
   background: linear-gradient(#778899, #333333);
 }
+
+a.back-to-top {
+  display: none;
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  z-index: 999;
+  right: 20px;
+  bottom: 20px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  color: #d4d4d4;
+  text-decoration: none;
+  font-size: -webkit-xxx-large;
+}
+
+.back_to_top_arrow {
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+  align-items: center;
+}
