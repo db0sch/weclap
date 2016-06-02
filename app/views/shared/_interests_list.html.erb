@@ -1,5 +1,4 @@
 <div class="container padded">
-
   <div class="row"x>
     <div class="col-xs-10 col-xs-offset-1">
       <h3 class="section-title">Your Watchlist</h3>
@@ -10,11 +9,16 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
-      <h3 class="section-title">Watched</h3>
-      <div id="watched-movie-list"></div>
+  <% watched = [] %>
+  <% if current_user.interests.each do |i| %>
+    <% watched << i if !i.watched_on.nil?  %>
+    <% end %>
+    <% !watched.empty? %>
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1">
+        <h3 class="section-title">Watched</h3>
+        <div id="watched-movie-list"></div>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
-

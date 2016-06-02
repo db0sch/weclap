@@ -23,3 +23,26 @@ $(function(){
     // container: '#scrollable-list'
   });
 });
+
+
+$('a.back-to-top').click(function() {
+  $('body').animate({
+    scrollTop: 0
+  });
+
+  return false;
+});
+
+
+
+$(window).scroll(function() {
+  var amountScrolled = 300;
+
+  if ( $(window).scrollTop() > amountScrolled ) {
+    $('a.back-to-top').fadeIn('slow');
+  } else {
+    $('a.back-to-top').fadeOut('slow');
+  }
+});
+
+
