@@ -8,9 +8,12 @@
             <div class="movie-info-left">
               <span class="movie-title"><%= @movie.title%><%= " (#{@movie.release_date.to_date.year})" if @movie.release_date %></span>
               <% if @movie.imdb_id %>
-                <span class="imdbRatingPlugin" data-user="" data-title="<%= @movie.imdb_id %>" data-style="p4">
+                <span class="imdb-rating" data-user="" data-title="<%= @movie.imdb_id %>" data-style="p4">
                   <%= link_to "http://www.imdb.com/title/#{@movie.imdb_id}/?ref_=plg_rt_1" do %>
-                     <%= image_tag("http://g-ecx.images-amazon.com/images/G/01/imdb/plugins/rating/images/imdb_31x14.png", alt: "#{@movie.title} on IMDb") %>
+                    <span><%= image_tag("imdb_rating_31x14.png", style: "margin-bottom: 2px;",  alt: "#{@movie.title} on IMDb") %></span>
+                    <span class="rating-imdb">
+                      <span class="imdb-score"><%= @movie.imdb_score %></span><span class="by-ten">/10</span>
+                    </span>
                   <% end %>
                 </span>
               <% end %>
@@ -23,7 +26,6 @@
                     <% end %>
                 </span>
               <% end %>
-
               <% if @movie.imdb_id %>
                 <div class='inline-flex'>
                   <% if !@friends.nil? %>
