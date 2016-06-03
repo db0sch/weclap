@@ -11,16 +11,12 @@ class MoviesController < ApplicationController
     @movies = Movie.select{ |m| !m.shows.blank? } if ontheater
     @movies = Movie.select{ |m| !m.streamings.blank? } if onvod
     @friends = my_friends_finder
-    @movies.take(100)
-    # respond_to do |format|
-    #   format.html
-    #   format.json
-    #   format.js
-    # end
+    @movies = @movies.take(100)
   end
 
   def show
     @movie = Movie.find(params[:id])
+    authorize @movie
     @display_shows = display_shows_tab?(@movie)
     @friends = my_friends_finder
     credits = @movie.credits
@@ -33,12 +29,9 @@ class MoviesController < ApplicationController
     @city = current_user.city
     @original_title = @movie.original_title unless @movie.original_title.blank? || @movie.title.casecmp(@movie.original_title) == 0
     # execute in background
-    # GetShowtimesJob.set(wait: 1.seconds).perform_later(@location, @city, @movie.id, current_user.id)
-    # GetStreamingsJob.set(wait: 1.seconds).perform_later(@movie.id, current_user.id)
     GetShowtimesJob.perform_later(@location, @city, @movie.id, current_user.id)
-    GetStreamingsJob.perform_later(@movie.id, current_user.id)
-
-    authorize @movie
+    # GetShowtimesJob.set(wait: 0.5.seconds).perform_later(@location, @city, @movie.id, current_user.id)
+    GetStreamingsJob.set(wait: 0.5.seconds).perform_later(@movie.id, current_user.id)
   end
 
   def my_friends_finder
