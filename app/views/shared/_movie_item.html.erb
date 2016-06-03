@@ -25,7 +25,8 @@
       <% end %>
       <% if !movie.streamings.empty?  %>
         <a href=<%=movie_path(movie.id)%> class="ribbon"><i class="fa fa-television" style="margin-left: 3px"></i></a>
-      <% elsif !movie.theaters.empty?%>
+      <% end %>
+      <% if !movie.theaters.empty?%>
         <a href=<%=movie_path(movie.id)%> class="ribbon-left"> <i class="fa fa-film" style="margin-left: 2px"></i></a>
       <% end %>
     </div>
@@ -54,10 +55,5 @@
       <% end %>
     </div>
   </div>
-
-
-
-
-
 </div>
 
