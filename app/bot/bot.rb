@@ -4,10 +4,10 @@ require 'facebook/messenger'
 # Below the code that allows the webhook configuration.
 Facebook::Messenger.configure do |config|
   puts "trying connection"
-  # config.access_token = ENV['FB_ACCESS_TOKEN']
-  # config.verify_token = ENV['FB_VERIFY_TOKEN']
-  config.access_token = ENV['TESTBOT_FB_ACCESS_TOKEN']
-  config.verify_token = ENV['TESTBOT_FB_VERIFY_TOKEN']
+  config.access_token = ENV['FB_ACCESS_TOKEN']
+  config.verify_token = ENV['FB_VERIFY_TOKEN']
+  # config.access_token = ENV['TESTBOT_FB_ACCESS_TOKEN']
+  # config.verify_token = ENV['TESTBOT_FB_VERIFY_TOKEN']
 end
 
 include Facebook::Messenger
