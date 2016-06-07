@@ -18,29 +18,19 @@ Bot.on :message do |message|
 
 
   if user.nil?
-    Bot.deliver(
-      recipient: message.sender,
-      message: {
-        text: "Please, sign in with Facebook on https://www.weclap.co"
-      }
-    )
-
-  else
-
-  unless message.attachments.nil?
-
-    Bot.deliver(
-      recipient: message.sender,
-      message: {
-        text: "Wow, I'm so sorry. I can understand text only :(."
-      }
-    )
-  else
+    #check if the user is registered on weclap.co
+    text = "Please, sign in with Facebook on https://www.weclap.co"
+    send_text(message.sender, text)
+  elsif message.attachments.any?
+    #check if the message sent by the user is really text only.
+    text = "Wow, I'm so sorry. I can understand text only :(."
+    send_text(message.send, text)
+  elsif user.interests.any?
+    #check if the user as already added a film in his watchlist.
     users_movies = []
-    unless user.interests.empty?
-      user.interests.each do |interest|
-        users_movies << interest.movie
-      end
+    user.interests.each do |interest|
+      # create a users_movies variable that contains all the movies added by the user.
+      users_movies << interest.movie
     end
 
     case message.text.downcase
@@ -51,16 +41,11 @@ Bot.on :message do |message|
     when "bonjour"
       say_hello(user, message)
 
-#change the url for watch the film
     when /watchlist/i
       movie_array = []
       if user.interests.empty?
-        Bot.deliver(
-          recipient: message.sender,
-          message: {
-            text: "Sorry buddy, your watchlist is empty."
-          }
-        )
+        text = "Sorry buddy, your watchlist is empty."
+        send_text(message.sender, text)
       else
         counter = 0
         user.interests.each do |interest|
@@ -82,82 +67,38 @@ Bot.on :message do |message|
           counter = counter + 1
         end
       end
-      Bot.deliver(
-          recipient: message.sender,
-          # message: {
-          #   text: "#{movie.title}"
-          # }
-            "message":{
-              "attachment":{
-                "type":"template",
-                "payload": {
-                  "template_type":"generic",
-                  "elements":movie_array
-                }
-              }
-            }
-        )
+      send_movie_cards(message.sender, movie_array)
+      
     when "help"
-      Bot.deliver(
-        recipient: message.sender,
-        message: {
-          text: "Hey buddy, want to know how I work?"
-        }
-      )
-      Bot.deliver(
-        recipient: message.sender,
-        message: {
-          text: "- \"Hello\": I'm very polite\n- \"List\": Show your watchlist\n- \"Watchlist\": Show the first 10 movies of your watchlist in cards\n- \"Help\": To list all the commands"
-        }
-      )
-      Bot.deliver(
-        recipient: message.sender,
-        message: {
-          text: "Looking for a film?\nSend me the title, or just a word, and I'll start searching ;)"
-        }
-      )
-      Bot.deliver(
-        recipient: message.sender,
-        message: {
-          text: "Just try!"
-        }
-      )
+      text_1 = "Hey buddy, want to know how I work?"
+      text_2 = "- \"Hello\": I'm very polite\n- \"List\": Show your watchlist\n- \"Watchlist\": Show the first 10 movies of your watchlist in cards\n- \"Help\": To list all the commands"
+      text_3 = "Looking for a film?\nSend me the title, or just a word, and I'll start searching ;)"
+      text_4 = "Just try!"
+      send_text(message.sender, text_1)
+      send_text(message.sender, text_2)
+      send_text(message.sender, text_3)
+      send_text(message.sender, text_4)
 
     when "list"
       if user.interests.empty?
-        Bot.deliver(
-          recipient: message.sender,
-          message: {
-            text: "Sorry buddy, your watchlist is empty."
-          }
-        )
+        text = "Sorry buddy, your watchlist is empty."
+        send_text(message.sender, text)
       else
-        Bot.deliver(
-          recipient: message.sender,
-          message: {
-            text: "Your watchlist:"
-          }
-        )
+        send_text(message.sender, "Your watchlist:")
         user.interests.each do |interest|
-          Bot.deliver(
-            recipient: message.sender,
-            message: {
-              text: "- #{interest.movie.title}"
-            }
-          )
+          send_text(message.sender, interest.movie.title)
         end
       end
+
     else
+
       movies = Movie.where('title ILIKE ? OR original_title ILIKE ?', "%#{message.text}%", "%#{message.text}%")
       movie_array = []
+
       if movies.empty?
-        Bot.deliver(
-          recipient: message.sender,
-          message: {
-            #text: "hello #{user.first_name}"
-            text: "Sorry. No film found for #{message.text}"
-          }
-        )
+        text = "Sorry. No film found for #{message.text}"
+        send_text(message.sender, text)
+
       else
         counter = 0
         movies.each do |movie|
@@ -186,29 +127,10 @@ Bot.on :message do |message|
         end
       end
       if movie_array.empty?
-        Bot.deliver(
-          recipient: message.sender,
-          message: {
-            #text: "hello #{user.first_name}"
-            text: "Sorry. No film found. Maybe is it already in your watchlist?"
-          }
-        )
+        text = "Sorry. No film found. Maybe is it already in your watchlist?"
+        send_text(message.sender, text)
       else
-        Bot.deliver(
-          recipient: message.sender,
-          # message: {
-          #   text: "#{movie.title}"
-          # }
-            "message":{
-              "attachment":{
-                "type":"template",
-                "payload": {
-                  "template_type":"generic",
-                  "elements":movie_array
-                }
-              }
-            }
-        )
+        send_movie_cards(message.sender, movie_array)
       end
     end
   end
@@ -260,6 +182,45 @@ Bot.on :delivery do |delivery|
 end
 
 private
+
+def send_text(sender, text)
+  Bot.deliver(
+    recipient: sender,
+    message: {
+      text: text
+    }
+  )
+end
+
+def send_movie_cards(sender, attachment)
+  Bot.deliver(
+    recipient: sender,
+    "message":{
+      "attachment":{
+        "type":"template",
+        "payload": {
+          "template_type":"generic",
+          "elements":attachment
+        }
+      }
+    }
+  )
+end
+
+def movie_card(movie)
+  card = {
+            "title":"#{interest.movie.title}",
+            "image_url":"#{interest.movie.poster_url}",
+            "subtitle":"Directed by " + director,
+            "buttons":[
+              {
+                "type":"web_url",
+                "url":"https://weclap.co/movies/#{interest.movie.id}",
+                "title":"Details"
+              },
+            ]
+          }
+end
 
 def say_hello(user, message)
   Bot.deliver(
