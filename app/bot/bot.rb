@@ -9,13 +9,10 @@ end
 include Facebook::Messenger
 
 Bot.on :message do |message|
-  messenger_id = message.sender['id']
-  response = RestClient.get "https://graph.facebook.com/v2.6/#{messenger_id}?fields=first_name,last_name,profile_pic&access_token=#{ENV['FB_ACCESS_TOKEN']}"
-  repos = JSON.parse(response)
-  user = User.where(first_name: repos["first_name"]).where(last_name: repos["last_name"]).first
+
+  user = check_user(message)
 
   puts "Received #{message.text} from #{message.sender}"
-
 
   if user.nil?
     #check if the user is registered on weclap.co
@@ -50,19 +47,7 @@ Bot.on :message do |message|
         counter = 0
         user.interests.each do |interest|
           if counter < 10
-            director = interest.movie.credits['crew']['Director'].join(', ') unless interest.movie.credits['crew'].blank?
-            movie_array << {
-              "title":"#{interest.movie.title}",
-              "image_url":"#{interest.movie.poster_url}",
-              "subtitle":"Directed by " + director,
-              "buttons":[
-                {
-                  "type":"web_url",
-                  "url":"https://weclap.co/movies/#{interest.movie.id}",
-                  "title":"Details"
-                },
-              ]
-            }
+            movie_array << movie_card(interest.movie, false)
           end
           counter = counter + 1
         end
@@ -70,14 +55,7 @@ Bot.on :message do |message|
       send_movie_cards(message.sender, movie_array)
       
     when "help"
-      text_1 = "Hey buddy, want to know how I work?"
-      text_2 = "- \"Hello\": I'm very polite\n- \"List\": Show your watchlist\n- \"Watchlist\": Show the first 10 movies of your watchlist in cards\n- \"Help\": To list all the commands"
-      text_3 = "Looking for a film?\nSend me the title, or just a word, and I'll start searching ;)"
-      text_4 = "Just try!"
-      send_text(message.sender, text_1)
-      send_text(message.sender, text_2)
-      send_text(message.sender, text_3)
-      send_text(message.sender, text_4)
+      send_help(message.sender)
 
     when "list"
       if user.interests.empty?
@@ -104,28 +82,12 @@ Bot.on :message do |message|
         movies.each do |movie|
           next if users_movies.include?(movie)
           if counter < 10
-            director = movie.credits['crew']['Director'].join(', ') unless movie.credits['crew'].blank?
-            movie_array << {
-              "title":"#{movie.title}",
-              "image_url":"#{movie.poster_url}",
-              "subtitle":"Directed by " + director ,
-              "buttons":[
-                {
-                  "type":"web_url",
-                  "url":"https://weclap.co/movies/#{movie.id}",
-                  "title":"Details"
-                },
-                {
-                  "type":"postback",
-                  "title":"Add to watchlist",
-                  "payload":{"movie_id":"#{movie.id}"}.to_json
-                }
-              ]
-            }
+            movie_array << movie_card(movie, true)
           counter = counter + 1
           end
         end
       end
+
       if movie_array.empty?
         text = "Sorry. No film found. Maybe is it already in your watchlist?"
         send_text(message.sender, text)
@@ -133,7 +95,6 @@ Bot.on :message do |message|
         send_movie_cards(message.sender, movie_array)
       end
     end
-  end
   end
 end
 
@@ -169,19 +130,17 @@ Bot.on :postback do |postback|
     text = 'Oups, something went wrong.'
   end
 
-  Bot.deliver(
-    recipient: postback.messaging['sender'],
-    message: {
-      text: text
-    }
-  )
+  send_text(postback.messaging['sender'], text)
+
 end
 
 Bot.on :delivery do |delivery|
   puts "Delivered message(s) #{delivery.ids}"
 end
 
+
 private
+
 
 def send_text(sender, text)
   Bot.deliver(
@@ -207,57 +166,99 @@ def send_movie_cards(sender, attachment)
   )
 end
 
-def movie_card(movie)
-  card = {
-            "title":"#{interest.movie.title}",
-            "image_url":"#{interest.movie.poster_url}",
-            "subtitle":"Directed by " + director,
-            "buttons":[
-              {
-                "type":"web_url",
-                "url":"https://weclap.co/movies/#{interest.movie.id}",
-                "title":"Details"
-              },
-            ]
-          }
-end
-
-def say_hello(user, message)
+def send_buttons(sender, text, buttons)
   Bot.deliver(
-    recipient: message.sender,
-    message: {
-      text: "Hello #{user.first_name}"
-    }
-  )
-  Bot.deliver(
-    recipient: message.sender,
-    message: {
-      text: "You can send me 'help' anytime, and I'll help you to interact with me."
-    }
-  )       
-  Bot.deliver(
-    "recipient": message.sender,
+    "recipient": sender,
     "message":{
       "attachment":{
         "type":"template",
         "payload":{
           "template_type":"button",
-          "text":"What do you want to do next?",
-          "buttons":[
-            {
-              "type":"postback",
-              "title":"Find a movie",
-              "payload":{"find":"true"}.to_json
-            },
-            {
-              "type":"postback",
-              "title":"Help",
-              "payload":{"help":"true"}.to_json
-            }
-          ]
+          "text":text,
+          "buttons": buttons
         }
       }
     }
   )
-  
+end
+
+def movie_card(movie, to_add)
+  # movie is an instance of Movie.
+  # to_add is a boolean whether these films can be added or not to the watchlist
+  director = movie.credits['crew']['Director'].join(', ') unless movie.credits['crew'].blank?
+  if to_add
+    card = {
+            "title":"#{movie.title}",
+            "image_url":"#{movie.poster_url}",
+            "subtitle":"Directed by " + director ,
+            "buttons":[
+              {
+                "type":"web_url",
+                "url":"https://weclap.co/movies/#{movie.id}",
+                "title":"Details"
+              },
+              {
+                "type":"postback",
+                "title":"Add to watchlist",
+                "payload":{"movie_id":"#{movie.id}"}.to_json
+              }
+            ]
+          }
+  else
+    card = {
+              "title":"#{movie.title}",
+              "image_url":"#{movie.poster_url}",
+              "subtitle":"Directed by " + director,
+              "buttons":[
+                {
+                  "type":"web_url",
+                  "url":"https://weclap.co/movies/#{movie.id}",
+                  "title":"Details"
+                },
+              ]
+            }
+  end
+  return card
+end 
+
+def say_hello(user, message)
+  text_1 = "Hello #{user.first_name}"
+  text_2 = "You can send me 'help' anytime, and I'll help you to interact with me."
+  text_3 = "What do you want to do next?"
+
+  buttons = [
+              {
+                "type":"postback",
+                "title":"Find a movie",
+                "payload":{"find":"true"}.to_json
+              },
+              {
+                "type":"postback",
+                "title":"Help",
+                "payload":{"help":"true"}.to_json
+              }
+            ]
+
+  send_text(user, text_1)
+  send_text(user, text_2)
+  send_buttons(user, text_3, buttons)
+end
+
+def send_help(sender)
+  text_1 = "Hey buddy, want to know how I work?"
+  text_2 = "- \"Hello\": I'm very polite\n- \"List\": Show your watchlist\n- \"Watchlist\": Show the first 10 movies of your watchlist in cards\n- \"Help\": To list all the commands"
+  text_3 = "Looking for a film?\nSend me the title, or just a word, and I'll start searching ;)"
+  text_4 = "Just try!"
+  send_text(sender, text_1)
+  send_text(sender, text_2)
+  send_text(sender, text_3)
+  send_text(sender, text_4)
+end
+
+def check_user(message)
+  messenger_id = message.sender['id']
+  response = RestClient.get "https://graph.facebook.com/v2.6/#{messenger_id}?fields=first_name,last_name,profile_pic&access_token=#{ENV['FB_ACCESS_TOKEN']}"
+  repos = JSON.parse(response)
+  user = User.where(first_name: repos["first_name"]).where(last_name: repos["last_name"]).first
+  return user
 end
