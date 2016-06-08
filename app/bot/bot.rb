@@ -14,6 +14,7 @@ include Facebook::Messenger
 
 # Method when the server receives a message for user (on Messenger or FB page)
 Bot.on :message do |message|
+  p message
 
   # messenger_id is needed for the check_user method, to get the user info from fb api.
   # the check_user method return the User instance if any.
@@ -150,7 +151,6 @@ Bot.on :delivery do |delivery|
   puts "Delivered message(s) #{delivery.ids}"
 end
 
-
 private
 
 
@@ -269,6 +269,7 @@ end
 
 def check_user(message, messenger_id) # to link the messenger user to the fb user
   response = RestClient.get "https://graph.facebook.com/v2.6/#{messenger_id}?fields=first_name,last_name,profile_pic&access_token=#{ENV['FB_ACCESS_TOKEN']}"
+  # response = RestClient.get "https://graph.facebook.com/v2.6/#{messenger_id}?fields=first_name,last_name,profile_pic&access_token=#{ENV['TESTBOT_FB_ACCESS_TOKEN']}"
   repos = JSON.parse(response)
   p repos
   user = User.where(first_name: repos["first_name"]).where(last_name: repos["last_name"]).first
