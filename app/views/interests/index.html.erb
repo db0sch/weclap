@@ -1,5 +1,5 @@
 <%= render 'shared/search_bar' %>
-<%= render 'shared/interests_list', list: @watchlist %>
+<%= render 'shared/interests_list', list: @watchlist, friends: @friends %>
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
