@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  after_commit :check_friendships
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -33,57 +31,8 @@ class User < ActiveRecord::Base
       user.picture = auth.info.image.gsub("http://", "https://")
       user.token = auth.credentials.token
       user.token_expiry = Time.at(auth.credentials.expires_at)
-      data = JSON.parse(RestClient.get "https://graph.facebook.com/#{user.uid}/invitable_friends?limit=5000&access_token=#{user.token}&l")
-      datadev = JSON.parse(RestClient.get "https://graph.facebook.com/#{user.uid}/friends?limit=5000&access_token=#{user.token}&l")
-      friendslist = []
-      if !data.nil?
-        data["data"].each do |d|
-           friendslist << d['name']
-        end
-      end
-
-      if !datadev.nil?
-        datadev["data"].each do |d|
-           friendslist << d['name']
-        end
-      end
-      user.friendslist = friendslist.to_s
     end
   end
-
-  private
-
-  def check_friendships
-
-      # data = JSON.parse(RestClient.get "https://graph.facebook.com/#{self.uid}/invitable_friends?limit=5000&access_token=#{self.token}&l")
-      # datadev = JSON.parse(RestClient.get "https://graph.facebook.com/#{self.uid}/friends?limit=5000&access_token=#{self.token}&l")
-      # friendslist = []
-      # if !data.nil?
-      #   data["data"].each do |d|
-      #      friendslist << d['name']
-      #   end
-      # end
-
-      # if !datadev.nil?
-      #   datadev["data"].each do |d|
-      #      friendslist << d['name']
-      #   end
-      # end
-      # self.friendslist = friendslist.to_s
-
-
-    unless friendslist.blank?
-      JSON.parse(self.friendslist).each do |f|
-        User.all.each do |u|
-          if u.fullname == f
-            Friendship.create({friend_id: u.id, buddy_id: self.id})
-          end
-        end
-      end
-
-    end
-  end
-
 end
 
 
