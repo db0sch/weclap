@@ -3,8 +3,9 @@
   align-items: center;
   transition: all 0.15s ease;
   background-color: #FAFAFA;
-  border-right: 7px solid #FAFAFA;
+  // border-right: 7px solid #FAFAFA;
   box-shadow: 0px 0px 1px 0px #81819E;
+  position: relative;
   margin: 4px;
   transition: border-right 0.5s ease;
   // transition: 0.3;
@@ -19,25 +20,33 @@
 .movie-item:hover {
   cursor: pointer;
   background-color: white;
-  border-right: 7px solid #fd986f;
-    h3 a {
+  // border-right: 7px solid #fd986f;
+  h3 a {
     color: #272822;
     text-decoration: none;
   }
-  .movie-item-image{
+  .movie-item-image {
      opacity: 1;
   }
 }
 
+.movie-item-right-part {
+  flex: 1 0 20%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
 
 .movie-item-social {
+  flex: 1 0 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   transition: all 0.15s ease;
   margin: 4px;
-  margin-right: 25px;
+  margin-right: 15px;
   p {
     font-size: 12px;
     margin-bottom: 0px;
@@ -52,8 +61,6 @@
   flex-direction: column;
   align-items: center;
   transition: all 0.15s ease;
-  margin: 4px;
-  margin-right: 25px;
 }
 
 .movie-rating {
@@ -89,7 +96,7 @@
 
 /* Body design */
 .movie-item-body {
-  flex: 1 1 auto;
+  flex: 1 1 70%;
 }
 .movie-item-body {
   h3 {
@@ -115,14 +122,38 @@
   align-items: center;
   text-align: center;
   margin: 0px;
+  .movie-add-btn {
+    width: 105px;
+  }
+  a.movie-add-btn {
+    font-size: 12px;
+    color: white;
+    text-decoration: none;
+    &:hover {
+      color: white;
+      text-decoration: none;
+    }
+  }
+  a.movie-added-btn {
+    font-size: 12px;
+    color: black;
+  }
+  .movie-added-btn {
+    border: 1px solid black;
+    width: 105px;
+  }
 }
-.movie-item-controls a {
-  font-size: 17px;
-}
-.movie-item-controls a:hover {
-  color: #1C3C56 !important;
-  opacity: 0.8;
-}
+
+
+
+
+// .movie-item-controls a {
+//   font-size: 17px;
+// }
+// .movie-item-controls a:hover {
+//   // color: #1C3C56 !important;
+//   // opacity: 0.8;
+// }
 .movie-item-controls-hidden a {
   color: transparent;
   font-size: 15px;
@@ -135,26 +166,29 @@
   color: #528FC1;
 }
 
-a.movie-add-btn {
-  font-size: 30px;
-  color: $blue;
-  opacity: 0.5;
-  text-decoration: none;
-}
-
-.movie-add-btn {
-  color: #383838;
-}
-
-.movie-add-btn:hover {
-  color: black;
-}
 
 
-a.movie-added-btn {
-  font-size: 30px;
-  color: $green;
-}
+
+// a.movie-add-btn {
+//   font-size: 15px;
+//   color: white;
+//   opacity: 0.9;
+//   text-decoration: none;
+// }
+
+// .movie-add-btn {
+//   color: #31708F;
+// }
+
+// .movie-add-btn:hover {
+//   color: white;
+// }
+
+
+// a.movie-added-btn {
+//   font-size: 30px;
+//   color: $green;
+// }
 
 .crew {
   font-size: 12px;
@@ -188,68 +222,39 @@ a.movie-added-btn {
     align-items: center;
     justify-content: flex-start;
   }
+  .movie-item-image {
+    margin-right: 20px;
+    width: 70px;
+    box-shadow: 4px 0px 3px 0px #B5B5B5;
+    opacity: 0.9;
+  }
 }
 
-.ribbon{
-  right: 50px;
-  top: 5px;
+.movie-channel {
   position: absolute;
-
-  z-index: 1;
-  color: #eee;
-  font-size: 2em;
-  cursor: pointer;
-  width: 1.5em;
-  line-height: 0.5em;
-  -webkit-transition: line-height 0.5s;
-  transition: line-height 0.5s;
-}
-.ribbon:after {
-  content: "";
-  font-size: 0.5em;
-  position: absolute;
-  height:  4.8em;
-  border: 1.5em solid #F44336;
-  z-index: -1;
-  top: -1em;
-  border-top-width: 1.5em;
-  border-bottom-color: transparent;
-  right: 0;
-  -webkit-transition: height 0.5s;
-  transition: height 0.5s;
+  bottom: 0px;
+  right: 0px;
 }
 
-.ribbon-left{
-  right: 80px;
-  top: 5px;
-  position: absolute;
+.channel-label {
+  display: inline;
+  font-size: 12px;
+  padding: 2px 10px;
+  a {
+    color: white;
+    font-weight: 500;
+  }
+}
+.channel-label-cinema {
+  background-color: #e67e22;
+}
+.channel-label-streaming {
+  background-color: #fdd835;
+}
 
-  z-index: 1;
-  color: #eee;
-  font-size: 2em;
-  cursor: pointer;
-  width: 1.5em;
-  line-height: 0.5em;
-  -webkit-transition: line-height 0.5s;
-  transition: line-height 0.5s;
-}
-.ribbon-left:after {
-  content: "";
-  font-size: 0.5em;
-  position: absolute;
-  height:  4.8em;
-  border: 1.5em solid #455645;
-  z-index: -1;
-  top: -1em;
-  border-top-width: 1.5em;
-  border-bottom-color: transparent;
-  right: 0;
-  -webkit-transition: height 0.5s;
-  transition: height 0.5s;
-}
 .item-cross {
   top: 5px;
-  right: 2px;
+  right: 5px;
   position: absolute;
   color: #e6e6e6;
 }

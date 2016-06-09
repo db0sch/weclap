@@ -1,4 +1,4 @@
-$('#movie-add-' + <%= @movie.id %>).removeClass( 'movie-add-btn' ).addClass( 'movie-added-btn').html('<i class="fa fa-check-circle"></i>');
+$('#movie-add-' + <%= @movie.id %>).removeClass( 'movie-add-btn btn-success' ).addClass( 'movie-added-btn btn-secondary').html('added to list');
 <% if !@friend.nil? %>
 $('#friend-<%= @friend.id %>').html("<%= j render 'shared/friend_item', friend: @friend, common_movies: @common_movies, interest: nil %>");
 <% end %>
