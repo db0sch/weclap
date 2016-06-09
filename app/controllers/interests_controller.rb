@@ -6,13 +6,12 @@ class InterestsController < ApplicationController
   def index
     @user = params[:user_id] ? User.find(params[:user_id]) : current_user
     @watchlist = @user.interests.order(created_at: :desc)
-    @friends = my_friends_finder
+    @friends = JSON.parse(current_user.friendslist)
   end
 
   def create
 
-    @friend = User.where(id: my_friends_finder).find(params[:friend_id]) if params[:friend_id]
-
+    @friend = User.where(uid: JSON.parse(current_user.friendslist))
     @interest = Interest.new
     @interest.movie = @movie
     @interest.user = current_user
@@ -22,7 +21,6 @@ class InterestsController < ApplicationController
       current_user.interests.reload
         if @friend
         @friend.interests.reload
-
         @common_movies = []
         @friend.interests.each do |movie|
           if movie.watched_on.nil?
@@ -77,28 +75,11 @@ class InterestsController < ApplicationController
 
   private
 
-    def set_movie
-      @movie = Movie.find(params[:movie_id])
-    end
+  def set_movie
+    @movie = Movie.find(params[:movie_id])
+  end
 
-    def set_interest
-      @interest = Interest.find(params[:id])
-    end
-
-    def my_friends_finder
-    friend_ids = []
-
-      if !current_user.buddies.nil?
-        current_user.buddies.each do |buddy|
-          friend_ids << buddy.friend_id
-        end
-      end
-      if !current_user.friends.nil?
-        current_user.friends.each do |buddy|
-          friend_ids << buddy.buddy_id
-        end
-      end
-      friend_ids
-    end
-
+  def set_interest
+    @interest = Interest.find(params[:id])
+  end
 end
