@@ -39,6 +39,7 @@
             <% if interest.watched_on.nil? %>
               <% raise %>
               <% if movie.id == interest.movie_id %>
+
                  <%= link_to image_tag(User.find_by_uid(friend_uid).picture, class: "avatar", "data-toggle" => "tooltip", 'data-placement' => "bottom", title: User.find_by_uid(friend_uid).first_name ), user_friendships_path(current_user) %>
               <% end %>
             <% else %>

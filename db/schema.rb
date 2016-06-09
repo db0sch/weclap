@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602184306) do
+ActiveRecord::Schema.define(version: 20160609151850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,11 +126,12 @@ ActiveRecord::Schema.define(version: 20160602184306) do
     t.string   "token"
     t.datetime "token_expiry"
     t.string   "access_token"
-    t.string   "friendslist"
+    t.string   "full_name_friendlist"
     t.string   "fullname"
     t.string   "zip_code",               default: "75001"
     t.string   "city",                   default: "Paris"
     t.boolean  "admin",                  default: false,   null: false
+    t.json     "friendslist"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

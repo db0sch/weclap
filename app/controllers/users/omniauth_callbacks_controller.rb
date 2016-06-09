@@ -18,6 +18,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         friendslist << fb_friend['id'] unless User.find_by_uid(fb_friend["id"]).nil?
       end
     end
-    user.update({friendslist: friendslist})
+    user.update({friendslist: friendslist.to_json})
   end
 end
