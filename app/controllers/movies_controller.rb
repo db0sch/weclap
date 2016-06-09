@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
     @movies = Movie.select{ |m| imdb250top.include?(m.imdb_id) } if top100
     @movies = Movie.select{ |m| !m.shows.blank? } if ontheater
     @movies = Movie.select{ |m| !m.streamings.blank? } if onvod
-    @friends = my_friends_finder
+    @friends = JSON.parse(current_user.friendslist)
     @movies = @movies.take(100)
   end
 
@@ -18,7 +18,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     authorize @movie
     @display_shows = display_shows_tab?(@movie)
-    @friends = my_friends_finder
+    @friends = JSON.parse(current_user.friendslist)
     credits = @movie.credits
 
     @directors = credits['crew']['Director'].join(', ') unless credits['crew'].blank?
@@ -32,22 +32,6 @@ class MoviesController < ApplicationController
     GetShowtimesJob.perform_later(@location, @city, @movie.id, current_user.id)
     # GetShowtimesJob.set(wait: 0.5.seconds).perform_later(@location, @city, @movie.id, current_user.id)
     GetStreamingsJob.set(wait: 0.5.seconds).perform_later(@movie.id, current_user.id)
-  end
-
-  def my_friends_finder
-    friend_ids = []
-
-    if !current_user.buddies.nil?
-      current_user.buddies.each do |buddy|
-        friend_ids << buddy.friend_id
-      end
-    end
-    if !current_user.friends.nil?
-      current_user.friends.each do |buddy|
-        friend_ids << buddy.buddy_id
-      end
-    end
-    friend_ids
   end
 
   private
