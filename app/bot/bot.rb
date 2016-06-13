@@ -197,12 +197,12 @@ end
 def movie_card(movie, to_add) # to create movie cards
   # movie is an instance of Movie.
   # to_add is a boolean whether these films can be added or not to the watchlist
-  director = movie.credits['crew']['Director'].join(', ') unless movie.credits['crew'].blank?
+  director = movie.credits['crew']['Director'].join(', ') unless movie.credits['crew']['Director'].blank?
   if to_add
     card = {
             "title":"#{movie.title}",
             "image_url":"#{movie.poster_url}",
-            "subtitle":"Directed by " + director ,
+            "subtitle":"Directed by " + director ? director : "unknown",
             "buttons":[
               {
                 "type":"web_url",
@@ -220,7 +220,7 @@ def movie_card(movie, to_add) # to create movie cards
     card = {
               "title":"#{movie.title}",
               "image_url":"#{movie.poster_url}",
-              "subtitle":"Directed by " + director,
+              "subtitle":"Directed by " + director ? director : "unknown",
               "buttons":[
                 {
                   "type":"web_url",
