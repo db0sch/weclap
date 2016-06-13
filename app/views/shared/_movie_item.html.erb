@@ -5,7 +5,7 @@
   <div class='movie-item-body'>
     <h3><%= link_to movie.title, movie_path(movie.id) %></h3>
     <div class="crew">
-      <p class="item-director">Directed by: <%= movie.credits['crew']['Director'].join(', ') unless movie.credits['crew'].blank?%></p>
+      <p class="item-director">Directed by: <%= movie.credits['crew']['Director'].join(', ') unless movie.credits['crew']['Director'].blank? %></p>
       <p class="item-cast-crew">Cast: <%= movie.credits['cast'].take(5).join(', ')%></p>
     </div>
     <div class="movie-infos">

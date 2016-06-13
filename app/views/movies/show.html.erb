@@ -175,9 +175,11 @@
   </script>
 
   <script>
-    $(document).ready(function() {
-      $('iframe').attr('src', "<%= @movie.trailer_url%>?&showinfo=0");
-    })
+    <% unless @movie.trailer_url.blank? %>
+      $(document).ready(function() {
+        $('iframe').attr('src', "<%= @movie.trailer_url %>?&showinfo=0");
+      })
+    <% end %>
   </script>
 
 <% end %>
