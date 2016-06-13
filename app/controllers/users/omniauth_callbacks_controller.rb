@@ -10,13 +10,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to new_user_registration_url
     end
 
-    graph = Koala::Facebook::API.new(user.token)
+    graph = Koala::Facebook::API.new(user.token, ENV['FB_SECRET'])
     f = graph.get_connections("me", "friends")
     friendslist = []
     unless f.blank?
       f.each do |fb_friend|
         friendslist << fb_friend['id'] unless User.find_by_uid(fb_friend["id"]).nil?
-        raise
       end
     end
     user.update({friendslist: friendslist.to_json})
