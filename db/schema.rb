@@ -125,11 +125,12 @@ ActiveRecord::Schema.define(version: 20160609081121) do
     t.string   "token"
     t.datetime "token_expiry"
     t.string   "access_token"
-    t.string   "friendslist"
+    t.string   "full_name_friendlist"
     t.string   "fullname"
     t.string   "zip_code",               default: "75001"
     t.string   "city",                   default: "Paris"
     t.boolean  "admin",                  default: false,   null: false
+    t.json     "friendslist"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

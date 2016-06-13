@@ -2,15 +2,22 @@
   display: flex;
   align-items: center;
   transition: all 0.15s ease;
-  background-color: #e6e6e6;
-  border-right: 7px solid #e6e6e6;
+  background-color: #FAFAFA;
+  border-right: 7px solid #FAFAFA;
   box-shadow: 0px 0px 1px 0px #81819E;
   margin: 4px;
+  transition: border-right 0.5s ease;
+  // transition: 0.3;
+  .movie-item-image {
+    margin-right: 20px;
+    width: 70px;
+    box-shadow: 4px 0px 3px 0px #B5B5B5;
+    opacity: 0.9;
+  }
 }
 
 .movie-item:hover {
   cursor: pointer;
-  transition: 0.3;
   background-color: white;
   border-right: 7px solid #fd986f;
     h3 a {
@@ -27,8 +34,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   transition: all 0.15s ease;
   margin: 4px;
+  margin-right: 25px;
+  p {
+    font-size: 12px;
+    margin-bottom: 0px;
+    color: #A7BCBC;
+  }
+  .starrr {
+  }
 }
 
 .movie-item-social:hover {
@@ -37,6 +53,7 @@
   align-items: center;
   transition: all 0.15s ease;
   margin: 4px;
+  margin-right: 25px;
 }
 
 .movie-rating {
@@ -48,24 +65,26 @@
   align-items: flex-end;
 }
 
-.movie-item-image {
-  margin-right: 20px;
-  width: 100px;
-  box-shadow: 4px 0px 3px 0px #B5B5B5;
-  opacity: 0.9;
-}
-
-
 .movie-infos {
   display: flex;
+  margin: 5px 0px;
 }
 
-#year_released {
+.item-year-released {
   margin-right: 15px;
+  margin-bottom: 0px;
+  font-size: 12px;
 }
 
-#clock {
-  margin: 3px 5px;
+.item-clock {
+  margin-top: 2px;
+  margin-right: 5px;
+  font-size: 12px;
+}
+
+.item-runtime {
+  margin-bottom: 0px;
+  font-size: 12px;
 }
 
 /* Body design */
@@ -76,40 +95,18 @@
   h3 {
   font-weight: 200;
   font-size: 24px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   }
   a {
-  color: #636363;
-  font-weight: 200;
+  color: #2C2C2C;
+  font-weight: 500;
+  font-size: 22px;
   }
-}
-.movie-item-body p {
-  font-weight: lighter;
-  color: #404040;
-}
-
-
-/* Upvote design */
-.movie-item-upvote {
-  padding-right: 20px;
-  text-align: center;
-  transition: all 0.15s ease;
-  font-weight: bold;
-  font-size: 13px;
-  line-height: 20px;
-}
-.movie-item-count {
-  margin: 2px 0 0;
-}
-.movie-item-arrow {
-  transition: all 0.15s ease;
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid transparent;
-  border-bottom: 9px solid black;
-  border-radius: 2px;
-  margin: auto;
+  p {
+    font-weight: lighter;
+    color: #404040;
+  }
 }
 
 /* Controls design */
@@ -133,21 +130,10 @@
   border-color: transparent;
 }
 
-/* Hover effects */
-
-.movie-item-upvote:hover {
-  color: #5898f1;
-  cursor: pointer;
-}
-
 #add_to_watchlist {
   font-size: xx-large;
   color: #528FC1;
 }
-
-.movie-item:hover .movie-item-upvote { transform: scale(1.2) }
-.movie-item:hover .movie-item-controls-hidden a { color: #E6E6E6 }
-.movie-item-upvote:hover .movie-item-arrow { border-bottom: 9px solid #5898f1 }
 
 a.movie-add-btn {
   font-size: 30px;
@@ -174,7 +160,11 @@ a.movie-added-btn {
   font-size: 12px;
 }
 
-#directed {
+.item-director {
+  margin-bottom: 0px;
+}
+
+.item-cast-crew {
   margin-bottom: 0px;
 }
 
@@ -257,12 +247,12 @@ a.movie-added-btn {
   -webkit-transition: height 0.5s;
   transition: height 0.5s;
 }
-.cross {
+.item-cross {
   top: 5px;
   right: 2px;
   position: absolute;
+  color: #e6e6e6;
 }
-
 
 .watched-movie {
   opacity: 0.5;

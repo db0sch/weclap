@@ -14,6 +14,11 @@
     <!-- Different navigation if login or not -->
     <% if user_signed_in? %>
       <!-- Button (call-to-action) -->
+      <div class="fb-messengermessageus" 
+      messenger_app_id="1054618387948073" 
+      page_id="1593695557626599"
+      color="white"
+      size="large" ></div>
       <%= button_to t(".top_call_to_action", default: "Movies"), movies_path, method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
       <%= button_to t(".top_call_to_action", default: "Watchlist"), watchlist_path(current_user), method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
 

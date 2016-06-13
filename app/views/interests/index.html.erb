@@ -1,5 +1,5 @@
 <%= render 'shared/search_bar' %>
-<%= render 'shared/interests_list', list: @watchlist %>
+<%= render 'shared/interests_list', list: @watchlist, friends: @friends %>
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
@@ -25,10 +25,14 @@
               success: function(data) {
                 var myItem = $('#movie-' + e.currentTarget.id);
                 if($(myItem).find('.movie-rating #movie-just-been-watched').length === 0) {
+                  $(myItem).find('.rating-text').remove();
+                  $(myItem).find('.starrr').addClass('hidden');
                   $(myItem).find('.movie-rating').prepend('<div id="movie-just-been-watched">Watched</div>')
                   setTimeout(function() {
                     $(myItem).find('#movie-just-been-watched').remove();
+                    $(myItem).find('.starrr').removeClass('hidden');
                     $(myItem).addClass('watched-movie');
+                    $(myItem).css("opacity", "0.5");
                     $(myItem).removeClass('unwatched-movie');
                     $(myItem).prependTo($(watched_list));
                   }, 3000);
