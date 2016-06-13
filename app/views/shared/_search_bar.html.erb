@@ -3,8 +3,11 @@
     <div class="row">
       <div class="col-xs-12 col-md-6 col-md-offset-3">
         <div class="movie-search-bar-container">
-          <form action="/movies" method="get" class="movie-search-bar-form">
-            <input type="text" class="movie-search-field" name="title" placeholder="Search something">
+<!--           <form action="/movies" method="get" class="movie-search-bar-form">
+            <input type="text" class="movie-search-field" id="search-field" name="title" placeholder="Search something">
+ -->
+          <form action="/search" method="get" class="movie-search-bar-form">
+            <input type="text" class="movie-search-field" id="search-field" name="terms" placeholder="Search something">
             <button type="submit" style='outline-width: 0;' id="search-button">Search</button>
           </form>
         </div>
@@ -12,3 +15,58 @@
     </div>
   </div>
 </div>
+
+<% content_for :after_js2 do %>
+  <script>
+    // $(function() {
+    //   $.ajax({
+    //     type: 'GET',
+    //     dataType: 'json',
+    //     url: url,
+    //     success: function(data) {
+    //       console.log(data);
+    //     }
+    //   });
+
+      // // $("#q").focus(); //Focus on search field
+      // $("#search-field").autocomplete({
+      //   minLength: 3,
+      //   delay: 200,
+      //   source: function(request, response) {
+      //     var term = request.term.toLowerCase().trim().replace(/\s/g, "_"),
+      //       url = 'http://sg.media-imdb.com/suggests/' + term[0] + '/'+ term + '.json';
+      //     $.ajax({
+      //       type: 'GET',
+      //       dataType: 'json',
+      //       url: url,
+      //       dataFilter: function(response) {
+      //         return response.match(/(?<=\()(.*)(?=\))/);
+      //       },
+      //       success: function(data) {
+      //         console.log(data);
+      //       }
+      //       // url: '/resources/' . element.data('id') . '/upvote',
+      //       // success: function(data) {
+      //         // console.log('success')
+      //         // data is an array of objects and must be transformed for autocomplete to use
+      //         // var array = data.error ? [] : $.map(data.movies, function(m) {
+      //         //   return {
+      //         //     label: m.title + " (" + m.year + ")",
+      //         //     url: m.links.alternate
+      //         //   };
+      //         // });
+      //         // response(array);
+      //       // }
+      //     });
+      //   },
+      //   focus: function(event, ui) {
+      //     event.preventDefault();
+      //   },
+      //   select: function(event, ui) {
+      //     event.preventDefault();
+      //     // window.open(ui.item.url);
+      //   }
+      // });
+    // });
+  </script>
+<% end %>
