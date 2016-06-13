@@ -38,8 +38,8 @@ en:
   watched: "Watched"
   my-friends:  "My friends"
   soon: "Soon on your devices"
-  loggin: "You need to be logged in to continue"
-  loggin-fb: "Log in with Facebook"
+  login: "You need to be logged in to continue"
+  login-fb: "Log in with Facebook"
   search: "Search"
   search-something: "Search something"
   results: "Results"
@@ -53,9 +53,10 @@ en:
   rating: "Rate this movie"
   friends: "Friends"
   log-out: "Log out"
+  nocommon: "You have no common movies with"
   common: "Your common movies"
   uncommon: "The other movies of"
-  nomore: "hasn't other movie"
+  nomore: "#{friend.first_name} hasn't other movie"
   close: "Close"
-
+  friendsinterest: "'s Claplist"
 

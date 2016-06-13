@@ -69,7 +69,7 @@
               <li><strong><%= t ('genres') %>: </strong><%= @genres %> |
               <strong><%= t ('directed-by') %>:</strong> <%= @directors %> |
               <i class="fa fa-clock-o" id="clock-duration-inline"><span></i><%= @movie.runtime %> min </span> |
-                <span class="parental-rating"><%= @movie.adult ? (t ('adult')) : (t ('For all')) %></span></li>
+                <span class="parental-rating"><%= @movie.adult ? (t ('adult')) : (t ('forall')) %></span></li>
               </span>
               <li><strong><%= t ('starring') %></strong> <%= @actors %></li>
             </ul>
@@ -85,7 +85,7 @@
 
         <div class="movie-synopsis">
           <div class="container-synopsis">
-            <h4>Synopsis</h4>
+            <h4><%= t ('Synopsis') %></h4>
             <p><%= @movie.overview %></p>
           </div>
         </div>
