@@ -31,7 +31,7 @@
                   <% if !@friends.nil? %>
                     <div class="movie-social movie-item-controls">
                       <% @friends.each do |b| %>
-                        <% User.find(b).interests.each do |interest| %>
+                        <% User.find_by_uid(b).interests.each do |interest| %>
                           <% if interest.watched_on.nil? %>
                             <% if @movie.id == interest.movie_id %>
                                <%= link_to image_tag(User.find(b).picture, class: "avatar"), user_friendships_path(current_user) %>

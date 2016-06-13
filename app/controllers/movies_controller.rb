@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
     @movies = Movie.select{ |m| imdb250top.include?(m.imdb_id) } if top100
     @movies = Movie.select{ |m| !m.shows.blank? } if ontheater
     @movies = Movie.select{ |m| !m.streamings.blank? } if onvod
-    @friends = JSON.parse(current_user.friendslist)
+    @friends = current_user.friendslist
     @movies = @movies.take(100)
   end
 
@@ -18,7 +18,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     authorize @movie
     @display_shows = display_shows_tab?(@movie)
-    @friends = JSON.parse(current_user.friendslist)
+    @friends = current_user.friendslist
     credits = @movie.credits
 
     @directors = credits['crew']['Director'].join(', ') unless credits['crew'].blank?

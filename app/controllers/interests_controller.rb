@@ -6,13 +6,12 @@ class InterestsController < ApplicationController
   def index
     @user = params[:user_id] ? User.find(params[:user_id]) : current_user
     @watchlist = @user.interests.order(created_at: :desc)
-    @friends = JSON.parse(current_user.friendslist)
-    raise
+    @friends = current_user.friendslist
   end
 
   def create
 
-    @friend = User.where(uid: JSON.parse(current_user.friendslist))
+    @friend = User.where(uid: current_user.friendslist)
     @interest = Interest.new
     @interest.movie = @movie
     @interest.user = current_user

@@ -19,6 +19,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         raise
       end
     end
-    user.update({friendslist: friendslist})
+    user.update({friendslist: friendslist.to_json})
   end
 end
