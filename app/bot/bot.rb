@@ -14,18 +14,26 @@ include Facebook::Messenger
 
 # Method when the server receives a message for user (on Messenger or FB page)
 Bot.on :message do |message|
-  p message
-
   # messenger_id is needed for the check_user method, to get the user info from fb api.
   # the check_user method return the User instance if any.
   messenger_id = message.sender['id']
   user = check_user(message, messenger_id)
 
   puts "Received #{message.text} from #{message.sender}"
+  p user
 
   if user.nil? #check if the user is registered on weclap.co
     text = "Please, sign in with Facebook on https://www.weclap.co"
     send_text(message.sender, text)
+  elsif user.messenger_id.blank?
+    text1 = "We have a new authentication system."
+    text2 = "Can you please go to https://www.weclap.co and click on the Send to Messenger button?"
+    text3 = "This way, we'll know for sure it's really you ;-)"
+    text4 = "Once you've done it, you're all set. We won't ask you again."
+    send_text(message.sender, text1)
+    send_text(message.sender, text2)
+    send_text(message.sender, text3)
+    send_text(message.sender, text4)
   elsif message.attachments #check if the message sent by the user is really text only.
     text = "Wow, I'm so sorry. I can understand text only :(."
     send_text(message.sender, text)
@@ -38,14 +46,8 @@ Bot.on :message do |message|
 
     case message.text.downcase # this is where the messages are being processed.
 
-    when /hello/i
-      say_hello(message.sender, user, message)
-    when "yo"
-      say_hello(message.sender, user, message)
-    when "bonjour"
-      say_hello(message.sender, user, message)
-    when "hey"
-      say_hello(message.sender, user, message)
+    when /hello/i, "yo", "bonjour", "hey", "hi", "salut"
+      say_hello(message.sender, user)
 
     when /watchlist/i #should return the watchlist in generic template/card mode (max. 10)
       movie_array = []
@@ -151,6 +153,28 @@ Bot.on :delivery do |delivery|
   puts "Delivered message(s) #{delivery.ids}"
 end
 
+Bot.on :optin do |optin|
+  optin.sender    # => { 'id' => '1008372609250235' }
+  optin.recipient # => { 'id' => '2015573629214912' }
+  optin.sent_at   # => 2016-04-22 21:30:36 +0200
+  optin.ref       # => 'CONTACT_SKYNET'
+
+  p optin.sender
+  p optin.ref
+  user = set_user(optin.sender, optin.ref)
+  p user
+
+  text = "You're now authenticated. Congrats!"
+  send_text(optin.sender, text)
+  say_hello(optin.sender, user)
+  # Bot.deliver(
+  #   recipient: optin.sender,
+  #   message: {
+  #     text: 'Ah, human!'
+  #   }
+  # )
+end
+
 private
 
 
@@ -233,7 +257,7 @@ def movie_card(movie, to_add) # to create movie cards
   return card
 end 
 
-def say_hello(sender, user, message) # to say hello
+def say_hello(sender, user) # to say hello
   text_1 = "Hello #{user.first_name}"
   text_2 = "You can send me 'help' anytime, and I'll help you to interact with me."
   text_3 = "What do you want to do next?"
@@ -268,10 +292,21 @@ def send_help(sender) # to send help
 end
 
 def check_user(message, messenger_id) # to link the messenger user to the fb user
-  response = RestClient.get "https://graph.facebook.com/v2.6/#{messenger_id}?fields=first_name,last_name,profile_pic&access_token=#{ENV['FB_ACCESS_TOKEN']}"
-  # response = RestClient.get "https://graph.facebook.com/v2.6/#{messenger_id}?fields=first_name,last_name,profile_pic&access_token=#{ENV['TESTBOT_FB_ACCESS_TOKEN']}"
-  repos = JSON.parse(response)
-  p repos
-  user = User.where(first_name: repos["first_name"]).where(last_name: repos["last_name"]).first
+  unless User.where(messenger_id: messenger_id).blank?
+    user = User.where(messenger_id: messenger_id)
+  else
+    # # pour production    
+    response = RestClient.get "https://graph.facebook.com/v2.6/#{messenger_id}?fields=first_name,last_name,profile_pic&access_token=#{ENV['FB_ACCESS_TOKEN']}"
+    # # pour test en local
+    # response = RestClient.get "https://graph.facebook.com/v2.6/#{messenger_id}?fields=first_name,last_name,profile_pic&access_token=#{ENV['TESTBOT_FB_ACCESS_TOKEN']}"
+    repos = JSON.parse(response)
+    user = User.where(first_name: repos["first_name"]).where(last_name: repos["last_name"]).first
+    return user
+  end
+end
+
+def set_user(messenger_id, messenger_ref)
+  user = User.find(messenger_ref)
+  user.update(messenger_id: messenger_id)
   return user
 end
