@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :friendships, only: [:show, :index]
   end
   get '/users/:user_id/watchlist' => 'interests#index', as: 'watchlist'
+  get 'search' => 'search#index'
 
   resources :interests, only: [:create, :update, :destroy]
 
