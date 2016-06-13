@@ -21,3 +21,30 @@
 
 en:
   hello: "Hello world"
+  home-title: "The ultimate connected Watchlist"
+  home-subtitle: "Find movies, anywhere, anytime"
+  button-lets-clap: "LET'S CLAP"
+  card:
+    discover-title: "Discover"
+    discover: "A WIDE ARRAY OF MOVIES, JUST PICK YOUR FAVORITES AND FILL YOUR WATCHLIST !"
+    plan-title: "Plan"
+    plan: "WATCH DIRECTLY VOD FROM HOME OR PLAN MOVIE NIGHTS AT YOUR LOCAL CINEMA"
+    Share-title: "Share"
+    Share: "SHARE YOUR CLAPLIST WITH YOUR FRIENDS AND WATCH MOVIES TOGETHER"
+  mywl: "My Claplist"
+  wl: "Claplist"
+  find: "find a movie"
+  message: "Message Us"
+  visioned: "Watched"
+  friends:  "My friends"
+  soon: "Soon on your devices"
+  loggin: "You need to be logged in to continue"
+  loggin-fb: "Log in with Facebook"
+  search: "Search"
+  search-something: "Search something"
+  results: "Results"
+  on-theater: "On theater"
+  on-vod: "On VOD"
+
+fr:
+  wl: "Ma Claplist"
