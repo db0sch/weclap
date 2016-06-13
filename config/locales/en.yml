@@ -35,8 +35,8 @@ en:
   wl: "Claplist"
   find: "find a movie"
   message: "Message Us"
-  visioned: "Watched"
-  friends:  "My friends"
+  watched: "Watched"
+  my-friends:  "My friends"
   soon: "Soon on your devices"
   loggin: "You need to be logged in to continue"
   loggin-fb: "Log in with Facebook"
@@ -45,6 +45,21 @@ en:
   results: "Results"
   on-theater: "On theater"
   on-vod: "On VOD"
+  directed-by: "Directed by:"
+  starring: "Staring:"
+  genres: "Genres:"
+  adult: "Adult:"
+  synopsis: "Synopsis"
+  rating: "Rate this movie"
+  friends: "Friends"
+  log-out: "Log out"
+  common: "Your common movies"
+  uncommon: "The other movies of"
+  nomore: "hasn't other movie"
+  close: "Close"
+
+
+
 
 fr:
   wl: "Ma Claplist"
