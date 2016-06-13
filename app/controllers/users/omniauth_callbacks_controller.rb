@@ -16,6 +16,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     unless f.blank?
       f.each do |fb_friend|
         friendslist << fb_friend['id'] unless User.find_by_uid(fb_friend["id"]).nil?
+        raise
       end
     end
     user.update({friendslist: friendslist})
