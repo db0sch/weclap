@@ -45,7 +45,7 @@
             <% else %>
               <% if movie.id == interest.movie_id %>
                  <%= link_to user_friendships_path(current_user), style: "text-decoration: none;" do %>
-                    <div style="background-image: url(<%= image_path(User.find(b).picture)%>)" class="avatar rating rating-container" data-toggle="tooltip" data-placement="bottom" title=<%=User.find_by_uid(friend_uid).first_name%>>
+                    <div style="background-image: url(<%= image_path(User.find_by_uid(friend_uid).picture)%>)" class="avatar rating rating-container" data-toggle="tooltip" data-placement="bottom" title=<%=User.find_by_uid(friend_uid).first_name%>>
                       <div class="rating-gradient">
                       </div>
                       <div id="rating"><%= interest.rating %><i class="fa fa-star" id="star-rating"></i>
