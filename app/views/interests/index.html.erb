@@ -27,7 +27,7 @@
                 if($(myItem).find('.movie-rating #movie-just-been-watched').length === 0) {
                   $(myItem).find('.rating-text').remove();
                   $(myItem).find('.starrr').addClass('hidden');
-                  $(myItem).find('.movie-rating').prepend('<div id="movie-just-been-watched"><%= t ('watched') %></div>')
+                  $(myItem).find('.movie-rating').prepend('<div id="movie-just-been-watched"><%= t ('list.watched') %></div>')
                   setTimeout(function() {
                     $(myItem).find('#movie-just-been-watched').remove();
                     $(myItem).find('.starrr').removeClass('hidden');

@@ -19,8 +19,8 @@
       page_id="1593695557626599"
       color="white"
       size="large" ></div>
-      <%= button_to t(".top_call_to_action", default: (t ('find'))), movies_path, method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
-      <%= button_to t(".top_call_to_action", default: (t ('wl'))), watchlist_path(current_user), method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
+      <%= button_to t(".top_call_to_action", default: (t ('navbar.find'))), movies_path, method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
+      <%= button_to t(".top_call_to_action", default: (t ('navbar.wl'))), watchlist_path(current_user), method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
 
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item">
@@ -31,17 +31,17 @@
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
               <%= link_to user_friendships_path(current_user) do %>
-                <i class="fa fa-users"></i> <%= t ".friends", default: (t ('my-friends')) %>
+                <i class="fa fa-users"></i> <%= t ".friends", default: (t ('navbar.friends')) %>
               <% end %>
             </li>
             <li>
               <%= link_to watchlist_path(current_user) do %>
-                <i class="fa fa-film"></i>  <%= t ".watchlist", default: (t ('wl')) %>
+                <i class="fa fa-film"></i>  <%= t ".watchlist", default: (t ('navbar.wl')) %>
               <% end %>
             </li>
             <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
-                <i class="fa fa-sign-out"></i>  <%= t ".sign_out", default: (t ('log-out')) %>
+                <i class="fa fa-sign-out"></i>  <%= t ".sign_out", default: (t ('navbar.log-out')) %>
               <% end %>
             </li>
           </ul>
@@ -59,17 +59,17 @@
 
           <li>
             <%= link_to user_friendships_path(current_user) do %>
-              <i class="fa fa-users"></i> <%= t ".friends", default: (t ('my-friends')) %>
+              <i class="fa fa-users"></i> <%= t ".friends", default: (t ('navbar.friends')) %>
             <% end %>
           </li>
           <li>
             <%= link_to watchlist_path(current_user) do %>
-              <i class="fa fa-film"></i>  <%= t ".watchlist", default:(t ('wl')) %>
+              <i class="fa fa-film"></i>  <%= t ".watchlist", default:(t ('navbar.wl')) %>
             <% end %>
           </li>
           <li>
             <%= link_to destroy_user_session_path, method: :delete do %>
-              <i class="fa fa-sign-out"></i>  <%= t ".sign_out", default: (t ('log-out')) %>
+              <i class="fa fa-sign-out"></i>  <%= t ".sign_out", default: (t ('navbar.log-out')) %>
             <% end %>
           </li>
         </ul>
