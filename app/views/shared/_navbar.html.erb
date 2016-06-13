@@ -14,11 +14,23 @@
     <!-- Different navigation if login or not -->
     <% if user_signed_in? %>
       <!-- Button (call-to-action) -->
+<!--
       <div class="fb-messengermessageus"
+      messenger_app_id="1054618387948073"
+ -->
+      <% if current_user.messenger_id.blank? %>
+        <div class="fb-send-to-messenger"
+        messenger_app_id="263884933962717"
+        page_id="188469658220408"
+        data-ref="<%= current_user.id %>"
+        color="blue"
+        size="standard"></div>
+      <% end %>
+     <!--  <div class="fb-messengermessageus"
       messenger_app_id="1054618387948073"
       page_id="1593695557626599"
       color="white"
-      size="large" ></div>
+      size="large" ></div> -->
       <%= button_to t(".top_call_to_action", default: (t ('navbar.find'))), movies_path, method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
       <%= button_to t(".top_call_to_action", default: (t ('navbar.wl'))), watchlist_path(current_user), method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
 
