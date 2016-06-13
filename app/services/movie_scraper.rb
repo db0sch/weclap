@@ -17,7 +17,8 @@ class MovieScraper
         imdb_id = m.search(".wlb_wrapper").attribute('data-tconst').value
         mv = Movie.unscoped.new({
           imdb_id: imdb_id,
-          imdb_score: m.search(".user_rating span.rating-rating > span.value").text.to_f
+          imdb_score: m.search(".user_rating span.rating-rating > span.value").text.to_f,
+          release_date: Date.new(m.search("span.year_type").text.match(/\d+/)[0].to_i, 1, 1)
         })
         mv.save if mv.valid?
         movie_ids << imdb_id
@@ -43,8 +44,8 @@ class MovieScraper
 
       if mv
         collection = mv['belongs_to_collection'] ? { mv['belongs_to_collection']['id'] => mv['belongs_to_collection']['name'] } : nil
-        r_date ||= mv['release_date']
         movie = Movie.unscoped.find_by(imdb_id: imdb_id)
+        r_date = mv['release_date'].blank? ? movie.release_date : mv['release_date'].to_date
         movie.update({
           title: mv['title'],
           original_title: mv['original_title'],

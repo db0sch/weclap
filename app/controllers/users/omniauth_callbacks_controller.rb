@@ -1,7 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     user = User.find_for_facebook_oauth(request.env['omniauth.auth'])
-
     if user.persisted?
       sign_in_and_redirect user, event: :authentication
       set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
@@ -10,7 +9,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to new_user_registration_url
     end
 
-    graph = Koala::Facebook::OAuth.new(ENV['FB_ID'], ENV['FB_SECRET'], new_user_registration_url)
+    graph = Koala::Facebook::API.new(user.token, ENV['FB_SECRET'])
     f = graph.get_connections("me", "friends")
     friendslist = []
     unless f.blank?

@@ -21,7 +21,7 @@ class MoviesController < ApplicationController
     @friends = current_user.friendslist
     credits = @movie.credits
 
-    @directors = credits['crew']['Director'].join(', ') unless credits['crew'].blank?
+    @directors = credits['crew']['Director'].join(', ') unless credits['crew']['Director'].blank?
     @actors = credits['cast'].take(5).join(', ')
     @genres = @movie.genres.take(2).join(', ')
     @clap_score = @movie.clap_score

@@ -18,7 +18,7 @@ $(function(){
   window.sr = ScrollReveal({ reset: true });
   sr.reveal('.movie-item', {
     origin: 'top',
-    duration: 500,
+    duration: 300,
     mobile: true,
     // container: '#scrollable-list'
   });
