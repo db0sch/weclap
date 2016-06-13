@@ -7,8 +7,8 @@
             <input type="text" class="movie-search-field" id="search-field" name="title" placeholder="Search something">
  -->
           <form action="/search" method="get" class="movie-search-bar-form">
-            <input type="text" class="movie-search-field" id="search-field" name="terms" placeholder="Search something">
-            <button type="submit" style='outline-width: 0;' id="search-button">Search</button>
+            <input type="text" class="movie-search-field" id="search-field" name="terms" placeholder="<%= t ('search-something') %>">
+            <button type="submit" style='outline-width: 0;' id="search-button"><%= t ('search') %></button>
           </form>
         </div>
       </div>

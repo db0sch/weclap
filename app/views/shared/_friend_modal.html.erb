@@ -46,7 +46,7 @@
         <% end %>
         <!-- no uncommon movies -->
         <% if uncommon_movies.empty? %>
-          <div><h4><%= t ('nomore') %></h4></div>
+          <div><h4><%= friend.first_name %> <%= t ('nomore') %></h4></div>
         <!-- uncommon movies -->
         <% else %>
           <div>
