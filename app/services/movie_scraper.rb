@@ -72,12 +72,11 @@ class MovieScraper
     end
 
     def find_showtimes_of_the_day(zip_code, city, movie, limit, no_nearing = false)
-      shows = {}
       url = "http://www.imdb.com/showtimes/title/#{movie.imdb_id}/FR/#{zip_code}"
       response = RestClient.get url
-      return unless response.code == 200
+      return {} unless response.code == 200
       theaters = Nokogiri::HTML(response.body).search(".list_item")
-
+      shows = {}
       # First we go through each theater from IMDB and find or create them
       # We then create an array of [[TheaterInstance, NokogiriData], [TheaterInstance, NokogiriData]]
       theaters_data = theaters.map do |t|
@@ -128,15 +127,15 @@ class MovieScraper
       pos = movie.cnc_url =~ /\&format\=/
       movie_url = pos ? movie.cnc_url[0...pos] : movie.cnc_url
       movie_url += '&format=4002'
-      streamings = {}
       begin
         response = RestClient.get(movie_url)
         fail unless response.code == 200
       rescue
         puts "Could not retrieve data from the CNC website"
-        return nil
+        return {}
       end
 
+      streamings = {}
       doc = Nokogiri::HTML(response.body)
       doc.search(".film-title-search").each do |element|
         local_url = CGI::escapeHTML(element.attribute('href').value).gsub(/°/, '&deg;')
