@@ -3,7 +3,13 @@
     <%= image_tag movie.poster_url ? movie.poster_url : "http://placehold.it/40x60", alt: movie.title, class: "movie-item-image hidden-xs" %>
   <% end %>
   <div class='movie-item-body'>
-    <h3><%= link_to movie.title, movie_path(movie.id) %></h3>
+    <% if I18n.locale == :fr %>
+   <!-- REMPLACER PAR TITLE_FR -->
+      <h3><%= link_to movie.title, movie_path(movie.id) %></h3>
+    <% else %>
+      <h3><%= link_to movie.title, movie_path(movie.id) %></h3>
+    <% end %>
+
     <div class="crew">
       <p class="item-director"><%= t ('movie-item.directed-by') %>: <%= movie.credits['crew']['Director'].join(', ') unless movie.credits['crew']['Director'].blank? %></p>
       <p class="item-cast-crew"><%= t ('movie-item.starring') %>: <%= movie.credits['cast'].take(5).join(', ')%></p>

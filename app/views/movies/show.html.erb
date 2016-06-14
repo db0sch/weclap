@@ -6,7 +6,14 @@
         <div class="movie-info-container boxing">
           <div class="movie-basic-info">
             <div class="movie-info-left">
-              <span class="movie-title"><%= @movie.title%><%= " (#{@movie.release_date.to_date.year})" if @movie.release_date %></span>
+              <span class="movie-title">
+                 <% if I18n.locale == :fr %>
+                 <!-- REMPLACER PAR TITLE_FR -->
+                    <%= @movie.title%>
+                  <% else %>
+                    <%= @movie.title%>
+                  <% end %>
+              <%= " (#{@movie.release_date.to_date.year})" if @movie.release_date %></span>
               <% if @movie.imdb_id %>
                 <span class="imdb-rating" data-user="" data-title="<%= @movie.imdb_id %>" data-style="p4">
                   <%= link_to "http://www.imdb.com/title/#{@movie.imdb_id}/?ref_=plg_rt_1" do %>
@@ -85,8 +92,20 @@
 
         <div class="movie-synopsis">
           <div class="container-synopsis">
-            <h4><%= t ('movie-item.synopsis') %></h4>
-            <p><%= @movie.overview %></p>
+            <% if I18n.locale == :fr %>
+              <h4><%= t ('movie-item.synopsis') %></h4>
+
+
+
+<!-- REMPLACER PAR OVERVIEW_FR -->
+              <p><%= @movie.overview %></p>
+
+
+            <% else %>
+              <h4><%= t ('movie-item.synopsis') %></h4>
+              <p><%= @movie.overview %></p>
+            <% end %>
+
           </div>
         </div>
       </div>

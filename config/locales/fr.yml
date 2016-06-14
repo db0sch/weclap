@@ -44,7 +44,7 @@ fr:
     common: "Vos films en commun"
     uncommon: "Les autres films de"
     nomore: "n'a pas d'autre film"
-    friendsinterest: ": sa Claplist"
+    friendsinterest: "La Claplist de %{name}"
     close: "Fermer"
 
   devise:
