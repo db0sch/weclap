@@ -14,13 +14,25 @@
     <!-- Different navigation if login or not -->
     <% if user_signed_in? %>
       <!-- Button (call-to-action) -->
-      <div class="fb-messengermessageus" 
-      messenger_app_id="1054618387948073" 
+<!--
+      <div class="fb-messengermessageus"
+      messenger_app_id="1054618387948073"
+ -->
+      <% if current_user.messenger_id.blank? %>
+        <div class="fb-send-to-messenger"
+        messenger_app_id="263884933962717"
+        page_id="188469658220408"
+        data-ref="<%= current_user.id %>"
+        color="blue"
+        size="standard"></div>
+      <% end %>
+     <!--  <div class="fb-messengermessageus"
+      messenger_app_id="1054618387948073"
       page_id="1593695557626599"
       color="white"
-      size="large" ></div>
-      <%= button_to t(".top_call_to_action", default: "Movies"), movies_path, method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
-      <%= button_to t(".top_call_to_action", default: "Watchlist"), watchlist_path(current_user), method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
+      size="large" ></div> -->
+      <%= button_to t(".top_call_to_action", default: (t ('navbar.find'))), movies_path, method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
+      <%= button_to t(".top_call_to_action", default: (t ('navbar.wl'))), watchlist_path(current_user), method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
 
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item">
@@ -31,17 +43,17 @@
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
               <%= link_to user_friendships_path(current_user) do %>
-                <i class="fa fa-users"></i> <%= t ".friends", default: "Friends" %>
+                <i class="fa fa-users"></i> <%= t ".friends", default: (t ('navbar.friends')) %>
               <% end %>
             </li>
             <li>
               <%= link_to watchlist_path(current_user) do %>
-                <i class="fa fa-film"></i>  <%= t ".watchlist", default: "Watchlist" %>
+                <i class="fa fa-film"></i>  <%= t ".watchlist", default: (t ('navbar.wl')) %>
               <% end %>
             </li>
             <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
-                <i class="fa fa-sign-out"></i>  <%= t ".sign_out", default: "Log out" %>
+                <i class="fa fa-sign-out"></i>  <%= t ".sign_out", default: (t ('navbar.log-out')) %>
               <% end %>
             </li>
           </ul>
@@ -59,17 +71,17 @@
 
           <li>
             <%= link_to user_friendships_path(current_user) do %>
-              <i class="fa fa-users"></i> <%= t ".friends", default: "Friends" %>
+              <i class="fa fa-users"></i> <%= t ".friends", default: (t ('navbar.friends')) %>
             <% end %>
           </li>
           <li>
             <%= link_to watchlist_path(current_user) do %>
-              <i class="fa fa-film"></i>  <%= t ".watchlist", default: "Watchlist" %>
+              <i class="fa fa-film"></i>  <%= t ".watchlist", default:(t ('navbar.wl')) %>
             <% end %>
           </li>
           <li>
             <%= link_to destroy_user_session_path, method: :delete do %>
-              <i class="fa fa-sign-out"></i>  <%= t ".sign_out", default: "Log out" %>
+              <i class="fa fa-sign-out"></i>  <%= t ".sign_out", default: (t ('navbar.log-out')) %>
             <% end %>
           </li>
         </ul>

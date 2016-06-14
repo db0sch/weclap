@@ -7,7 +7,7 @@
           <form action="/movies" method="get">
             <input name="results" class="hidden">
             <button type="submit" class="none <%= 'underline' if params[:results] %>">
-              <h3 class="tabs-title flex-tab-item">Results</h3>
+              <h3 class="tabs-title flex-tab-item"><%= t ('list.results') %></h3>
             </button>
           </form>
         </li>
@@ -23,7 +23,7 @@
           <form action="/movies" method="get">
             <input name="ontheater" class="hidden">
             <button type="submit" class="none <%= 'underline' if params[:ontheater] %>">
-              <h3 class="tabs-title flex-tab-item">On theater</h3>
+              <h3 class="tabs-title flex-tab-item"><%= t ('movie-item.on-theater') %></h3>
             </button>
           </form>
         </li>
@@ -31,13 +31,13 @@
           <form action="/movies" method="get">
             <input name="onvod" class="hidden">
             <button type="submit" class="none <%= 'underline' if params[:onvod] %>">
-              <h3 class="tabs-title flex-tab-item">On VOD</h3>
+              <h3 class="tabs-title flex-tab-item"><%= t ('movie-item.on-vod') %></h3>
             </button>
           </form>
         </li>
       </ul>
       <% if @movies.empty? %>
-        <h3 class="section-title">Try another request</h3>
+        <h3 class="section-title"><%= t ('list.empty') %></h3>
       <% else %>
         <% list.each do |movie| %>
           <%= render 'shared/movie_item', movie: movie, friends: @friends, interest: nil %>

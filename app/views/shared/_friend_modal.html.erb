@@ -5,19 +5,19 @@
       <div class="modal-header">
       <!-- button close -->
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title text-center" id="myModalLabel"><%= friend.first_name %>'s watch list</h3>
+        <h3 class="modal-title text-center" id="myModalLabel"><%= t ('friends.friendsinterest'), name: friend.first_name %></h3>
       </div>
       <!-- common movies -->
       <div class="modal-body">
         <!-- no common movies -->
         <% if common_movies.empty? %>
           <div>
-            <h4>You have no common movies with <%= friend.first_name %></h4>
+            <h4><%= t ('friends.nocommon') %> <%= friend.first_name %></h4>
           </div>
         <!-- common movies   -->
         <% else %>
           <div>
-            <h4>Your common movies</h4>
+            <h4><%= t ('friends.common') %></h4>
             <% common_movies.each do |movie_id| %>
               <div>
                 <%= link_to  movie_path(movie_id) do %>
@@ -46,11 +46,11 @@
         <% end %>
         <!-- no uncommon movies -->
         <% if uncommon_movies.empty? %>
-          <div><h4><%= friend.first_name %> hasn't other movies</h4></div>
+          <div><h4><%= friend.first_name %> <%= t ('friends.nomore') %></h4></div>
         <!-- uncommon movies -->
         <% else %>
           <div>
-            <h4>The other movies of <%= friend.first_name %></h4>
+            <h4><%= t ('friends.uncommon') %> <%= friend.first_name %></h4>
             <% uncommon_movies.each do |movie| %>
               <div>
                 <div class="modal-item">
@@ -76,7 +76,7 @@
       </div>
       <!-- close button -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t ('friends.close') %></button>
       </div>
     </div>
   </div>

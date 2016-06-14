@@ -3,10 +3,16 @@
     <%= image_tag movie.poster_url ? movie.poster_url : "http://placehold.it/40x60", alt: movie.title, class: "movie-item-image hidden-xs" %>
   <% end %>
   <div class='movie-item-body'>
-    <h3><%= link_to movie.title, movie_path(movie.id) %></h3>
+    <% if I18n.locale == :fr %>
+   <!-- REMPLACER PAR TITLE_FR -->
+      <h3><%= link_to movie.title, movie_path(movie.id) %></h3>
+    <% else %>
+      <h3><%= link_to movie.title, movie_path(movie.id) %></h3>
+    <% end %>
+
     <div class="crew">
-      <p class="item-director">Directed by: <%= movie.credits['crew']['Director'].join(', ') unless movie.credits['crew']['Director'].blank? %></p>
-      <p class="item-cast-crew">Cast: <%= movie.credits['cast'].take(5).join(', ')%></p>
+      <p class="item-director"><%= t ('movie-item.directed-by') %>: <%= movie.credits['crew']['Director'].join(', ') unless movie.credits['crew']['Director'].blank? %></p>
+      <p class="item-cast-crew"><%= t ('movie-item.starring') %>: <%= movie.credits['cast'].take(5).join(', ')%></p>
     </div>
     <div class="movie-infos">
       <p class="item-year-released"><%= movie.release_date.to_date.year %></p>
@@ -20,7 +26,7 @@
         <%= link_to icon('times'), interest_path(interest), method: :delete, class: "item-cross", remote: true unless interest.nil? %>
         <% if interest %>
           <% if interest.rating.nil? %>
-            <p class="rating-text">Rate this movie</p>
+            <p class="rating-text"><%= t ('movie-item.rating') %></p>
           <% end %>
         <% end %>
         <div class="list-inline movie-item-controls movie-rating">
@@ -30,7 +36,7 @@
       <% else %>
         <div class="list-inline movie-item-controls movie-rating">
           <%# link_to icon('plus-circle'), interests_path(movie_id: movie), method: :post, remote: true, class: "movie-add-btn", id: "movie-add-#{movie.id}" %>
-          <%= link_to "Want to watch", interests_path(movie_id: movie), method: :post, remote: true, class: "movie-add-btn btn btn-success", id: "movie-add-#{movie.id}" %>
+          <%= link_to (t ('movie-item.add-to-wl')), interests_path(movie_id: movie), method: :post, remote: true, class: "movie-add-btn btn btn-success", id: "movie-add-#{movie.id}" %>
         </div>
       <% end %>
     </div>
@@ -59,12 +65,13 @@
           <% else %>
             <% if movie.id == interest.movie_id %>
               <%= link_to user_friendships_path(current_user), style: "text-decoration: none;" do %>
-                <div style="background-image: url(<%= image_path(User.find(b).picture)%>)" class="avatar rating rating-container" data-toggle="tooltip" data-placement="bottom" title=<%=User.find_by_uid(friend_uid).first_name%>>
+                <div style="background-image: url(<%= image_path(User.find(friend_uid).picture)%>)" class="avatar rating rating-container" data-toggle="tooltip" data-placement="bottom" title=<%=User.find_by_uid(friend_uid).first_name%>>
                   <div class="rating-gradient">
                   </div>
                   <div id="rating"><%= interest.rating %><i class="fa fa-star" id="star-rating"></i>
                   </div>
                 </div>
+
               <% end %>
             <% end %>
           <% end %>
