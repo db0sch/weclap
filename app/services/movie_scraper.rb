@@ -193,6 +193,7 @@ class MovieScraper
         next unless movie_response.code == 200
         film = JSON.parse(movie_response.body)
         next if film['imdb_id'].blank?
+        r_date = film['release_date'].blank? ? movie.release_date : film['release_date'].to_date
         movie = Movie.unscoped.new({
           title: film['title'],
           original_title: film['original_title'],
@@ -204,18 +205,16 @@ class MovieScraper
           imdb_score: film['vote_average'],
           tmdb_id: film['id'],
           adult: film['adult'],
-          budget: film['budget'],
           overview: film['overview'],
           popularity: film['popularity'],
           original_language: film['original_language'],
-          poster_path: film['poster_path'],
-          production_countries: film['production_countries'],
-          release_date: film['release_date'],
+          release_date: r_date,
           spoken_languages: film['spoken_languages'],
           credits: { cast: get_cast(film['id']), crew: get_crew(film['id']) },
           trailer_url: "https://www.youtube.com/embed#{get_youtube(film['title'])}?rel=0&amp;showinfo=0",
           website_url: "http://www.imdb.com/title/#{film['imdb_id']}",
-          cnc_url: "http://vad.cnc.fr/titles?search=#{film['title'].gsub(" ", "+")}&format=4002"
+          cnc_url: "http://vad.cnc.fr/titles?search=#{film['title'].gsub(" ", "+")}&format=4002",
+          setup: true
         })
         puts "#{'%5i' % count += 1}. #{movie.title} (imdb_id: #{movie.imdb_id})"
         movie.valid? ? movie.save : (puts "---> Not persisted: " + movie.errors.full_messages.to_s)
