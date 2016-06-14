@@ -1,5 +1,13 @@
 class Movie < ActiveRecord::Base
-  # searchkick
+  include PgSearch
+  pg_search_scope :which_title_contains,
+                  against: { title: 'A', original_title: 'B', tagline: 'D', overview: 'C' },
+                  ignoring: :accents,
+                  using: {
+                            tsearch: { prefix: true, any_word: true }#,
+                            # dmetaphone: { any_word: true },
+                            # trigram: { only: :original_title }
+                         }
 
   has_many :interests, dependent: :destroy
   has_many :users, through: :interests
@@ -12,7 +20,6 @@ class Movie < ActiveRecord::Base
 
   validates :imdb_id, uniqueness: true
 
-  # scope :set_up, -> { where(setup: true) }
   default_scope { where(setup: true) }
 
   def clap_score
