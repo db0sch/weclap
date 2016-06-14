@@ -1,5 +1,6 @@
-.container-search-bar {
-  padding-top: 28px;
+.movie-search-bar-container {
+  flex: 1 1 auto;
+  padding: 0 20px;
 }
 
 .movie-search-bar-form {
@@ -9,7 +10,7 @@
 
 .movie-search-field {
   margin-right: 0px;
-  flex: 1 0 175px;
+  flex: 1 0 auto;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
   border-top-left-radius: 20px;

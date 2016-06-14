@@ -36,8 +36,8 @@ fr:
     friends: "Amis"
     log-out: "Déconnexion"
     message: "Contactez nous"
-    find: "Trouver"
-    wl: "Claplist"
+    find: "Suggestions"
+    wl: "Mes films"
 
   friends:
     nocommon: "Vous n'avez pas de film en commun"
