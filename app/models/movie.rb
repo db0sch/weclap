@@ -1,13 +1,21 @@
 class Movie < ActiveRecord::Base
   include PgSearch
-  pg_search_scope :which_title_contains,
+  pg_search_scope :autocomplete_title,
+                  against: { title: 'A', original_title: 'B' },
+                  ignoring: :accents,
+                  using: { tsearch: { prefix: true, any_word: true } },
+                  order_within_rank: "movies.imdb_score DESC"
+
+  pg_search_scope :which_title_or_synopsis_contains,
                   against: { title: 'A', original_title: 'B', tagline: 'D', overview: 'C' },
                   ignoring: :accents,
                   using: {
-                            tsearch: { prefix: true, any_word: true }#,
-                            # dmetaphone: { any_word: true },
+                            tsearch: { prefix: true },
+                            dmetaphone: { only: [:title, :origin_title] }#,
+                            # dmetaphone: { any_word: true, only: [:title, :origin_title] }#,
                             # trigram: { only: :original_title }
-                         }
+                         },
+                  order_within_rank: "movies.imdb_score DESC"
 
   has_many :interests, dependent: :destroy
   has_many :users, through: :interests
@@ -20,7 +28,7 @@ class Movie < ActiveRecord::Base
 
   has_many :jobs, dependent: :destroy
   has_many :people, through: :jobs
-  
+
   validates :imdb_id, uniqueness: true
 
   default_scope { where(setup: true) }

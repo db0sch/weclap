@@ -8,7 +8,9 @@ Rails.application.routes.draw do
     resources :interests, only: [:create, :update, :destroy]
 
     get '/users/:user_id/watchlist' => 'interests#index', as: 'watchlist'
+
     get 'search' => 'search#index'
+    get 'search/autocomplete', to: 'search#autocomplete'
 
     authenticated :user do
       root 'interests#index', as: :authenticated_root
