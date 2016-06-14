@@ -10,6 +10,9 @@ class Movie < ActiveRecord::Base
   has_many :streamings, dependent: :destroy
   has_many :providers, -> { distinct }, through: :streamings
 
+  has_many :jobs, dependent: :destroy
+  has_many :people, through: :jobs
+  
   validates :imdb_id, uniqueness: true
 
   # scope :set_up, -> { where(setup: true) }
