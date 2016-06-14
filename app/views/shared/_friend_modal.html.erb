@@ -5,19 +5,19 @@
       <div class="modal-header">
       <!-- button close -->
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title text-center" id="myModalLabel"><%= friend.first_name %><%= t ('friends.friendsinterest') %></h3>
+        <h3 class="modal-title text-center" id="myModalLabel"><%= t ('friends.friendsinterest'), name: friend.first_name %></h3>
       </div>
       <!-- common movies -->
       <div class="modal-body">
         <!-- no common movies -->
         <% if common_movies.empty? %>
           <div>
-            <h4><%= t ('nocommon') %> <%= friend.first_name %></h4>
+            <h4><%= t ('friends.nocommon') %> <%= friend.first_name %></h4>
           </div>
         <!-- common movies   -->
         <% else %>
           <div>
-            <h4><%= t ('common') %></h4>
+            <h4><%= t ('friends.common') %></h4>
             <% common_movies.each do |movie_id| %>
               <div>
                 <%= link_to  movie_path(movie_id) do %>

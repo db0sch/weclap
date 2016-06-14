@@ -29,8 +29,8 @@ en:
     discover: "A WIDE ARRAY OF MOVIES, JUST PICK YOUR FAVORITES AND FILL YOUR WATCHLIST !"
     plan-title: "Plan"
     plan: "WATCH DIRECTLY VOD FROM HOME OR PLAN MOVIE NIGHTS AT YOUR LOCAL CINEMA"
-    Share-title: "Share"
-    Share: "SHARE YOUR CLAPLIST WITH YOUR FRIENDS AND WATCH MOVIES TOGETHER"
+    share-title: "Share"
+    share: "SHARE YOUR CLAPLIST WITH YOUR FRIENDS AND WATCH MOVIES TOGETHER"
     soon: "Soon on your devices"
     login: "You need to be logged in to continue"
     login-fb: "Log in with Facebook"
@@ -67,6 +67,11 @@ en:
     nocommon: "You have no common movies with"
     common: "Your common movies"
     uncommon: "The other movies of"
-    nomore: "#{friend.first_name} hasn't other movie"
-    friendsinterest: "'s Claplist"
+    nomore: "hasn't other movie"
+    friendsinterest: "%{name}'s Claplist"
     close: "Close"
+
+  tables:
+    title:
+    description: "%{@movie.overview}"
+
