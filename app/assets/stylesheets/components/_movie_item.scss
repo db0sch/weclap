@@ -68,6 +68,8 @@
   margin: 4px;
 }
 .movie-social {
+  align-self: flex-end;
+  margin-bottom: 5px;
   display: flex;
   align-items: flex-end;
 }
@@ -121,7 +123,7 @@
   display: flex;
   align-items: center;
   text-align: center;
-  margin: 0px;
+  // margin: 0px;
   .movie-add-btn {
     width: 105px;
   }

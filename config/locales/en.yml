@@ -47,7 +47,7 @@ en:
   movie-item:
     rating: "Rate this movie"
     synopsis: "Synopsis"
-    starring: "Staring"
+    starring: "Starring"
     genres: "Genres"
     adult: "Adult"
     forall: "For all"
