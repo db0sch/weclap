@@ -13,12 +13,12 @@
   flex: 1 0 auto;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
   transition: all 0.15s ease;
   line-height: 40px;
   font-weight: lighter;
-  padding: 0 18px;
+  padding: 0 0 0 15px;
   font-size: 14px;
   outline: none;
   color: #666666;
@@ -29,10 +29,10 @@
   margin-left: 0px;
   flex: 0 1 100px;
   z-index: 1;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
+  // border-top-right-radius: 20px;
+  // border-bottom-right-radius: 20px;
+  // border-top-left-radius: 0px;
+  // border-bottom-left-radius: 0px;
 }
 
 
@@ -44,8 +44,8 @@
   -ms-flex: 0 1 100px;
   flex: 0 1 100px;
   z-index: 1;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
   border: none;
@@ -68,13 +68,19 @@
 .ui-autocomplete {
   list-style: none;
   line-height: 25px;
-  padding-left: 18px;
+  padding-left: 0px;
   z-index: 1001;
+  background-color: white;
+  border-top: 1px solid #E8E8E8;
+  box-shadow: 1px 1px 1px #C6C6C6;
   li {
-    background-color: white;
     font-family: Open Sans;
     font-weight: 200;
     font-size: 14px;
+    padding-left: 15px;
+    &:hover {
+      background-color: #EDEDFF;      
+    }
     &:last-child {
       border-radius: 0 0 3px 3px;
     }
