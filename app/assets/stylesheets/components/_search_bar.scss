@@ -64,3 +64,20 @@
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
+
+.ui-autocomplete {
+  list-style: none;
+  line-height: 25px;
+  padding-left: 18px;
+  z-index: 1001;
+  li {
+    background-color: white;
+    font-family: Open Sans;
+    font-weight: 200;
+    font-size: 14px;
+    &:last-child {
+      border-radius: 0 0 3px 3px;
+    }
+  }
+}
+
