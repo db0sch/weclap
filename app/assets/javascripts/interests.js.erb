@@ -1,0 +1,48 @@
+// Place all the behaviors and hooks related to the matching controller here.
+// All this logic will automatically be available in application.js.
+
+// $("#filter").on("click", function(event) {
+//   $('.interest-js').addClass('hidden');
+// });
+$(document).ready(function() {
+
+  $(function() {
+    $('.selectpicker.checkbox-diff').on('change', function(){
+      var selected = $(this).find("option:selected").val();
+      if (selected === 'on_vod'){
+        $(".interest-js").removeClass('hidden')
+        $(".interest-js:not(.streams)").addClass('hidden');
+      }
+      else if (selected === 'on_Theater'){
+        $(".interest-js").removeClass('hidden')
+        $(".interest-js:not(.theater)").addClass('hidden');
+      }
+      else if (selected === 'all'){
+        $(".interest-js").removeClass('hidden')
+      }
+    });
+
+    $('.selectpicker.sort-by').on('change', function(){
+      var selected = $(this).find("option:selected").val();
+      if (selected === 'rating'){
+
+      }
+      else if (selected === 'release_date'){
+      }
+    });
+  });
+  // $(function() {
+  //   $('.selectpicker').on('change', function(){
+  //     var selected = $(this).find("option:selected").val('on_Theater');
+  //     $(".interest-js:not(.theater)").toggleClass('hidden');
+  //   });
+  // });
+  // $('.selectpicker').selectpicker();
+  // $('.checkbox-diff').find("[value=on_vod]").on("change", function(event) {
+  //     $(".interest-js:not(.streams)").toggleClass('hidden');
+  // });
+  // $("#inlineCheckbox2").on("change", function(event) {
+  //     $(".interest-js:not(.theater)").toggleClass('hidden');
+  // });
+  // $(".chosen-select").chosen({max_selected_options: 5});
+});

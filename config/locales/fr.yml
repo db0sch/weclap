@@ -19,6 +19,7 @@ fr:
     search-something: "Chercher un film"
     results: "Resultats"
     empty: "Oups, nous avons rien trouvé"
+    availability: "Disponible en"
 
   movie-item:
     rating: "Evaluer ce film"
@@ -31,6 +32,7 @@ fr:
     add-to-wl: "Je veux le voir"
     on-theater: "Au cinéma"
     on-vod: "En VOD"
+    all: "Tous"
 
   navbar:
     friends: "Amis"
@@ -46,6 +48,28 @@ fr:
     nomore: "n'a pas d'autre film"
     friendsinterest: "La Claplist de %{name}"
     close: "Fermer"
+
+  genres:
+    Action: "Action"
+    Adventure: "Aventures"
+    Animation: "Animation"
+    Comedy: "Comédie"
+    Crime: "Crime"
+    Documentary: "Documentaires"
+    Drama: "Drame"
+    Family: "Famille"
+    Fantasy: "Fantastique"
+    Foreign: "Etranger"
+    History: "Historique"
+    Horror: "Horreur"
+    Music: "Musique"
+    Mystery: "Mystère"
+    Romance: "Romance"
+    Science Fiction: "Science Fiction"
+    Tv Movie: "Téléfilm"
+    Thriller: "Thriller"
+    War: "Guerre"
+    Western: "Western"
 
   devise:
     confirmations:

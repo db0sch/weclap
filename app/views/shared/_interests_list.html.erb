@@ -1,6 +1,47 @@
 <div class="container padded">
   <div class="row"x>
     <div class="col-xs-10 col-xs-offset-1">
+    <div style="display: inline">
+    <!-- availability -->
+      <div class="dropdown" style="display: inline">
+        <select class="selectpicker checkbox-diff" data-width="33%" title=<%=t ('list.availability')%>>
+          <%= t ('list.availability') %>
+          <option value="all"><%= t ('movie-item.all') %>
+          </option>
+          <option value="on_vod"><%= t ('movie-item.on-vod') %>
+          </option>
+          <option value="on_Theater"><%= t ('movie-item.on-theater') %>
+          </option>
+        </select>
+      </div>
+    <!-- released_date -->
+    <!-- sort_by imdb_rating/release_date/duration -->
+      <div class="dropdown" style="display: inline">
+        <select class="selectpicker sort-by" data-width="33%" title='SORT BY'>
+          <%= t ('list.availability') %>
+          <option value="rating"><%= t ('movie-item.rating') %>
+          </option>
+          <option value="release_date"><%= t ('movie-item.release_date') %>
+          </option>
+        </select>
+      </div>
+
+    <!-- filterby duration -->
+    <!-- genres -->
+    <div class="dropdown" style="display: inline">
+      <select class="selectpicker" data-size="5" data-width="33%" multiple title=<%=t ('movie-item.genres')%>>
+        <% api_url = "http://api.themoviedb.org/3/genre/movie/list?api_key=#{ENV['TMDB_API_KEY']}" %>
+        <% open(api_url) do |f| %>
+          <% genres = JSON.parse(f.read) %>
+          <% genres['genres'].each do |g| %>
+              <option value=<%= "#{g['id']}" %>><%= t ("genres.#{g['name']}") %></option>
+            <% end %>
+        <% end %>
+      </select>
+    </div>
+  </div>
+
+
       <h3 class="section-title"><%= t ('list.mywl') %></h3>
       <div id="unwatched-movie-list">
         <% list.each do |interest| %>

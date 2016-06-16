@@ -11,7 +11,7 @@ class InterestsController < ApplicationController
 
   def create
 
-    @friend = User.where(uid: current_user.friendslist)
+    #@friend = User.where(uid: current_user.friendslist)
     @interest = Interest.new
     @interest.movie = @movie
     @interest.user = current_user

@@ -43,6 +43,7 @@ en:
     search-something: "Search something"
     results: "Results"
     empty: "Try another request"
+    availability: "available on"
 
   movie-item:
     rating: "Rate this movie"
@@ -55,6 +56,7 @@ en:
     add-to-wl: "Want to watch"
     on-theater: "On theater"
     on-vod: "On VOD"
+    all: "All"
 
   navbar:
     friends: "Friends"

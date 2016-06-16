@@ -26,4 +26,5 @@ class Movie < ActiveRecord::Base
     end
     sum / count unless count == 0
   end
+
 end
