@@ -31,7 +31,7 @@
 }
 
 .movie-item-right-part {
-  flex: 1 0 20%;
+  flex: 0 0 20%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -39,7 +39,7 @@
 
 
 .movie-item-social {
-  flex: 1 0 10%;
+  flex: 1 0 15%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,6 +68,8 @@
   margin: 4px;
 }
 .movie-social {
+  align-self: flex-end;
+  margin-bottom: 5px;
   display: flex;
   align-items: flex-end;
 }
@@ -96,9 +98,7 @@
 
 /* Body design */
 .movie-item-body {
-  flex: 1 1 70%;
-}
-.movie-item-body {
+  flex: 1 1 50%;
   h3 {
   font-weight: 200;
   font-size: 24px;
@@ -121,7 +121,7 @@
   display: flex;
   align-items: center;
   text-align: center;
-  margin: 0px;
+  // margin: 0px;
   .movie-add-btn {
     width: 105px;
   }
@@ -275,5 +275,12 @@
   color: #ffffff;
   font-weight: 100;
   opacity: 0.8;
+}
+
+.movie-item-friends-interests-link {
+  text-decoration: none;
+  font-size: 10px;
+  color: #585858;
+
 }
 

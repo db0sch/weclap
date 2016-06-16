@@ -51,20 +51,6 @@
   border: none;
 }
 
-#search-button:hover {
-  color: white;
-  background-color: #31708f;
-  margin-left: 0px;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 1 100px;
-  flex: 0 1 100px;
-  z-index: 1;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
-}
-
 .ui-autocomplete {
   list-style: none;
   line-height: 25px;

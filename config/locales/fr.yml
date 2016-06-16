@@ -31,6 +31,17 @@ fr:
     add-to-wl: "Je veux le voir"
     on-theater: "Au cinéma"
     on-vod: "En VOD"
+    friendsnotseen:
+        one:   'Un ami veut voir ce film.'
+        other: '%{count} amis veulent le voir.'
+    friendshaveseen:
+        one:   'Un ami a déjà vu ce film.'
+        other: "%{count} amis l'ont déjà vu."
+    modal-friends:
+        title: 'Vos amis'
+        friends-want-to-see: 'Amis qui veulent voir ce film.'
+        friends-have-seen: 'Amis qui ont déjà vu ce film.'
+        close: 'Fermer'
 
   navbar:
     friends: "Amis"
