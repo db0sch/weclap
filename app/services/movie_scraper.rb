@@ -30,26 +30,23 @@ class MovieScraper
 
     def get_movie_details(imdb_id)
       puts "retrieving movie (imdb_id: #{imdb_id}) from tmdb"
+#SBE 2do do not call each time
+Tmdb::Api.key(ENV['TMDB_API_KEY'])
 
-      Tmdb::Api.key(ENV['TMDB_API_KEY'])
-      Tmdb::Api.language("fr")
-      # retrieve_all_genres
+      tmdb_mv = Tmdb::Find.imdb_id(imdb_id)
+      return if tmdb_mv.blank? || (tmdb_mv = tmdb_mv['movie_results']).blank?
+      # p tmdb_mv = tmdb_mv['movie_results']
+      tmdb_id = tmdb_mv.first['id']
 
-      tmdb_mv = Tmdb::Find.imdb_id(imdb_id)['movie_results'].first
-      return if tmdb_mv.nil?
-
-      movie_response = RestClient.get "http://api.themoviedb.org/3/movie/#{tmdb_mv['id']}?language=fr&api_key=#{ENV['TMDB_API_KEY']}"
-      return unless movie_response.code == 200
-      mv = JSON.parse(movie_response.body)
-
-      if mv
+      if mv = get_movie_description_through_api(tmdb_id, imdb_id, 'en')
         collection = mv['belongs_to_collection'] ? { mv['belongs_to_collection']['id'] => mv['belongs_to_collection']['name'] } : nil
-        movie = Movie.unscoped.find_by(imdb_id: imdb_id)
+        return unless movie = Movie.unscoped.find_by(imdb_id: imdb_id)
         r_date = mv['release_date'].blank? ? movie.release_date : mv['release_date'].to_date
+
         movie.update({
           title: mv['title'],
           original_title: mv['original_title'],
-          tmdb_id: mv['id'],
+          tmdb_id: tmdb_id,
           runtime: mv['runtime'],
           tagline: mv['tagline'],
           genres: mv['genres'].map { |genre| genre.values.last },
@@ -67,7 +64,7 @@ class MovieScraper
           website_url: "http://www.imdb.com/title/#{imdb_id}",
           cnc_url: "http://vad.cnc.fr/titles?search=#{mv['original_title'].gsub(" ", "+")}&format=4002",
           setup: true
-        })
+        }.merge(fields_in_french_for(tmdb_id, imdb_id)))
       end
     end
 
@@ -245,11 +242,13 @@ class MovieScraper
 
     def get_cast(movie_id, limit = 10)
       cast = Tmdb::Movie.casts(movie_id)
+      cast ||= []
       cast.map { |char| char['name'] }[0...limit]
     end
 
     def get_crew(movie_id)
       crew = Tmdb::Movie.crew(movie_id)
+      crew ||= {}
       p_crew = {}
       crew.each { |member| p_crew.key?(member['job']) ? p_crew[member['job']] << member['name'] : p_crew[member['job']] = [member['name']] }
       p_crew
@@ -261,6 +260,33 @@ class MovieScraper
 
     def retrieve_all_genres
       p @genres ||= Tmdb::Genre.list['genres'].map(&:values).to_h
+    end
+public
+
+    def get_movie_description_through_api(tmdb_id, imdb_id, lang)
+      # Tmdb::Api.key(ENV['TMDB_API_KEY'])
+      # tmdb_mv = Tmdb::Find.imdb_id(imdb_id)['movie_results']
+      # return if tmdb_mv.nil?
+
+      # tmdb_mv = Tmdb::Find.imdb_id(imdb_id)
+      # return if tmdb_mv.nil?
+      # # p tmdb_mv = tmdb_mv['movie_results']
+      # tmdb_mv = tmdb_mv.first
+      movie_response = RestClient.get "http://api.themoviedb.org/3/movie/#{tmdb_id}?language=#{lang}&api_key=#{ENV['TMDB_API_KEY']}"
+      return unless movie_response.code == 200
+      mv = JSON.parse(movie_response.body)
+    end
+
+    def fields_in_french_for(tmdb_id, imdb_id)
+      # if Tmdb::Movie.translations(tmdb_id)['translations'].find{ |t| t['iso_639_1'] == 'fr' } && \
+      if mv = get_movie_description_through_api(tmdb_id, imdb_id, 'fr')
+        return {
+          fr_title: mv['title'],
+          fr_tagline: mv['tagline'],
+          fr_overview: mv['overview'],
+        }
+      end
+      {}
     end
   end
 end

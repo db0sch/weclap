@@ -1,17 +1,20 @@
 class Movie < ActiveRecord::Base
   include PgSearch
   pg_search_scope :autocomplete_title,
-                  against: { title: 'A', original_title: 'B' },
+                  against: { title: 'C', original_title: 'B' },
+                  # against: { fr_title: 'A', title: 'C', original_title: 'B' },
                   ignoring: :accents,
                   using: { tsearch: { prefix: true, any_word: true } },
                   order_within_rank: "movies.imdb_score DESC"
 
   pg_search_scope :which_title_or_synopsis_contains,
-                  against: { title: 'A', original_title: 'B', tagline: 'D', overview: 'C' },
+                  against: { title: 'C', original_title: 'B', tagline: 'F', overview: 'E' },
+                  # against: { title: 'C', original_title: 'B', tagline: 'F', overview: 'E', fr_title: 'A', fr_overview: 'D' },
                   ignoring: :accents,
                   using: {
                             tsearch: { prefix: true },
                             dmetaphone: { only: [:title, :origin_title] }#,
+                            # dmetaphone: { only: [:fr_title, :title, :origin_title] }#,
                             # dmetaphone: { any_word: true, only: [:title, :origin_title] }#,
                             # trigram: { only: :original_title }
                          },
