@@ -4,26 +4,21 @@
   <% if rating.nil? %>
     <% friends_not_seen << "#{friend.first_name}<br>" %>
   <% else %>
-    <% friends_have_seen << "#{friend.first_name} - #{rating}<br>" %>
+    <% friends_have_seen << "#{friend.first_name} - #{rating}/5<br>" %>
   <% end %>
 <% end %>
 
 <% if friends_not_seen.size > 0 %>
   <div class="friends_tooltip" data-toggle="tooltip" data-placement="top" title="<%=friends_not_seen.join("")%>">
-    <a href="#" data-toggle="modal" data-target=".bs-example-modal-lg"><%=friends_not_seen.size %> friends want to watch the film</a>
+    <a href="#" class="movie-item-friends-interests-link" data-toggle="modal" data-target="#modalfriends-<%= movie.id %>"><%= t('movie-item.friendsnotseen', count: friends_not_seen.size) %></a>
   </div>
 <% end %>
 <% if friends_have_seen.size > 0 %>
   <div class="friends_tooltip" data-toggle="tooltip" data-placement="top" title="<%= friends_have_seen.join("") %>">
-    <p><%=friends_have_seen.size %> friends have seen the film</p>
+    <a href="#" class="movie-item-friends-interests-link" data-toggle="modal" data-target="#modalfriends-<%= movie.id %>"><%=t('movie-item.friendshaveseen', count: friends_have_seen.size) %></a>
   </div>
 <% end %>
 
-
-<div class="modal fade bs-example-modal-lg" id="modalfriends" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      ...
-    </div>
-  </div>
-</div>
+<% if friends_not_seen.size > 0 || friends_have_seen.size > 0 %>
+  <%= render 'shared/movie_item_friends_modal', movie: movie %>
+<% end %>

@@ -1,3 +1,35 @@
-#modalfriends {
-  z-index: 1010;
+.modal-backdrop.in {
+  z-index: -1;
+}
+
+.friend-stripe {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px 0;
+  img {
+    margin: 0 10px;
+  }
+  p {
+    margin: 0 10px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .friend-modal-rating {
+    font-size: 14px;
+    font-weight: 300;
+  }
+}
+
+.friend_movie_item_image {
+  width: 50px;
+}
+
+.friends-list-modal {
+  margin-bottom: 20px;
+  h4 {
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 0px;
+  }
 }
