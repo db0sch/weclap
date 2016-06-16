@@ -1,0 +1,29 @@
+<% friends_not_seen = [] %>
+<% friends_have_seen = [] %>
+<% movie.interested_friends_of(current_user).each do |friend, rating| %>
+  <% if rating.nil? %>
+    <% friends_not_seen << "#{friend.first_name}<br>" %>
+  <% else %>
+    <% friends_have_seen << "#{friend.first_name} - #{rating}<br>" %>
+  <% end %>
+<% end %>
+
+<% if friends_not_seen.size > 0 %>
+  <div class="friends_tooltip" data-toggle="tooltip" data-placement="top" title="<%=friends_not_seen.join("")%>">
+    <a href="#" data-toggle="modal" data-target=".bs-example-modal-lg"><%=friends_not_seen.size %> friends want to watch the film</a>
+  </div>
+<% end %>
+<% if friends_have_seen.size > 0 %>
+  <div class="friends_tooltip" data-toggle="tooltip" data-placement="top" title="<%= friends_have_seen.join("") %>">
+    <p><%=friends_have_seen.size %> friends have seen the film</p>
+  </div>
+<% end %>
+
+
+<div class="modal fade bs-example-modal-lg" id="modalfriends" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      ...
+    </div>
+  </div>
+</div>
