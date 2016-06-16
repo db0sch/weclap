@@ -82,9 +82,8 @@ ActiveRecord::Schema.define(version: 20160615210426) do
   end
 
   create_table "people", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "imdb_id"
+    t.string   "name"
+    t.string   "tmdb_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
