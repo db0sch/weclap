@@ -44,4 +44,15 @@ class Movie < ActiveRecord::Base
     end
     sum / count unless count == 0
   end
+
+  def interested_friends_of(user)
+    friendslist = user.friendslist
+    # movie_friends = self.users.select { |u| friendslist.include?(u.uid) }
+    interest_friends = self.interests.select { |interest| friendslist.include?(interest.user.uid) }
+    movie_friends_hash = {}
+    interest_friends.each do |interest|
+      movie_friends_hash[interest.user] = interest.rating
+    end
+    movie_friends_hash
+  end
 end

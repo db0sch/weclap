@@ -20,6 +20,9 @@
       <p class="item-runtime"><%= movie.runtime %> min</p>
     </div>
   </div>
+  <div class="movie-social movie-item-controls">
+    <%= render 'shared/movie_item_friends_interests', movie: movie %>
+  </div>
   <div class="movie-item-right-part">
     <div class="movie-item-social">
       <% if current_user.movies.include?(movie) %>
@@ -51,32 +54,6 @@
       <div class="channel-label channel-label-cinema">
         <a href=<%=movie_path(movie.id)%>>cinéma</a>
       </div>
-    <% end %>
-  </div>
-  <div class="movie-social movie-item-controls">
-    <% if !@friends.nil? %>
-      <% @friends.each do |friend_uid| %>
-        <% !User.find_by_uid(friend_uid).interests.nil? %>
-        <% User.find_by_uid(friend_uid).interests.each do |interest| %>
-          <% if interest.watched_on.nil? %>
-            <% if movie.id == interest.movie_id %>
-              <%= link_to image_tag(User.find_by_uid(friend_uid).picture, class: "avatar", "data-toggle" => "tooltip", 'data-placement' => "bottom", title: User.find_by_uid(friend_uid).first_name ), user_friendships_path(current_user) %>
-            <% end %>
-          <% else %>
-            <% if movie.id == interest.movie_id %>
-              <%= link_to user_friendships_path(current_user), style: "text-decoration: none;" do %>
-                <div style="background-image: url(<%= image_path(User.find(friend_uid).picture)%>)" class="avatar rating rating-container" data-toggle="tooltip" data-placement="bottom" title=<%=User.find_by_uid(friend_uid).first_name%>>
-                  <div class="rating-gradient">
-                  </div>
-                  <div id="rating"><%= interest.rating %><i class="fa fa-star" id="star-rating"></i>
-                  </div>
-                </div>
-
-              <% end %>
-            <% end %>
-          <% end %>
-        <% end %>
-      <% end %>
     <% end %>
   </div>
 </div>

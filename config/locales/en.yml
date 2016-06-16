@@ -47,7 +47,7 @@ en:
   movie-item:
     rating: "Rate this movie"
     synopsis: "Synopsis"
-    starring: "Staring"
+    starring: "Starring"
     genres: "Genres"
     adult: "Adult"
     forall: "For all"
@@ -55,6 +55,17 @@ en:
     add-to-wl: "Want to watch"
     on-theater: "On theater"
     on-vod: "On VOD"
+    friendsnotseen:
+        one:   'One friend wants the see it.'
+        other: '%{count} friends want to see it.'
+    friendshaveseen:
+        one:   'One friend has seen it.'
+        other: '%{count} friends have seen it.'
+    modal-friends:
+        title: 'Your friends'
+        friends-want-to-see: 'Friends who want to see this film'
+        friends-have-seen: 'Friends who have already seen this film'
+        close: 'Close'
 
   navbar:
     friends: "Friends"

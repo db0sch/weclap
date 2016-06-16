@@ -1,0 +1,54 @@
+<div class="modal fade" id="modalfriends-<%= movie.id %>" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabel"><%= t('movie-item.modal-friends.title') %></h4>
+      </div>
+      <div class="modal-body">
+        <div class="friends-list-modal">
+          <h4><%= t('movie-item.modal-friends.friends-want-to-see') %></h4>
+          <% movie.interested_friends_of(current_user).each do |friend, rating| %>
+            <% if rating.nil? %>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="friend-stripe">
+                    <% if friend.picture %>
+                      <%= image_tag friend.picture, alt: friend.fullname, class: "friend_movie_item_image" %>
+                    <% else %>
+                      <%= image_tag "http://placehold.it/40x60", alt: "placeholder", class: "friend_movie_item_image" %>
+                    <% end %>
+                    <p><%= "#{friend.first_name} #{friend.last_name}" %></p>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="friends-list-modal">
+          <h4><%= t('movie-item.modal-friends.friends-have-seen') %></h4>
+          <% movie.interested_friends_of(current_user).each do |friend, rating| %>
+            <% if rating %>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="friend-stripe">
+                    <% if friend.picture %>
+                      <%= image_tag friend.picture, alt: friend.fullname, class: "friend_movie_item_image" %>
+                    <% else %>
+                      <%= image_tag "http://placehold.it/40x60", alt: "placeholder", class: "friend_movie_item_image" %>
+                    <% end %>
+                    <p><%= "#{friend.first_name} #{friend.last_name}" %></p>
+                    <p class="friend-modal-rating"><%= "#{friend.first_name}'s" %> rating: <%= rating %>/5</p>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('movie-item.modal-friends.close') %></button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
