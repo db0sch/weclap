@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160614141846) do
+ActiveRecord::Schema.define(version: 20160615210426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,12 +76,14 @@ ActiveRecord::Schema.define(version: 20160614141846) do
     t.json     "collection"
     t.boolean  "setup",             default: false
     t.boolean  "adult",             default: false
+    t.string   "fr_title"
+    t.string   "fr_tagline"
+    t.string   "fr_overview"
   end
 
   create_table "people", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "imdb_id"
+    t.string   "name"
+    t.string   "tmdb_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
