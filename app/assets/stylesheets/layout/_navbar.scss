@@ -4,7 +4,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 70px;
+  height: 55px;
   padding: 0px 30px;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -18,8 +18,8 @@
   transition: 1s;
   padding-top: 21px;
   padding-bottom: 21px;
-  background: rgba(126, 155, 159, 0.5);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+  background-color: #00897B;
+  box-shadow: 0px 1px 2px rgba(50, 50, 50, 0.4);
 }
 
 /* Optional class to fix the navbar on top */
@@ -33,13 +33,13 @@
 
 /* Navbar logo */
 .navbar-wagon-brand img {
-  width: 67px;
-  height: 67px;
+  width: 50px;
+  height: 50px;
   border: 1px solid white;
 }
 
 .clap-logo {
-  width: 175px;
+  width: 120px;
 }
 
 .navbar-wagon-left {
@@ -124,7 +124,7 @@
   position: relative;
 }
 .navbar-wagon-search-btn {
-  line-height: 40px;
+  line-height: 35px;
   color: #E6E6E6;
   border: none;
   background: transparent;
@@ -136,7 +136,7 @@
 .navbar-wagon-search-input {
   flex: 0 1 300px;
   transition: all 0.15s ease;
-  line-height: 40px;
+  line-height: 35px;
   font-weight: lighter;
   color: #666666;
   border: 1px solid #E6E6E6;

@@ -229,9 +229,10 @@ $star-yellow: #FFB400;
 .flex-tab-item {
   flex: 0 0 25%;
   padding-bottom: 0px;
+  color: black;
 }
 .tab-active-search {
-  border-bottom: solid 1px;
+  border-bottom: 1px solid;
 }
 
 .none {
@@ -240,11 +241,11 @@ $star-yellow: #FFB400;
   border-bottom: solid 1px transparent;
 }
 .underline {
-  border-bottom: solid 1px white;
+  border-bottom: solid 1px darkgrey;
 }
 .none:hover {
-  padding-bottom: 3px;
-   border-bottom: solid 1px white;
+  // padding-bottom: 3px;
+  border-bottom: solid 1px darkgrey;
 }
 .none:focus {
   outline-width: 0;
