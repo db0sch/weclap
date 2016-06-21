@@ -16,12 +16,13 @@
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
   transition: all 0.15s ease;
-  line-height: 40px;
+  line-height: 35px;
   font-weight: lighter;
   padding: 0 0 0 15px;
   font-size: 14px;
   outline: none;
   color: #666666;
+  height: 34px;
   border: none;
 }
 
@@ -38,7 +39,7 @@
 
 #search-button {
   color: white;
-  background-color: #31708f;
+  background-color: $blue;
   margin-left: 0px;
   -webkit-box-flex: 0;
   -ms-flex: 0 1 100px;
@@ -49,6 +50,11 @@
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
   border: none;
+  font-family: "Open sans";
+  font-weight: 300;
+  &:hover {
+    background-color: #01578B;
+  }
 }
 
 .ui-autocomplete {
@@ -65,7 +71,7 @@
     font-size: 14px;
     padding-left: 15px;
     &:hover {
-      background-color: #EDEDFF;      
+      background-color: #EDEDFF;
     }
     &:last-child {
       border-radius: 0 0 3px 3px;
