@@ -29,12 +29,13 @@
     <!-- filterby duration -->
     <!-- genres -->
     <div class="dropdown" style="display: inline">
-      <select class="selectpicker" data-size="5" data-width="33%" multiple title=<%=t ('movie-item.genres')%>>
+      <select class="selectpicker genres" data-size="5" data-width="33%" multiple="multiple" name="genres" data-actions-box="true" title=<%=t ('movie-item.genres')%>>
+          <option value=<%= "All" %>><%= t ("genres.All") %></option>
         <% api_url = "http://api.themoviedb.org/3/genre/movie/list?api_key=#{ENV['TMDB_API_KEY']}" %>
         <% open(api_url) do |f| %>
           <% genres = JSON.parse(f.read) %>
           <% genres['genres'].each do |g| %>
-              <option value=<%= "#{g['id']}" %>><%= t ("genres.#{g['name']}") %></option>
+              <option value=<%= "#{g['name']}" %>><%= t ("genres.#{g['name']}") %></option>
             <% end %>
         <% end %>
       </select>
@@ -42,10 +43,15 @@
   </div>
 
 
+
+
       <h3 class="section-title"><%= t ('list.mywl') %></h3>
       <div id="unwatched-movie-list">
         <% list.each do |interest| %>
+          <span id="genres">
+
           <%= render 'shared/movie_item', movie: interest.movie, interest: interest %>
+          </span>
         <% end %>
       </div>
     </div>

@@ -50,6 +50,7 @@ fr:
     close: "Fermer"
 
   genres:
+    All:  "Tous les genres"
     Action: "Action"
     Adventure: "Aventures"
     Animation: "Animation"

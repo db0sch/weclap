@@ -73,6 +73,9 @@ en:
     friendsinterest: "%{name}'s Claplist"
     close: "Close"
 
+  genres:
+    All:  "All genres"
+
   tables:
     title:
     description: "%{@movie.overview}"
