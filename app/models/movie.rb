@@ -3,12 +3,14 @@ class Movie < ActiveRecord::Base
 
   pg_search_scope :autocomplete_title,
                   against: { fr_title: 'A', original_title: 'B', title: 'C' },
+                  associated_against: { people: :name },
                   ignoring: :accents,
                   using: { tsearch: { prefix: true, any_word: true } },
                   order_within_rank: "movies.imdb_score DESC"
 
   pg_search_scope :which_title_or_synopsis_contains,
                   against: { fr_title: 'A', original_title: 'B', title: 'C', fr_overview: 'D', overview: 'D', tagline: 'D' },
+                  associated_against: { people: :name },
                   ignoring: :accents,
                   using: {
                             tsearch: { prefix: true },

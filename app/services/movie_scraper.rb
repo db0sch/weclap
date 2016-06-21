@@ -27,7 +27,6 @@ class MovieScraper
       movie_ids.count
     end
 
-
     def get_movie_details(imdb_id)
       puts "retrieving movie (imdb_id: #{imdb_id}) from tmdb"
       #SBE 2do do not call each time
@@ -64,7 +63,8 @@ class MovieScraper
           cnc_url: "http://vad.cnc.fr/titles?search=#{mv['original_title'].gsub(" ", "+")}&format=4002",
           setup: true
         }.merge(fields_in_french_for(tmdb_id, imdb_id)))
-        retrieve_credits(movie.id, tmdb_id)
+        retrieve_credits?(movie)
+        movie
       end
     end
 
@@ -218,6 +218,16 @@ class MovieScraper
       end
     end
 
+    def move_credits_to_jobs_n_people
+      # Find all movies with credits
+      movies = Movie.where.not(credits: nil)
+      # Retrieve their credits as jobs and
+      # Remove the credits so that they are never processed again
+      movies.each do |movie|
+        movie.credits = nil if retrieve_credits?(movie)
+      end
+    end
+
     private
 
     def translate_movie_consumption_into_english(word)
@@ -280,12 +290,13 @@ class MovieScraper
       {}
     end
 
-    def retrieve_credits(movie_id, tmdb_id)
-      cast = Tmdb::Movie.casts(tmdb_id)
-      get_people_and_jobs(cast, movie_id, 'Actor') unless cast.blank?
+    def retrieve_credits?(movie)
+      cast = Tmdb::Movie.casts(movie.tmdb_id)
+      get_people_and_jobs(cast, movie.id, 'Actor') unless cast.blank?
 
-      crew = Tmdb::Movie.crew(tmdb_id)
-      get_people_and_jobs(crew, movie_id) unless crew.blank?
+      crew = Tmdb::Movie.crew(movie.tmdb_id)
+      get_people_and_jobs(crew, movie.id) unless crew.blank?
+      !(cast.blank? && crew.blank?)
     end
 
     def get_people_and_jobs(team, movie_id, job = nil)

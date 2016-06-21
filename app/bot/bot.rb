@@ -67,7 +67,7 @@ Bot.on :message do |message|
 
       # movie_array has been filled with movie card json, we can send them to the user.
       send_movie_cards(message.sender, movie_array)
-      
+
     when "help"
       # just call the help messages which summarize all possible actions (cf. private methods)
       send_help(message.sender)
@@ -221,41 +221,57 @@ end
 def movie_card(movie, to_add) # to create movie cards
   # movie is an instance of Movie.
   # to_add is a boolean whether these films can be added or not to the watchlist
-  director = movie.credits['crew']['Director'].join(', ') unless movie.credits['crew']['Director'].blank?
+  # director = movie.credits['crew']['Director'].join(', ') unless movie.credits['crew']['Director'].blank?
+  # if to_add
+  #   card = {
+  #           "title":"#{movie.title}",
+  #           "image_url":"#{movie.poster_url}",
+  #           "subtitle":"Directed by " + director,
+  #           "buttons":[
+  #             {
+  #               "type":"web_url",
+  #               "url":"https://weclap.co/movies/#{movie.id}",
+  #               "title":"Details"
+  #             },
+  #             {
+  #               "type":"postback",
+  #               "title":"Add to watchlist",
+  #               "payload":{"movie_id":"#{movie.id}"}.to_json
+  #             }
+  #           ]
+  #         }
+  # else
+  #   card = {
+  #             "title":"#{movie.title}",
+  #             "image_url":"#{movie.poster_url}",
+  #             "subtitle":"Directed by " + director,
+  #             "buttons":[
+  #               {
+  #                 "type":"web_url",
+  #                 "url":"https://weclap.co/movies/#{movie.id}",
+  #                 "title":"Details"
+  #               }
+  #             ]
+  #           }
+  # end
+#SBE
+  director = movie.jobs.where(title: 'Director').map(&:person).map(&:name).join(', ')
+  director = 'Unknown' if director.blank?
+  buttons = [ { "type": "web_url",
+                "url": "https://weclap.co/movies/#{movie.id}",
+                "title": "Details" } ]
   if to_add
-    card = {
-            "title":"#{movie.title}",
-            "image_url":"#{movie.poster_url}",
-            "subtitle":"Directed by " + director ? director : "unknown",
-            "buttons":[
-              {
-                "type":"web_url",
-                "url":"https://weclap.co/movies/#{movie.id}",
-                "title":"Details"
-              },
-              {
-                "type":"postback",
-                "title":"Add to watchlist",
-                "payload":{"movie_id":"#{movie.id}"}.to_json
-              }
-            ]
-          }
-  else
-    card = {
-              "title":"#{movie.title}",
-              "image_url":"#{movie.poster_url}",
-              "subtitle":"Directed by " + director ? director : "unknown",
-              "buttons":[
-                {
-                  "type":"web_url",
-                  "url":"https://weclap.co/movies/#{movie.id}",
-                  "title":"Details"
-                },
-              ]
-            }
+    buttons << { "type": "postback",
+                 "title": "Add to watchlist",
+                 "payload": { "movie_id": "#{movie.id}" }.to_json }
   end
+  card = { "title": "#{movie.title}",
+           "image_url": "#{movie.poster_url}",
+           "subtitle": "Directed by " + director,
+           "buttons": buttons }
+
   return card
-end 
+end
 
 def say_hello(sender, user) # to say hello
   text_1 = "Hello #{user.first_name}"
@@ -295,7 +311,7 @@ def check_user(message, messenger_id) # to link the messenger user to the fb use
   unless User.where(messenger_id: messenger_id).blank?
     user = User.where(messenger_id: messenger_id)
   else
-    # # pour production    
+    # # pour production
     response = RestClient.get "https://graph.facebook.com/v2.6/#{messenger_id}?fields=first_name,last_name,profile_pic&access_token=#{ENV['FB_ACCESS_TOKEN']}"
     # # pour test en local
     # response = RestClient.get "https://graph.facebook.com/v2.6/#{messenger_id}?fields=first_name,last_name,profile_pic&access_token=#{ENV['TESTBOT_FB_ACCESS_TOKEN']}"

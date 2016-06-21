@@ -11,8 +11,8 @@
     <% end %>
 
     <div class="crew">
-      <p class="item-director"><%= t ('movie-item.directed-by') %>: <%= movie.credits['crew']['Director'].join(', ') unless movie.credits['crew']['Director'].blank? %></p>
-      <p class="item-cast-crew"><%= t ('movie-item.starring') %>: <%= movie.credits['cast'].take(5).join(', ')%></p>
+      <p class="item-director"><%= t ('movie-item.directed-by') %>: <%= movie.jobs.where(title: 'Director').map(&:person).map(&:name).join(', ') %></p>
+      <p class="item-cast-crew"><%= t ('movie-item.starring') %>: <%= movie.jobs.where(title: 'Actor').take(5).map(&:person).map(&:name).join(', ') %></p>
     </div>
     <div class="movie-infos">
       <p class="item-year-released"><%= movie.release_date.to_date.year %></p>
