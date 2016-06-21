@@ -1,136 +1,136 @@
-<div class="movie-wrapper">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12  col-sm-8 <%#= 'no-right-padded' unless request.user_agent =~ /Mobile|webOS/ %>">
-        <div class="movie-info-container boxing">
-          <div class="movie-basic-info">
-            <div class="movie-info-left">
-              <span class="movie-title">
-                 <% if I18n.locale == :fr %>
-                 <!-- REMPLACER PAR TITLE_FR -->
-                    <%= @movie.title%>
-                  <% else %>
-                    <%= @movie.title%>
+<div class="container padded">
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 <%#= 'no-right-padded' unless request.user_agent =~ /Mobile|webOS/ %>">
+      <div class="movie-info-container boxing">
+        <div class="movie-basic-info">
+          <div class="movie-info-left">
+            <span class="movie-title">
+               <% if I18n.locale == :fr %>
+               <!-- REMPLACER PAR TITLE_FR -->
+                  <%= @movie.title%>
+                <% else %>
+                  <%= @movie.title%>
+                <% end %>
+            <%= " (#{@movie.release_date.to_date.year})" if @movie.release_date %></span>
+            <% if @movie.imdb_id %>
+              <span class="imdb-rating" data-user="" data-title="<%= @movie.imdb_id %>" data-style="p4">
+                <%= link_to "http://www.imdb.com/title/#{@movie.imdb_id}/?ref_=plg_rt_1" do %>
+                  <span><%= image_tag("imdb_rating_31x14.png", style: "margin-bottom: 2px;",  alt: "#{@movie.title} on IMDb") %></span>
+                  <span class="rating-imdb">
+                    <span class="imdb-score"><%= @movie.imdb_score %></span><span class="by-ten">/10</span>
+                  </span>
+                <% end %>
+              </span>
+            <% end %>
+          </div>
+          <div class="movie-info-right">
+            <% if @clap_score %>
+              <span class="score-container">
+                  <% (1..5).each do |score| %>
+                    <%= icon 'hand-spock-o', class: score <= @clap_score.round ? 'rating-enabled' : 'rating-disabled' %>
                   <% end %>
-              <%= " (#{@movie.release_date.to_date.year})" if @movie.release_date %></span>
-              <% if @movie.imdb_id %>
-                <span class="imdb-rating" data-user="" data-title="<%= @movie.imdb_id %>" data-style="p4">
-                  <%= link_to "http://www.imdb.com/title/#{@movie.imdb_id}/?ref_=plg_rt_1" do %>
-                    <span><%= image_tag("imdb_rating_31x14.png", style: "margin-bottom: 2px;",  alt: "#{@movie.title} on IMDb") %></span>
-                    <span class="rating-imdb">
-                      <span class="imdb-score"><%= @movie.imdb_score %></span><span class="by-ten">/10</span>
-                    </span>
-                  <% end %>
-                </span>
-              <% end %>
-            </div>
-            <div class="movie-info-right">
-              <% if @clap_score %>
-                <span class="score-container">
-                    <% (1..5).each do |score| %>
-                      <%= icon 'hand-spock-o', class: score <= @clap_score.round ? 'rating-enabled' : 'rating-disabled' %>
-                    <% end %>
-                </span>
-              <% end %>
-              <% if @movie.imdb_id %>
-                <div class='inline-flex'>
-                  <% if !@friends.nil? %>
-                    <div class="movie-social movie-item-controls">
-                      <% @friends.each do |b| %>
-                        <% User.find_by_uid(b).interests.each do |interest| %>
-                          <% if interest.watched_on.nil? %>
-                            <% if @movie.id == interest.movie_id %>
-                               <%= link_to image_tag(User.find_by_uid(b).picture, class: "avatar"), user_friendships_path(current_user) %>
-                            <% end %>
-                          <% else %>
-                            <% if @movie.id == interest.movie_id %>
-                               <%= link_to user_friendships_path(current_user), style: "text-decoration: none;" do %>
-                                  <div style="background-image: url(<%= image_path(User.find_by_uid(b).picture)%>)" class="avatar rating rating-container">
-                                  </div>
-                               <% end %>
-                            <% end %>
+              </span>
+            <% end %>
+            <% if @movie.imdb_id %>
+              <div class='inline-flex'>
+                <% if !@friends.nil? %>
+                  <div class="movie-social movie-item-controls">
+                    <% @friends.each do |b| %>
+                      <% User.find_by_uid(b).interests.each do |interest| %>
+                        <% if interest.watched_on.nil? %>
+                          <% if @movie.id == interest.movie_id %>
+                             <%= link_to image_tag(User.find_by_uid(b).picture, class: "avatar"), user_friendships_path(current_user) %>
+                          <% end %>
+                        <% else %>
+                          <% if @movie.id == interest.movie_id %>
+                             <%= link_to user_friendships_path(current_user), style: "text-decoration: none;" do %>
+                                <div style="background-image: url(<%= image_path(User.find_by_uid(b).picture)%>)" class="avatar rating rating-container">
+                                </div>
+                             <% end %>
                           <% end %>
                         <% end %>
                       <% end %>
-                    </div>
-                  <% end %>
-                  <div>
-                    <% if current_user.movies.include?(@movie) %>
-                      <%= link_to icon('check-circle'), interests_path(movie_id: @movie), method: :post, remote: true, class:"movie-added-btn plus-button-movie-show" %>
-                    <% else %>
-                      <%= link_to icon('plus-circle'), interests_path(movie_id: @movie), method: :post, remote: true, class:"plus-button-movie-show", id: "movie-add-#{@movie.id}" %>
                     <% end %>
                   </div>
+                <% end %>
+                <div class="movie-item-controls">
+                  <% if current_user.movies.include?(@movie) %>
+                    <div class="movie-added-btn btn btn-secondary">
+                      <%=t('movie-item.added-to-wl')%>
+                    </div>
+                  <% else %>
+                    <%= link_to (t ('movie-item.add-to-wl')), interests_path(movie_id: @movie), method: :post, remote: true, class: "movie-add-btn btn btn-warning" %>
+                  <% end %>
                 </div>
-              <% end %>
-            </div>
-            <%# raw "<span>aka #{@original_title}</span><br>" if @original_title %>
+              </div>
+            <% end %>
           </div>
-
-          <div class="container-movie-infos">
-            <ul style="list-style-type: none" id="movie-infos-small">
-
-
-              <span>
-              <li><strong><%= t ('movie-item.genres') %>: </strong><%= @genres %> |
-              <strong><%= t ('movie-item.directed-by') %>:</strong> <%= @directors %> |
-              <i class="fa fa-clock-o" id="clock-duration-inline"><span></i><%= @movie.runtime %> min </span> |
-                <span class="parental-rating"><%= @movie.adult ? (t ('movie-item.adult')) : (t ('movie-item.forall')) %></span></li>
-              </span>
-              <li><strong><%= t ('movie-item.starring') %></strong> <%= @actors %></li>
-            </ul>
-          </div>
-
-          <div class="movie-media-container">
-            <div class="movie-poster-container">
-              <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/204x300" : "http://image.tmdb.org/t/p/w500/" + @movie.poster_url), size: "204x300", alt: "2do", class: "img-responsive movie-poster-show hidden-xs hidden-sm hidden-md") %>
-            </div>
-            <iframe height="300" width="477" frameborder="0" allowfullscreen></iframe>
-          </div>
+          <%# raw "<span>aka #{@original_title}</span><br>" if @original_title %>
         </div>
 
-        <div class="movie-synopsis">
-          <div class="container-synopsis">
-            <% if I18n.locale == :fr %>
-              <h4><%= t ('movie-item.synopsis') %></h4>
+        <div class="container-movie-infos">
+          <ul style="list-style-type: none" id="movie-infos-small">
+
+
+            <span>
+            <li><strong><%= t ('movie-item.genres') %>: </strong><%= @genres %> |
+            <strong><%= t ('movie-item.directed-by') %>:</strong> <%= @directors %> |
+            <i class="fa fa-clock-o" id="clock-duration-inline"><span></i><%= @movie.runtime %> min </span> |
+              <span class="parental-rating"><%= @movie.adult ? (t ('movie-item.adult')) : (t ('movie-item.forall')) %></span></li>
+            </span>
+            <li><strong><%= t ('movie-item.starring') %></strong> <%= @actors %></li>
+          </ul>
+        </div>
+
+        <div class="movie-media-container">
+          <div class="movie-poster-container">
+            <%= image_tag((@movie.poster_url.blank? ? "http://placehold.it/204x300" : "http://image.tmdb.org/t/p/w500/" + @movie.poster_url), size: "204x300", alt: "2do", class: "img-responsive movie-poster-show hidden-xs hidden-sm hidden-md") %>
+          </div>
+          <iframe height="300" width="477" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="movie-synopsis">
+        <div class="container-synopsis">
+          <% if I18n.locale == :fr %>
+            <h4><%= t ('movie-item.synopsis') %></h4>
 
 
 
 <!-- REMPLACER PAR OVERVIEW_FR -->
-              <p><%= @movie.overview %></p>
+            <p class="text-justify"><%= @movie.overview %></p>
 
 
-            <% else %>
-              <h4><%= t ('movie-item.synopsis') %></h4>
-              <p><%= @movie.overview %></p>
-            <% end %>
+          <% else %>
+            <h4><%= t ('movie-item.synopsis') %></h4>
+            <p class="text-justify"><%= @movie.overview %></p>
+          <% end %>
 
-          </div>
         </div>
       </div>
+    </div>
 
-      <div class="col-xs-12 col-sm-4 <%#= 'no-left-padded' unless request.user_agent =~ /Mobile|webOS/ %>">
-        <div class="boxing" id="boxing-show">
-          <div class="tabs">
-            <a class="tab <%= 'active' if @display_shows %>" data-target="#shows">
-              <div class="tab-header"><i class="fa fa-film" aria-hidden="true" style="font-size: x-large;"></i></div>
-            </a>
-            <a class="tab <%='active' unless @display_shows %>" data-target="#streamings">
-              <div class="tab-header"><i class="fa fa-television" aria-hidden="true" style="font-size: x-large;"></i></div>
-            </a>
-          </div>
-          <div class="tab-content <%= 'hidden' unless @display_shows %>" id="shows">
-            <div class="container-movie-times">
-              <ul class="list-unstyled" id="shows_in_theaters">
-                <li class="loader"></li>
-              </ul>
-            </div>
-          </div>
-          <div class="tab-content <%= 'hidden' if @display_shows %>" id="streamings">
-            <ul class="list-unstyled" id="streamings_per_provider">
+    <div class="col-xs-12 col-sm-4 <%#= 'no-left-padded' unless request.user_agent =~ /Mobile|webOS/ %>">
+      <div class="boxing" id="boxing-show">
+        <div class="tabs">
+          <a class="tab <%= 'active' if @display_shows %>" data-target="#shows">
+            <div class="tab-header"><i class="fa fa-film" aria-hidden="true" style="font-size: x-large;"></i></div>
+          </a>
+          <a class="tab <%='active' unless @display_shows %>" data-target="#streamings">
+            <div class="tab-header"><i class="fa fa-television" aria-hidden="true" style="font-size: x-large;"></i></div>
+          </a>
+        </div>
+        <div class="tab-content <%= 'hidden' unless @display_shows %>" id="shows">
+          <div class="container-movie-times">
+            <ul class="list-unstyled" id="shows_in_theaters">
               <li class="loader"></li>
             </ul>
           </div>
+        </div>
+        <div class="tab-content <%= 'hidden' if @display_shows %>" id="streamings">
+          <ul class="list-unstyled" id="streamings_per_provider">
+            <li class="loader"></li>
+          </ul>
         </div>
       </div>
     </div>

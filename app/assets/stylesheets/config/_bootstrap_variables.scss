@@ -11,11 +11,11 @@ $line-height-base:        $base-height;
 $headings-font-family:    $header-font;
 
 // Semantic color scheme
-$brand-primary:   $blue;
+$brand-primary:   $blue; // for any other buttons (ex: in the navbar)
 $brand-success:   $green;
-$brand-info:      $yellow;
+$brand-info:      $orange;
 $brand-danger:    $red;
-$brand-warning:   $orange;
+$brand-warning:   $yellow; // for add_to_watchlist btns
 
 // Buttons / inputs radius
 $border-radius-base:  2px;

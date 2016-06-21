@@ -12,7 +12,7 @@ fr:
     share: "PARTAGER VOTRE CLAPLIST A VOS AMIS ET VISIONNER LES FILMS AVEC EUX"
 
   list:
-    mywl: "Ma Claplist"
+    mywl: "Ma liste"
     watched: "Films vus"
     my-friends:  "Mes amis"
     search: "Rechercher"
@@ -29,8 +29,11 @@ fr:
     forall: "Pour tous"
     directed-by: "Réalisé par"
     add-to-wl: "Je veux le voir"
+    added-to-wl: "Ajouté à ma liste"
     on-theater: "Au cinéma"
+    on-theater-tag: "#CINEMA"
     on-vod: "En VOD"
+    on-vod-tag: "#VOD"
     friendsnotseen:
         one:   'Un ami veut voir ce film.'
         other: '%{count} amis veulent le voir.'

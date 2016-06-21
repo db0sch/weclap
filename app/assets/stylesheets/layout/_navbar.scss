@@ -18,7 +18,7 @@
   transition: 1s;
   padding-top: 21px;
   padding-bottom: 21px;
-  background-color: #00897B;
+  background-color: $brand-color;
   box-shadow: 0px 1px 2px rgba(50, 50, 50, 0.4);
 }
 
@@ -33,8 +33,8 @@
 
 /* Navbar logo */
 .navbar-wagon-brand img {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   border: 1px solid white;
 }
 
@@ -77,7 +77,6 @@
     margin-right: 8px;
   }
 }
-
 /* Navbar standard link */
 .navbar-wagon-link {
   color: #616668;
@@ -89,6 +88,15 @@
 }
 
 /* Navbar right button */
+.navbar-button-watchlist {
+  font-family: "Open sans";
+  width: 115px;
+  height: 34px;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+
 .navbar-wagon-button {
   width: 131px;
   display: inline-block;
@@ -153,7 +161,7 @@
 .navbar-wagon-dropdown-menu {
   margin-top: 6px;
   margin-right: 15px;
-  background-color: #F1F1F1;
+  background-color: white;
 }
 .navbar-wagon-dropdown-menu li > a {
   transition: color 0.3s ease;

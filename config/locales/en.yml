@@ -36,7 +36,7 @@ en:
     login-fb: "Log in with Facebook"
 
   list:
-    mywl: "My Claplist"
+    mywl: "My Watchlist"
     watched: "Watched"
     my-friends:  "My friends"
     search: "Search"
@@ -53,8 +53,11 @@ en:
     forall: "For all"
     directed-by: "Directed by"
     add-to-wl: "Want to watch"
+    added-to-wl: "Added to watchlist"
     on-theater: "On theater"
+    on-theater-tag: "#THEATER"
     on-vod: "On VOD"
+    on-vod-tag: "#STREAMING"
     friendsnotseen:
         one:   'One friend wants the see it.'
         other: '%{count} friends want to see it.'
@@ -72,7 +75,7 @@ en:
     log-out: "Log out"
     message: "Message Us"
     find: "Suggestions"
-    wl: "My films"
+    wl: "Movie list"
 
   friends:
     nocommon: "You have no common movies with"

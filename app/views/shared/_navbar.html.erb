@@ -20,14 +20,14 @@
     <!-- Different navigation if login or not -->
     <% if user_signed_in? %>
       <!-- Button (call-to-action) -->
-      <% if current_user.messenger_id.blank? %>
-        <div class="fb-send-to-messenger"
+      <%# if current_user.messenger_id.blank? %>
+<!--         <div class="fb-send-to-messenger"
         messenger_app_id="263884933962717"
         page_id="188469658220408"
         data-ref="<%= current_user.id %>"
         color="blue"
-        size="standard"></div>
-      <% end %>
+        size="standard"></div> -->
+      <%# end %>
 
      <!--  <div class="fb-messengermessageus"
       messenger_app_id="1054618387948073"
@@ -35,7 +35,7 @@
       color="white"
       size="large" ></div> -->
       <%# button_to t(".top_call_to_action", default: (t ('navbar.find'))), movies_path, method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
-      <%= button_to t(".top_call_to_action", default: (t ('navbar.wl'))), watchlist_path(current_user), method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
+      <%= button_to t('navbar.wl'), watchlist_path(current_user), method: :get, class: "btn btn-primary navbar-button-watchlist" %>
 
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item">
@@ -51,7 +51,7 @@
             </li>
             <li>
               <%= link_to movies_path do %>
-                <i class="fa fa-film"></i>  
+                <i class="fa fa-film"></i>
                 <%= t ('navbar.find') %>
               <% end %>
             </li>
@@ -79,7 +79,7 @@
           </li>
           <li>
             <%= link_to movies_path do %>
-              <i class="fa fa-film"></i>  
+              <i class="fa fa-film"></i>
               <%= t ('navbar.find') %>
             <% end %>
           </li>

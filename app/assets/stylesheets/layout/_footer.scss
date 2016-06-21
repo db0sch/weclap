@@ -1,7 +1,7 @@
 // Your footer style
 
 .footer {
-  background: #00897B;
+  background-color: $brand-color;
   padding: 10px 0;
   color: #CCCCCC;
   height: 55px;
@@ -12,13 +12,13 @@
     ul {
       margin-bottom: 0px;
       a {
-        color: #CCCCCC;
+        color: white;
         font-size: 30px;
         letter-spacing: 20px;
         transition: color 1s ease;
         font-size: 20px;
         &:hover {
-          color: #96866B;
+          color: $yellow;
         }
       }
     }
@@ -28,6 +28,7 @@
     justify-content: flex-end;
     align-items: center;
     p {
+      color: white;
       font-size: 14px;
       margin-bottom: 0px;
     }
