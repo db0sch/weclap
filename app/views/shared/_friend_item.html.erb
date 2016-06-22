@@ -16,7 +16,7 @@
   <!-- common moovies -->
     <% if common_movies.length < 7 %>
       <% common_movies.each do |movie_id| %>
-        <div>
+        <div class="common-movies-small">
           <%= link_to image_tag(Movie.find(movie_id).poster_url, class: "movie-item-image hidden-xs"), movie_path(movie_id) %>
         </div>
       <% end %>

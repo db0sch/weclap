@@ -11,30 +11,27 @@ class InterestsController < ApplicationController
 
   def create
 
-    #@friend = User.where(uid: current_user.friendslist)
+    @friend = User.find(params[:friend_id]) if params[:friend_id]
     @interest = Interest.new
     @interest.movie = @movie
     @interest.user = current_user
     authorize @interest
-
     if @interest.save
-      current_user.interests.reload
-        if @friend
-        @friend.interests.reload
-        @common_movies = []
-        @friend.interests.each do |movie|
-          if movie.watched_on.nil?
-            current_user.interests.each do |cumovie|
-              if cumovie.movie_id == movie.movie_id
-                @common_movies << movie.movie_id
-              end
-            end
-          end
-        end
-      end
+      # if @friend
+      #   @common_movies = []
+      #   @friend.interests.each do |movie|
+      #     if movie.watched_on.nil?
+      #       current_user.interests.each do |cumovie|
+      #         if cumovie.movie_id == movie.movie_id
+      #           @common_movies << movie.movie_id
+      #         end
+      #       end
+      #     end
+      #   end
+      # end
 
       respond_to do |format|
-        format.html { redirect_to users_path(current_user) }
+        # format.html { redirect_to users_path(current_user) }
         format.js  # <-- will render `app/views/interests/create.js.erb`
       end
     else
@@ -43,11 +40,6 @@ class InterestsController < ApplicationController
         format.js  # <-- idem
       end
     end
-    # if @interest.save
-    #   redirect_to movie_path(@movie)
-    # else
-    #   raise
-    # end
   end
 
   def update
