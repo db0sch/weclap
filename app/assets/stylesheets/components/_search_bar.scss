@@ -1,5 +1,6 @@
-.container-search-bar {
-  padding-top: 28px;
+.movie-search-bar-container {
+  flex: 1 1 auto;
+  padding: 0 20px;
 }
 
 .movie-search-bar-form {
@@ -9,18 +10,19 @@
 
 .movie-search-field {
   margin-right: 0px;
-  flex: 1 0 175px;
+  flex: 1 0 auto;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
   transition: all 0.15s ease;
-  line-height: 40px;
+  line-height: 35px;
   font-weight: lighter;
-  padding: 0 18px;
+  padding: 0 0 0 15px;
   font-size: 14px;
   outline: none;
   color: #666666;
+  height: 34px;
   border: none;
 }
 
@@ -28,38 +30,52 @@
   margin-left: 0px;
   flex: 0 1 100px;
   z-index: 1;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
+  // border-top-right-radius: 20px;
+  // border-bottom-right-radius: 20px;
+  // border-top-left-radius: 0px;
+  // border-bottom-left-radius: 0px;
 }
 
 
 #search-button {
   color: white;
-  background-color: #31708f;
+  background-color: $blue;
   margin-left: 0px;
   -webkit-box-flex: 0;
   -ms-flex: 0 1 100px;
   flex: 0 1 100px;
   z-index: 1;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
   border: none;
+  font-family: "Open sans";
+  font-weight: 300;
+  &:hover {
+    background-color: #01578B;
+  }
 }
 
-#search-button:hover {
-  color: white;
-  background-color: #31708f;
-  margin-left: 0px;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 1 100px;
-  flex: 0 1 100px;
-  z-index: 1;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
+.ui-autocomplete {
+  list-style: none;
+  line-height: 25px;
+  padding-left: 0px;
+  z-index: 1001;
+  background-color: white;
+  border-top: 1px solid #E8E8E8;
+  box-shadow: 1px 1px 1px #C6C6C6;
+  li {
+    font-family: Open Sans;
+    font-weight: 200;
+    font-size: 14px;
+    padding-left: 15px;
+    &:hover {
+      background-color: #EDEDFF;
+    }
+    &:last-child {
+      border-radius: 0 0 3px 3px;
+    }
+  }
 }
+

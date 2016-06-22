@@ -1,11 +1,20 @@
 class SearchController < ApplicationController
+  skip_after_action :verify_policy_scoped, only: :index
+  skip_after_action :verify_authorized, only: :autocomplete
 
   def index
     search_terms = params[:terms]
-    # search imdb for the terms, possibly background job with high priority
 
-    # retrieve the items list: only movies for now (but later, collections & people)
-    # search whether they are present in the DB: if not add from within another background job
-    # bring back the results to the requester ordered by desc release_date
+    @movies = Movie.which_title_or_synopsis_contains(search_terms)
+    @friends = current_user.friendslist
+
+    render 'movies/index'
+  end
+
+  def autocomplete
+    search_terms = params[:query]
+    p params
+    movies = Movie.autocomplete_title(search_terms)
+    render json: movies.map{ |m| "#{m.title}" }.take(20)
   end
 end

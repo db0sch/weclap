@@ -27,29 +27,24 @@ class MovieScraper
       movie_ids.count
     end
 
-
     def get_movie_details(imdb_id)
       puts "retrieving movie (imdb_id: #{imdb_id}) from tmdb"
-
+      #SBE 2do do not call each time
       Tmdb::Api.key(ENV['TMDB_API_KEY'])
-      Tmdb::Api.language("fr")
-      # retrieve_all_genres
 
-      tmdb_mv = Tmdb::Find.imdb_id(imdb_id)['movie_results'].first
-      return if tmdb_mv.nil?
+      tmdb_mv = Tmdb::Find.imdb_id(imdb_id)
+      return if tmdb_mv.blank? || (tmdb_mv = tmdb_mv['movie_results']).blank?
+      tmdb_id = tmdb_mv.first['id']
 
-      movie_response = RestClient.get "http://api.themoviedb.org/3/movie/#{tmdb_mv['id']}?language=fr&api_key=#{ENV['TMDB_API_KEY']}"
-      return unless movie_response.code == 200
-      mv = JSON.parse(movie_response.body)
-
-      if mv
+      if mv = get_movie_description_through_api(tmdb_id, imdb_id, 'en')
         collection = mv['belongs_to_collection'] ? { mv['belongs_to_collection']['id'] => mv['belongs_to_collection']['name'] } : nil
-        movie = Movie.unscoped.find_by(imdb_id: imdb_id)
+        return unless movie = Movie.unscoped.find_by(imdb_id: imdb_id)
         r_date = mv['release_date'].blank? ? movie.release_date : mv['release_date'].to_date
+
         movie.update({
           title: mv['title'],
           original_title: mv['original_title'],
-          tmdb_id: mv['id'],
+          tmdb_id: tmdb_id,
           runtime: mv['runtime'],
           tagline: mv['tagline'],
           genres: mv['genres'].map { |genre| genre.values.last },
@@ -61,23 +56,24 @@ class MovieScraper
           release_date: r_date,
           spoken_languages: mv['spoken_languages'],
           collection: collection,
-          credits: { cast: get_cast(mv['id']), crew: get_crew(mv['id']) },
+          # credits: { cast: get_cast(mv['id']), crew: get_crew(mv['id']) },
           # Add later
           # trailer_url: "https://www.youtube.com/embed#{get_youtube(mv['original_title'])}?rel=0&amp;showinfo=0",
           website_url: "http://www.imdb.com/title/#{imdb_id}",
           cnc_url: "http://vad.cnc.fr/titles?search=#{mv['original_title'].gsub(" ", "+")}&format=4002",
           setup: true
-        })
+        }.merge(fields_in_french_for(tmdb_id, imdb_id)))
+        retrieve_credits?(movie)
+        movie
       end
     end
 
     def find_showtimes_of_the_day(zip_code, city, movie, limit, no_nearing = false)
-      shows = {}
       url = "http://www.imdb.com/showtimes/title/#{movie.imdb_id}/FR/#{zip_code}"
       response = RestClient.get url
-      return unless response.code == 200
+      return {} unless response.code == 200
       theaters = Nokogiri::HTML(response.body).search(".list_item")
-
+      shows = {}
       # First we go through each theater from IMDB and find or create them
       # We then create an array of [[TheaterInstance, NokogiriData], [TheaterInstance, NokogiriData]]
       theaters_data = theaters.map do |t|
@@ -128,15 +124,15 @@ class MovieScraper
       pos = movie.cnc_url =~ /\&format\=/
       movie_url = pos ? movie.cnc_url[0...pos] : movie.cnc_url
       movie_url += '&format=4002'
-      streamings = {}
       begin
         response = RestClient.get(movie_url)
         fail unless response.code == 200
       rescue
         puts "Could not retrieve data from the CNC website"
-        return nil
+        return {}
       end
 
+      streamings = {}
       doc = Nokogiri::HTML(response.body)
       doc.search(".film-title-search").each do |element|
         local_url = CGI::escapeHTML(element.attribute('href').value).gsub(/°/, '&deg;')
@@ -193,6 +189,7 @@ class MovieScraper
         next unless movie_response.code == 200
         film = JSON.parse(movie_response.body)
         next if film['imdb_id'].blank?
+        r_date = film['release_date'].blank? ? movie.release_date : film['release_date'].to_date
         movie = Movie.unscoped.new({
           title: film['title'],
           original_title: film['original_title'],
@@ -204,22 +201,30 @@ class MovieScraper
           imdb_score: film['vote_average'],
           tmdb_id: film['id'],
           adult: film['adult'],
-          budget: film['budget'],
           overview: film['overview'],
           popularity: film['popularity'],
           original_language: film['original_language'],
-          poster_path: film['poster_path'],
-          production_countries: film['production_countries'],
-          release_date: film['release_date'],
+          release_date: r_date,
           spoken_languages: film['spoken_languages'],
           credits: { cast: get_cast(film['id']), crew: get_crew(film['id']) },
           trailer_url: "https://www.youtube.com/embed#{get_youtube(film['title'])}?rel=0&amp;showinfo=0",
           website_url: "http://www.imdb.com/title/#{film['imdb_id']}",
-          cnc_url: "http://vad.cnc.fr/titles?search=#{film['title'].gsub(" ", "+")}&format=4002"
+          cnc_url: "http://vad.cnc.fr/titles?search=#{film['title'].gsub(" ", "+")}&format=4002",
+          setup: true
         })
         puts "#{'%5i' % count += 1}. #{movie.title} (imdb_id: #{movie.imdb_id})"
         movie.valid? ? movie.save : (puts "---> Not persisted: " + movie.errors.full_messages.to_s)
         sleep 1
+      end
+    end
+
+    def move_credits_to_jobs_n_people
+      # Find all movies with credits
+      movies = Movie.where.not(credits: nil)
+      # Retrieve their credits as jobs and
+      # Remove the credits so that they are never processed again
+      movies.each do |movie|
+        movie.credits = nil if retrieve_credits?(movie)
       end
     end
 
@@ -247,13 +252,16 @@ class MovieScraper
 
     def get_cast(movie_id, limit = 10)
       cast = Tmdb::Movie.casts(movie_id)
+      cast ||= []
       cast.map { |char| char['name'] }[0...limit]
     end
 
     def get_crew(movie_id)
       crew = Tmdb::Movie.crew(movie_id)
+      crew ||= {}
       p_crew = {}
-      crew.each { |member| p_crew.key?(member['job']) ? p_crew[member['job']] << member['name'] : p_crew[member['job']] = [member['name']] }
+      crew.each { |member|
+        p_crew.key?(member['job']) ? p_crew[member['job']] << member['name'] : p_crew[member['job']] = [member['name']] }
       p_crew
     end
 
@@ -263,6 +271,45 @@ class MovieScraper
 
     def retrieve_all_genres
       p @genres ||= Tmdb::Genre.list['genres'].map(&:values).to_h
+    end
+
+    def get_movie_description_through_api(tmdb_id, imdb_id, lang)
+      movie_response = RestClient.get "http://api.themoviedb.org/3/movie/#{tmdb_id}?language=#{lang}&api_key=#{ENV['TMDB_API_KEY']}"
+      return unless movie_response.code == 200
+      mv = JSON.parse(movie_response.body)
+    end
+
+    def fields_in_french_for(tmdb_id, imdb_id)
+      if mv = get_movie_description_through_api(tmdb_id, imdb_id, 'fr')
+        return {
+          fr_title: mv['title'],
+          fr_tagline: mv['tagline'],
+          fr_overview: mv['overview'],
+        }
+      end
+      {}
+    end
+
+    def retrieve_credits?(movie)
+      cast = Tmdb::Movie.casts(movie.tmdb_id)
+      get_people_and_jobs(cast, movie.id, 'Actor') unless cast.blank?
+
+      crew = Tmdb::Movie.crew(movie.tmdb_id)
+      get_people_and_jobs(crew, movie.id) unless crew.blank?
+      !(cast.blank? && crew.blank?)
+    end
+
+    def get_people_and_jobs(team, movie_id, job = nil)
+      team.each do |member|
+        # names = unfold_names(member['name'])
+        # pe = Person.where(imdb_id: member['id']).first_or_create(first_name: names.first, last_name: names.last)
+        pe = Person.where(tmdb_id: member['id']).first_or_create(name: member['name'])
+        Job.create(person_id: pe.id, movie_id: movie_id, title: job ? job : member['job'])
+      end
+    end
+
+    def unfold_names(full_name)
+      full_name.scan(/(.*)\s(.*)\z/)
     end
   end
 end

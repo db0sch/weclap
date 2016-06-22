@@ -2,18 +2,19 @@
   display: flex;
   align-items: center;
   transition: all 0.15s ease;
-  background-color: #FAFAFA;
-  // border-right: 7px solid #FAFAFA;
-  box-shadow: 0px 0px 1px 0px #81819E;
+  background-color: white;
+  border: 1px solid lightgrey;
   position: relative;
-  margin: 4px;
+  margin: 4px 0px;
   transition: border-right 0.5s ease;
-  // transition: 0.3;
+  border-radius: 2px;
   .movie-item-image {
     margin-right: 20px;
     width: 70px;
-    box-shadow: 4px 0px 3px 0px #B5B5B5;
+    box-shadow: 1px 0px 1px #b0bec5;
     opacity: 0.9;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
   }
 }
 
@@ -31,7 +32,7 @@
 }
 
 .movie-item-right-part {
-  flex: 1 0 20%;
+  flex: 0 0 20%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -39,7 +40,7 @@
 
 
 .movie-item-social {
-  flex: 1 0 10%;
+  flex: 1 0 15%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,11 +66,15 @@
 
 .movie-rating {
   display: flex;
-  margin: 4px;
+  margin: 0px 4px;
 }
 .movie-social {
   display: flex;
-  align-items: flex-end;
+  align-self: flex-end;
+  flex-direction: column;
+  align-content: flex-end;
+  justify-content: flex-end;
+  margin-bottom: 5px;
 }
 
 .movie-infos {
@@ -96,23 +101,23 @@
 
 /* Body design */
 .movie-item-body {
-  flex: 1 1 70%;
-}
-.movie-item-body {
+  flex: 1 1 50%;
   h3 {
-  font-weight: 200;
-  font-size: 24px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  }
-  a {
-  color: #2C2C2C;
-  font-weight: 500;
-  font-size: 22px;
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 22px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    a {
+      color: $dark-gray-typo;
+      // font-weight: 500;
+    }
   }
   p {
     font-weight: lighter;
-    color: #404040;
+    font-family: Roboto;
+    font-weight: 300;
+    color: #666666;
   }
 }
 
@@ -121,13 +126,13 @@
   display: flex;
   align-items: center;
   text-align: center;
-  margin: 0px;
   .movie-add-btn {
-    width: 105px;
+    // width: 120px;
   }
   a.movie-add-btn {
-    font-size: 12px;
+    font-size: 13px;
     color: white;
+    font-weight: 600;
     text-decoration: none;
     &:hover {
       color: white;
@@ -136,24 +141,20 @@
   }
   a.movie-added-btn {
     font-size: 12px;
-    color: black;
+    color: $gray-dark;
   }
-  .movie-added-btn {
+  .movie-added-btn.btn {
     border: 1px solid black;
-    width: 105px;
+    font-size: 12px;
+    opacity: 1;
+    // width: 130px;
+    &:hover {
+      color: $gray-dark;
+    }
   }
 }
 
 
-
-
-// .movie-item-controls a {
-//   font-size: 17px;
-// }
-// .movie-item-controls a:hover {
-//   // color: #1C3C56 !important;
-//   // opacity: 0.8;
-// }
 .movie-item-controls-hidden a {
   color: transparent;
   font-size: 15px;
@@ -165,31 +166,6 @@
   font-size: xx-large;
   color: #528FC1;
 }
-
-
-
-
-// a.movie-add-btn {
-//   font-size: 15px;
-//   color: white;
-//   opacity: 0.9;
-//   text-decoration: none;
-// }
-
-// .movie-add-btn {
-//   color: #31708F;
-// }
-
-// .movie-add-btn:hover {
-//   color: white;
-// }
-
-
-// a.movie-added-btn {
-//   font-size: 30px;
-//   color: $green;
-// }
-
 .crew {
   font-size: 12px;
 }
@@ -239,17 +215,25 @@
 .channel-label {
   display: inline;
   font-size: 12px;
-  padding: 2px 10px;
+  padding: 2px 5px;
   a {
-    color: white;
+    // color: white;
     font-weight: 500;
+    font-size: 11px;
   }
 }
 .channel-label-cinema {
-  background-color: #e67e22;
+
+  // background-color: #e67e22;
+  a {
+    color: $red;
+  }
 }
 .channel-label-streaming {
-  background-color: #fdd835;
+  // background-color: #fdd835;
+  a {
+    color: $cyan;
+  }
 }
 
 .item-cross {
@@ -264,7 +248,8 @@
 }
 
 #movie-just-been-watched {
-  background-color: #fd986f;
+  // background-color: #fd986f;
+  background-color: $red;
   color: white;
   margin-right: 10px;
   border-radius: 5px;
@@ -275,5 +260,12 @@
   color: #ffffff;
   font-weight: 100;
   opacity: 0.8;
+}
+
+.movie-item-friends-interests-link {
+  text-decoration: none;
+  font-size: 10px;
+  color: #585858;
+
 }
 

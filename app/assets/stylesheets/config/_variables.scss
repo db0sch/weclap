@@ -2,9 +2,9 @@
  * Fonts
  * ------------------------------------- */
 // Google fonts
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Raleway:400,100,300,700,500");
-$base-font: "Open Sans", "Helvetica", "sans-serif";
-$header-font: "Raleway", "Helvetica", "sans-serif";
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Raleway:400,100,300,700,500|Roboto:400,700,900,300,100,500");
+$base-font: "Roboto, Open Sans", "Helvetica", "sans-serif";
+$header-font: "Roboto, Raleway", "Helvetica", "sans-serif";
 
 // Local fonts (uncomment following lines)
 // @font-face {
@@ -24,13 +24,16 @@ $base-height: 1.4;
  * Colors
  * ------------------------------------- */
 // Scheme
-$brand-color: #D23333;
+$brand-color: #03A9F4; // Google Material Lightblue 500
 
-$red: #EE5F5B;
-$blue: #469AE0;
-$yellow: #FDB631;
+$red: #e57373; // Google Material Red 300
+$blue: #0277BD; // Google Material Lightblue 800
+$blue-lighter: #4FC3F7; // Google Material Lightblue 300
+$yellow: #FFC400; // Google Material Amber A400
 $orange: #E67E22;
-$green: #32B796;
+$green: #81c784; // Google Material Green 300
+$cyan: #4dd0e1; // Google Cyan 300
+$dark-gray-typo: #424242; // Google Grey 800
 
 // Gray scale
 $gray-darker:  lighten(#000, 13.5%); // #222

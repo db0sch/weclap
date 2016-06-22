@@ -36,7 +36,7 @@ en:
     login-fb: "Log in with Facebook"
 
   list:
-    mywl: "My Claplist"
+    mywl: "My Watchlist"
     watched: "Watched"
     my-friends:  "My friends"
     search: "Search"
@@ -48,22 +48,37 @@ en:
   movie-item:
     rating: "Rate this movie"
     synopsis: "Synopsis"
-    starring: "Staring"
+    starring: "Starring"
     genres: "Genres"
     adult: "Adult"
     forall: "For all"
     directed-by: "Directed by"
     add-to-wl: "Want to watch"
+    added-to-wl: "Added to watchlist"
     on-theater: "On theater"
+    on-theater-tag: "#THEATER"
     on-vod: "On VOD"
     all: "All"
+
+    on-vod-tag: "#STREAMING"
+    friendsnotseen:
+        one:   'One friend wants the see it.'
+        other: '%{count} friends want to see it.'
+    friendshaveseen:
+        one:   'One friend has seen it.'
+        other: '%{count} friends have seen it.'
+    modal-friends:
+        title: 'Your friends'
+        friends-want-to-see: 'Friends who want to see this film'
+        friends-have-seen: 'Friends who have already seen this film'
+        close: 'Close'
 
   navbar:
     friends: "Friends"
     log-out: "Log out"
     message: "Message Us"
-    find: "find"
-    wl: "Claplist"
+    find: "Suggestions"
+    wl: "Movie list"
 
   friends:
     nocommon: "You have no common movies with"

@@ -30,8 +30,8 @@ gem 'nokogiri'
 gem 'facebook-messenger'
 gem "coffee-rails"
 gem "gmaps4rails"
-# gem 'searchkick'
 gem 'jquery-ui-rails'
+gem 'pg_search'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"

@@ -11,10 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613161204) do
+ActiveRecord::Schema.define(version: 20160615210426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "fuzzystrmatch"
+  enable_extension "unaccent"
+  enable_extension "pg_trgm"
 
   create_table "friendships", force: :cascade do |t|
     t.integer  "buddy_id"
@@ -37,6 +40,17 @@ ActiveRecord::Schema.define(version: 20160613161204) do
 
   add_index "interests", ["movie_id"], name: "index_interests_on_movie_id", using: :btree
   add_index "interests", ["user_id"], name: "index_interests_on_user_id", using: :btree
+
+  create_table "jobs", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "person_id"
+    t.integer  "movie_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "jobs", ["movie_id"], name: "index_jobs_on_movie_id", using: :btree
+  add_index "jobs", ["person_id"], name: "index_jobs_on_person_id", using: :btree
 
   create_table "movies", force: :cascade do |t|
     t.string   "title"
@@ -62,6 +76,16 @@ ActiveRecord::Schema.define(version: 20160613161204) do
     t.json     "collection"
     t.boolean  "setup",             default: false
     t.boolean  "adult",             default: false
+    t.string   "fr_title"
+    t.string   "fr_tagline"
+    t.string   "fr_overview"
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.string   "name"
+    t.string   "tmdb_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "providers", force: :cascade do |t|
@@ -139,6 +163,8 @@ ActiveRecord::Schema.define(version: 20160613161204) do
 
   add_foreign_key "interests", "movies"
   add_foreign_key "interests", "users"
+  add_foreign_key "jobs", "movies"
+  add_foreign_key "jobs", "people"
   add_foreign_key "shows", "movies"
   add_foreign_key "shows", "theaters"
   add_foreign_key "streamings", "movies"

@@ -4,7 +4,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 70px;
+  height: 55px;
   padding: 0px 30px;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -18,8 +18,8 @@
   transition: 1s;
   padding-top: 21px;
   padding-bottom: 21px;
-  background: rgba(126, 155, 159, 0.5);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+  background-color: $brand-color;
+  box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.4);
 }
 
 /* Optional class to fix the navbar on top */
@@ -33,24 +33,27 @@
 
 /* Navbar logo */
 .navbar-wagon-brand img {
-  width: 67px;
-  height: 67px;
+  width: 45px;
+  height: 45px;
   border: 1px solid white;
 }
 
 .clap-logo {
-  width: 175px;
+  width: 120px;
 }
 
 .navbar-wagon-left {
-  flex: 0 0 25%;
+  flex: 0 0 15%;
 }
 
 .navbar-wagon-center {
   flex: 1 0 auto;
   display: flex;
-  align-items: center;
+  align-items: space-around;
   justify-content: center;
+  .nav-search-container {
+    flex: 0 1 500px;
+  }
 
   // margin-right: -314px;
 }
@@ -58,7 +61,7 @@
 
 /* Navbar right section (with form, links, button) */
 .navbar-wagon-right {
-  flex: 0 0 27%;
+  flex: 0 0 15%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -74,7 +77,6 @@
     margin-right: 8px;
   }
 }
-
 /* Navbar standard link */
 .navbar-wagon-link {
   color: #616668;
@@ -86,6 +88,15 @@
 }
 
 /* Navbar right button */
+.navbar-button-watchlist {
+  font-family: "Open sans";
+  width: 115px;
+  height: 34px;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+
 .navbar-wagon-button {
   width: 131px;
   display: inline-block;
@@ -121,7 +132,7 @@
   position: relative;
 }
 .navbar-wagon-search-btn {
-  line-height: 40px;
+  line-height: 35px;
   color: #E6E6E6;
   border: none;
   background: transparent;
@@ -133,7 +144,7 @@
 .navbar-wagon-search-input {
   flex: 0 1 300px;
   transition: all 0.15s ease;
-  line-height: 40px;
+  line-height: 35px;
   font-weight: lighter;
   color: #666666;
   border: 1px solid #E6E6E6;
@@ -150,7 +161,7 @@
 .navbar-wagon-dropdown-menu {
   margin-top: 6px;
   margin-right: 15px;
-  background-color: #F1F1F1;
+  background-color: white;
 }
 .navbar-wagon-dropdown-menu li > a {
   transition: color 0.3s ease;
@@ -165,6 +176,8 @@
   color: #6C7A7A !important;
 }
 
+
+
 #dropdown_smartphone {
   margin-right: -135px;
 }
@@ -172,4 +185,30 @@
 .fb-messengermessageus {
   margin-right: 10px;
 }
+
+.navbar-wagon-item.hidden-md.hidden-lg {
+  flex: 1 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .dropdown {
+    flex: 0 0 10%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    // position: relative;
+    .dropdown-toggle {
+      flex: 0 0 auto;
+      font-size: 30px;
+    }
+  }
+  .navbar-center-part-search {
+    flex: 1 0 80%;
+  }
+  .navbar-right-part-empty {
+    flex: 0 0 10%;
+  }
+}
+
+
 
