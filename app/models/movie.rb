@@ -56,4 +56,5 @@ class Movie < ActiveRecord::Base
     end
     movie_friends_hash
   end
+
 end

@@ -19,6 +19,12 @@ fr:
     search-something: "Chercher un film"
     results: "Resultats"
     empty: "Oups, nous avons rien trouvé"
+    availability: "Disponible en"
+
+  interest:
+    rating: 'Score'
+    release_date: 'Date de sortie'
+    sort-by: "Trier par"
 
   movie-item:
     rating: "Evaluer ce film"
@@ -33,6 +39,8 @@ fr:
     on-theater: "Au cinéma"
     on-theater-tag: "#CINEMA"
     on-vod: "En VOD"
+    all: "Tous"
+
     on-vod-tag: "#VOD"
     friendsnotseen:
         one:   'Un ami veut voir ce film.'
@@ -60,6 +68,29 @@ fr:
     nomore: "n'a pas d'autre film"
     friendsinterest: "La Claplist de %{name}"
     close: "Fermer"
+
+  genres:
+    All:  "Tous les genres"
+    Action: "Action"
+    Adventure: "Aventures"
+    Animation: "Animation"
+    Comedy: "Comédie"
+    Crime: "Crime"
+    Documentary: "Documentaires"
+    Drama: "Drame"
+    Family: "Famille"
+    Fantasy: "Fantastique"
+    Foreign: "Etranger"
+    History: "Historique"
+    Horror: "Horreur"
+    Music: "Musique"
+    Mystery: "Mystère"
+    Romance: "Romance"
+    Science Fiction: "Science Fiction"
+    Tv Movie: "Téléfilm"
+    Thriller: "Thriller"
+    War: "Guerre"
+    Western: "Western"
 
   devise:
     confirmations:

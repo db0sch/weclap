@@ -10,6 +10,7 @@ class InterestsController < ApplicationController
   end
 
   def create
+
     @friend = User.find(params[:friend_id]) if params[:friend_id]
     @interest = Interest.new
     @interest.movie = @movie

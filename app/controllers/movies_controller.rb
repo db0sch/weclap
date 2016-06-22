@@ -12,6 +12,7 @@ class MoviesController < ApplicationController
     @movies = Movie.select{ |m| !m.streamings.blank? } if onvod
     @friends = current_user.friendslist
     @movies = @movies.take(100)
+
   end
 
   def show

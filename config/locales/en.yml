@@ -43,6 +43,12 @@ en:
     search-something: "Search something"
     results: "Results"
     empty: "Try another request"
+    availability: "available on"
+
+  interest:
+    rating: 'Rating'
+    release_date: 'Release date'
+    sort-by: 'Sort by'
 
   movie-item:
     rating: "Rate this movie"
@@ -57,6 +63,8 @@ en:
     on-theater: "On theater"
     on-theater-tag: "#THEATER"
     on-vod: "On VOD"
+    all: "All"
+
     on-vod-tag: "#STREAMING"
     friendsnotseen:
         one:   'One friend wants the see it.'
@@ -84,6 +92,9 @@ en:
     nomore: "hasn't other movie"
     friendsinterest: "%{name}'s Claplist"
     close: "Close"
+
+  genres:
+    All:  "All genres"
 
   tables:
     title:
