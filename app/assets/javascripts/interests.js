@@ -1,5 +1,6 @@
 $(document).ready(function() {
   $(function() {
+
     $('.selectpicker.checkbox-diff').on('change', function(){
       var selected = $(this).find("option:selected").val();
       if (selected === 'on_vod'){
@@ -15,14 +16,18 @@ $(document).ready(function() {
       }
     });
 
-    // $('.selectpicker.sort-by').on('change', function(){
-    //   var selected = $(this).find("option:selected").val();
-    //   if (selected === 'rating'){
 
-    //   }
-    //   else if (selected === 'release_date'){
-    //   }
-    // });
+    $('.selectpicker.sort-by').on('change', function(){
+      var selected = $(this).find("option:selected").val();
+        if (selected == 'rating'){
+        $('#unwatched-movie-list').prepend("<% list = list.sort_by{|interest| interest.movie.imdb_score}.reverse %>".safe_html);
+        $('span#genres').reload();
+        }
+       else if (selected == 'release_date'){
+        $('#unwatched-movie-list').prepend("<% list = list.sort_by{|interest| interest.movie.imdb_score} %>".safe_html);
+        $('span#genres').reload();
+        }
+    });
 
     $('.selectpicker.genres').on('changed.bs.select', function(){
       var selected =  $('.selectpicker.genres').select().val();
@@ -36,6 +41,7 @@ $(document).ready(function() {
           }
         }
     });
-  });
 
+
+  });
 });

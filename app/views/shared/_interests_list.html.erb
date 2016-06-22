@@ -42,17 +42,17 @@
     </div>
   </div>
 
-
-
-
       <h3 class="section-title"><%= t ('list.mywl') %></h3>
       <div id="unwatched-movie-list">
-        <% list.each do |interest| %>
-          <span id="genres">
+        <span id="genres">
 
-          <%= render 'shared/movie_item', movie: interest.movie, interest: interest %>
-          </span>
-        <% end %>
+          <span class="imdb_score hidden"><% list = list.sort_by{|interest| interest.movie.imdb_score}.reverse %></span>
+          <span class="release hidden"><% list = list.sort_by{|interest| interest.movie.imdb_score} %></span>
+
+          <% list.each do |interest| %>
+            <%= render 'shared/movie_item', movie: interest.movie, interest: interest %>
+          <% end %>
+        </span>
       </div>
     </div>
   </div>
