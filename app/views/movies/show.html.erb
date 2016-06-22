@@ -5,7 +5,7 @@
         <div class="movie-basic-info">
           <div class="movie-info-left">
             <span class="movie-title">
-               <% if I18n.locale == :fr && !movie.fr_title.nil? %>
+               <% if I18n.locale == :fr && !@movie.fr_title.nil? %>
 
                   <%= @movie.fr_title%>
                 <% else %>
@@ -92,7 +92,7 @@
 
       <div class="movie-synopsis">
         <div class="container-synopsis">
-          <% if I18n.locale == :fr && !movie.fr_overview.nil?%>
+          <% if I18n.locale == :fr && !@movie.fr_overview.nil?%>
             <h4><%= t ('movie-item.synopsis') %></h4>
 
 

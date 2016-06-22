@@ -45,6 +45,11 @@ en:
     empty: "Try another request"
     availability: "available on"
 
+  interest:
+    rating: 'Rating'
+    release_date: 'Release date'
+    sort-by: 'Sort by'
+
   movie-item:
     rating: "Rate this movie"
     synopsis: "Synopsis"

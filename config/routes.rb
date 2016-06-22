@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   scope '(:locale)', locale: /fr/ do
+    resources :sort, only: [:index]
     resources :movies, only: [:show, :index]
     resources :users, only: [:index] do
       resources :friendships, only: [:show, :index]

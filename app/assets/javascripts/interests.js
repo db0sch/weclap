@@ -17,16 +17,21 @@ $(document).ready(function() {
     });
 
 
-    $('.selectpicker.sort-by').on('change', function(){
-      var selected = $(this).find("option:selected").val();
-        if (selected == 'rating'){
-        $('#unwatched-movie-list').prepend("<% list = list.sort_by{|interest| interest.movie.imdb_score}.reverse %>".raw_html);
 
-        }
-       else if (selected == 'release_date'){
-        $('#unwatched-movie-list').prepend("<% list = list.sort_by{|interest| interest.movie.imdb_score} %>".safe_html);
 
+    $('.selectpicker.sort-by').on('change', function(e){
+      console.log(e.currentTarget.selectedIndex);
+      $.ajax({
+        type: "GET",
+        data: {sort: e.currentTarget.selectedIndex},
+        url: '/sort',
+        success: function(data) {
+          console.log('on passe dans le JS tout court');
+        },
+        error: function(jqXHR) {
+          console.error(jqXHR.responseText);
         }
+      });
     });
 
     $('.selectpicker.genres').on('changed.bs.select', function(){
@@ -49,4 +54,8 @@ $(document).ready(function() {
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 $('.modal').appendTo(".main");
+
+
+
+
 

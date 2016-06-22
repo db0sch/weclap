@@ -1,58 +1,52 @@
 <div class="container padded">
-  <div class="row"x>
+  <div class="row">
     <div class="col-xs-10 col-xs-offset-1">
-    <div style="display: inline">
-    <!-- availability -->
-      <div class="dropdown" style="display: inline">
-        <select class="selectpicker checkbox-diff" data-width="33%" title=<%=t ('list.availability')%>>
-          <%= t ('list.availability') %>
-          <option value="all"><%= t ('movie-item.all') %>
-          </option>
-          <option value="on_vod"><%= t ('movie-item.on-vod') %>
-          </option>
-          <option value="on_Theater"><%= t ('movie-item.on-theater') %>
-          </option>
-        </select>
-      </div>
-    <!-- released_date -->
-    <!-- sort_by imdb_rating/release_date/duration -->
-      <div class="dropdown" style="display: inline">
-        <select class="selectpicker sort-by" data-width="33%" title='SORT BY'>
-          <%= t ('list.availability') %>
-          <option value="rating"><%= t ('movie-item.rating') %>
-          </option>
-          <option value="release_date"><%= t ('movie-item.release_date') %>
-          </option>
-        </select>
+      <div style="display: inline">
+      <!-- availability -->
+        <div class="dropdown" style="display: inline">
+          <select class="selectpicker checkbox-diff" data-width="33%" title=<%=t ('list.availability')%>>
+            <%= t ('list.availability') %>
+            <option value="all"><%= t ('movie-item.all') %>
+            </option>
+            <option value="on_vod"><%= t ('movie-item.on-vod') %>
+            </option>
+            <option value="on_Theater"><%= t ('movie-item.on-theater') %>
+            </option>
+          </select>
+        </div>
+      <!-- sort_by imdb_rating/release_date/duration -->
+        <div class="dropdown" style="display: inline">
+          <select class="selectpicker sort-by" data-width="33%" title=<%= t ('interest.sort-by') %>>
+
+            <option value="rating"><%= t ('interest.rating') %>
+            </option>
+            <option value="release_date"><%= t ('interest.release_date') %>
+            </option>
+          </select>
+        </div>
+      <!-- filterby duration -->
+      <!-- genres -->
+        <div class="dropdown" style="display: inline">
+          <select class="selectpicker genres" data-size="5" data-width="33%" multiple="multiple" name="genres" data-actions-box="true" title=<%=t ('movie-item.genres')%>>
+              <option value=<%= "All" %>><%= t ("genres.All") %></option>
+            <% api_url = "http://api.themoviedb.org/3/genre/movie/list?api_key=#{ENV['TMDB_API_KEY']}" %>
+            <% open(api_url) do |f| %>
+              <% genres = JSON.parse(f.read) %>
+              <% genres['genres'].each do |g| %>
+                  <option value=<%= "#{g['name']}" %>><%= t ("genres.#{g['name']}") %></option>
+                <% end %>
+            <% end %>
+          </select>
+        </div>
       </div>
 
-    <!-- filterby duration -->
-    <!-- genres -->
-    <div class="dropdown" style="display: inline">
-      <select class="selectpicker genres" data-size="5" data-width="33%" multiple="multiple" name="genres" data-actions-box="true" title=<%=t ('movie-item.genres')%>>
-          <option value=<%= "All" %>><%= t ("genres.All") %></option>
-        <% api_url = "http://api.themoviedb.org/3/genre/movie/list?api_key=#{ENV['TMDB_API_KEY']}" %>
-        <% open(api_url) do |f| %>
-          <% genres = JSON.parse(f.read) %>
-          <% genres['genres'].each do |g| %>
-              <option value=<%= "#{g['name']}" %>><%= t ("genres.#{g['name']}") %></option>
-            <% end %>
-        <% end %>
-      </select>
-    </div>
-  </div>
+
 
       <h3 class="section-title"><%= t ('list.mywl') %></h3>
       <div id="unwatched-movie-list">
-        <span id="genres">
-
-          <span class="imdb_score hidden"><% list = list.sort_by{|interest| interest.movie.imdb_score}.reverse %></span>
-          <span class="release hidden"><% list = list.sort_by{|interest| interest.movie.imdb_score} %></span>
-
-          <% list.each do |interest| %>
-            <%= render 'shared/movie_item', movie: interest.movie, interest: interest %>
-          <% end %>
-        </span>
+        <% list.each do |interest| %>
+          <%= render 'shared/movie_item', movie: interest.movie, interest: interest %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -69,3 +63,5 @@
     </div>
   <% end %>
 </div>
+
+

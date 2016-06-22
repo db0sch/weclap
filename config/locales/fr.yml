@@ -21,6 +21,11 @@ fr:
     empty: "Oups, nous avons rien trouvé"
     availability: "Disponible en"
 
+  interest:
+    rating: 'Score'
+    release_date: 'Date de sortie'
+    sort-by: "Trier par"
+
   movie-item:
     rating: "Evaluer ce film"
     synopsis: "Synopsis"
