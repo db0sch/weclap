@@ -35,7 +35,27 @@
       color="white"
       size="large" ></div> -->
       <%# button_to t(".top_call_to_action", default: (t ('navbar.find'))), movies_path, method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
-      <%= button_to t('navbar.wl'), watchlist_path(current_user), method: :get, class: "btn btn-primary navbar-button-watchlist" %>
+      <div class="navbar-commands">
+        <%= link_to watchlist_path(current_user) do %>
+          <div class="navbar-btn">
+            <%= icon("th-list") %>
+            <span><%= t('navbar.wl') %></span>
+          </div>
+        <% end %>
+        <%= link_to user_friendships_path(current_user) do %>
+          <div class="navbar-btn">
+            <%= icon("users") %>
+            <span><%= t('navbar.friends') %></span>
+          </div>
+        <% end %>
+        <%= link_to movies_path do %>
+          <div class="navbar-btn">
+            <%= icon("bolt") %>
+            <span><%= t('navbar.find') %></span>
+          </div>
+        <% end %>
+      </div>
+      <%# button_to t('navbar.wl'), watchlist_path(current_user), method: :get, class: "btn btn-primary navbar-button-watchlist" %>
 
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item">
@@ -44,17 +64,6 @@
             <%= image_tag current_user.picture, class: "avatar" %>
           <% end %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-            <li>
-              <%= link_to user_friendships_path(current_user) do %>
-                <i class="fa fa-users"></i> <%= t ('navbar.friends') %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to movies_path do %>
-                <i class="fa fa-film"></i>
-                <%= t ('navbar.find') %>
-              <% end %>
-            </li>
             <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
                 <i class="fa fa-sign-out"></i>  <%= t ('navbar.log-out') %>
@@ -73,13 +82,18 @@
         <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
         <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu" id="dropdown_smartphone">
           <li>
+            <%= link_to watchlist_path(current_user) do %>
+              <i class="fa fa-th-list"></i> <%= t ('navbar.wl') %>
+            <% end %>
+          </li>
+          <li>
             <%= link_to user_friendships_path(current_user) do %>
               <i class="fa fa-users"></i> <%= t ('navbar.friends') %>
             <% end %>
           </li>
           <li>
             <%= link_to movies_path do %>
-              <i class="fa fa-film"></i>
+              <i class="fa fa-bolt"></i>
               <%= t ('navbar.find') %>
             <% end %>
           </li>
