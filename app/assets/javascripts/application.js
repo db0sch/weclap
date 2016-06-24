@@ -2,8 +2,9 @@
 //= require jquery_ujs
 //= require jquery-ui/autocomplete
 //= require bootstrap-sprockets
+//= require bootstrap-select
 //= require starrr
 //= require underscore
 //= require gmaps/google
-//= require_tree .
 //= require filterrific/filterrific-jquery
+//= require_tree .
