@@ -79,8 +79,14 @@
           </li>
           <li>
             <%= link_to movies_path do %>
-              <i class="fa fa-film"></i>
-              <%= t ('navbar.find') %>
+            <i class="fa fa-lightbulb-o"></i>
+            <%= t ('navbar.find') %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to watchlist_path(current_user) do %>
+            <i class="fa fa-film"></i>
+            <%= t('navbar.wl') %>
             <% end %>
           </li>
           <li>
