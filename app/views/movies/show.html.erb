@@ -153,11 +153,12 @@
     });
   </script>
 
-  <%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyBJB3G_SfQa6Xbb9D9GZpej54J73sm6TGc" %>
-  <%= javascript_include_tag "https://cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js" %>
+  <%# javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyBJB3G_SfQa6Xbb9D9GZpej54J73sm6TGc" %>
+  <%# javascript_include_tag "https://cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js" %>
 
   <script>
     $(document).ready(function() {
+      $.ajaxSetup({ cache: true });
       // Listen to showtimes refresh event
       channel.bind('refresh_showtimes', function(data) {
         if(data.user_id === <%= current_user.id %>) {
@@ -166,13 +167,18 @@
             showsContainer.html(data['shows_html']);
             showsContainer.parent().append('<div class="theater-map" id="map"></div>')
             // Handle google maps display of theaters
-            $('#shows_in_theaters').html(data['shows_html'])
-            var handler = Gmaps.build('Google');
-            handler.buildMap({ internal: { id: 'map' } }, function() {
-              markers = handler.addMarkers(data.theaters_json);
-              handler.bounds.extendWith(markers);
-              handler.fitMapToBounds();
-            });
+            $.getScript("https://maps.google.com/maps/api/js?libraries=places&sensor=false&key=<%= ENV['GMAPS_KEY'] %>")
+              .done(function() {
+                var handler = Gmaps.build('Google');
+                handler.buildMap({ internal: { id: 'map' } }, function() {
+                  $.getScript("https://cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js")
+                    .done(function() {
+                      markers = handler.addMarkers(data.theaters_json);
+                      handler.bounds.extendWith(markers);
+                      handler.fitMapToBounds();
+                    });
+                });
+              });
           } else {
             showsContainer.parent().html('<div class="text-center">No showtimes</div>')
           }
@@ -189,15 +195,9 @@
           }
         }
       });
+      <% unless @movie.trailer_url.blank? %>
+        $('iframe').attr('src', "<%= @movie.trailer_url %>?&showinfo=0");
+      <% end %>
     });
   </script>
-
-  <script>
-    <% unless @movie.trailer_url.blank? %>
-      $(document).ready(function() {
-        $('iframe').attr('src', "<%= @movie.trailer_url %>?&showinfo=0");
-      })
-    <% end %>
-  </script>
-
 <% end %>
