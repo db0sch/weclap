@@ -9,9 +9,10 @@
     margin: 4px 0px;
     transition: border-right 0.5s ease;
     border-radius: 2px;
+    font-size: 13px;
     .movie-item-image {
       margin-right: 15px;
-      width: 13em;
+      width: 10em;
       box-shadow: 1px 0px 1px #b0bec5;
       opacity: 0.9;
       border-top-left-radius: 2px;
@@ -33,6 +34,33 @@
     position: absolute;
     top: 1px;
     right: 1px;
+  }
+  .movie-item-body h3 {
+    font-size: 13px;
+    padding-top: 9px;
+  }
+  .channel-label-streaming {
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+  }
+  .btn-warning {
+    padding: 3px;
+  }
+  .fa-times {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+  }
+  .movie-rating {
+    position: absolute;
+    left: -51px;
+    top: 15px;
+  }
+  .rating-text {
+    position: relative;
+    top: -1px;
+    right: 55px;
   }
 }
 

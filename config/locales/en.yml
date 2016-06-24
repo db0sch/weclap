@@ -67,7 +67,7 @@ en:
 
     on-vod-tag: "#STREAMING"
     friendsnotseen:
-        one:   'One friend wants the see it.'
+        one:   'One friend wants to see it.'
         other: '%{count} friends want to see it.'
     friendshaveseen:
         one:   'One friend has seen it.'
