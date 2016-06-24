@@ -22,6 +22,7 @@ gem 'pundit'
 gem 'geocoder'
 gem 'omniauth-facebook'
 gem 'rails-assets-starrr', source: 'https://rails-assets.org'
+gem 'rails-assets-bootstrap-select', source: 'https://rails-assets.org'
 gem 'fb_graph'
 gem 'rest-client'
 gem 'awesome_print'
@@ -32,6 +33,8 @@ gem "coffee-rails"
 gem "gmaps4rails"
 gem 'jquery-ui-rails'
 gem 'pg_search'
+gem 'capybara', '~> 2.4.4'
+gem 'poltergeist'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"

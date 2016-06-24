@@ -1,5 +1,5 @@
 console.log("hello JAVASCRIPT");
-$('#movie-add-' + <%= @movie.id %>).removeClass( 'movie-add-btn btn-success' ).addClass( 'movie-added-btn btn-secondary').html('added to list');
+$('#movie-add-' + <%= @movie.id %>).removeClass( 'movie-add-btn btn-warning' ).addClass( 'movie-added-btn btn-secondary').html('Added to list');
 <% if @friend %>
   console.log('on passe dans le if friend');
   if ($('#friend-' + <%= @friend.id %> + ' .movie-item > div').length < 8) {

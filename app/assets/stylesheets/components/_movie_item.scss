@@ -35,22 +35,27 @@
   .starrr a {
     font-size: 43px;
   }
+
   .col-xs-offset-1 {
     margin-left: 0%;
   }
+
   .col-xs-10 {
     width: 100%;
   }
+
   .movie-item-social {
     position: absolute;
     top: 1px;
     right: 1px;
   }
+
   .movie-social {
     position: absolute;
     top: 1px;
     right: 1px;
   }
+
   .movie-item-body {
     line-height: 9px;
     h3 {
@@ -58,27 +63,29 @@
       padding-top: 9px;
     }
   }
+
   .channel-label-streaming {
     position: absolute;
     bottom: 1px;
     right: 1px;
   }
+
   .channel-label-cinema {
     position: absolute;
     bottom: 15px;
     right: 1px;
   }
+
   .btn-warning {
     padding: 3px;
   }
+
   .fa-times {
     position: absolute;
     top: 1px;
     right: 1px;
   }
-  .movie-rating {
 
-  }
   .rating-text {
     position: relative;
     top: -1px;
@@ -133,7 +140,6 @@
     align-items: center;
   }
 
-
   .movie-item-social {
     flex: 1 0 15%;
     display: flex;
@@ -148,8 +154,6 @@
       margin-bottom: 0px;
       color: #A7BCBC;
     }
-    .starrr {
-    }
   }
 
   .movie-item-social:hover {
@@ -163,6 +167,7 @@
     display: flex;
     margin: 0px 4px;
   }
+
   .movie-social {
     display: flex;
     align-self: flex-end;
@@ -216,26 +221,41 @@
     }
   }
 
-  /* Controls design */
-  .movie-item-controls {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    .movie-add-btn {
-      // width: 120px;
-    }
-    a.movie-add-btn {
-      font-size: 13px;
+$width-btn: 110px;
+
+/* Controls design */
+.movie-item-controls {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  .movie-add-btn {
+    width: $width-btn;
+  }
+}
+  a.movie-add-btn {
+    font-size: 13px;
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid $yellow;
+    &:hover {
       color: white;
-      font-weight: 600;
       text-decoration: none;
-      &:hover {
-        color: white;
-        text-decoration: none;
-      }
     }
-    a.movie-added-btn {
-      font-size: 12px;
+  }
+
+  a.movie-added-btn {
+    font-size: 13px;
+    font-weight: 600;
+    color: $gray-light;
+  }
+
+  .movie-added-btn.btn {
+    border: 1px solid $gray-light;
+    font-size: 12px;
+    opacity: 1;
+    width: $width-btn;
+    &:hover {
       color: $gray-dark;
     }
     .movie-added-btn.btn {
@@ -261,6 +281,7 @@
     font-size: xx-large;
     color: #528FC1;
   }
+
   .crew {
     font-size: 12px;
   }
@@ -276,6 +297,7 @@
   .modal-item-body {
     flex: 0 0 auto;
   }
+
   #modal-end {
     margin-right: 10px;
   }
@@ -318,7 +340,6 @@
     }
   }
   .channel-label-cinema {
-
     // background-color: #e67e22;
     a {
       color: $red;
@@ -361,6 +382,8 @@
     text-decoration: none;
     font-size: 10px;
     color: #585858;
-
   }
+
+
 }
+

@@ -13,6 +13,7 @@ class GetMovieDetailsJob < ActiveJob::Base
       sleep(delay)
       retry
     end
-    GetMovieDetailsJob.set(wait: (((rand(5) == 1) ? 1 : 0) * 2).seconds).perform_later(imdb_ids) if imdb_ids.any?
+    GetMovieDetailsJob.perform_later(imdb_ids) if imdb_ids.any?
+    # GetMovieDetailsJob.set(wait: (((rand(5) == 1) ? 1 : 0) * 2).seconds).perform_later(imdb_ids) if imdb_ids.any?
   end
 end
