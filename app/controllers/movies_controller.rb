@@ -20,10 +20,6 @@ class MoviesController < ApplicationController
     authorize @movie
     @display_shows = display_shows_tab?(@movie)
     @friends = current_user.friendslist
-#
-    # credits = @movie.credits
-    # @directors = credits['crew']['Director'].join(', ') unless credits['crew']['Director'].blank?
-    # @actors = credits['cast'].take(5).join(', ')
     @directors = @movie.jobs.where(title: 'Director').map(&:person).map(&:name).join(', ')
     @actors = @movie.jobs.where(title: 'Actor').map(&:person).map(&:name).join(', ')
 # 2do Use proper translation if available
@@ -34,9 +30,8 @@ class MoviesController < ApplicationController
     @location = current_user.zip_code
     @city = current_user.city
     # execute in background
-    GetShowtimesJob.perform_later(@location, @city, @movie.id, current_user.id)
-    # GetShowtimesJob.set(wait: 0.5.seconds).perform_later(@location, @city, @movie.id, current_user.id)
-    GetStreamingsJob.set(wait: 0.5.seconds).perform_later(@movie.id, current_user.id)
+    GetShowtimesJob.set(wait: 0.5.seconds).perform_later(@location, @city, @movie.id, current_user.id)
+    GetStreamingsJob.set(wait: 0.7.seconds).perform_later(@movie.id, current_user.id)
   end
 
   private

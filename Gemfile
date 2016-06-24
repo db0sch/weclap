@@ -33,6 +33,8 @@ gem "coffee-rails"
 gem "gmaps4rails"
 gem 'jquery-ui-rails'
 gem 'pg_search'
+gem 'capybara', '~> 2.4.4'
+gem 'poltergeist'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"

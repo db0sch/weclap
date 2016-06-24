@@ -2,46 +2,75 @@ class MovieScraper
   class << self
 
     def get_movie_list(count, start = 1, desc = false) # Retrieve 50 per request
-      p url = "http://www.imdb.com/search/title?title_type=feature&start=#{start}&sort=release_date_us#{desc ? ',desc' : ''}"
-      begin
-        movies_response = RestClient.get url
-        fail unless movies_response.code == 200
-      rescue
-        puts "Could not retrieve movie listing from IMDb (URL: #{url})"
-        return
-      end
-
-      movies_html = Nokogiri::HTML(movies_response.body).search('table.results tr.detailed td.title')
+      counter = 0
       movie_ids = []
-      movies_html.take(count).each do |m|
-        imdb_id = m.search(".wlb_wrapper").attribute('data-tconst').value
-        mv = Movie.unscoped.new({
-          imdb_id: imdb_id,
-          imdb_score: m.search(".user_rating span.rating-rating > span.value").text.to_f,
-          release_date: Date.new(m.search("span.year_type").text.match(/\d+/)[0].to_i, 1, 1)
-        })
-        mv.save if mv.valid?
-        movie_ids << imdb_id
+
+      url = "http://www.imdb.com/search/title?sort=release_date_us#{desc ? ',desc' : ''}&start=#{start}&title_type=feature"
+      WebScraper.scrape do |page|
+        page.visit url
+        while count > 0
+          begin
+            rows = Nokogiri::HTML(page.html).search('table.results tr.detailed td.title')
+            cnt = [rows.count, count].min
+            rows.take(cnt).each do |m|
+              imdb_id = m.search(".wlb_wrapper").attribute('data-tconst').value
+              r_date = m.search("span.year_type").text.match(/\d+/)
+              r_date = Date.new(r_date[0].to_i, 1, 1) if r_date
+              mv = Movie.unscoped.new({
+                imdb_id: imdb_id,
+                imdb_score: m.search(".user_rating span.rating-rating > span.value").text.to_f,
+                release_date: r_date
+              })
+              mv.save if mv.valid?
+              movie_ids << imdb_id
+              puts "Retrieved #{counter += 1} movie ids from IMDb"
+            end
+            GetMovieDetailsJob.perform_later(movie_ids) if movie_ids.any?
+            break if movie_ids.count < cnt || (count -= cnt) == 0
+
+            movie_ids = []
+            pgn = page.first('.pagination')
+            if pgn
+              pgn.find('a:last-child').trigger('click')
+              sleep 30
+            else
+              fail WebScraperException, "Pagination element not found in page"
+            end
+          rescue Capybara::ElementNotFound
+            puts "Could not find the 'Nexto »' link"
+            break
+          rescue WebScraperException => e
+            puts "#{e.message}#{'... retrying' unless retried}"
+            retry unless retried
+            retried = true
+          rescue => e
+            puts "***********"
+            puts "Could not retrieve movie listing from IMDb (URL: #{url})"
+            puts "Error: #{e.message}"
+            puts "***********"
+          end
+          retried = false
+        end
       end
-      GetMovieDetailsJob.perform_later(movie_ids) if movie_ids.any?
-      movie_ids.count
     end
 
     def get_movie_details(imdb_id)
-      puts "retrieving movie (imdb_id: #{imdb_id}) from tmdb"
       #SBE 2do do not call each time
       Tmdb::Api.key(ENV['TMDB_API_KEY'])
-
       tmdb_mv = Tmdb::Find.imdb_id(imdb_id)
+
       return if tmdb_mv.blank? || (tmdb_mv = tmdb_mv['movie_results']).blank?
       tmdb_id = tmdb_mv.first['id']
 
-      if mv = get_movie_description_through_api(tmdb_id, imdb_id, 'en')
+      if mv = get_movie_description_through_api(tmdb_id, 'en')
+        puts "Retrieving english description of movie (imdb_id: #{imdb_id}) from tmdb"
+
         collection = mv['belongs_to_collection'] ? { mv['belongs_to_collection']['id'] => mv['belongs_to_collection']['name'] } : nil
         return unless movie = Movie.unscoped.find_by(imdb_id: imdb_id)
         r_date = mv['release_date'].blank? ? movie.release_date : mv['release_date'].to_date
 
-        movie.update({
+        movie.update(
+        {
           title: mv['title'],
           original_title: mv['original_title'],
           tmdb_id: tmdb_id,
@@ -56,13 +85,10 @@ class MovieScraper
           release_date: r_date,
           spoken_languages: mv['spoken_languages'],
           collection: collection,
-          # credits: { cast: get_cast(mv['id']), crew: get_crew(mv['id']) },
-          # Add later
-          # trailer_url: "https://www.youtube.com/embed#{get_youtube(mv['original_title'])}?rel=0&amp;showinfo=0",
           website_url: "http://www.imdb.com/title/#{imdb_id}",
           cnc_url: "http://vad.cnc.fr/titles?search=#{mv['original_title'].gsub(" ", "+")}&format=4002",
           setup: true
-        }.merge(fields_in_french_for(tmdb_id, imdb_id)))
+        }.merge(fields_in_french_for({tmdb_id: tmdb_id, runtime: mv['runtime']})))
         retrieve_credits?(movie)
         movie
       end
@@ -218,14 +244,45 @@ class MovieScraper
       end
     end
 
-    def move_credits_to_jobs_n_people
+    def move_credits_to_jobs_n_people_add_fr_xlations(max = 0)
       # Find all movies with credits
-      movies = Movie.where.not(credits: nil)
-      # Retrieve their credits as jobs and
-      # Remove the credits so that they are never processed again
-      movies.each do |movie|
-        movie.credits = nil if retrieve_credits?(movie)
+      movies = max > 0 ? Movie.where.not(credits: nil).take(max) : Movie.where.not(credits: nil)
+      movies.each_with_index do |movie, index|
+        GetFrenchXlationNCreditsJob.set(wait: index * 1.5.seconds).perform_later(movie.id)
       end
+    end
+
+    def fields_in_french_for(args)
+      if mv = get_movie_description_through_api(args[:tmdb_id], 'fr')
+        return {
+          fr_title: mv['title'],
+          fr_tagline: mv['tagline'],
+          fr_overview: mv['overview'],
+          runtime: args[:runtime] || args[:runtime] == 0 ? args[:runtime] : mv['runtime']
+        }
+      end
+      {}
+    end
+
+    def retrieve_credits?(movie)
+      cast = Tmdb::Movie.casts(movie.tmdb_id)
+      get_people_and_jobs(team: cast, movie_id: movie.id, job: 'Actor', max_results: 10) unless cast.blank?
+      crew = Tmdb::Movie.crew(movie.tmdb_id)
+      get_people_and_jobs(team: crew, movie_id: movie.id) unless crew.blank?
+      !(cast.blank? && crew.blank?)
+    end
+
+    def retrieve_trailers(count)
+      return unless movie = Movie.where(trailer_url: nil).first
+      get_movie_trailer(movie)
+      GetMovieTrailerFromYoutubeJob.set(wait: 0.5.seconds).perform_later(count) if (count -= 1) > 0
+    end
+
+# 2DO: replace by a more appropriate picture
+    FALLBACK_TRAILER = "http://placehold.it/477x300"
+    def get_movie_trailer(movie)
+      url = get_youtube(movie)
+      movie.update(trailer_url: url ? "https://www.youtube.com/embed#{url}?rel=0&amp;showinfo=0" : FALLBACK_TRAILER)
     end
 
     private
@@ -234,20 +291,19 @@ class MovieScraper
       { 'Louer' => 'Rent', 'Acheter' => 'Purchase', 'abonner' => 'Subscribe'}[word]
     end
 
-    def get_youtube(title)
-      titleplus = title.gsub(" ", "+").gsub(/[^[:ascii:]]/, "+")
+    def get_youtube(movie)
+      titleplus = movie.original_title.delete(';').gsub("'", ' ').gsub(" ", "+").gsub(/[^[:ascii:]]/, "+")
+      year = movie.release_date.year
+      url = "https://www.youtube.com/results?search_query=allintitle:+\"#{titleplus}+#{year}\"+trailer"
+      puts "@@@> Retrieving trailer for '#{movie.title}' with url = #{url} @ Youtube"
       begin
-        response = RestClient.get "https://www.youtube.com/results?search_query=#{titleplus}+trailer"
+        response = RestClient.get url
       rescue
-        return ''
+        return
       end
-      return '' unless response.code == 200
-      trailer = Nokogiri::HTML(response.body)
-        .search(".yt-lockup-title")
-        .children
-        .attribute('href')
-        .value.gsub("watch?v=", "")
-      trailer ? trailer : ''
+      return unless response.code == 200
+      children = Nokogiri::HTML(response.body).search(".yt-lockup-title").children
+      trailer = children.blank? ? nil : children.attribute('href').value.gsub("watch?v=", "")
     end
 
     def get_cast(movie_id, limit = 10)
@@ -273,38 +329,29 @@ class MovieScraper
       p @genres ||= Tmdb::Genre.list['genres'].map(&:values).to_h
     end
 
-    def get_movie_description_through_api(tmdb_id, imdb_id, lang)
-      movie_response = RestClient.get "http://api.themoviedb.org/3/movie/#{tmdb_id}?language=#{lang}&api_key=#{ENV['TMDB_API_KEY']}"
-      return unless movie_response.code == 200
-      mv = JSON.parse(movie_response.body)
-    end
-
-    def fields_in_french_for(tmdb_id, imdb_id)
-      if mv = get_movie_description_through_api(tmdb_id, imdb_id, 'fr')
-        return {
-          fr_title: mv['title'],
-          fr_tagline: mv['tagline'],
-          fr_overview: mv['overview'],
-        }
+    # def get_movie_description_through_api(tmdb_id, imdb_id, lang)
+    def get_movie_description_through_api(tmdb_id, lang)
+      mv = {}
+      WebScraper.scrape do |page|
+        p url = "http://api.themoviedb.org/3/movie/#{tmdb_id}?language=#{lang}&api_key=#{ENV['TMDB_API_KEY']}"
+        page.visit url
+        mv = JSON.parse(page.find('body').text)
       end
-      {}
+      mv
     end
 
-    def retrieve_credits?(movie)
-      cast = Tmdb::Movie.casts(movie.tmdb_id)
-      get_people_and_jobs(cast, movie.id, 'Actor') unless cast.blank?
+    VIP_CREW_MEMBERS = ['Director', 'Producer', 'Author', 'Writer', 'Scenario Writer', 'Screenplay'].freeze
 
-      crew = Tmdb::Movie.crew(movie.tmdb_id)
-      get_people_and_jobs(crew, movie.id) unless crew.blank?
-      !(cast.blank? && crew.blank?)
-    end
-
-    def get_people_and_jobs(team, movie_id, job = nil)
-      team.each do |member|
-        # names = unfold_names(member['name'])
-        # pe = Person.where(imdb_id: member['id']).first_or_create(first_name: names.first, last_name: names.last)
-        pe = Person.where(tmdb_id: member['id']).first_or_create(name: member['name'])
-        Job.create(person_id: pe.id, movie_id: movie_id, title: job ? job : member['job'])
+    def get_people_and_jobs(args)
+      count = args[:max_results] || 20
+      job = args[:job]
+      args[:team].each do |member|
+        if VIP_CREW_MEMBERS.include?(member['job']) || job
+          pe = Person.where(tmdb_id: member['id']).first_or_create(name: member['name'])
+          j = Job.new(person_id: pe.id, movie_id: args[:movie_id], title: job ? job : member['job'])
+          j.save if j.valid?
+          return if (count -= 1) <= 0
+        end
       end
     end
 
