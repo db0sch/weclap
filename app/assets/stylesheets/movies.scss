@@ -1,7 +1,7 @@
-.movie-wrapper {
-  background: linear-gradient(#778899, #333333);
-  padding: 10px 0;
-}
+// .movie-wrapper {
+//   background: linear-gradient(#778899, #333333);
+//   padding: 10px 0;
+// }
 .movie-info-container {
   // display: flex;
   // justify-content: flex-center;
@@ -28,10 +28,11 @@
 }
 
 .boxing {
-  box-shadow: 1px 1px 2px #aaa;
+  // box-shadow: 1px 1px 2px #aaa;
+  border: 1px solid lightgrey;
   border-radius: 4px;
   margin: 10px 0;
-  background-color: #F4F4F4;
+  background-color: white;
   padding: 23px 24px 41px 25px;
   // box-shadow: -1px 2px 4px -0.9px rgba(0, 0, 0, 0.7) inset;
   h4 {
@@ -60,7 +61,7 @@
   color: $gray-light;
   .movie-title, .movie-release-year {
     font-size: 24px;
-    font-weight: normal;
+    font-weight: 600;
     color: $gray-dark;
     margin-right: 10px;
   }
@@ -140,15 +141,18 @@ $star-yellow: #FFB400;
 }
 
 .movie-synopsis {
-  box-shadow: 1px 1px 2px #aaa;
+  // box-shadow: 1px 1px 2px #aaa;
+  border: 1px solid lightgrey;
   border-radius: 4px;
   margin: 0;
-  background-color: #F4F4F4;
+  background-color: white;
   padding-top: 37px;
   padding-left: 25px;
   padding-bottom: 37px;
   min-height: 322px;
-  // box-shadow: -1px 2px 4px -0.9px rgba(0, 0, 0, 0.7) inset;
+  p {
+    color: $gray;
+  }
 }
 
 .theater-container {
@@ -196,14 +200,16 @@ $star-yellow: #FFB400;
 }
 
 .section-title {
-  font-size: 20px;
-  border-bottom: solid 1px;
-  padding-bottom: 15px;
-  margin-top: 5px;
+  font-size: 16px;
+  border-bottom: 1px solid $gray-dark;
+  margin-top: 10px;
+  padding-bottom: 10px;
   // margin-left: 116px;
   // margin-right: 116px;
   text-align: center;
-  color: #ffffff;
+  font-family: "Open sans";
+  font-weight: 300;
+  color: $gray-dark;
   font-weight: 100;
   opacity: 0.8;
 }
@@ -229,9 +235,13 @@ $star-yellow: #FFB400;
 .flex-tab-item {
   flex: 0 0 25%;
   padding-bottom: 0px;
+  color: $gray-dark;
+  font-weight: 200;
+  font-size: 16px;
+  font-family: 'Open sans'
 }
 .tab-active-search {
-  border-bottom: solid 1px;
+  border-bottom: 1px solid;
 }
 
 .none {
@@ -240,11 +250,11 @@ $star-yellow: #FFB400;
   border-bottom: solid 1px transparent;
 }
 .underline {
-  border-bottom: solid 1px white;
+  border-bottom: solid 1px darkgrey;
 }
 .none:hover {
-  padding-bottom: 3px;
-   border-bottom: solid 1px white;
+  // padding-bottom: 3px;
+  border-bottom: solid 1px darkgrey;
 }
 .none:focus {
   outline-width: 0;

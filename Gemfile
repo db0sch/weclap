@@ -9,6 +9,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'devise'
 gem 'redis'
 gem 'themoviedb'
+gem 'filterrific'
 
 gem 'sass-rails'
 gem 'jquery-rails'

@@ -36,13 +36,19 @@ en:
     login-fb: "Log in with Facebook"
 
   list:
-    mywl: "My Claplist"
+    mywl: "My Watchlist"
     watched: "Watched"
     my-friends:  "My friends"
     search: "Search"
     search-something: "Search something"
     results: "Results"
     empty: "Try another request"
+    availability: "available on"
+
+  interest:
+    rating: 'Rating'
+    release_date: 'Release date'
+    sort-by: 'Sort by'
 
   movie-item:
     rating: "Rate this movie"
@@ -53,8 +59,13 @@ en:
     forall: "For all"
     directed-by: "Directed by"
     add-to-wl: "Want to watch"
+    added-to-wl: "Added to watchlist"
     on-theater: "On theater"
+    on-theater-tag: "#THEATER"
     on-vod: "On VOD"
+    all: "All"
+
+    on-vod-tag: "#STREAMING"
     friendsnotseen:
         one:   'One friend wants the see it.'
         other: '%{count} friends want to see it.'
@@ -71,8 +82,8 @@ en:
     friends: "Friends"
     log-out: "Log out"
     message: "Message Us"
-    find: "Suggestions"
-    wl: "My films"
+    find: "Trending"
+    wl: "Movie list"
 
   friends:
     nocommon: "You have no common movies with"
@@ -81,6 +92,9 @@ en:
     nomore: "hasn't other movie"
     friendsinterest: "%{name}'s Claplist"
     close: "Close"
+
+  genres:
+    All:  "All genres"
 
   tables:
     title:
