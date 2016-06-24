@@ -1,4 +1,13 @@
 @media (max-width: 768px) {
+
+  .large {
+    display: none;
+  }
+  .friends-tooltip-global {
+    position: absolute;
+    top: 31px;
+  }
+
   .movie-item {
     display: flex;
     align-items: center;
@@ -10,6 +19,9 @@
     transition: border-right 0.5s ease;
     border-radius: 2px;
     font-size: 13px;
+    h3 {
+      font-size: 15px;
+    }
     .movie-item-image {
       margin-right: 15px;
       width: 10em;
@@ -18,6 +30,9 @@
       border-top-left-radius: 2px;
       border-bottom-left-radius: 2px;
     }
+  }
+  .starrr a {
+    font-size: 43px;
   }
   .col-xs-offset-1 {
     margin-left: 0%;
@@ -35,13 +50,21 @@
     top: 1px;
     right: 1px;
   }
-  .movie-item-body h3 {
-    font-size: 13px;
-    padding-top: 9px;
+  .movie-item-body {
+    line-height: 9px;
+    h3 {
+      font-size: 13px;
+      padding-top: 9px;
+    }
   }
   .channel-label-streaming {
     position: absolute;
     bottom: 1px;
+    right: 1px;
+  }
+  .channel-label-cinema {
+    position: absolute;
+    bottom: 15px;
     right: 1px;
   }
   .btn-warning {
@@ -53,9 +76,7 @@
     right: 1px;
   }
   .movie-rating {
-    position: absolute;
-    left: -51px;
-    top: 15px;
+
   }
   .rating-text {
     position: relative;
@@ -65,7 +86,11 @@
 }
 
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
+  .smallxs {
+    display: none;
+  }
+
   .movie-item {
     display: flex;
     align-items: center;
@@ -76,6 +101,7 @@
     margin: 4px 0px;
     transition: border-right 0.5s ease;
     border-radius: 2px;
+
     .movie-item-image {
       margin-right: 20px;
       width: 70px;

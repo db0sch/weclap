@@ -7,18 +7,18 @@
     <% friends_have_seen << "#{friend.first_name} - #{rating}/5<br>" %>
   <% end %>
 <% end %>
-
-<% if friends_not_seen.size > 0 %>
-  <div class="friends_tooltip" data-toggle="tooltip" data-placement="top" title="<%=friends_not_seen.join("")%>">
-    <a href="#" class="movie-item-friends-interests-link" data-toggle="modal" data-target="#modalfriends-<%= movie.id %>"><%= t('movie-item.friendsnotseen', count: friends_not_seen.size) %></a>
-  </div>
-<% end %>
-<% if friends_have_seen.size > 0 %>
-  <div class="friends_tooltip" data-toggle="tooltip" data-placement="top" title="<%= friends_have_seen.join("") %>">
-    <a href="#" class="movie-item-friends-interests-link" data-toggle="modal" data-target="#modalfriends-<%= movie.id %>"><%=t('movie-item.friendshaveseen', count: friends_have_seen.size) %></a>
-  </div>
-<% end %>
-
+<div class="friends-tooltip-global">
+  <% if friends_not_seen.size > 0 %>
+    <div class="friends_tooltip" data-toggle="tooltip" data-placement="top" title="<%=friends_not_seen.join("")%>">
+      <a href="#" class="movie-item-friends-interests-link" data-toggle="modal" data-target="#modalfriends-<%= movie.id %>"><%= t('movie-item.friendsnotseen', count: friends_not_seen.size) %></a>
+    </div>
+  <% end %>
+  <% if friends_have_seen.size > 0 %>
+    <div class="friends_tooltip" data-toggle="tooltip" data-placement="top" title="<%= friends_have_seen.join("") %>">
+      <a href="#" class="movie-item-friends-interests-link" data-toggle="modal" data-target="#modalfriends-<%= movie.id %>"><%=t('movie-item.friendshaveseen', count: friends_have_seen.size) %></a>
+    </div>
+  <% end %>
+</div>
 <% if friends_not_seen.size > 0 || friends_have_seen.size > 0 %>
   <%= render 'shared/movie_item_friends_modal', movie: movie %>
 <% end %>
