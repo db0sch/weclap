@@ -65,6 +65,11 @@
           <% end %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
+              <%= link_to profile_path do %>
+                <i class="fa fa-user"></i>  <%= t ('navbar.profile') %>
+              <% end %>
+            </li>
+            <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
                 <i class="fa fa-sign-out"></i>  <%= t ('navbar.log-out') %>
               <% end %>

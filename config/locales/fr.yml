@@ -57,6 +57,7 @@ fr:
   navbar:
     friends: "Amis"
     log-out: "Déconnexion"
+    profile: "Profil"
     message: "Contactez nous"
     find: "En ce moment"
     wl: "Mes films"
@@ -152,3 +153,21 @@ fr:
         one: "1 erreur a empêché ce(tte) %{resource} d'être sauvegardé(e) :"
         other: "%{count} erreurs ont empêché ce(tte) %{resource} d'être sauvegardé(e) :"
 
+  profile:
+    main:
+      email: "e-mail: %{email}"
+      location: "location: %{location}"
+    statistics:
+      title: "Statistics"
+      in-watchlist: "Movies in watchlist: %{number}"
+      seen: "Movies in seen: %{number}"
+      with-friends: "Movies in common with your friends: %{number}"
+    friends:
+      title: "Friends"
+    newsletter:
+      title: "Newsletter"
+    bot:
+      title: "Bot (beta)"
+      text: "This is our messanging bot. When you're on the go, you can get your list, search for movies, and add them to your watchlist, just by texting the bot on Facebook Messenger. \nThis feature is still in beta mode. Do not hesitate to us your advice, ideas, doubts about this new way of communication. \n To make it work, just click on the sign in button, and then on 'Message Us'"
+      signin: "First, click on this button to link your Clap account and the bot"
+      messageus: "Then, just click Message Us, and you'll be redirect to messenger.com and start chatting with the bot."
