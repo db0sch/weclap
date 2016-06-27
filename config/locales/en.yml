@@ -51,6 +51,7 @@ en:
     sort-by: 'Sort by'
 
   movie-item:
+    rate: "Rate"
     rating: "Rate this movie"
     synopsis: "Synopsis"
     starring: "Starring"
@@ -91,8 +92,9 @@ en:
     common: "Your common movies"
     uncommon: "The other movies of"
     nomore: "hasn't other movie"
-    friendsinterest: "%{name}'s Claplist"
+    friendsinterest: "%{name}'s movie list"
     close: "Close"
+    common-movies: "You have %{count_common} common movies with %{friend}"
 
   genres:
     All:  "All genres"

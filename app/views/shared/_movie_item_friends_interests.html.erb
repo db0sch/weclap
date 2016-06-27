@@ -9,13 +9,18 @@
 <% end %>
 <div class="friends-tooltip-global">
   <% if friends_not_seen.size > 0 %>
-    <div class="friends_tooltip" data-toggle="tooltip" data-placement="top" title="<%=friends_not_seen.join("")%>">
+    <div class="friends_tooltip hidden-xs" data-toggle="tooltip" data-placement="top" title="<%=friends_not_seen.join("")%>">
       <a href="#" class="movie-item-friends-interests-link" data-toggle="modal" data-target="#modalfriends-<%= movie.id %>"><%= t('movie-item.friendsnotseen', count: friends_not_seen.size) %></a>
     </div>
   <% end %>
   <% if friends_have_seen.size > 0 %>
-    <div class="friends_tooltip" data-toggle="tooltip" data-placement="top" title="<%= friends_have_seen.join("") %>">
+    <div class="friends_tooltip hidden-xs" data-toggle="tooltip" data-placement="top" title="<%= friends_have_seen.join("") %>">
       <a href="#" class="movie-item-friends-interests-link" data-toggle="modal" data-target="#modalfriends-<%= movie.id %>"><%=t('movie-item.friendshaveseen', count: friends_have_seen.size) %></a>
+    </div>
+  <% end %>
+  <% if friends_have_seen.size > 0 || friends_not_seen.size > 0%>
+    <div class="friends_tooltip hidden-md hidden-sm hidden-lg" data-toggle="tooltip" data-placement="top" title="<%= friends_have_seen.join("") %>">
+      <a href="#" class="movie-item-friends-interests-link btn btn-success" data-toggle="modal" data-target="#modalfriends-<%= movie.id %>"><%=t('navbar.friends', count: friends_have_seen.size) %></a>
     </div>
   <% end %>
 </div>
