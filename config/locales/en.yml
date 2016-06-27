@@ -91,8 +91,9 @@ en:
     common: "Your common movies"
     uncommon: "The other movies of"
     nomore: "hasn't other movie"
-    friendsinterest: "%{name}'s Claplist"
+    friendsinterest: "%{name}'s movie list"
     close: "Close"
+    common-movies: "You have %{count_common} common movies with %{friend}"
 
   genres:
     All:  "All genres"

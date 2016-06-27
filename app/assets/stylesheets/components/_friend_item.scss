@@ -1,128 +1,128 @@
 
-.wrapper-friend-list {
-  background-color: #BFCDCF;
-}
+  .wrapper-friend-list {
+    background-color: #BFCDCF;
+  }
 
-.flex-box-align {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-.flex-item-align {
-  flex: 0 0 25%;
-}
-.relative {
-  position: relative;
-}
-.absolute {
-  position: absolute;
-}
-.friend-item {
-  display: flex;
-  align-items: center;
-  padding: 20px;
-  border-radius: 3px;
-  transition: all 0.15s ease;
-  background-color: #F4F4F4;
-  border: 1px solid #949494;
-  margin: 4px;
-}
+  .flex-box-align {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .flex-item-align {
+    flex: 0 0 25%;
+  }
+  .relative {
+    position: relative;
+  }
+  .absolute {
+    position: absolute;
+  }
+  .friend-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 3px;
+    transition: all 0.15s ease;
+    background-color: #F4F4F4;
+    border: 1px solid #949494;
+    margin: 4px;
+  }
 
-/* Body design */
-.friend-item-body {
-  flex: 1 1 auto;
-}
-.friend-item-body h3 {
-  font-weight: 200;
-  font-size: 24px;
-}
-.friend-item-body p {
-  font-weight: lighter;
-  color: #999999;
-  margin-bottom: 0;
-}
+  /* Body design */
+  .friend-item-body {
+    flex: 1 1 auto;
+  }
+  .friend-item-body h3 {
+    font-weight: 200;
+    font-size: 24px;
+  }
+  .friend-item-body p {
+    font-weight: lighter;
+    color: #999999;
+    margin-bottom: 0;
+  }
 
-/* friend-item image */
-.friend-item-image {
-  border-radius: 10px;
-  margin-right: 20px;
-  width: 50px;
-}
+  /* friend-item image */
+  .friend-item-image {
+    border-radius: 10px;
+    margin-right: 20px;
+    width: 50px;
+  }
 
-/* Upvote design */
-.friend-item-upvote {
-  padding-right: 20px;
-  text-align: center;
-  transition: all 0.15s ease;
-  font-weight: bold;
-  font-size: 13px;
-  line-height: 20px;
-}
-.friend-item-count {
-  margin: 2px 0 0;
-}
-.friend-item-arrow {
-  transition: all 0.15s ease;
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid transparent;
-  border-bottom: 9px solid black;
-  border-radius: 2px;
-  margin: auto;
-}
+  /* Upvote design */
+  .friend-item-upvote {
+    padding-right: 20px;
+    text-align: center;
+    transition: all 0.15s ease;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 20px;
+  }
+  .friend-item-count {
+    margin: 2px 0 0;
+  }
+  .friend-item-arrow {
+    transition: all 0.15s ease;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid transparent;
+    border-bottom: 9px solid black;
+    border-radius: 2px;
+    margin: auto;
+  }
 
-/* Controls design */
-.friend-item-controls {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  margin: 0px;
-}
-.friend-item-controls a {
-  padding: 0 20px;
-  font-size: 17px;
-  color: #E6E6E6;
-}
-.friend-item-controls a:hover {
-  color: #D3473C !important
-}
-.friend-item-controls-hidden a {
-  color: transparent;
-  font-size: 15px;
-  transition: all 0.15s ease;
-  border-color: transparent;
-}
+  /* Controls design */
+  .friend-item-controls {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 0px;
+  }
+  .friend-item-controls a {
+    padding: 0 20px;
+    font-size: 17px;
+    color: #E6E6E6;
+  }
+  .friend-item-controls a:hover {
+    color: #D3473C !important
+  }
+  .friend-item-controls-hidden a {
+    color: transparent;
+    font-size: 15px;
+    transition: all 0.15s ease;
+    border-color: transparent;
+  }
 
-/* Hover effects */
-.friend-item:hover {
-  background: #f7f7fa;
-  cursor: pointer;
-}
-.friend-item-upvote:hover {
-  color: #5898f1;
-  cursor: pointer;
-}
+  /* Hover effects */
+  .friend-item:hover {
+    background: #f7f7fa;
+    cursor: pointer;
+  }
+  .friend-item-upvote:hover {
+    color: #5898f1;
+    cursor: pointer;
+  }
 
-#add_to_watchlist {
-  font-size: xx-large;
-  color: #528FC1;
-}
+  #add_to_watchlist {
+    font-size: xx-large;
+    color: #528FC1;
+  }
 
-.friend-item:hover .friend-item-upvote { transform: scale(1.2) }
-.friend-item:hover .friend-item-controls-hidden a { color: #E6E6E6 }
-.friend-item-upvote:hover .friend-item-arrow { border-bottom: 9px solid #5898f1 }
+  .friend-item:hover .friend-item-upvote { transform: scale(1.2) }
+  .friend-item:hover .friend-item-controls-hidden a { color: #E6E6E6 }
+  .friend-item-upvote:hover .friend-item-arrow { border-bottom: 9px solid #5898f1 }
 
-a.friend-add-btn {
-  width: 150px;
-  font-size: 12px;
-  background-color: $blue;
-}
+  a.friend-add-btn {
+    width: 150px;
+    font-size: 12px;
+    background-color: $blue;
+  }
 
-a.friend-added-btn {
-  width: 150px;
-  font-size: 12px;
-  background-color: $green;
-}
+  a.friend-added-btn {
+    width: 150px;
+    font-size: 12px;
+    background-color: $green;
+  }
 
