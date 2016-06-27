@@ -27,6 +27,7 @@ fr:
     sort-by: "Trier par"
 
   movie-item:
+    rate: "Evaluer"
     rating: "Evaluer ce film"
     synopsis: "Synopsis"
     starring: "Avec"
@@ -66,8 +67,9 @@ fr:
     common: "Vos films en commun"
     uncommon: "Les autres films de"
     nomore: "n'a pas d'autre film"
-    friendsinterest: "La Claplist de %{name}"
+    friendsinterest: "Les Films de %{name}"
     close: "Fermer"
+    common-movies: "Vous avez %{count_common} films en commun avec %{friend}"
 
   genres:
     All:  "Tous les genres"
