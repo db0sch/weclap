@@ -3,7 +3,7 @@
     <div class="col-xs-10 col-xs-offset-1">
       <div style="display: inline">
       <!-- availability -->
-        <div class="dropdown" style="display: inline">
+        <div class="dropdown hidden-xs" style="display: inline">
           <select class="selectpicker checkbox-diff" data-width="33%" title=<%=t ('list.availability')%>>
             <%= t ('list.availability') %>
             <option value="all"><%= t ('movie-item.all') %>
@@ -15,7 +15,7 @@
           </select>
         </div>
       <!-- sort_by imdb_rating/release_date/duration -->
-        <div class="dropdown" style="display: inline">
+        <div class="dropdown hidden-xs" style="display: inline">
           <select class="selectpicker sort-by" data-width="33%" title=<%= t ('interest.sort-by') %>>
 
             <option value="rating"><%= t ('interest.rating') %>
@@ -26,7 +26,7 @@
         </div>
       <!-- filterby duration -->
       <!-- genres -->
-        <div class="dropdown" style="display: inline">
+        <div class="dropdown hidden-xs" style="display: inline">
           <select class="selectpicker genres" data-size="5" data-width="33%" multiple="multiple" name="genres" data-actions-box="true" title=<%=t ('movie-item.genres')%>>
               <option value=<%= "All" %>><%= t ("genres.All") %></option>
             <% api_url = "http://api.themoviedb.org/3/genre/movie/list?api_key=#{ENV['TMDB_API_KEY']}" %>

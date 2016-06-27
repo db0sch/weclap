@@ -1,125 +1,225 @@
-.movie-item {
-  display: flex;
-  align-items: center;
-  transition: all 0.15s ease;
-  background-color: white;
-  border: 1px solid lightgrey;
-  position: relative;
-  margin: 4px 0px;
-  transition: border-right 0.5s ease;
-  border-radius: 2px;
-  .movie-item-image {
-    margin-right: 20px;
-    width: 70px;
-    box-shadow: 1px 0px 1px #b0bec5;
-    opacity: 0.9;
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
+@media (max-width: 768px) {
+
+  .large {
+    display: none;
   }
-}
-
-.movie-item:hover {
-  cursor: pointer;
-  background-color: white;
-  // border-right: 7px solid #fd986f;
-  h3 a {
-    color: #272822;
-    text-decoration: none;
+  .friends-tooltip-global {
+    position: fixed;
+    top: 31px;
+    right: 0;
   }
-  .movie-item-image {
-     opacity: 1;
-  }
-}
 
-.movie-item-right-part {
-  flex: 0 0 20%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-
-.movie-item-social {
-  flex: 1 0 15%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.15s ease;
-  margin: 4px;
-  margin-right: 15px;
-  p {
-    font-size: 12px;
-    margin-bottom: 0px;
-    color: #A7BCBC;
-  }
-  .starrr {
-  }
-}
-
-.movie-item-social:hover {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: all 0.15s ease;
-}
-
-.movie-rating {
-  display: flex;
-  margin: 0px 4px;
-}
-.movie-social {
-  display: flex;
-  align-self: flex-end;
-  flex-direction: column;
-  align-content: flex-end;
-  justify-content: flex-end;
-  margin-bottom: 5px;
-}
-
-.movie-infos {
-  display: flex;
-  margin: 5px 0px;
-}
-
-.item-year-released {
-  margin-right: 15px;
-  margin-bottom: 0px;
-  font-size: 12px;
-}
-
-.item-clock {
-  margin-top: 2px;
-  margin-right: 5px;
-  font-size: 12px;
-}
-
-.item-runtime {
-  margin-bottom: 0px;
-  font-size: 12px;
-}
-
-/* Body design */
-.movie-item-body {
-  flex: 1 1 50%;
-  h3 {
-    font-family: Roboto;
-    font-weight: 500;
-    font-size: 22px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    a {
-      color: $dark-gray-typo;
-      // font-weight: 500;
+  .movie-item {
+    display: flex;
+    align-items: center;
+    transition: all 0.15s ease;
+    background-color: white;
+    border: 1px solid lightgrey;
+    position: relative;
+    margin: 4px 0px;
+    transition: border-right 0.5s ease;
+    border-radius: 2px;
+    font-size: 13px;
+    h3 {
+      font-size: 15px;
+    }
+    .movie-item-image {
+      margin-right: 15px;
+      width: 10em;
+      box-shadow: 1px 0px 1px #b0bec5;
+      opacity: 0.9;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
     }
   }
-  p {
-    font-weight: lighter;
-    font-family: Roboto;
-    font-weight: 300;
-    color: #666666;
+  .starrr a {
+    font-size: 43px;
+  }
+
+  .col-xs-offset-1 {
+    margin-left: 0%;
+  }
+
+  .col-xs-10 {
+    width: 100%;
+  }
+
+  .movie-item-social {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+  }
+
+  .movie-social {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+  }
+
+  .movie-item-body {
+    line-height: 9px;
+    h3 {
+      font-size: 13px;
+      padding-top: 9px;
+    }
+  }
+
+  .channel-label-streaming {
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+  }
+
+  .channel-label-cinema {
+    position: absolute;
+    bottom: 15px;
+    right: 1px;
+  }
+
+  .btn-warning {
+    padding: 3px;
+  }
+
+  .fa-times {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+  }
+
+  .rating-text {
+    position: relative;
+    top: 1px;
+    right: 16px;
   }
 }
+
+
+@media (min-width: 768px) {
+  .smallxs {
+    display: none;
+  }
+
+  .movie-item {
+    display: flex;
+    align-items: center;
+    transition: all 0.15s ease;
+    background-color: white;
+    border: 1px solid lightgrey;
+    position: relative;
+    margin: 4px 0px;
+    transition: border-right 0.5s ease;
+    border-radius: 2px;
+
+    .movie-item-image {
+      margin-right: 20px;
+      width: 70px;
+      box-shadow: 1px 0px 1px #b0bec5;
+      opacity: 0.9;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+    }
+  }
+
+  .movie-item:hover {
+    cursor: pointer;
+    background-color: white;
+    // border-right: 7px solid #fd986f;
+    h3 a {
+      color: #272822;
+      text-decoration: none;
+    }
+    .movie-item-image {
+       opacity: 1;
+    }
+  }
+
+  .movie-item-right-part {
+    flex: 0 0 20%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .movie-item-social {
+    flex: 1 0 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+    margin: 4px;
+    margin-right: 15px;
+    p {
+      font-size: 12px;
+      margin-bottom: 0px;
+      color: #A7BCBC;
+    }
+  }
+
+  .movie-item-social:hover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.15s ease;
+  }
+
+  .movie-rating {
+    display: flex;
+    margin: 0px 4px;
+  }
+
+  .movie-social {
+    display: flex;
+    align-self: flex-end;
+    flex-direction: column;
+    align-content: flex-end;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+  }
+
+  .movie-infos {
+    display: flex;
+    margin: 5px 0px;
+  }
+
+  .item-year-released {
+    margin-right: 15px;
+    margin-bottom: 0px;
+    font-size: 12px;
+  }
+
+  .item-clock {
+    margin-top: 2px;
+    margin-right: 5px;
+    font-size: 12px;
+  }
+
+  .item-runtime {
+    margin-bottom: 0px;
+    font-size: 12px;
+  }
+
+  /* Body design */
+  .movie-item-body {
+    flex: 1 1 50%;
+    h3 {
+      font-family: Roboto;
+      font-weight: 500;
+      font-size: 22px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      a {
+        color: $dark-gray-typo;
+        // font-weight: 500;
+      }
+    }
+    p {
+      font-weight: lighter;
+      font-family: Roboto;
+      font-weight: 300;
+      color: #666666;
+    }
+  }
 
 $width-btn: 110px;
 
@@ -131,6 +231,7 @@ $width-btn: 110px;
   .movie-add-btn {
     width: $width-btn;
   }
+}
   a.movie-add-btn {
     font-size: 13px;
     color: white;
@@ -142,11 +243,13 @@ $width-btn: 110px;
       text-decoration: none;
     }
   }
+
   a.movie-added-btn {
     font-size: 13px;
     font-weight: 600;
     color: $gray-light;
   }
+
   .movie-added-btn.btn {
     border: 1px solid $gray-light;
     font-size: 12px;
@@ -155,121 +258,132 @@ $width-btn: 110px;
     &:hover {
       color: $gray-dark;
     }
+    .movie-added-btn.btn {
+      border: 1px solid black;
+      font-size: 12px;
+      opacity: 1;
+      // width: 130px;
+      &:hover {
+        color: $gray-dark;
+      }
+    }
   }
-}
 
 
-.movie-item-controls-hidden a {
-  color: transparent;
-  font-size: 15px;
-  transition: all 0.15s ease;
-  border-color: transparent;
-}
+  .movie-item-controls-hidden a {
+    color: transparent;
+    font-size: 15px;
+    transition: all 0.15s ease;
+    border-color: transparent;
+  }
 
-#add_to_watchlist {
-  font-size: xx-large;
-  color: #528FC1;
-}
-.crew {
-  font-size: 12px;
-}
+  #add_to_watchlist {
+    font-size: xx-large;
+    color: #528FC1;
+  }
 
-.item-director {
-  margin-bottom: 0px;
-}
+  .crew {
+    font-size: 12px;
+  }
 
-.item-cast-crew {
-  margin-bottom: 0px;
-}
+  .item-director {
+    margin-bottom: 0px;
+  }
 
-.modal-item-body {
-  flex: 0 0 auto;
-}
-#modal-end {
-  margin-right: 10px;
-}
+  .item-cast-crew {
+    margin-bottom: 0px;
+  }
 
-.modal-item {
-  display: flex;
-  align-items: center;
-  transition: all 0.15s ease;
-  background-color: #F4F4F4;
-  border: 1px solid #949494;
-  margin: 4px;
-  justify-content: space-between;
-  .modal-item-group-one {
+  .modal-item-body {
+    flex: 0 0 auto;
+  }
+
+  #modal-end {
+    margin-right: 10px;
+  }
+
+  .modal-item {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    transition: all 0.15s ease;
+    background-color: #F4F4F4;
+    border: 1px solid #949494;
+    margin: 4px;
+    justify-content: space-between;
+    .modal-item-group-one {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .movie-item-image {
+      margin-right: 20px;
+      width: 70px;
+      box-shadow: 4px 0px 3px 0px #B5B5B5;
+      opacity: 0.9;
+    }
   }
-  .movie-item-image {
-    margin-right: 20px;
-    width: 70px;
-    box-shadow: 4px 0px 3px 0px #B5B5B5;
-    opacity: 0.9;
+
+  .movie-channel {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
   }
-}
 
-.movie-channel {
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-}
-
-.channel-label {
-  display: inline;
-  font-size: 12px;
-  padding: 2px 5px;
-  a {
-    // color: white;
-    font-weight: 500;
-    font-size: 11px;
+  .channel-label {
+    display: inline;
+    font-size: 12px;
+    padding: 2px 5px;
+    a {
+      // color: white;
+      font-weight: 500;
+      font-size: 11px;
+    }
   }
-}
-.channel-label-cinema {
-
-  // background-color: #e67e22;
-  a {
-    color: $red;
+  .channel-label-cinema {
+    // background-color: #e67e22;
+    a {
+      color: $red;
+    }
   }
-}
-.channel-label-streaming {
-  // background-color: #fdd835;
-  a {
-    color: $cyan;
+  .channel-label-streaming {
+    // background-color: #fdd835;
+    a {
+      color: $cyan;
+    }
   }
-}
 
-.item-cross {
-  top: 5px;
-  right: 5px;
-  position: absolute;
-  color: #e6e6e6;
-}
+  .item-cross {
+    top: 5px;
+    right: 5px;
+    position: absolute;
+    color: #e6e6e6;
+  }
 
-.watched-movie {
-  opacity: 0.5;
-}
+  .watched-movie {
+    opacity: 0.5;
+  }
 
-#movie-just-been-watched {
-  // background-color: #fd986f;
-  background-color: $red;
-  color: white;
-  margin-right: 10px;
-  border-radius: 5px;
-  padding: 5px 15px;
-}
+  #movie-just-been-watched {
+    // background-color: #fd986f;
+    background-color: $red;
+    color: white;
+    margin-right: 10px;
+    border-radius: 5px;
+    padding: 5px 15px;
+  }
 
-.title-seen {
-  color: #ffffff;
-  font-weight: 100;
-  opacity: 0.8;
-}
+  .title-seen {
+    color: #ffffff;
+    font-weight: 100;
+    opacity: 0.8;
+  }
 
-.movie-item-friends-interests-link {
-  text-decoration: none;
-  font-size: 10px;
-  color: #585858;
+  .movie-item-friends-interests-link {
+    text-decoration: none;
+    font-size: 10px;
+    color: #585858;
+  }
+
 
 }
 

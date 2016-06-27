@@ -1,7 +1,7 @@
 
 <div  <%=raw interest.nil? ? "class=\"movie-item interest-js\"" : "class=\"#{'streams' if !movie.streamings.empty?} #{'theater' if !movie.theaters.empty?} movie-item #{movie.genres.join(' ')} #{'un' unless interest.watched_on}watched-movie interest-js\" id=movie-#{interest.id}"%>>
   <%= link_to movie_path(movie.id) do %>
-    <%= image_tag movie.poster_url ? movie.poster_url : "http://placehold.it/40x60", alt: movie.title, class: "movie-item-image hidden-xs" %>
+    <%= image_tag movie.poster_url ? movie.poster_url : "http://placehold.it/40x60", alt: movie.title, class: "movie-item-image" %>
   <% end %>
   <div class='movie-item-body'>
     <% if I18n.locale == :fr && !movie.fr_title.nil? %>
@@ -18,32 +18,64 @@
     <div class="movie-infos">
       <p class="item-year-released"><%= movie.release_date.to_date.year %></p>
       <i class="fa fa-clock-o item-clock" aria-hidden="true"></i>
-      <p class="item-runtime"><%= movie.runtime %> min</p>
+      <span class="item-runtime"><%= movie.runtime %> min</span>
     </div>
   </div>
+
   <div class="movie-social">
     <%= render 'shared/movie_item_friends_interests', movie: movie %>
   </div>
+
   <div class="movie-item-right-part">
-    <div class="movie-item-social">
+
+    <div class="movie-item-social ">
       <% if current_user.movies.include?(movie) %>
         <%= link_to icon('times'), interest_path(interest), method: :delete, class: "item-cross", remote: true unless interest.nil? %>
         <% if interest %>
           <% if interest.rating.nil? %>
-            <p class="rating-text"><%= t ('movie-item.rating') %></p>
+            <!-- on screen -->
+            <div class="hidden-xs">
+              <p class="rating-text"><%= t ('movie-item.rating') %></p>
+              <div class="list-inline movie-item-controls movie-rating">
+                <div class='starrr' <%= interest ? "id=#{interest.id} #{'data-rating=' + interest.rating.to_s if interest.rating}" : '' %>>
+                </div>
+              </div>
+            </div>
+            <!-- on phone -->
+            <div class="hidden-sm hidden-md hidden-lg" >
+              <button class="rating-text btn btn-warning" data-toggle="modal" data-target="#ratingmodal" data=<%="#{interest}"%>><%= t ('movie-item.rating')%></button>
+              <div class="modal fade" id="ratingmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header text-center">
+                      <h3><%= t ('movie-item.rating') %></h3>
+                      <div class='starrr' <%= interest ? "id=#{interest.id} #{'data-rating=' + interest.rating.to_s if interest.rating}" : '' %>>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           <% end %>
         <% end %>
-        <div class="list-inline movie-item-controls movie-rating">
-          <div class='starrr' <%= interest ? "id=#{interest.id} #{'data-rating=' + interest.rating.to_s if interest.rating}" : '' %> >
-          </div>
-        </div>
       <% else %>
         <div class="list-inline movie-item-controls movie-rating">
           <%= link_to (t ('movie-item.add-to-wl')), interests_path(movie_id: movie), method: :post, remote: true, class: "movie-add-btn btn btn-warning", id: "movie-add-#{movie.id}" %>
         </div>
       <% end %>
     </div>
+
+
+
+
+
+
+
   </div>
+
+
+
+
   <div class="movie-channel">
     <% if !movie.streamings.empty?  %>
       <div class="channel-label channel-label-streaming">
