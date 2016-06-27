@@ -27,6 +27,7 @@ fr:
     sort-by: "Trier par"
 
   movie-item:
+    rate: "Evaluer"
     rating: "Evaluer ce film"
     synopsis: "Synopsis"
     starring: "Avec"

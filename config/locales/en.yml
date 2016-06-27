@@ -51,6 +51,7 @@ en:
     sort-by: 'Sort by'
 
   movie-item:
+    rate: "Rate"
     rating: "Rate this movie"
     synopsis: "Synopsis"
     starring: "Starring"
