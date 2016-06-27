@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   scope '(:locale)', locale: /fr/ do
     resources :sort, only: [:index]
     resources :movies, only: [:show, :index]
-    resources :users, only: [:index] do
+    resources :users, only: [:index, :update] do
       resources :friendships, only: [:show, :index]
     end
     resources :interests, only: [:create, :update, :destroy]

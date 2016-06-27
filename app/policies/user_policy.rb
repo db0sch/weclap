@@ -4,4 +4,10 @@ class UserPolicy < ApplicationPolicy
       scope
     end
   end
+
+  def update?
+    true
+    # record.user == user
+  end
+
 end

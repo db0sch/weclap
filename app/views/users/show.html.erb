@@ -40,6 +40,14 @@
           <!-- faire formulaire d'inscription à la newsletter -->
           <!-- checkbox pour confirmer l'inscription -->
           <!-- possibilité de changer d'adresse email (donc attention à faire une migration pour rajouter colonne email_newsletter) -->
+          <%= simple_form_for(@user, remote: true) do |f| %>
+            <%= f.error_notification %>
+
+            <%= f.input :secondary_email %>
+            <%= f.input :newsletter, as: :boolean, checked_value: true, unchecked_value: false %>
+
+            <%= f.button :submit %>
+          <% end %>
         </div>
       </div>
     </div>
