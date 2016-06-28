@@ -4,6 +4,7 @@ class MovieScraper
     def get_movie_list(count, start = 1, desc = false) # Retrieve 50 per request
       counter = 0
       movie_ids = []
+      retried = false
 
       url = "http://www.imdb.com/search/title?sort=release_date_us#{desc ? ',desc' : ''}&start=#{start}&title_type=feature"
       WebScraper.scrape do |page|
@@ -37,7 +38,7 @@ class MovieScraper
               fail WebScraperException, "Pagination element not found in page"
             end
           rescue Capybara::ElementNotFound
-            puts "Could not find the 'Nexto »' link"
+            puts "Could not find the 'Next »' link"
             break
           rescue WebScraperException => e
             puts "#{e.message}#{'... retrying' unless retried}"
