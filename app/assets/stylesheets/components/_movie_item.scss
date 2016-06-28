@@ -1,4 +1,7 @@
 @media (max-width: 768px) {
+  p.sentence {
+    margin: 0 12px 11px;
+  }
 
   .large {
     display: none;
@@ -35,7 +38,9 @@
   .starrr a {
     font-size: 43px;
   }
-
+  .item-cast-crew {
+    line-height: 14px;
+  }
   .col-xs-offset-1 {
     margin-left: 0%;
   }
@@ -49,7 +54,11 @@
     top: 1px;
     right: 1px;
   }
-
+  .friends_tooltip.hidden-sm {
+    position: inherit;
+    top: 1px;
+    right: 100px;
+  }
   .movie-social {
     position: absolute;
     top: 1px;
@@ -79,17 +88,24 @@
   .btn-warning {
     padding: 3px;
   }
+  .btn-success {
+    padding: 3px;
+  }
 
   .fa-times {
-    position: absolute;
+    position: fixed;
     top: 1px;
-    right: 1px;
+    left: 1px;
+    z-index: 1;
+    background: rgba(128, 128, 128, 0.59);
+    padding: 2px;
+    border-radius: 30%;
   }
 
   .rating-text {
     position: relative;
     top: 1px;
-    right: 16px;
+    right: 1px;
   }
 }
 
