@@ -11,7 +11,7 @@
     <% end %>
 
     <div class="crew">
-      <p class="item-director"><%= t ('movie-item.directed-by') %>: <%= movie.jobs.where(title: 'Director').map(&:person).map(&:name).join(', ') %></p>
+      <p class="item-director"><%= t ('movie-item.directed-by') %>: <%= movie.jobs.where(title: 'Director').take(2).map(&:person).map(&:name).join(', ') %></p>
       <p class="item-cast-crew hidden-xs"><%= t ('movie-item.starring') %>: <%= movie.jobs.where(title: 'Actor').take(5).map(&:person).map(&:name).join(', ') %></p>
       <p class="item-cast-crew hidden-md hidden-sm hidden-lg"><%= t ('movie-item.starring') %>: <%= movie.jobs.where(title: 'Actor').take(3).map(&:person).map(&:name).join(', ') %></p>
     </div>

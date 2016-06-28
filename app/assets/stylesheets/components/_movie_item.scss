@@ -1,6 +1,9 @@
 @media (max-width: 768px) {
+  #friend-img {
+    width: 85px;
+  }
   p.sentence {
-    margin: 0 12px 11px;
+    margin: 0;
   }
   .floating {
     display:inline-block;
@@ -43,9 +46,10 @@
   .starrr a {
     font-size: 43px;
   }
-  .item-cast-crew {
+  .crew {
     line-height: 14px;
   }
+
   .col-xs-offset-1 {
     margin-left: 0%;
   }
@@ -76,8 +80,9 @@
   .movie-item-body {
     line-height: 9px;
     h3 {
+      margin-top: 0;
+      margin-bottom: 0;
       font-size: 19px;
-      padding-top: 9px;
     }
   }
 
@@ -126,7 +131,8 @@
     margin-top: 8px;
   }
   .friends_tooltip.hidden-xs {
-    margin-right: 22px;
+    position: relative;
+    right: 15px;
     // position: inherit;
     // top: 1px;
     // right: 100px;
@@ -263,6 +269,8 @@ $width-btn: 110px;
   display: flex;
   align-items: center;
   text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
   .movie-add-btn {
     width: $width-btn;
   }
@@ -290,6 +298,7 @@ $width-btn: 110px;
     font-size: 12px;
     opacity: 1;
     width: $width-btn;
+    padding: 5px;
     &:hover {
       color: $gray-dark;
     }
