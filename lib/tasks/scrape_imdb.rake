@@ -1,15 +1,26 @@
 namespace :clap do
   namespace :movies do
-    desc 'Massively populate Clap! database with batches of movies'
-    task :populate, [:start,:count,:order] => :environment do |t, args|
-      args.with_defaults(order: 'asc')
-      desc = args[:order] == 'desc'
+    desc "Massively populate database with batches of movies from TMDB API"
+    task :populate, [:start,:count] => :environment do |t, args|
       start = args[:start].to_i
       count = args[:count].to_i
-      puts "Retrieving #{count} movies from ?MDb starting at #{start} in '#{args[:order]}' order"
+      puts "Retrieving #{count} movies from TMDb id starting at #{start}"
       # GetMovieListJob.perform_later(count, start, desc)
-      MovieScraper.get_movie_list(count, start, desc)
+      MovieApi.get_movie_tmdb_id(start, count)
     end
+
+    ### BELOW (commented) => old rake task to scrap IMDB... not in user anymore
+
+    # desc 'Massively populate Clap! database with batches of movies'
+    # task :populate, [:start,:count,:order] => :environment do |t, args|
+    #   args.with_defaults(order: 'asc')
+    #   desc = args[:order] == 'desc'
+    #   start = args[:start].to_i
+    #   count = args[:count].to_i
+    #   puts "Retrieving #{count} movies from ?MDb starting at #{start} in '#{args[:order]}' order"
+    #   # GetMovieListJob.perform_later(count, start, desc)
+    #   MovieScraper.get_movie_list(count, start, desc)
+    # end
 
     desc 'Upgrade movies\' description to its latest definition'
     task :upgrade, [:max_count] => :environment do |t, args|

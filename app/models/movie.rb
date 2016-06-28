@@ -30,7 +30,7 @@ class Movie < ActiveRecord::Base
   has_many :jobs, dependent: :destroy
   has_many :people, through: :jobs
 
-  validates :imdb_id, uniqueness: true
+  # validates :imdb_id, uniqueness: true
 
   default_scope { where(setup: true) }
 
