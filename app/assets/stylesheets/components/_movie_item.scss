@@ -2,16 +2,21 @@
   p.sentence {
     margin: 0 12px 11px;
   }
-
+  .floating {
+    display:inline-block;
+  }
   .large {
     display: none;
   }
-  .friends-tooltip-global {
-    position: fixed;
-    top: 31px;
-    right: 0;
-  }
+  // .friends-tooltip-global {
+  //   position: fixed;
+  //   top: 31px;
+  //   right: 0;
+  // }
 
+  .list {
+    display: inline-flex;
+  }
   .movie-item {
     display: flex;
     align-items: center;
@@ -55,20 +60,23 @@
     right: 1px;
   }
   .friends_tooltip.hidden-sm {
-    position: inherit;
-    top: 1px;
-    right: 100px;
+    margin-right: 1px;
+    // position: inherit;
+    // top: 1px;
+    // right: 100px;
   }
   .movie-social {
-    position: absolute;
+    position: initial;
     top: 1px;
     right: 1px;
   }
-
+  .movie-social.hidden-md {
+    position: initial
+  }
   .movie-item-body {
     line-height: 9px;
     h3 {
-      font-size: 13px;
+      font-size: 19px;
       padding-top: 9px;
     }
   }
@@ -103,7 +111,6 @@
   }
 
   .rating-text {
-    position: relative;
     top: 1px;
     right: 1px;
   }
@@ -114,7 +121,19 @@
   .smallxs {
     display: none;
   }
+  .friends-tooltip-global {
+    line-height: 9px;
+    margin-top: 8px;
+  }
+  .friends_tooltip.hidden-xs {
+    margin-right: 22px;
+    // position: inherit;
+    // top: 1px;
+    // right: 100px;
+  }
+  .rating-text {
 
+  }
   .movie-item {
     display: flex;
     align-items: center;
