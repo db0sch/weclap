@@ -7,10 +7,12 @@ class User < ActiveRecord::Base
   has_many :interests, dependent: :destroy
   has_many :movies, through: :interests
 
+private
   has_many :friendships, foreign_key: 'friend_id', dependent: :destroy
   has_many :friends, through: :friendships, source: :buddy
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'buddy_id', dependent: :destroy
   has_many :buddies, through: :inverse_friendships, source: :friend
+public
 
   geocoded_by :address do |obj,results|
     if geo = results.first
@@ -34,16 +36,23 @@ class User < ActiveRecord::Base
     fr.destroy if fr
   end
 
-  def get_watched_movies_list
+  def watched_movies_list
     interests.includes(:movie).select{ |int| int.watched_on }.map(&:movie)
   end
 
-  def get_unwatched_movies_list
+  def unwatched_movies_list
     interests.includes(:movie).select{ |int| int.watched_on.nil? }.map(&:movie)
   end
 
+  def common_movies_with(user, status = :unwatched)
+    cmovies = case status
+      when :unwatched then self.unwatched_movies_list & user.unwatched_movies_list
+      when :watched then self.watched_movies_list & user.watched_movies_list
+      else self.movies & user.movies
+    end
+  end
+
   def self.find_for_facebook_oauth(auth)
-    # access_token = auth.credentials.token
     user_params = {
       provider: auth.provider,
       uid: auth.uid,

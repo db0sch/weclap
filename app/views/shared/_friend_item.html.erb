@@ -1,35 +1,34 @@
 <div class="col-xs-12">
-  <div data-toggle="modal" data-target="#myModal<%=friend.first_name%>" class="movie-item" <%= "id = movie-#{interest.id}" unless interest.nil?  %>>
-  <!-- img FB -->
-      <div>
-        <% if friend.picture %>
-          <%= image_tag friend.picture, alt: friend.fullname, class: "movie-item-image" %>
-        <% else %>
-          <%= image_tag "http://placehold.it/40x60", alt: "placeholder", class: "movie-item-image" %>
-        <% end %>
-      </div>
-
-  <!-- Fullname -->
+  <div data-toggle="modal" data-target="#myModal<%=friend.first_name%>" class="movie-item">
+    <!-- img FB -->
+    <div>
+      <% if friend.picture %>
+        <%= image_tag friend.picture, alt: friend.fullname, class: "movie-item-image" %>
+      <% else %>
+        <%= image_tag "http://placehold.it/40x60", alt: "placeholder", class: "movie-item-image" %>
+      <% end %>
+    </div>
+    <!-- Fullname -->
     <div class='movie-item-body'>
       <h3><%= friend.fullname %></h3>
     </div>
-  <!-- common moovies -->
+    <!-- common movies -->
     <div class=" hidden-sm hidden-md hidden-lg">
-      <p class="sentence"><%= t ('friends.common-movies'), count_common: common_movies.length, friend: friend.first_name  %></p>
+      <p class="sentence"><%= t('friends.common-movies', count: common_movies.length, friend: friend.first_name) %></p>
     </div>
+
     <% if common_movies.length < 7 %>
-      <% common_movies.each do |movie_id| %>
+      <% common_movies.each do |movie| %>
         <div class="common-movies-small">
-          <%= link_to image_tag(Movie.find(movie_id).poster_url, class: "movie-item-image hidden-xs"), movie_path(movie_id) %>
+          <%= link_to image_tag(movie.poster_url, class: "movie-item-image hidden-xs"), movie %>
         </div>
       <% end %>
     <% else %>
-      <div class="btn"> You have <%= common_movies.length - 5 %> other movies in common</div>
-      <% common_movies.take(5).each do |movie_id| %>
+      <p class="btn"><%= t('friends.more-common-movies', count: common_movies.length - 5) %>
+      <% common_movies.take(5).each do |movie| %>
         <div>
-        <%= link_to image_tag(Movie.find(movie_id).poster_url, class: "movie-item-image hidden-xs"), movie_path(movie_id) %>
+          <%= link_to image_tag(movie.poster_url, class: "movie-item-image hidden-xs"), movie %>
         </div>
-        <% riends %>
       <% end %>
     <% end %>
   </div>

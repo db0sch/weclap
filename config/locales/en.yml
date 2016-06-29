@@ -94,7 +94,11 @@ en:
     nomore: "hasn't other movie"
     friendsinterest: "%{name}'s movie list"
     close: "Close"
-    common-movies: "You have %{count_common} common movies with %{friend}"
+    common-movies:
+      zero: "You have no movie in common with %{friend}"
+      one: "You have one movie in common with %{friend}"
+      other: "You have %{count} movies in common with %{friend}"
+    more-common-movies: "You have %{count} more movies in common"
 
   genres:
     All:  "All genres"

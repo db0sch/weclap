@@ -10,7 +10,10 @@ class MoviesController < ApplicationController
     @movies = Movie.select{ |m| imdb250top.include?(m.imdb_id) } if top100
     @movies = Movie.select{ |m| !m.shows.blank? } if ontheater
     @movies = Movie.select{ |m| !m.streamings.blank? } if onvod
-    @friends = current_user.friendslist
+#
+    @friends = current_user.get_friends_list
+    # @friends = current_user.friendslist
+#
     @movies = @movies.take(100)
 
   end
@@ -19,7 +22,10 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     authorize @movie
     @display_shows = display_shows_tab?(@movie)
-    @friends = current_user.friendslist
+#
+    @friends = current_user.get_friends_list
+    # @friends = current_user.friendslist
+#
     @directors = @movie.jobs.where(title: 'Director').map(&:person).map(&:name).join(', ')
     @actors = @movie.jobs.where(title: 'Actor').map(&:person).map(&:name).join(', ')
 # 2do Use proper translation if available
