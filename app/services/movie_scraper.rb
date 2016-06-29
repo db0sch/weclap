@@ -1,7 +1,7 @@
 class MovieScraper
   class << self
 
-    def get_movie_list(count, start = 1, desc = false) # Retrieve 50 per request
+    def get_movie_list(count, start = 1) # Retrieve 50 per request
       counter = 0
       movie_ids = []
       retried = false
@@ -95,6 +95,7 @@ class MovieScraper
           setup: true
         }.merge(fields_in_french_for({tmdb_id: tmdb_id, runtime: mv['runtime']})))
         retrieve_credits?(movie)
+        puts "#{movie.tmdb_id} - #{movie.title} has been created"
         movie
       end
     end
