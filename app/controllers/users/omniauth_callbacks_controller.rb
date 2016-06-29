@@ -12,11 +12,27 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     graph = Koala::Facebook::API.new(user.token, ENV['FB_SECRET'])
     f = graph.get_connections("me", "friends")
     friendslist = []
+    user_updated_friends = []
     unless f.blank?
       f.each do |fb_friend|
-        friendslist << fb_friend['id'] unless User.find_by_uid(fb_friend["id"]).nil?
+        usr = User.find_by_uid(fb_friend["id"])
+        if usr
+          friendslist << fb_friend['id']
+          user_updated_friends << usr
+        end
       end
     end
-    user.update({friendslist: friendslist.to_json})
+    binding.pry
+    user_friends = user.get_friends_list
+    delta_friends = user_friends - user_updated_friends
+    if delta_friends.any? # user has removed some friends on FB
+      delta_friends.each{ |f| user.remove_friend(f) }
+    end
+    delta_friends = user_updated_friends - user_friends
+    if delta_friends.any? # user has added some friends on FB
+      delta_friends.each{ |f| user.add_friend(f) }
+    end
+
+    user.update({ friendslist: friendslist.to_json })
   end
 end
