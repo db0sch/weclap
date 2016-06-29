@@ -6,8 +6,11 @@ class User < ActiveRecord::Base
 
   has_many :interests, dependent: :destroy
   has_many :movies, through: :interests
-  has_many :friends, class_name: 'Friendship', foreign_key: 'friend_id'
-  has_many :buddies, class_name: 'Friendship', foreign_key: 'buddy_id'
+
+  has_many :friendships, foreign_key: 'friend_id', dependent: :destroy
+  has_many :friends, through: :friendships, source: :buddy
+  has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'buddy_id', dependent: :destroy
+  has_many :buddies, through: :inverse_friendships, source: :friend
 
   geocoded_by :address do |obj,results|
     if geo = results.first
@@ -17,21 +20,30 @@ class User < ActiveRecord::Base
   end
   after_validation :geocode, if: :address_changed?
 
+  def get_friends_list
+    friends + buddies
+  end
+
+  def add_friend(user)
+    Friendship.where('(friend_id = ? AND buddy_id = ?) OR (friend_id = ? AND buddy_id = ?)', user.id, self.id, self.id, user.id)
+      .first_or_create(friend_id: user.id, buddy_id: self.id)
+  end
+
+  def remove_friend(user)
+    fr = Friendship.where('(friend_id = ? AND buddy_id = ?) OR (friend_id = ? AND buddy_id = ?)', user.id, self.id, self.id, user.id).first
+    fr.destroy if fr
+  end
+
+  def get_watched_movies_list
+    interests.includes(:movie).select{ |int| int.watched_on }.map(&:movie)
+  end
+
+  def get_unwatched_movies_list
+    interests.includes(:movie).select{ |int| int.watched_on.nil? }.map(&:movie)
+  end
+
   def self.find_for_facebook_oauth(auth)
-    access_token = auth.credentials.token
-    # where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-    #   user.provider = auth.provider
-    #   user.uid = auth.uid
-    #   user.email = auth.info.email
-    #   user.access_token = access_token
-    #   user.password = Devise.friendly_token[0,20]  # Fake password for validation
-    #   user.first_name = auth.info.first_name
-    #   user.last_name = auth.info.last_name
-    #   user.fullname = auth.info.first_name + " " + auth.info.last_name
-    #   user.picture = auth.info.image.gsub("http://", "https://")
-    #   user.token = auth.credentials.token
-    #   user.token_expiry = Time.at(auth.credentials.expires_at)
-    # end
+    # access_token = auth.credentials.token
     user_params = {
       provider: auth.provider,
       uid: auth.uid,
