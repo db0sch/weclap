@@ -22,7 +22,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         end
       end
     end
-    binding.pry
     user_friends = user.get_friends_list
     delta_friends = user_friends - user_updated_friends
     if delta_friends.any? # user has removed some friends on FB
