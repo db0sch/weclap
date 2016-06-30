@@ -11,7 +11,7 @@
           <% movie.interested_friends_of(current_user).each do |friend, rating| %>
             <% if rating.nil? %>
               <div class="row">
-                <div class="col-md-12">
+                <div class="col-xs-12">
                   <div class="friend-stripe">
                     <% if friend.picture %>
                       <%= image_tag friend.picture, alt: friend.fullname, class: "friend_movie_item_image" %>
@@ -30,7 +30,7 @@
           <% movie.interested_friends_of(current_user).each do |friend, rating| %>
             <% if rating %>
               <div class="row">
-                <div class="col-md-12">
+                <div class="col-xs-12">
                   <div class="friend-stripe">
                     <% if friend.picture %>
                       <%= image_tag friend.picture, alt: friend.fullname, class: "friend_movie_item_image" %>

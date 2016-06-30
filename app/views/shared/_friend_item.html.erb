@@ -14,7 +14,7 @@
       <h3 id="friend-h3"><%= friend.fullname %></h3>
     </div>
   <!-- common moovies -->
-    <div class="hidden-sm hidden-md hidden-lg">
+    <div class="sentence hidden-sm hidden-md hidden-lg">
       <p class="sentence"><%= t ('friends.common-movies'), count_common: common_movies.length, friend: friend.first_name  %></p>
     </div>
     <% if common_movies.length < 7 %>
