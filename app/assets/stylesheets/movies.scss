@@ -1,3 +1,23 @@
+@media (max-width: 768px) {
+
+}
+@media (min-width: 768px) {
+
+
+  #shows_in_theaters > li.loader {
+    display: block;
+  }
+  #streamings_per_provider > li.loader {
+    display: block;
+  }
+  #streamings_per_provider > li {
+    display: inline-block;
+    padding: 8px;
+    text-align: center;
+  }
+}
+
+
 // .movie-wrapper {
 //   background: linear-gradient(#778899, #333333);
 //   padding: 10px 0;
@@ -8,7 +28,9 @@
   // flex-wrap: wrap;
   // margin: 0 50px;
 }
-
+.list-friend {
+  display: inline-block;
+}
 #movie-infos-small {
   margin-left: -35px;
   margin-bottom: -10px;
@@ -24,7 +46,7 @@
   color: #6C7A7A;
   font-weight: lighter;
   font-size: 14px;
-  margin-left: 11px;
+  margin-left: 0px;
 }
 
 .boxing {
@@ -40,12 +62,6 @@
   }
 }
 
-#boxing-show {
-  margin-left: -18px;
-  margin-right: -18px;
-  min-height: 456px;
-}
-
 .movie-poster-show {
   margin: 0 auto;
   height: 300px;
@@ -53,12 +69,12 @@
   border-radius: 3px;
 }
 .movie-basic-info {
-  display: flex;
-  flex: 1 1 250px;
-  margin-left: 10px;
-  font-size: 13px;
-  font-weight: lighter;
-  color: $gray-light;
+  // display: flex;
+  // flex: 1 1 250px;
+  // margin-left: 10px;
+  // font-size: 13px;
+  // font-weight: lighter;
+  // color: $gray-light;
   .movie-title, .movie-release-year {
     font-size: 24px;
     font-weight: 600;
@@ -68,12 +84,13 @@
 }
 
 .movie-info-left {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  .imdb-rating, .inline-flex {
-    padding: 0 10px;
-  }
+  // flex: 1;
+  // display: flex;
+  // align-items: center;
+  // .imdb-rating, .inline-flex {
+  //   padding: 0 10px;
+  // }
+  margin-top: 23px;
   .by-ten {
     font-weight: 100;
     font-size: x-small;
@@ -89,9 +106,14 @@
   margin-left: 5px;
 }
 
+.rating-friend {
+  margin-top: 10px;
+  text-align: right;
+}
+
 .movie-info-right {
-  display: flex;
-  align-items: center;
+  // display: flex;
+  // align-items: center;
 }
 
 .youtube-trailer {
@@ -260,4 +282,6 @@ $star-yellow: #FFB400;
   outline-width: 0;
 }
 
-
+.movie-social.movie-item-controls {
+  flex-direction: row;
+}

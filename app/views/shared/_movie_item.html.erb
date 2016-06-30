@@ -11,7 +11,7 @@
     <% end %>
 
     <div class="crew">
-      <p class="item-director"><%= t ('movie-item.directed-by') %>: <%= movie.jobs.where(title: 'Director').map(&:person).map(&:name).join(', ') %></p>
+      <p class="item-director"><%= t ('movie-item.directed-by') %>: <%= movie.jobs.where(title: 'Director').take(2).map(&:person).map(&:name).join(', ') %></p>
       <p class="item-cast-crew hidden-xs"><%= t ('movie-item.starring') %>: <%= movie.jobs.where(title: 'Actor').take(5).map(&:person).map(&:name).join(', ') %></p>
       <p class="item-cast-crew hidden-md hidden-sm hidden-lg"><%= t ('movie-item.starring') %>: <%= movie.jobs.where(title: 'Actor').take(3).map(&:person).map(&:name).join(', ') %></p>
     </div>
@@ -23,57 +23,56 @@
   </div>
 
   <div class="inline-block">
-  <div class="movie-social hidden-xs">
-    <%= render 'shared/movie_item_friends_interests', movie: movie %>
-  </div>
+    <div class="movie-social hidden-xs">
+      <%= render 'shared/movie_item_friends_interests', movie: movie %>
+    </div>
 
-  <div class="movie-item-right-part text-center">
-    <div class="movie-item-social ">
-      <% if current_user.movies.include?(movie) %>
-        <%= link_to icon('times'), interest_path(interest), method: :delete, class: "item-cross", remote: true unless interest.nil? %>
-        <% if interest %>
-          <% if interest.rating.nil? %>
-            <!-- on screen -->
-            <div class="hidden-xs">
-              <p class="rating-text"><%= t ('movie-item.rating') %></p>
-              <div class="list-inline movie-item-controls movie-rating">
-                <div class='starrr' <%= interest ? "id=#{interest.id} #{'data-rating=' + interest.rating.to_s if interest.rating}" : '' %>>
+    <div class="movie-item-right-part text-center">
+      <div class="movie-item-social ">
+        <% if current_user.movies.include?(movie) %>
+          <%= link_to icon('times'), interest_path(interest), method: :delete, class: "item-cross", remote: true unless interest.nil? %>
+          <% if interest %>
+            <% if interest.rating.nil? %>
+              <!-- on screen -->
+              <div class="hidden-xs">
+                <p class="rating-text"><%= t ('movie-item.rating') %></p>
+                <div class="list-inline movie-item-controls movie-rating">
+                  <div class='starrr' <%= interest ? "id=#{interest.id} #{'data-rating=' + interest.rating.to_s if interest.rating}" : '' %>>
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- on phone -->
-            <div class="list hidden-sm hidden-md hidden-lg" >
-              <div class="movie-social">
-                <%= render 'shared/movie_item_friends_interests', movie: movie %>
-              </div>
-              <a class="rating-text btn btn-warning" data-toggle="modal" data-target="#ratingmodal" data=<%="#{interest}"%>><%= t ('movie-item.rate')%></a>
-              <div class="modal fade" id="ratingmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header text-center">
-                      <h3><%= t ('movie-item.rating') %></h3>
-                      <div class='starrr' <%= interest ? "id=#{interest.id} #{'data-rating=' + interest.rating.to_s if interest.rating}" : '' %>>
+              <!-- on phone -->
+              <div class="list hidden-sm hidden-md hidden-lg" >
+                <div class="movie-social">
+                  <%= render 'shared/movie_item_friends_interests', movie: movie %>
+                </div>
+                <a class="rating-text btn btn-warning" data-toggle="modal" data-target="#ratingmodal" data=<%="#{interest}"%>><%= t ('movie-item.rate')%></a>
+                <div class="modal fade" id="ratingmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header text-center">
+                        <h3><%= t ('movie-item.rating') %></h3>
+                        <div class='starrr' <%= interest ? "id=#{interest.id} #{'data-rating=' + interest.rating.to_s if interest.rating}" : '' %>>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
+        <% else %>
+          <div class="list">
+            <div class="movie-social hidden-sm hidden-md hidden-lg">
+              <%= render 'shared/movie_item_friends_interests', movie: movie %>
+            </div>
+            <div class="movie-item-controls movie-rating">
+              <%= link_to (t ('movie-item.add-to-wl')), interests_path(movie_id: movie), method: :post, remote: true, class: "movie-add-btn btn btn-warning", id: "movie-add-#{movie.id}" %>
+            </div>
+          </div>
         <% end %>
-      <% else %>
-      <div class="list">
-        <div class="movie-social hidden-sm hidden-md hidden-lg">
-          <%= render 'shared/movie_item_friends_interests', movie: movie %>
-        </div>
-        <div class="movie-item-controls movie-rating">
-          <%= link_to (t ('movie-item.add-to-wl')), interests_path(movie_id: movie), method: :post, remote: true, class: "movie-add-btn btn btn-warning", id: "movie-add-#{movie.id}" %>
-        </div>
-
       </div>
-      <% end %>
     </div>
-  </div>
   </div>
 
 

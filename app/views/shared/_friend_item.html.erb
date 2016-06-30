@@ -3,7 +3,7 @@
   <!-- img FB -->
       <div>
         <% if friend.picture %>
-          <%= image_tag friend.picture, alt: friend.fullname, class: "movie-item-image" %>
+          <%= image_tag friend.picture, alt: friend.fullname, class: "movie-item-image", id:"friend-img" %>
         <% else %>
           <%= image_tag "http://placehold.it/40x60", alt: "placeholder", class: "movie-item-image" %>
         <% end %>
@@ -11,10 +11,10 @@
 
   <!-- Fullname -->
     <div class='movie-item-body'>
-      <h3><%= friend.fullname %></h3>
+      <h3 id="friend-h3"><%= friend.fullname %></h3>
     </div>
   <!-- common moovies -->
-    <div class=" hidden-sm hidden-md hidden-lg">
+    <div class="hidden-sm hidden-md hidden-lg">
       <p class="sentence"><%= t ('friends.common-movies'), count_common: common_movies.length, friend: friend.first_name  %></p>
     </div>
     <% if common_movies.length < 7 %>

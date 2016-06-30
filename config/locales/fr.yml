@@ -70,7 +70,7 @@ fr:
     nomore: "n'a pas d'autre film"
     friendsinterest: "Les Films de %{name}"
     close: "Fermer"
-    common-movies: "Vous avez %{count_common} films en commun avec %{friend}"
+    common-movies: "%{count_common} films en commun"
 
   genres:
     All:  "Tous les genres"
