@@ -1,7 +1,7 @@
 class MovieScraper
   class << self
 
-    def get_movie_list(count, start = 1, desc = false) # Retrieve 50 per request
+    def get_movie_list(count, start = 1) # Retrieve 50 per request
       counter = 0
       movie_ids = []
       retried = false
@@ -33,23 +33,27 @@ class MovieScraper
             pgn = page.first('.pagination')
             if pgn
               pgn.find('a:last-child').trigger('click')
-              sleep 30
+              sleep 5
             else
               fail WebScraperException, "Pagination element not found in page"
             end
+
           rescue Capybara::ElementNotFound
             puts "Could not find the 'Next »' link"
             break
+
           rescue WebScraperException => e
-            puts "#{e.message}#{'... retrying' unless retried}"
+            puts "#{e.message}#{retried ? '' : '... retrying'}"
             retry unless retried
             retried = true
+
           rescue => e
             puts "***********"
             puts "Could not retrieve movie listing from IMDb (URL: #{url})"
             puts "Error: #{e.message}"
             puts "***********"
           end
+
           retried = false
         end
       end
@@ -91,6 +95,7 @@ class MovieScraper
           setup: true
         }.merge(fields_in_french_for({tmdb_id: tmdb_id, runtime: mv['runtime']})))
         retrieve_credits?(movie)
+        puts "#{movie.tmdb_id} - #{movie.title} has been created"
         movie
       end
     end

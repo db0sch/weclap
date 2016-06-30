@@ -1,0 +1,101 @@
+<div class="container padded profile">
+  <div class="profile-wrapper">
+    <div class="profile-primary-info">
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <img src=<%= @user.picture %> alt="profile picture" class="profile-page-picture img-responsive">
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <h1><%= @user.fullname %></h1>
+          <p><%= t('profile.main.email', email: @user.email) %></p>
+          <p><%= t('profile.main.location', location: @user.city) %></p>
+        </div>
+      </div>
+    </div>
+    <div class="row"></div>
+    <div class="profile-statistics">
+      <h3><%= t('profile.statistics.title') %></h3>
+      <div class="row">
+        <div class="col-xs-12">
+          <p><%= t('profile.statistics.in-watchlist', number: "nc") %></p>
+          <p><%= t('profile.statistics.seen', number: "nc") %></p>
+          <p><%= t('profile.statistics.with-friends', number: "nc") %></p>
+        </div>
+      </div>
+    </div>
+    <div class="profile-friends">
+      <h3><%= t('profile.friends.title') %></h3>
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- mettre du flexbox no wrap là dedans -->
+          <!-- il faut instancier @friends dans le user controller #show -->
+          <!-- et iterer dessus en cherchant les friends via leur uid facebook -->
+        </div>
+      </div>
+    </div>
+    <div class="profile-newsletter">
+      <h3><%= t('profile.newsletter.title') %></h3>
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- faire formulaire d'inscription à la newsletter -->
+          <!-- checkbox pour confirmer l'inscription -->
+          <!-- possibilité de changer d'adresse email (donc attention à faire une migration pour rajouter colonne email_newsletter) -->
+          <%= simple_form_for(@user, remote: true) do |f| %>
+            <%= f.error_notification %>
+
+            <%= f.input :secondary_email %>
+            <%= f.input :newsletter, as: :boolean, checked_value: true, unchecked_value: false %>
+
+            <%= f.button :submit %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="profile-bot">
+      <h3><%= t('profile.bot.title') %></h3>
+      <div class="row">
+        <div class="col-xs-12">
+          <p><%= t('profile.bot.text') %></p>
+        </div>
+        <div class="col-xs-12">
+          <h5><%= t('profile.bot.signin') %></h5>
+          <div class="fb-send-to-messenger"
+          messenger_app_id="263884933962717"
+          page_id="188469658220408"
+          data-ref="<%= current_user.id %>"
+          color="blue"
+          size="standard"></div>
+        </div>
+        <div class="col-xs-12">
+          <h5><%= t('profile.bot.messageus') %></h5>
+          <div class="fb-messengermessageus"
+          messenger_app_id="1054618387948073"
+          page_id="1593695557626599"
+          color="white"
+          size="large" >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1054618387948073',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) { return; }
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+
+</script>
