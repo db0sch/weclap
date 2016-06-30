@@ -5,7 +5,8 @@ class InterestsController < ApplicationController
 
   def index
     @user = params[:user_id] ? User.find(params[:user_id]) : current_user
-    @watchlist = @user.interests.order(created_at: :desc)
+    # @watchlist = @user.interests.order(created_at: :desc)
+    @watchlist = @user.interests.includes(movie: [{ jobs: :person }]).order(created_at: :desc)
     @friends = current_user.friendslist
   end
 

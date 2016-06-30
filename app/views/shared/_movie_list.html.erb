@@ -40,7 +40,7 @@
         <h3 class="section-title"><%= t ('list.empty') %></h3>
       <% else %>
         <% list.each do |movie| %>
-          <%= render 'shared/movie_item', movie: movie, friends: friends, interest: nil %>
+          <%= render 'shared/movie_item', movie: movie, interest: nil %>
         <% end %>
       <% end %>
     </div>

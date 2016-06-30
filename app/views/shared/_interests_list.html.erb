@@ -17,7 +17,6 @@
       <!-- sort_by imdb_rating/release_date/duration -->
         <div class="dropdown hidden-xs" style="display: inline">
           <select class="selectpicker sort-by" data-width="33%" title=<%= t ('interest.sort-by') %>>
-
             <option value="rating"><%= t ('interest.rating') %>
             </option>
             <option value="release_date"><%= t ('interest.release_date') %>
@@ -40,8 +39,6 @@
         </div>
       </div>
 
-
-
       <h3 class="section-title"><%= t ('list.mywl') %></h3>
       <div id="unwatched-movie-list">
         <% list.each do |interest| %>
@@ -50,18 +47,13 @@
       </div>
     </div>
   </div>
-  <% watched = [] %>
-  <% if current_user.interests.each do |i| %>
-    <% watched << i if !i.watched_on.nil?  %>
-    <% end %>
-    <% !watched.empty? %>
-    <div class="row">
-      <div class="col-xs-10 col-xs-offset-1">
-        <h3 class="section-title"><%= t ('list.watched') %></h3>
-        <div id="watched-movie-list"></div>
-      </div>
+  <!-- Add Watched section if required -->
+  <div class="row <%= 'hidden' unless current_user.has_ever_watched_a_movie? %>">
+    <div class="col-xs-10 col-xs-offset-1">
+      <h3 class="section-title"><%= t ('list.watched') %></h3>
+      <div id="watched-movie-list"></div>
     </div>
-  <% end %>
+  </div>
 </div>
 
 

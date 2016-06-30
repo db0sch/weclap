@@ -52,6 +52,10 @@ public
     end
   end
 
+  def has_ever_watched_a_movie?
+    Interest.where(user: self).where.not(watched_on: nil).exists?
+  end
+
   def self.find_for_facebook_oauth(auth)
     user_params = {
       provider: auth.provider,

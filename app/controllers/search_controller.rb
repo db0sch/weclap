@@ -6,8 +6,8 @@ class SearchController < ApplicationController
     search_terms = params[:terms]
 
     @movies = Movie.which_title_or_synopsis_contains(search_terms)
-    @friends = current_user.friendslist
-
+    # @friends = current_user.friendslist
+    @friends = current_user.get_friends_list
     render 'movies/index'
   end
 

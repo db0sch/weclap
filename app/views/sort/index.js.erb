@@ -2,7 +2,7 @@ console.log('on passe dans le js.erb')
 $(document).ready(function(){
   $('#unwatched-movie-list').empty();
   <% @list.each do |interest| %>
-    <% next if interest.watched_on %>
+    <%# next if interest.watched_on %>
     $('#unwatched-movie-list').append("<%= j render 'shared/movie_item', movie: interest.movie, interest: interest %>");
   <% end %>
 });

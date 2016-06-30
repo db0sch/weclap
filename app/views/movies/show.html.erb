@@ -35,19 +35,12 @@
               <div class='inline-flex'>
                 <% if !@friends.nil? %>
                   <div class="movie-social movie-item-controls">
-                    <% @friends.each do |b| %>
-                      <% User.find_by_uid(b).interests.each do |interest| %>
-                        <% if interest.watched_on.nil? %>
-                          <% if @movie.id == interest.movie_id %>
-                             <%= link_to image_tag(User.find_by_uid(b).picture, class: "avatar"), user_friendships_path(current_user) %>
-                          <% end %>
-                        <% else %>
-                          <% if @movie.id == interest.movie_id %>
-                             <%= link_to user_friendships_path(current_user), style: "text-decoration: none;" do %>
-                                <div style="background-image: url(<%= image_path(User.find_by_uid(b).picture)%>)" class="avatar rating rating-container">
-                                </div>
-                             <% end %>
-                          <% end %>
+                    <% @friends.each do |friend| %>
+                      <% if friend.unwatched_movies_list.include? @movie %>
+                        <%= link_to image_tag(friend.picture, class: "avatar"), user_friendships_path(friend) %>
+                      <% elsif friend.watched_movies_list.include? @movie %>
+                        <%= link_to user_friendships_path(friend), style: "text-decoration: none;" do %>
+                          <div style="background-image: url(<%= image_path(friend.picture)%>)" class="avatar rating rating-container"></div>
                         <% end %>
                       <% end %>
                     <% end %>
@@ -65,7 +58,6 @@
               </div>
             <% end %>
           </div>
-          <%# raw "<span>aka #{@original_title}</span><br>" if @original_title %>
         </div>
 
         <div class="container-movie-infos">
@@ -92,11 +84,7 @@
         <div class="container-synopsis">
           <% if I18n.locale == :fr && !@movie.fr_overview.nil?%>
             <h4><%= t ('movie-item.synopsis') %></h4>
-
-
             <p class="text-justify"><%= @movie.fr_overview %></p>
-
-
           <% else %>
             <h4><%= t ('movie-item.synopsis') %></h4>
             <p class="text-justify"><%= @movie.overview %></p>
@@ -148,9 +136,6 @@
       channel = pusher.subscribe('watching_events_channel');
     });
   </script>
-
-  <%# javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyBJB3G_SfQa6Xbb9D9GZpej54J73sm6TGc" %>
-  <%# javascript_include_tag "https://cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js" %>
 
   <script>
     $(document).ready(function() {
