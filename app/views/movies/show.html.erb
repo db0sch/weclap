@@ -114,8 +114,8 @@
         </div>
       </div>
     </div>
-
-    <div class="col-xs-12 col-sm-4 <%#= 'no-left-padded' unless request.user_agent =~ /Mobile|webOS/ %>">
+<!-- on phone -->
+    <div class="col-xs-12 hidden-md hidden-sm hidden-lg <%#= 'no-left-padded' unless request.user_agent =~ /Mobile|webOS/ %>">
       <div class="boxing" id="boxing-show">
         <div class="tabs">
           <a class="tab <%= 'active' if @display_shows %>" data-target="#shows">
@@ -127,13 +127,40 @@
         </div>
         <div class="tab-content <%= 'hidden' unless @display_shows %>" id="shows">
           <div class="container-movie-times">
-            <ul class="list-unstyled" id="shows_in_theaters">
+            <ul class="list-unstyled list-inline" id="shows_in_theaters">
               <li class="loader"></li>
             </ul>
           </div>
         </div>
         <div class="tab-content <%= 'hidden' if @display_shows %>" id="streamings">
-          <ul class="list-unstyled" id="streamings_per_provider">
+          <ul class="list-unstyled list-inline" id="streamings_per_provider">
+            <li class="loader"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+<!-- on screen -->
+    <div class="col-xs-12 hidden-xs <%#= 'no-left-padded' unless request.user_agent =~ /Mobile|webOS/ %>">
+      <div class="movie-info-container boxing" id="boxing-show">
+        <div class="tabs">
+          <a class="tab <%= 'active' if @display_shows %>" data-target="#shows">
+            <div class="tab-header"><i class="fa fa-film" aria-hidden="true" style="font-size: x-large;"></i></div>
+          </a>
+          <a class="tab <%='active' unless @display_shows %>" data-target="#streamings">
+            <div class="tab-header"><i class="fa fa-television" aria-hidden="true" style="font-size: x-large;"></i></div>
+          </a>
+        </div>
+        <div class="tab-content <%= 'hidden' unless @display_shows %>" id="shows">
+          <div class="container-movie-times">
+            <ul class="list-unstyled list-inline" id="shows_in_theaters">
+              <li class="loader"></li>
+            </ul>
+          </div>
+        </div>
+        <div class="tab-content <%= 'hidden' if @display_shows %>" id="streamings">
+          <ul class="list-unstyled list-inline" id="streamings_per_provider">
             <li class="loader"></li>
           </ul>
         </div>

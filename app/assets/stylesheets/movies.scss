@@ -1,3 +1,23 @@
+@media (max-width: 768px) {
+
+}
+@media (min-width: 768px) {
+
+
+  #shows_in_theaters > li.loader {
+    display: block;
+  }
+  #streamings_per_provider > li.loader {
+    display: block;
+  }
+  #streamings_per_provider > li {
+    display: inline-block;
+    padding: 8px;
+    text-align: center;
+  }
+}
+
+
 // .movie-wrapper {
 //   background: linear-gradient(#778899, #333333);
 //   padding: 10px 0;
@@ -40,12 +60,6 @@
   h4 {
     color: black;
   }
-}
-
-#boxing-show {
-  margin-left: -18px;
-  margin-right: -18px;
-  min-height: 456px;
 }
 
 .movie-poster-show {
