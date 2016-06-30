@@ -219,7 +219,7 @@ class MovieScraper
         r_date = film['release_date'].blank? ? movie.release_date : film['release_date'].to_date
         movie = Movie.unscoped.new({
           title: film['title'],
-          original_title: film['original_title'],
+          # original_title: film['original_title'],
           runtime: film['runtime'],
           tagline: film['tagline'],
           genres: film['genres'].map { |genre| genre.values.last },
@@ -293,18 +293,18 @@ class MovieScraper
     end
 
     def get_youtube(movie)
-      titleplus = movie.original_title.delete(';').gsub("'", ' ').gsub(" ", "+").gsub(/[^[:ascii:]]/, "+")
-      year = movie.release_date.year
-      url = "https://www.youtube.com/results?search_query=allintitle:+\"#{titleplus}+#{year}\"+trailer"
-      puts "@@@> Retrieving trailer for '#{movie.title}' with url = #{url} @ Youtube"
-      begin
-        response = RestClient.get url
-      rescue
-        return
-      end
-      return unless response.code == 200
-      children = Nokogiri::HTML(response.body).search(".yt-lockup-title").children
-      trailer = children.blank? ? nil : children.attribute('href').value.gsub("watch?v=", "")
+      # titleplus = movie.original_title.delete(';').gsub("'", ' ').gsub(" ", "+").gsub(/[^[:ascii:]]/, "+")
+      # year = movie.release_date.year
+      # url = "https://www.youtube.com/results?search_query=allintitle:+\"#{titleplus}+#{year}\"+trailer"
+      # puts "@@@> Retrieving trailer for '#{movie.title}' with url = #{url} @ Youtube"
+      # begin
+      #   response = RestClient.get url
+      # rescue
+      #   return
+      # end
+      # return unless response.code == 200
+      # children = Nokogiri::HTML(response.body).search(".yt-lockup-title").children
+      # trailer = children.blank? ? nil : children.attribute('href').value.gsub("watch?v=", "")
     end
 
     def get_cast(movie_id, limit = 10)

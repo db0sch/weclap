@@ -127,12 +127,16 @@
     display: none;
   }
   .friends-tooltip-global {
-    line-height: 9px;
-    margin-top: 8px;
+    height: 0;
+    position: absolute;
+    top: 3px;
+    right: 12px;
+    line-height: 10px;
+    // margin-top: 8px;
   }
   .friends_tooltip.hidden-xs {
     position: relative;
-    right: 15px;
+    // right: 15px;
     // position: inherit;
     // top: 1px;
     // right: 100px;
@@ -208,7 +212,9 @@
     display: flex;
     margin: 0px 4px;
   }
+  .movie-social.hidden-xs {
 
+  }
   .movie-social {
     display: flex;
     align-self: flex-end;
@@ -426,6 +432,7 @@ $width-btn: 110px;
     text-decoration: none;
     font-size: 10px;
     color: #585858;
+    // line-height: 10px;
   }
 
 

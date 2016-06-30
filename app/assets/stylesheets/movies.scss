@@ -8,7 +8,9 @@
   // flex-wrap: wrap;
   // margin: 0 50px;
 }
-
+.list-friend {
+  display: inline-block;
+}
 #movie-infos-small {
   margin-left: -35px;
   margin-bottom: -10px;
@@ -88,6 +90,11 @@
 
 .rating-imdb {
   margin-left: 5px;
+}
+
+.rating-friend {
+  margin-top: 10px;
+  text-align: right;
 }
 
 .movie-info-right {
@@ -261,4 +268,6 @@ $star-yellow: #FFB400;
   outline-width: 0;
 }
 
-
+.movie-social.movie-item-controls {
+  flex-direction: row;
+}

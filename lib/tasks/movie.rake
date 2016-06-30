@@ -1,4 +1,4 @@
-include ActionView::Helpers::TextHelper
+ActionView::Helpers::TextHelper
 
 # Rake task to populate the DB and update showtimes for each movie in theaters around Paris 01
 namespace :movie do
