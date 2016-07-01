@@ -4,25 +4,10 @@
       <div class="col-xs-12">
       <h3 class="section-title"><%= t ('list.my-friends') %></h3>
       </div>
-      <% list.each do |friend_uid| %>
-        <% common_movies = [] %>
-        <% friend = User.find_by_uid(friend_uid) %>
-        <!-- movies in common -->
-
-        <% friend.interests.each do |movie| %>
-
-          <% if movie.watched_on.nil? %>
-            <% current_user.interests.each do |cumovie| %>
-              <% if cumovie.watched_on.nil? %>
-                <% if cumovie.movie_id == movie.movie_id %>
-                    <% common_movies << movie.movie_id %>
-                <% end %>
-              <% end %>
-            <% end  %>
-          <% end %>
-        <% end  %>
+      <% list.each do |friend| %>
+        <% common_movies = current_user.common_movies_with(friend, :unwatched) %>
         <div id="friend-<%= friend.id %>">
-          <%= render 'shared/friend_item', friend: friend, common_movies: common_movies, interest: nil %>
+          <%= render 'shared/friend_item', friend: friend, common_movies: common_movies %>
         </div>
         <%= render 'shared/friend_modal', friend: friend, common_movies: common_movies, interest: nil %>
       <% end %>

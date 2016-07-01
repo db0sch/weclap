@@ -1,28 +1,43 @@
 class MoviesController < ApplicationController
 
+  skip_after_action :verify_policy_scoped, only: :index
+  FILTER_ACTIONS = [:top100, :ontheater, :onvod]
   def index
-    @movies = policy_scope(Movie)
-    title = params[:title]
-    top100 = params[:top100]
-    ontheater = params[:ontheater]
-    onvod = params[:onvod]
-    @movies = Movie.where('title ILIKE ? OR original_title ILIKE ?', "%#{title}%", "%#{title}%") unless title.blank?
-    @movies = Movie.select{ |m| imdb250top.include?(m.imdb_id) } if top100
-    @movies = Movie.select{ |m| !m.shows.blank? } if ontheater
-    @movies = Movie.select{ |m| !m.streamings.blank? } if onvod
-    @friends = current_user.friendslist
-    @movies = @movies.take(100)
-
+    action_index = FILTER_ACTIONS.find_index{ |a| params[a] }
+    @movies = case action_index
+      when 0 then Movie.includes(jobs: :person, interests: :user).where(imdb_id: imdb250top).limit(100)
+      when 1 then Movie.includes(jobs: :person, interests: :user).where(id: Show.select(:movie_id)).limit(100)
+      when 2 then Movie.includes(jobs: :person, interests: :user).where(id: Streaming.select(:movie_id)).limit(100)
+      else
+        Movie.includes(jobs: :person, interests: :user).order('Random()').limit(100)
+    end
+    # @movies = policy_scope(Movie)
+    # title = params[:title]
+    # @movies = Movie.where('title ILIKE ? OR original_title ILIKE ?', "%#{title}%", "%#{title}%") unless title.blank?
+    # top100 = params[:top100]
+    # ontheater = params[:ontheater]
+    # onvod = params[:onvod]
+    # @movies = Movie.select{ |m| imdb250top.include?(m.imdb_id) } if top100
+    # @movies = Movie.select{ |m| !m.shows.blank? } if ontheater
+    # @movies = Movie.select{ |m| !m.streamings.blank? } if onvod
+#
+    @friends = current_user.get_friends_list
+    # @friends = current_user.friendslist
+#
+    # @movies = @movies.take(100)
   end
 
   def show
     @movie = Movie.find(params[:id])
     authorize @movie
     @display_shows = display_shows_tab?(@movie)
-    @friends = current_user.friendslist
+#
+    @friends = current_user.get_friends_list
+    # @friends = current_user.friendslist
+#
     @directors = @movie.jobs.where(title: 'Director').map(&:person).map(&:name).join(', ')
     @actors = @movie.jobs.where(title: 'Actor').map(&:person).map(&:name).join(', ')
-# 2do Use proper translation if available
+#2do Use proper translation if available
     @genres = @movie.genres.take(2).join(', ')
     @original_title = @movie.original_title unless @movie.original_title.blank? || @movie.title.casecmp(@movie.original_title) == 0
 #
