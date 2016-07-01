@@ -3,14 +3,14 @@
     <!-- img FB -->
     <div>
       <% if friend.picture %>
-        <%= image_tag friend.picture, alt: friend.fullname, class: "movie-item-image" %>
+        <%= image_tag friend.picture, alt: friend.fullname, class: "movie-item-image", id:"friend-img" %>
       <% else %>
         <%= image_tag "http://placehold.it/40x60", alt: "placeholder", class: "movie-item-image" %>
       <% end %>
     </div>
     <!-- Fullname -->
     <div class='movie-item-body'>
-      <h3><%= friend.fullname %></h3>
+      <h3 id="friend-h3"><%= friend.fullname %></h3>
     </div>
     <!-- common movies -->
     <div class=" hidden-sm hidden-md hidden-lg">

@@ -7,7 +7,7 @@
       <% list.each do |friend| %>
         <% common_movies = current_user.common_movies_with(friend, :unwatched) %>
         <div id="friend-<%= friend.id %>">
-          <%= render 'shared/friend_item', friend: friend, common_movies: common_movies, interest: nil %>
+          <%= render 'shared/friend_item', friend: friend, common_movies: common_movies %>
         </div>
         <%= render 'shared/friend_modal', friend: friend, common_movies: common_movies, interest: nil %>
       <% end %>

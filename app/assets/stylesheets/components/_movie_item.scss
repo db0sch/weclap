@@ -1,12 +1,31 @@
 @media (max-width: 768px) {
+  #friend-img {
+    width: 85px;
+  }
+
   p.sentence {
-    margin: 0 12px 11px;
+    margin: 0;
+  }
+  div.sentence {
+    right: 10px;
+    position: absolute;
+    height: 85px;
+    line-height: 85px;
   }
   .floating {
     display:inline-block;
   }
+
   .large {
     display: none;
+  }
+
+
+  a.movie-added-btn {
+    border: 1px solid #777777;
+    font-size: 12px;
+    opacity: 1;
+    width: 110px;
   }
   // .friends-tooltip-global {
   //   position: fixed;
@@ -43,9 +62,10 @@
   .starrr a {
     font-size: 43px;
   }
-  .item-cast-crew {
+  .crew {
     line-height: 14px;
   }
+
   .col-xs-offset-1 {
     margin-left: 0%;
   }
@@ -76,8 +96,9 @@
   .movie-item-body {
     line-height: 9px;
     h3 {
+      margin-top: 0;
+      margin-bottom: 0;
       font-size: 19px;
-      padding-top: 9px;
     }
   }
 
@@ -122,11 +143,16 @@
     display: none;
   }
   .friends-tooltip-global {
-    line-height: 9px;
-    margin-top: 8px;
+    height: 0;
+    position: absolute;
+    top: 3px;
+    right: 20px;
+    line-height: 10px;
+    // margin-top: 8px;
   }
   .friends_tooltip.hidden-xs {
-    margin-right: 22px;
+    position: relative;
+    // right: 15px;
     // position: inherit;
     // top: 1px;
     // right: 100px;
@@ -202,7 +228,9 @@
     display: flex;
     margin: 0px 4px;
   }
+  .movie-social.hidden-xs {
 
+  }
   .movie-social {
     display: flex;
     align-self: flex-end;
@@ -263,16 +291,19 @@ $width-btn: 110px;
   display: flex;
   align-items: center;
   text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
   .movie-add-btn {
     width: $width-btn;
   }
 }
+
   a.movie-add-btn {
     font-size: 13px;
-    color: white;
+    // color: white;
     font-weight: 600;
     text-decoration: none;
-    border: 1px solid $yellow;
+    // border: 1px solid $yellow;
     &:hover {
       color: white;
       text-decoration: none;
@@ -290,6 +321,7 @@ $width-btn: 110px;
     font-size: 12px;
     opacity: 1;
     width: $width-btn;
+    padding: 5px;
     &:hover {
       color: $gray-dark;
     }
@@ -417,6 +449,7 @@ $width-btn: 110px;
     text-decoration: none;
     font-size: 10px;
     color: #585858;
+    // line-height: 10px;
   }
 
 

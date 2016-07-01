@@ -4,42 +4,37 @@
       <div style="display: inline">
       <!-- availability -->
         <div class="dropdown hidden-xs" style="display: inline">
-          <select class="selectpicker checkbox-diff" data-width="33%" title=<%=t ('list.availability')%>>
-            <%= t ('list.availability') %>
-            <option value="all"><%= t ('movie-item.all') %>
-            </option>
-            <option value="on_vod"><%= t ('movie-item.on-vod') %>
-            </option>
-            <option value="on_Theater"><%= t ('movie-item.on-theater') %>
-            </option>
+          <select class="selectpicker checkbox-diff" data-width="33%" title=<%= t('list.availability') %> >
+            <%= t('list.availability') %>
+            <option value="all"><%= t('movie-item.all') %></option>
+            <option value="on_vod"><%= t('movie-item.on-vod') %></option>
+            <option value="on_Theater"><%= t('movie-item.on-theater') %></option>
           </select>
         </div>
       <!-- sort_by imdb_rating/release_date/duration -->
         <div class="dropdown hidden-xs" style="display: inline">
-          <select class="selectpicker sort-by" data-width="33%" title=<%= t ('interest.sort-by') %>>
-            <option value="rating"><%= t ('interest.rating') %>
-            </option>
-            <option value="release_date"><%= t ('interest.release_date') %>
-            </option>
+          <select class="selectpicker sort-by" data-width="33%" title=<%= t('interest.sort-by') %> >
+            <option value="rating"><%= t('interest.rating') %></option>
+            <option value="release_date"><%= t('interest.release_date') %></option>
           </select>
         </div>
       <!-- filterby duration -->
       <!-- genres -->
         <div class="dropdown hidden-xs" style="display: inline">
-          <select class="selectpicker genres" data-size="5" data-width="33%" multiple="multiple" name="genres" data-actions-box="true" title=<%=t ('movie-item.genres')%>>
-              <option value=<%= "All" %>><%= t ("genres.All") %></option>
+          <select class="selectpicker genres" data-size="5" data-width="33%" multiple="multiple" name="genres" data-actions-box="true" title=<%= t('movie-item.genres')%> >
+            <option value=<%= "All" %>><%= t("genres.All") %></option>
             <% api_url = "http://api.themoviedb.org/3/genre/movie/list?api_key=#{ENV['TMDB_API_KEY']}" %>
             <% open(api_url) do |f| %>
               <% genres = JSON.parse(f.read) %>
               <% genres['genres'].each do |g| %>
-                  <option value=<%= "#{g['name']}" %>><%= t ("genres.#{g['name']}") %></option>
-                <% end %>
+                <option value=<%= "#{g['name']}" %>><%= t("genres.#{g['name']}") %></option>
+              <% end %>
             <% end %>
           </select>
         </div>
       </div>
 
-      <h3 class="section-title"><%= t ('list.mywl') %></h3>
+      <h3 class="section-title"><%= t('list.mywl') %></h3>
       <div id="unwatched-movie-list">
         <% list.each do |interest| %>
           <%= render 'shared/movie_item', movie: interest.movie, interest: interest %>
@@ -50,7 +45,7 @@
   <!-- Add Watched section if required -->
   <div class="row <%= 'hidden' unless current_user.has_ever_watched_a_movie? %>">
     <div class="col-xs-10 col-xs-offset-1">
-      <h3 class="section-title"><%= t ('list.watched') %></h3>
+      <h3 class="section-title"><%= t('list.watched') %></h3>
       <div id="watched-movie-list"></div>
     </div>
   </div>

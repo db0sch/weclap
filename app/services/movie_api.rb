@@ -19,12 +19,18 @@ class MovieApi
 
         fail if tmdb_mv['status_code'] == 25
         p tmdb_mv['status_code'] if tmdb_mv['status_code']
-
+        if tmdb_mv['status_code']
+          puts "**** ERROR CODE ****"
+          puts tmdb_mv['status_code']
+          return
+        end
         puts "Movie #{tmdb_id} found on TMDb. Title: #{tmdb_mv["title"]}"
 
         collection = tmdb_mv['belongs_to_collection'] ? { tmdb_mv['belongs_to_collection']['id'] => tmdb_mv['belongs_to_collection']['name'] } : nil
-        return if movie = Movie.unscoped.find_by(tmdb_id: tmdb_id)
-        p "Movie #{tmdb_id} is not in database. Let's create it"
+
+        return if Movie.unscoped.find_by(tmdb_id: tmdb_id)
+        puts "Movie #{tmdb_id} is not in database. Let's create it"
+
         movie = Movie.create!(
         {
           title: tmdb_mv['title'],
@@ -49,8 +55,8 @@ class MovieApi
         retrieve_credits?(movie)
         puts "probleme sur film #{movie.title}" unless movie.valid?
       rescue => e
-        puts "***** An error occurred with message #{e.message}: retrying in 1 seconds *****"
-        sleep 1
+        puts "***** An error occurred get_movie with message #{e.message}: retrying in 2 seconds - movie: #{tmdb_id}*****"
+        sleep 2
         retry
       end
       puts "#{movie.title} has been created. Thank you."
@@ -58,9 +64,17 @@ class MovieApi
     end
 
     def get_movie_details(tmdb_id, lang)
-      Tmdb::Api.key(ENV['TMDB_API_KEY'])
-      Tmdb::Api.language(lang)
-      tmdb_mv = Tmdb::Movie.detail(tmdb_id)
+      begin
+        Tmdb::Api.key(ENV['TMDB_API_KEY'])
+        Tmdb::Api.language(lang)
+        tmdb_mv = Tmdb::Movie.detail(tmdb_id)
+        fail if tmdb_mv['status_code'] == 25
+        tmdb_mv
+      rescue => e
+        puts "***** An error occurred in get_movie_details -> #{lang} <- with message #{e.message}: retrying in 2 seconds - movie: #{tmdb_id}*****"
+        sleep 2
+        retry
+      end
     end
 
     def fields_in_french_for(args)
@@ -77,11 +91,17 @@ class MovieApi
     end
 
     def retrieve_credits?(movie)
-      cast = Tmdb::Movie.casts(movie.tmdb_id)
-      get_people_and_jobs(team: cast, movie_id: movie.id, job: 'Actor', max_results: 10) unless cast.blank?
-      crew = Tmdb::Movie.crew(movie.tmdb_id)
-      get_people_and_jobs(team: crew, movie_id: movie.id) unless crew.blank?
-      !(cast.blank? && crew.blank?)
+      begin
+        cast = Tmdb::Movie.casts(movie.tmdb_id)
+        get_people_and_jobs(team: cast, movie_id: movie.id, job: 'Actor', max_results: 10) unless cast.blank?
+        crew = Tmdb::Movie.crew(movie.tmdb_id)
+        get_people_and_jobs(team: crew, movie_id: movie.id) unless crew.blank?
+        !(cast.blank? && crew.blank?)
+      rescue => e
+        puts "***** An error occurred in retrieve_credits with message #{e.message}: retrying in 2 seconds - movie: #{movie.tmdb_id}*****"
+        sleep 2
+        retry
+      end
     end
 
     VIP_CREW_MEMBERS = ['Director', 'Producer', 'Author', 'Writer', 'Scenario Writer', 'Screenplay'].freeze
