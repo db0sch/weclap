@@ -1,4 +1,4 @@
-<div  <%=raw interest.nil? ? 'class=\"movie-item interest-js\"' : "class=\"#{'streams' if !movie.streamings.empty?} #{'theater' if !movie.theaters.empty?} movie-item #{movie.genres.join(' ')} #{'un' unless interest.watched_on}watched-movie interest-js\" id=movie-#{interest.id}" %>>
+<div  <%=raw interest.nil? ? 'class="movie-item interest-js"' : "class=\"#{'streams' if !movie.streamings.empty?} #{'theater' if !movie.theaters.empty?} movie-item #{movie.genres.join(' ')} #{'un' unless interest.watched_on}watched-movie interest-js\" id=movie-#{interest.id}" %>>
   <%= link_to movie_path(movie.id) do %>
     <%= image_tag movie.poster_url ? movie.poster_url : "http://placehold.it/40x60", alt: movie.title, class: "movie-item-image" %>
   <% end %>
