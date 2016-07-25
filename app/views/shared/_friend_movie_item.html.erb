@@ -7,7 +7,7 @@
         </div>
         <div class="modal-item-body">
           <span><%= movie.title %><br>
-            <%= movie.release_date.to_date.year %></span>
+            <%= movie.release_date.to_date.year if movie.release_date %></span>
         </div>
       </div>
       <% if friend %>
