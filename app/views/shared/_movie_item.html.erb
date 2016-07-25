@@ -13,7 +13,7 @@
       <p class="item-cast-crew hidden-md hidden-sm hidden-lg"><%= t 'movie-item.starring' %>: <%= actors.shift(3).join(', ') %></p>
     </div>
     <div class="movie-infos">
-      <p class="item-year-released"><%= movie.release_date.to_date.year %></p>
+      <p class="item-year-released"><%= movie.release_date.to_date.year if movie.release_date %></p>
       <i class="fa fa-clock-o item-clock" aria-hidden="true"></i>
       <span class="item-runtime"><%= movie.runtime %> min</span>
     </div>
