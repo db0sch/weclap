@@ -5,7 +5,10 @@ class SearchController < ApplicationController
   def index
     search_terms = params[:terms]
 
-    @movies = Movie.which_title_or_synopsis_contains(search_terms)
+    # The line below refers to the last pg_search config made by nephaest
+    # @movies = Movie.which_title_or_synopsis_contains(search_terms)
+    # The line below refers to the new config, less precise, but hopefully less ressource consuming as well
+    @movies = Movie.which_title_contains(search_terms)
     # @friends = current_user.friendslist
     @friends = current_user.get_friends_list
     render 'movies/index'
