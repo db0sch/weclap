@@ -25,7 +25,7 @@ class Movie < ActiveRecord::Base
                   ignoring: :accents,
                   using: {
                             tsearch: { prefix: true },
-                            dmetaphone: { only: [:fr_title, :title, :origin_title] }
+                            #dmetaphone: { only: [:fr_title, :title, :origin_title] }
                          },
                   order_within_rank: "movies.imdb_score DESC"
 
