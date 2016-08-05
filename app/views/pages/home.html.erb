@@ -1,9 +1,60 @@
-<div class="banner" style="background: linear-gradient(-225deg, rgba(0, 0, 0, 0) 0%, rgba(0,54,61,0.6) 50%), url(<%= image_path('background.jpg') %>);margin-top: -70px;">
+<div class="banner">
   <div class="banner-content">
-    <h2><%= t ('home.title') %></h2>
-    <p><%= t ('home.subtitle') %></p>
+    <h2>love movies?</h2>
+    <h1>say hello to <span id="main-title">Holly</span></h1>
+    <%= link_to "getting started", '#' %>
+  </div>
+</div>
+<div class="hp-wrapper">
+  <div class="hp-content">
+    <div class="hp-icon">
+      <%= icon('list') %>
+    </div>
+    <div class="hp-text">
+      <h3>Fill you watchlist</h3>
+      <p class="text-justify">Holly is a powerful, yet simple, movie watchlist manager:</p>
+      <ul class="list-unstyled">
+        <li>Search and add the movies you want to watch</li>
+        <li>Browse your own watchlist (by filtering by duration, stars...)</li>
+        <li>Access movies info (overview, cast, trailer, poster...)</li>
+        <li>Know how you can watch the film (theaters or streaming)</li>
+      </ul>
+    </div>
+  </div>
 
-    <button type="button" class="banner-central-button" data-toggle="modal" data-target=".login-modal-sm"><%= t ('home.button-lets-clap') %></button>
+  <div class="hp-content-reverse">
+    <div class="hp-icon">
+      <%= icon('envelope-o') %>
+    </div>
+    <div class="hp-text">
+      <h3>Get updates</h3>
+      <p class="text-justify">Each week, we'll send you one email, to let you know :</p>
+      <ul class="list-unstyled">
+        <li>which movies are available (theaters or streaming)</li>
+        <li>which movies you share with your friends watchlist.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hp-content">
+    <div class="hp-icon">
+      <%= icon('comments-o') %>
+    </div>
+    <div class="hp-text">
+      <h3>On the go</h3>
+      <p class="text-justify">For us, Holly is more than a web service. We really want to give it a soul. So now, you can now interact with Holly via Facebook Messenger, whether in your desktop browser, or on the Messenger mobile app. Search a movie, add it, show your watchlist... you can do all this (and many other things to come), just by chatting with it.
+      <br>Awesome, right?</p>
+    </div>
+  </div>
+</div>
+
+<!--
+<div class="banner" style="background: linear-gradient(-225deg, rgba(0, 0, 0, 0) 0%, rgba(0,54,61,0.6) 50%), url(<%# image_path('background.jpg') %>);margin-top: -70px;">
+  <div class="banner-content">
+    <h2><%# t ('home.title') %></h2>
+    <p><%# t ('home.subtitle') %></p>
+
+    <button type="button" class="banner-central-button" data-toggle="modal" data-target=".login-modal-sm"><%# t ('home.button-lets-clap') %></button>
 
     <div class="modal fade login-modal-sm" id='LogInModal' tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm">
@@ -11,10 +62,10 @@
             <div class="modal-body">
               <div class="row">
                 <div class="col-xs-12 text-center">
-                  <h5><%= t ('login') %></h5>
-                  <%= link_to user_facebook_omniauth_authorize_path do %>
-                    <%= image_tag('login_fb_small.png') %>
-                  <% end %>
+                  <h5><%# t ('login') %></h5>
+                  <%# link_to user_facebook_omniauth_authorize_path do %>
+                    <%# image_tag('login_fb_small.png') %>
+                  <%# end %>
                 </div>
               </div>
             </div>
@@ -23,32 +74,32 @@
       </div>
 
   </div>
-</div>
-
+</div> -->
+<!--
 <div class="wrapper-gray padded">
   <div class="container text-center padded features">
     <div class="row">
       <div class="col-xs-12 col-sm-8 col-md-4">
         <div class="card" id="discover">
-        <div class="card-title"><h2><%= t ('home.discover-title') %></h2></div>
+        <div class="card-title"><h2><%# t ('home.discover-title') %></h2></div>
           <div class="card-content">
-            <p><%= t ('home.discover') %>
+            <p><%# t ('home.discover') %>
           </div>
         </div>
       </div>
       <div class="col-xs-12 col-sm-8 col-md-4">
         <div class="card">
-          <div class="card-title"><h2><%= t ('home.plan-title') %></h2></div>
+          <div class="card-title"><h2><%# t ('home.plan-title') %></h2></div>
             <div class="card-content">
-              <p><%= t ('home.plan') %></p>
+              <p><%# t ('home.plan') %></p>
             </div>
           </div>
       </div>
       <div class="col-xs-12 col-sm-8 col-md-4">
         <div class="card">
-          <div class="card-title"><h2><%= t ('home.share-title') %></h2></div>
+          <div class="card-title"><h2><%# t ('home.share-title') %></h2></div>
           <div class="card-content">
-            <p><%= t ('home.share') %></p>
+            <p><%# t ('home.share') %></p>
           </div>
         </div>
       </div>
@@ -58,15 +109,15 @@
 
 <div class="wrapper-multidevice">
   <div class="title-multidevice text-center" id="soon">
-    <%= image_tag("soon.png")%>
+    <%# image_tag("soon.png")%>
   </div>
   <div class="container text-center" id="multiplatform">
-    <%= image_tag("clap_iOS.png")%>
+    <%# image_tag("clap_iOS.png")%>
   </div>
 </div>
 
 
-
+ -->
 
 
 
