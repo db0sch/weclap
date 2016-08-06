@@ -2,9 +2,10 @@
   <!-- Center Navigation -->
   <div class="navbar-wagon-left hidden-xs hidden-sm">
     <!-- navbar element empty -->
-    <%= link_to(user_signed_in? ? watchlist_path(current_user) : root_path) do %>
+<!--     <%= link_to(user_signed_in? ? watchlist_path(current_user) : root_path) do %>
       <%= image_tag "logo.png", class: "clap-logo" %>
-    <% end %>
+    <% end %>     -->
+    <%= link_to "Holly", (user_signed_in? ? watchlist_path(current_user) : root_path), class:"navbar-logo" %>
   </div>
 
   <div class="navbar-wagon-center hidden-xs hidden-sm">

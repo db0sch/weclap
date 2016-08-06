@@ -21,13 +21,14 @@
   -ms-flex-pack: center;
   justify-content: center;
   .banner-content {
-    color: $brand-color;
+    color: $cyan-darker;
     h1 {
       font-size: 3em;
       margin: 40px 0;
+      color: $brand-color;
       font-family: $title-font;
       #main-title {
-        font-size: 6em;
+        font-size: 5em;
         color: $yellow;
         text-shadow: 10px 10px 0px $brand-color;
       }
@@ -37,38 +38,56 @@
       font-family: $title-font;
       font-size: 5em;
     }
+    .start-btn {
+      height: 100px;
+      padding: 20px;
+      a.btn.btn-secondary {
+        // il faut modifier la font du bouton.
+        position: relative;
+        font-size: 1.5em;
+        letter-spacing: 0.1em;
+        border: 2px solid $yellow;
+        box-shadow: 10px 10px 0px $brand-color;
+        text-decoration: none;
+        color: $brand-color;
+        font-weight: bold;
+        &:hover {
+          box-shadow: 5px 5px 0px $yellow;
+          top: 5px;
+          left: 5px;
+          background-color: $brand-color;
+          color: white;
+          border: 1px solid $brand-color;
+        }
+      }
+    }
   }
 }
 
 .hp-wrapper {
   background: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-direction: column;
+  padding: 100px 0;
 }
 
 .hp-content {
-  margin: 50px 0;
-  width: 50%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   .hp-text {
-    margin: 0 20px;
+    // margin: 0 20px;
   }
   .hp-icon {
-    font-size: 6em;
-    padding: 22px;
-    margin: 0 20px;
-    color: $brand-color;
+    display: flex;
+    flex-direction: row;
+    img.emoji {
+      height: 3em;
+      width: 3em;
+      margin: 0 .3em 0 .3em;
+      vertical-align: -0.1em;
+    }
     // the padding is here to fit with the h1 margin in hp-text div
   }
-}
-
-.hp-content-reverse {
-  @extend .hp-content;
-  flex-direction: row-reverse;
 }
 
 

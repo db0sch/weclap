@@ -2,51 +2,67 @@
   <div class="banner-content">
     <h2>love movies?</h2>
     <h1>say hello to <span id="main-title">Holly</span></h1>
-    <%= link_to "getting started", '#' %>
+    <div class="start-btn">
+      <%= link_to "START", '#', class: "btn btn-secondary" %>
+    </div>
   </div>
 </div>
 <div class="hp-wrapper">
-  <div class="hp-content">
-    <div class="hp-icon">
-      <%= icon('list') %>
-    </div>
-    <div class="hp-text">
-      <h3>Fill you watchlist</h3>
-      <p class="text-justify">Holly is a powerful, yet simple, movie watchlist manager:</p>
-      <ul class="list-unstyled">
-        <li>Search and add the movies you want to watch</li>
-        <li>Browse your own watchlist (by filtering by duration, stars...)</li>
-        <li>Access movies info (overview, cast, trailer, poster...)</li>
-        <li>Know how you can watch the film (theaters or streaming)</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="hp-content-reverse">
-    <div class="hp-icon">
-      <%= icon('envelope-o') %>
-    </div>
-    <div class="hp-text">
-      <h3>Get updates</h3>
-      <p class="text-justify">Each week, we'll send you one email, to let you know :</p>
-      <ul class="list-unstyled">
-        <li>which movies are available (theaters or streaming)</li>
-        <li>which movies you share with your friends watchlist.</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="hp-content">
-    <div class="hp-icon">
-      <%= icon('comments-o') %>
-    </div>
-    <div class="hp-text">
-      <h3>On the go</h3>
-      <p class="text-justify">For us, Holly is more than a web service. We really want to give it a soul. So now, you can now interact with Holly via Facebook Messenger, whether in your desktop browser, or on the Messenger mobile app. Search a movie, add it, show your watchlist... you can do all this (and many other things to come), just by chatting with it.
-      <br>Awesome, right?</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <div class="hp-content">
+          <div class="hp-icon">
+            <%= emojify ":clipboard: :movie_camera: :yum:" %>
+          </div>
+          <div class="hp-text">
+            <h3>Fill you watchlist</h3>
+            <p class="text-justify">Holly is a powerful, yet simple, movie watchlist manager:</p>
+            <ul class="list-unstyled">
+              <li>Search and add the movies you want to watch</li>
+              <li>Browse your own watchlist (by filtering by duration, stars...)</li>
+              <li>Access movies info (overview, cast, trailer, poster...)</li>
+              <li>Know how you can watch the film (theaters or streaming)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <div class="hp-content">
+          <div class="hp-icon">
+            <%= emojify ":mailbox: :e-mail: :grinning:" %>
+          </div>
+          <div class="hp-text">
+            <h3>Get updates</h3>
+            <p class="text-justify">Each week, we'll send you one email, to let you know :</p>
+            <ul class="list-unstyled">
+              <li>which movies are available (theaters or streaming)</li>
+              <li>which movies you share with your friends watchlist.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <div class="hp-content">
+          <div class="hp-icon">
+            <%= emojify ":iphone: :speech_balloon: :astonished:" %>
+          </div>
+          <div class="hp-text">
+            <h3>On the go</h3>
+            <p class="text-justify">For us, Holly is more than a web service. We really want to give it a soul. So now, you can now interact with Holly via Facebook Messenger, whether in your desktop browser, or on the Messenger mobile app. Search a movie, add it, show your watchlist... you can do all this (and many other things to come), just by chatting with it.
+            <br>Awesome, right?</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+
+
+
+
+
 
 <!--
 <div class="banner" style="background: linear-gradient(-225deg, rgba(0, 0, 0, 0) 0%, rgba(0,54,61,0.6) 50%), url(<%# image_path('background.jpg') %>);margin-top: -70px;">

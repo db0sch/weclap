@@ -35,6 +35,7 @@ gem 'jquery-ui-rails'
 gem 'pg_search'
 gem 'capybara', '~> 2.4.4'
 gem 'poltergeist'
+gem "twemoji"
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"

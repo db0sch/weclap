@@ -1,6 +1,5 @@
 /* Main class */
 .navbar-wagon {
-  background-color: transparent;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -38,8 +37,21 @@
   border: 1px solid white;
 }
 
-.clap-logo {
-  width: 120px;
+// .clap-logo {
+//   width: 120px;
+// }
+
+.navbar-logo {
+  font-family: $title-font;
+  font-size: 2em;
+  color: $yellow;
+  font-size: 200;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  text-shadow: 2px 2px 0px $cyan-darker;
+  &:hover {
+    color: white;
+  }
 }
 
 .navbar-wagon-left {
