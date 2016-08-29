@@ -65,7 +65,7 @@
 }
 
 .hp-wrapper {
-  background: white;
+  background: #F7F7F7;
   padding: 100px 0;
 }
 
@@ -78,16 +78,27 @@
     // changer couleur du text
     // changer police sur h3 et p
     h3 {
+      font-family: Lato;
+      font-size: 36px;
+      line-height: 44px;
+    }
+    p, li {
+      color: #808080;
+      font-size: 18px;
+      line-height: 28px;
     }
   }
   .hp-icon {
     display: flex;
     flex-direction: row;
     img.emoji {
-      height: 3em;
-      width: 3em;
-      margin: 0 .3em 0 .3em;
+      height: 2em;
+      width: 2em;
+      margin: 0 .5em 0 .5em;
       vertical-align: -0.1em;
     }
   }
+}
+.demo-image {
+  width: 100%;
 }
