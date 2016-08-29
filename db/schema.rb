@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160628142925) do
+ActiveRecord::Schema.define(version: 20160829160529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(version: 20160628142925) do
     t.string   "fr_overview"
     t.date     "fr_release_date"
   end
+
+  add_index "movies", ["fr_title", "original_title", "title"], name: "index_movies_on_fr_title_and_original_title_and_title", using: :btree
 
   create_table "people", force: :cascade do |t|
     t.string   "name"
