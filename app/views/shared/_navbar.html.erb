@@ -60,7 +60,8 @@
       </div>
     <% else %>
       <div class="navbar-signin">
-        <%= link_to "sign in", "#", class: "btn btn-secondary signin-link" %>
+        <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "btn btn-secondary signin-link" %>
+        <%# link_to "sign in", "#", class: "btn btn-secondary signin-link" %>
       </div>
     <% end %>
   </div>
