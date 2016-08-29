@@ -51,6 +51,15 @@
   text-shadow: 2px 2px 0px $brand-color;
   &:hover {
     color: white;
+    text-decoration: none;
+  }
+  &:link {
+    color: white;
+    text-decoration: none;
+  }
+  &:visited {
+    color: white;
+    text-decoration: none;
   }
 }
 
@@ -220,8 +229,8 @@
     justify-content: space-around;
     color: #F5F5F5;
     height: 55px;
-    border-bottom: 5px solid $brand-color;
-    border-top: 5px solid $brand-color;
+    border-bottom: 5px solid $cyan-darker;
+    border-top: 5px solid $cyan-darker;
     margin: 0px 10px;
     padding: 0px;
     font-size: 14px;
