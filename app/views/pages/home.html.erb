@@ -9,7 +9,7 @@
 </div>
 <div class="hp-wrapper">
   <div class="container">
-    <div class="row">
+    <div class="row marged-bot">
       <div class="col-xs-12 col-sm-6">
         <%= image_tag "watchlist.png", class: "demo-image" %>
       </div> 
@@ -19,7 +19,7 @@
             <%= emojify ":clipboard: :movie_camera: :yum:" %>
           </div>
           <div class="hp-text">
-            <h3 class='text-center'>Fill you watchlist</h3>
+            <h3 class='text-center'>Fill your watchlist</h3>
             <p class="text-justify">Holly is a powerful, yet simple, movie watchlist manager:</p>
             <ul class="list-unstyled">
               <li>Search and add the movies you want to watch</li>
@@ -31,8 +31,7 @@
         </div>
       </div>
     </div>
-
-
+    <div class="row marged-bot">
       <div class="col-xs-12 col-sm-6">
         <div class="hp-content">
           <div class="hp-icon">
@@ -48,30 +47,13 @@
           </div>
         </div>
       </div>
-
-      <div class="col-xs-12 col-sm-6">
-        <div class="hp-content">
-          <div class="hp-icon">
-            <%= emojify ":mailbox: :e-mail: :grinning:" %>
-          </div>
-          <div class="hp-text">
-            <h3 class='text-center'>Get updates</h3>
-            <p class="text-justify">Each week, we'll send you one email, to let you know :</p>
-            <ul class="list-unstyled">
-              <li>which movies are available (theaters or streaming)</li>
-              <li>which movies you share with your friends watchlist.</li>
-            </ul>
-          </div>
-        </div>
+       <div class="col-xs-12 col-sm-6">
       </div>
+    </div>
 
-
-      
-
+    <div class="row">
       <div class="col-xs-12 col-sm-6">
-        
-      </div> 
-
+      </div>
       <div class="col-xs-12 col-sm-6">
         <div class="hp-content">
           <div class="hp-icon">
@@ -85,5 +67,10 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+<div class="wrapper-white">
+  <div class="start-btn">
+    <%= link_to "TRY IT NOW", new_user_session_path, class: "btn btn-secondary" %>
   </div>
 </div>

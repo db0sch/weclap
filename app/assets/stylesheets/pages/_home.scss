@@ -38,35 +38,42 @@
       font-family: $title-font;
       font-size: 5em;
     }
-    .start-btn {
-      height: 100px;
-      padding: 20px;
-      a.btn.btn-secondary {
-        // il faut modifier la font du bouton.
-        position: relative;
-        font-size: 1.5em;
-        letter-spacing: 0.1em;
-        border: 2px solid $yellow;
-        box-shadow: 10px 10px 0px $brand-color;
-        text-decoration: none;
-        color: $brand-color;
-        font-weight: bold;
-        &:hover {
-          box-shadow: 5px 5px 0px $yellow;
-          top: 5px;
-          left: 5px;
-          background-color: $brand-color;
-          color: white;
-          border: 1px solid $brand-color;
-        }
+  }
+}
+.start-btn {
+    height: 100px;
+    padding: 20px;
+    a.btn.btn-secondary {
+      // il faut modifier la font du bouton.
+      position: relative;
+      font-size: 1.5em;
+      letter-spacing: 0.1em;
+      border: 2px solid $yellow;
+      box-shadow: 10px 10px 0px $brand-color;
+      text-decoration: none;
+      color: $brand-color;
+      font-weight: bold;
+      &:hover {
+        box-shadow: 5px 5px 0px $yellow;
+        top: 5px;
+        left: 5px;
+        background-color: $brand-color;
+        color: white;
+        border: 1px solid $brand-color;
       }
     }
   }
-}
 
 .hp-wrapper {
   background: #F7F7F7;
-  padding: 100px 0;
+  padding: 60px 0 25px 0;
+}
+.wrapper-white {
+  background: white;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hp-content {
@@ -75,16 +82,16 @@
   justify-content: center;
   align-items: center;
   .hp-text {
-    // changer couleur du text
-    // changer police sur h3 et p
     h3 {
-      font-family: Lato;
-      font-size: 36px;
+      font-weight: 100;
+      color: black;
+      font-size: 28px;
       line-height: 44px;
+      letter-spacing: 0.04em;
     }
     p, li {
       color: #808080;
-      font-size: 18px;
+      font-size: 16px;
       line-height: 28px;
     }
   }
@@ -93,7 +100,7 @@
     flex-direction: row;
     img.emoji {
       height: 2em;
-      width: 2em;
+      width: 3em;
       margin: 0 .5em 0 .5em;
       vertical-align: -0.1em;
     }
