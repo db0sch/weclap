@@ -2,9 +2,7 @@
   <!-- Center Navigation -->
   <div class="navbar-wagon-left hidden-xs hidden-sm">
     <!-- navbar element empty -->
-    <%= link_to(user_signed_in? ? watchlist_path(current_user) : root_path) do %>
-      <%= image_tag "logo.png", class: "clap-logo" %>
-    <% end %>
+    <%= link_to "Holly", (user_signed_in? ? watchlist_path(current_user) : root_path), class:"navbar-logo" %>
   </div>
 
   <div class="navbar-wagon-center hidden-xs hidden-sm">
@@ -19,22 +17,6 @@
   <div class="navbar-wagon-right hidden-xs hidden-sm">
     <!-- Different navigation if login or not -->
     <% if user_signed_in? %>
-      <!-- Button (call-to-action) -->
-      <%# if current_user.messenger_id.blank? %>
-<!--         <div class="fb-send-to-messenger"
-        messenger_app_id="263884933962717"
-        page_id="188469658220408"
-        data-ref="<%= current_user.id %>"
-        color="blue"
-        size="standard"></div> -->
-      <%# end %>
-
-     <!--  <div class="fb-messengermessageus"
-      messenger_app_id="1054618387948073"
-      page_id="1593695557626599"
-      color="white"
-      size="large" ></div> -->
-      <%# button_to t(".top_call_to_action", default: (t ('navbar.find'))), movies_path, method: :get, class: "navbar-wagon-item navbar-wagon-button btn" %>
       <div class="navbar-commands">
         <%= link_to watchlist_path(current_user) do %>
           <div class="navbar-btn">
@@ -55,7 +37,6 @@
           </div>
         <% end %>
       </div>
-      <%# button_to t('navbar.wl'), watchlist_path(current_user), method: :get, class: "btn btn-primary navbar-button-watchlist" %>
 
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item">
@@ -76,6 +57,11 @@
             </li>
           </ul>
         </div>
+      </div>
+    <% else %>
+      <div class="navbar-signin">
+        <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "btn btn-secondary signin-link" %>
+        <%# link_to "sign in", "#", class: "btn btn-secondary signin-link" %>
       </div>
     <% end %>
   </div>

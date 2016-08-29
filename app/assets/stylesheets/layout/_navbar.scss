@@ -1,6 +1,5 @@
 /* Main class */
 .navbar-wagon {
-  background-color: transparent;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -18,7 +17,7 @@
   transition: 1s;
   padding-top: 21px;
   padding-bottom: 21px;
-  background-color: $brand-color;
+  background-color: $cyan-darker;
   box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.4);
 }
 
@@ -38,8 +37,30 @@
   border: 1px solid white;
 }
 
-.clap-logo {
-  width: 120px;
+// .clap-logo {
+//   width: 120px;
+// }
+
+.navbar-logo {
+  font-family: $title-font;
+  font-size: 2em;
+  color: white;
+  font-size: 200;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  text-shadow: 2px 2px 0px $brand-color;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+  &:link {
+    color: white;
+    text-decoration: none;
+  }
+  &:visited {
+    color: white;
+    text-decoration: none;
+  }
 }
 
 .navbar-wagon-left {
@@ -85,16 +106,6 @@
   color: #da552f;
   text-decoration: none;
 }
-
-/* Navbar right button */
-// .navbar-button-watchlist {
-//   font-family: "Open sans";
-//   width: 115px;
-//   height: 34px;
-//   font-weight: 300;
-//   font-size: 16px;
-// }
-
 
 .navbar-wagon-button {
   width: 131px;
@@ -218,8 +229,8 @@
     justify-content: space-around;
     color: #F5F5F5;
     height: 55px;
-    border-bottom: 5px solid $brand-color;
-    border-top: 5px solid $brand-color;
+    border-bottom: 5px solid $cyan-darker;
+    border-top: 5px solid $cyan-darker;
     margin: 0px 10px;
     padding: 0px;
     font-size: 14px;
@@ -231,6 +242,20 @@
     &:hover {
       color: white;
       border-bottom: 5px solid white;
+    }
+  }
+}
+
+.navbar-signin {
+  .signin-link {
+    border-radius: 0px;
+    box-shadow: 5px 5px $brand-color;
+    border: 1px solid $cyan-darker;
+    text-decoration: none;
+    background-color: white;
+    color: $cyan-darker;
+    &:hover {
+      color: $cyan-darker;
     }
   }
 }

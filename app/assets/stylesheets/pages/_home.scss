@@ -3,10 +3,11 @@
  * (margin/padding adjustments)
  * ------------------------------------- */
 .banner {
-  color: white;
+  color: black;
   text-align: center;
-  height: 100vh;
-  background-size: cover !important;
+  height: calc(100vh - 55px);
+  background-color: white;
+  // background-size: cover !important;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -19,90 +20,74 @@
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-}
-
-
-.card {
-  background-color: #BFCDCF;
-  border-radius: 4px;
-  height: 250px;
-  width: 350px;
-  padding: 10px 41px 14px 48px;
-  transition: transform 0.5s;
-  -webkit-box-shadow: inset 0 0 6px #000000;
-  h2 {
-    color: white;
+  .banner-content {
+    color: $cyan-darker;
+    h1 {
+      font-size: 3em;
+      margin: 40px 0;
+      color: $brand-color;
+      font-family: $title-font;
+      #main-title {
+        font-size: 5em;
+        color: $yellow;
+        text-shadow: 10px 10px 0px $brand-color;
+      }
+    }
+    h2 {
+      margin-bottom: 40px;
+      font-family: $title-font;
+      font-size: 5em;
+    }
+    .start-btn {
+      height: 100px;
+      padding: 20px;
+      a.btn.btn-secondary {
+        // il faut modifier la font du bouton.
+        position: relative;
+        font-size: 1.5em;
+        letter-spacing: 0.1em;
+        border: 2px solid $yellow;
+        box-shadow: 10px 10px 0px $brand-color;
+        text-decoration: none;
+        color: $brand-color;
+        font-weight: bold;
+        &:hover {
+          box-shadow: 5px 5px 0px $yellow;
+          top: 5px;
+          left: 5px;
+          background-color: $brand-color;
+          color: white;
+          border: 1px solid $brand-color;
+        }
+      }
+    }
   }
-  p {
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    font-family: 'Brandon Grotesque Bold','Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.hp-wrapper {
+  background: white;
+  padding: 100px 0;
+}
+
+.hp-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .hp-text {
+    // changer couleur du text
+    // changer police sur h3 et p
+    h3 {
+    }
   }
-}
-
-.card:hover {
-  background-color: #F4F4F4;
-  border: 4px solid white;
-  height: 250px;
-  width: 350px;
-  cursor: pointer;
-  padding: 10px 41px 14px 48px;
-  transition: all 0.1s cubic-bezier(0.55, 0.06, 0.68, 0.19) 0.1s;
-  h2 {
-    color: #383838;
-  }
-  p {
-    color: #383838;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    font-family: 'Brandon Grotesque Bold','Helvetica Neue',Arial,Helvetica,sans-serif;
-  }
-}
-
-.wrapper-gray {
-  background-color: #383838;
-  background-size: cover;
-}
-
-.wrapper-multidevice {
-  background: radial-gradient( #BFCDCF, #6C7A7A);
-}
-
-.container {
-  position: relative;
-}
-
-.card-content {
-  margin-top: 23px;
-}
-
-.card-title h2 {
-  font-style: italic;
-  color: white;
-  letter-spacing: 5px;
-}
-
-#multiplatform img {
-  height: 380px;
-  margin-bottom: 60px;
-}
-
-.title-multidevice {
-  margin-bottom: -100px;
-}
-
-#soon img {
-  height: 343px;
-  margin-top: -115px;
-}
-
-
-.pages-home {
-  .navbar-wagon-dropdown-menu {
-    background-color: rgba(255, 255, 255, 0.77);
-    box-shadow: 1px 2px 1px #3C3C3C;
-    li {
-      color: white;
+  .hp-icon {
+    display: flex;
+    flex-direction: row;
+    img.emoji {
+      height: 3em;
+      width: 3em;
+      margin: 0 .3em 0 .3em;
+      vertical-align: -0.1em;
     }
   }
 }
