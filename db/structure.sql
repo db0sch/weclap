@@ -218,7 +218,8 @@ CREATE TABLE movies (
     fr_tagline character varying,
     fr_overview character varying,
     fr_release_date date,
-    tsv tsvector
+    tsv tsvector,
+    tsv_optional tsvector
 );
 
 
@@ -680,6 +681,13 @@ CREATE INDEX index_movies_on_tsv ON movies USING gin (tsv);
 
 
 --
+-- Name: index_movies_on_tsv_optional; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_movies_on_tsv_optional ON movies USING gin (tsv_optional);
+
+
+--
 -- Name: index_shows_on_movie_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -726,6 +734,13 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: opttsvectorupdate; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER opttsvectorupdate BEFORE INSERT OR UPDATE ON movies FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('tsv_optional', 'pg_catalog.english', 'fr_title', 'original_title', 'title');
 
 
 --
@@ -874,4 +889,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160628142925');
 INSERT INTO schema_migrations (version) VALUES ('20160829160529');
 
 INSERT INTO schema_migrations (version) VALUES ('20160830141737');
+
+INSERT INTO schema_migrations (version) VALUES ('20160830175926');
 

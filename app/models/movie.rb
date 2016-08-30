@@ -2,7 +2,7 @@ class Movie < ActiveRecord::Base
   include PgSearch
 
   pg_search_scope :autocomplete_title,
-                  against: { fr_title: 'A', original_title: 'B', title: 'C' },
+                  against: { title: 'A', fr_title: 'B', original_title: 'C'},
                   # associated_against: { people: :name },
                   ignoring: :accents,
                   using: {
@@ -11,9 +11,17 @@ class Movie < ActiveRecord::Base
                       any_word: true,
                       tsvector_column: "tsv"
                     },
-                    dmetaphone: { only: [:fr_title, :title, :origin_title] }
-                  },
-                  order_within_rank: "movies.popularity DESC"
+                    # dmetaphone: {
+                    #   tsvector_column: "tsv_optional",
+                    #   only: [:fr_title, :title, :origin_title]
+                    # }
+                    trigram: {
+                      threshold: 0.3,
+                      only: [:fr_title, :title, :origin_title]
+                    }
+                  }
+                  # :ranked_by => ":trigram"
+                  # order_within_rank: "movies.popularity DESC"
 
   # *** PREVIOUS PG_SEARCH CONFIG MADE BY NEPHAEST (BUT TOO RESSOURCE CONSUMING) ***
   # pg_search_scope :which_title_or_synopsis_contains,
@@ -31,12 +39,17 @@ class Movie < ActiveRecord::Base
                   # associated_against: { people: :name },
                   ignoring: :accents,
                   using: {
-                            tsearch: {
-                              prefix: true,
-                              tsvector_column: "tsv"
-                             },
-                            dmetaphone: { only: [:fr_title, :title, :origin_title] }
-                         },
+                    tsearch: {
+                      prefix: true,
+                      tsvector_column: "tsv"
+                    },
+                    # dmetaphone: {
+                    #   only: [:fr_title, :title, :origin_title]
+                    # },
+                    # trigram: {
+                    #   only: [:fr_title, :title, :origin_title]
+                    # }
+                  },
                   order_within_rank: "movies.popularity DESC"
 
   has_many :interests, dependent: :destroy
