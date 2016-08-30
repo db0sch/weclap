@@ -277,6 +277,8 @@ GEM
     tilt (2.0.5)
     twemoji (3.0.1)
       nokogiri (~> 1.6.2)
+    typedjs-rails (1.0.4)
+      railties (>= 3.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
@@ -342,6 +344,7 @@ DEPENDENCIES
   spring
   themoviedb
   twemoji
+  typedjs-rails (~> 1.0.4)
   uglifier
 
 RUBY VERSION
