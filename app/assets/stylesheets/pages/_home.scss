@@ -38,6 +38,15 @@
       font-family: $title-font;
       font-size: 5em;
     }
+    .glyphicon-chevron-down {
+      color: $cyan;
+      top: 2em;
+      font-size: 22px;
+      transition: ease 0.2s;
+      &:hover {
+        color: $yellow;
+      }
+    }
   }
 }
 .start-btn {
@@ -66,11 +75,11 @@
 
 .hp-wrapper {
   background: #F7F7F7;
-  padding: 60px 0 25px 0;
+  padding: 40px 0 10px 0;
 }
 .wrapper-white {
   background: white;
-  height: 200px;
+  height: 115px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -83,15 +92,15 @@
   align-items: center;
   .hp-text {
     h3 {
-      font-weight: 100;
+      font-weight: 300;
       color: black;
-      font-size: 28px;
+      font-size: 31px;
       line-height: 44px;
       letter-spacing: 0.04em;
     }
     p, li {
       color: #808080;
-      font-size: 16px;
+      font-size: 17px;
       line-height: 28px;
     }
   }
@@ -109,3 +118,4 @@
 .demo-image {
   width: 100%;
 }
+
