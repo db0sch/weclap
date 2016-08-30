@@ -38,5 +38,7 @@ module Weclap
     config.autoload_paths += %W(#{config.root}/app/services #{config.root}/app/jobs/controllers)
 
     config.active_job.queue_adapter = :sidekiq
+
+    config.active_record.schema_format = :sql
   end
 end
