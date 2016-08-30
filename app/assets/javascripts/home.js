@@ -1,4 +1,6 @@
-// Smooth scroll
+
+$(document).ready(function() {
+  // Smooth scroll
   $(function() {
     $('a[href*="#"]:not([href="#"])').click(function() {
       if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
@@ -13,3 +15,20 @@
       }
     });
   });
+
+ //Typedjs 
+  $(function(){
+    $(".element").typed({
+      strings: ["love movies?", "movie night with friends?"],
+      // showcursor
+      showCursor: true,
+      // backspacing speed
+      backSpeed: 50,
+      typeSpeed: 100,
+      // loop
+      loop: true,
+      cursorChar: "_",
+    });
+  });
+
+});

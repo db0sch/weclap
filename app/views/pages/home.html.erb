@@ -1,6 +1,10 @@
 <div class="banner">
   <div class="banner-content">
-    <h2>love movies?</h2>
+    <!-- Code visible en Desktop -->
+    <h2><span class="element hidden-xs"></span></h2>
+    <!-- Code visible en XS uniquement. On retire l'animation Typedjs -->
+    <h2 class="visible-xs">love movies?</h2>
+
     <h1>say hello to <span id="main-title">Holly</span></h1>
     <div class="start-btn">
       <%= link_to "START", new_user_session_path, class: "btn btn-secondary" %>
@@ -20,13 +24,7 @@
           </div>
           <div class="hp-text">
             <h3 class='text-center'>Fill your watchlist</h3>
-            <p class="text-justify">Holly is a powerful, yet simple, movie watchlist manager:</p>
-            <ul class="list-unstyled">
-              <li>Search and add the movies you want to watch</li>
-              <li>Browse your own watchlist (by filtering by duration, stars...)</li>
-              <li>Access movies info (overview, cast, trailer, poster...)</li>
-              <li>Know how you can watch the film (theaters or streaming)</li>
-            </ul>
+            <p class="text-justify">Holly is a powerful, yet simple, movie watchlist manager. Search and add the movies you want to watch. Browse your own watchlist (by filtering by duration, stars...). Access movies info (overview, cast, trailer, poster...). Know how you can watch the film (theaters or streaming)</p>
           </div>
         </div>
       </div>
@@ -42,11 +40,7 @@
           </div>
           <div class="hp-text">
             <h3 class='text-center'>Get updates</h3>
-            <p class="text-justify">Each week, we'll send you one email, to let you know :</p>
-            <ul class="list-unstyled">
-              <li>which movies are available (theaters or streaming)</li>
-              <li>which movies you share with your friends watchlist.</li>
-            </ul>
+            <p class="text-justify">Each week, we'll send you one email, to let you know : which movies are available (theaters or streaming). Which movies you share with your friends watchlist.</p>
           </div>
         </div>
       </div>

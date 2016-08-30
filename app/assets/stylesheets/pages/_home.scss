@@ -79,7 +79,7 @@
 }
 .wrapper-white {
   background: white;
-  height: 115px;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,6 +90,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 7px;
   .hp-text {
     h3 {
       font-weight: 300;
