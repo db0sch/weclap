@@ -10,9 +10,10 @@ class Movie < ActiveRecord::Base
                       prefix: true,
                       any_word: true,
                       tsvector_column: "tsv"
-                    }
+                    },
+                    dmetaphone: { only: [:fr_title, :title, :origin_title] }
                   },
-                  order_within_rank: "movies.imdb_score DESC"
+                  order_within_rank: "movies.popularity DESC"
 
   # *** PREVIOUS PG_SEARCH CONFIG MADE BY NEPHAEST (BUT TOO RESSOURCE CONSUMING) ***
   # pg_search_scope :which_title_or_synopsis_contains,
@@ -34,9 +35,9 @@ class Movie < ActiveRecord::Base
                               prefix: true,
                               tsvector_column: "tsv"
                              },
-                            #dmetaphone: { only: [:fr_title, :title, :origin_title] }
+                            dmetaphone: { only: [:fr_title, :title, :origin_title] }
                          },
-                  order_within_rank: "movies.imdb_score DESC"
+                  order_within_rank: "movies.popularity DESC"
 
   has_many :interests, dependent: :destroy
   has_many :users, through: :interests
