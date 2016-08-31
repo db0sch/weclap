@@ -37,6 +37,7 @@ gem 'capybara', '~> 2.4.4'
 gem 'poltergeist'
 gem "twemoji"
 gem "typedjs-rails", "~> 1.0.4"
+gem 'kaminari'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
