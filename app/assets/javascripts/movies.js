@@ -23,18 +23,23 @@
 //     // container: '#scrollable-list'
 //   });
 // });
+//
 
-$('.movies-list').infinitePages({
-  debug: true,
-  buffer: 200,
-  context: '.movies-list',
-  loading: function() {
-    return $(this).text("Loading...");
-  },
-  success: function() {},
-  error: function() {
-    return $(this).text("Trouble! Please drink some coconut water and click again");
-  }
+
+$(function() {
+  $('.movies-list').infinitePages({
+    debug: true,
+    buffer: 200,
+    context: 'body',
+    loading: function() {
+      console.log('it works'),
+      $(this).text("Loading...");
+    },
+    success: function() {},
+    error: function() {
+      $(this).text("Trouble! Please drink some coconut water and click again");
+    }
+  });
 });
 
 
