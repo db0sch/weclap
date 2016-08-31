@@ -18,6 +18,6 @@ class SearchController < ApplicationController
     search_terms = params[:query]
     p params
     movies = Movie.autocomplete_title(search_terms)
-    render json: movies.map{ |m| "#{m.title}" }.take(20)
+    render json: movies.map{ |m| "#{m.title} (#{m.fr_title})" }.take(20)
   end
 end
