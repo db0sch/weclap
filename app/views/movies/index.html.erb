@@ -2,8 +2,14 @@
   <div class="movies-list">
     <%= render 'shared/movies_list', movies: @movies, friends: @friends, interest: nil %>
   </div>
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <div class="pagination">
+        <div class="view-more-link">
+          <%= link_to_next_page(@movies, 'View more', :remote => true) %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<p class="pagination">
-  <%= link_to_next_page(@movies, 'Next Page', :remote => true) %>
-</p>

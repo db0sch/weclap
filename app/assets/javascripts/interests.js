@@ -1,21 +1,6 @@
 $(document).ready(function() {
 
-    $('.interests-list').infinitePages({
-      debug: true,
-      buffer: 200,
-      context: 'body',
-      loading: function() {
-        return $(this).text("Loading...");
-      },
-      success: function() {},
-      error: function() {
-        return $(this).text("Trouble! Please drink some coconut water and click again");
-      }
-    });
-
-
   $(function() {
-
     $('.selectpicker.checkbox-diff').on('change', function(){
       var selected = $(this).find("option:selected").val();
       if (selected === 'on_vod'){

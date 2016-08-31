@@ -4,8 +4,8 @@ $("<%=j render 'shared/interests_list', interests: @interests, friends: @friends
 
 // Update pagination link
 <% if @interests.last_page? %>
-  $('.pagination').html("That's all, folks!");
+  $('.pagination').html("<p>That's all, folks!</p>");
 <% else %>
   $('.pagination')
-    .html("<%=j link_to_next_page(@interests, 'Next Page', :remote => true) %>");
+    .html("<div class='view-more-link'> <%=j link_to_next_page(@interests, 'View more', :remote => true) %> </div>");
 <% end %>
