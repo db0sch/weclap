@@ -24,12 +24,19 @@
 //   });
 // });
 
-
-$("#posts .page").infinitescroll({
-  navSelector: "nav.pagination",
-  nextSelector: "nav.pagination a[rel=next]",
-  itemSelector: "#posts tr.post"
+$('.movies-list').infinitePages({
+  debug: true,
+  buffer: 200,
+  context: '.movies-list',
+  loading: function() {
+    return $(this).text("Loading...");
+  },
+  success: function() {},
+  error: function() {
+    return $(this).text("Trouble! Please drink some coconut water and click again");
+  }
 });
+
 
 $('a.back-to-top').click(function() {
   $('body').animate({

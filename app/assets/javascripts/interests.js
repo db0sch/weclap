@@ -1,4 +1,19 @@
 $(document).ready(function() {
+
+    $('.interests-list').infinitePages({
+      debug: true,
+      buffer: 200,
+      context: 'body',
+      loading: function() {
+        return $(this).text("Loading...");
+      },
+      success: function() {},
+      error: function() {
+        return $(this).text("Trouble! Please drink some coconut water and click again");
+      }
+    });
+
+
   $(function() {
 
     $('.selectpicker.checkbox-diff').on('change', function(){
@@ -53,7 +68,6 @@ $(document).ready(function() {
 
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
-$('.modal').appendTo(".main");
 
 
 

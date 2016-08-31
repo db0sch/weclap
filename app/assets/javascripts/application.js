@@ -8,5 +8,5 @@
 //= require gmaps/google
 //= require filterrific/filterrific-jquery
 //= require typed
-//= require jquery.infinitescroll
+//= require jquery.infinite-pages
 //= require_tree .

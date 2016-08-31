@@ -1,1 +1,13 @@
-$("#posts").append("<%= escape_javascript(render 'shared/movie_item', movie: movie, interest: nil) %>");
+// Append new data
+$("<%=j render 'shared/movies_list', movies: @movies, friends: @friends, interest: nil %>")
+  .appendTo($(".movies-list"));
+
+// Update pagination link
+<% if @movies.last_page? %>
+  $('.pagination').html("That's all, folks!");
+<% else %>
+  $('.pagination')
+    .html("<%=j link_to_next_page(@movies, 'Next Page', :remote => true) %>");
+<% end %>
+
+

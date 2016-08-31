@@ -1,4 +1,16 @@
-<%= render 'shared/interests_list', list: @watchlist, friends: @friends %>
+<%# render 'shared/interests_list', list: @watchlist, friends: @friends %>
+
+<div class="container padded">
+  <div class="interests-list">
+    <%= render 'shared/interests_list', interests: @interests, friends: @friends %>
+  </div>
+</div>
+
+<p class="pagination">
+  <%= link_to_next_page(@interests, 'Next Page', :remote => true) %>
+</p>
+
+
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>

@@ -38,6 +38,7 @@ gem 'poltergeist'
 gem "twemoji"
 gem "typedjs-rails", "~> 1.0.4"
 gem 'kaminari'
+gem 'jquery-infinite-pages'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"

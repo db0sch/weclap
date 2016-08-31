@@ -1,3 +1,9 @@
-<%= render 'shared/movie_list', list: @movies, friends: @friends %>
-<%= paginate @movies %>
+<div class="container padded">
+  <div class="movies-list">
+    <%= render 'shared/movies_list', movies: @movies, friends: @friends, interest: nil %>
+  </div>
+</div>
 
+<p class="pagination">
+  <%= link_to_next_page(@movies, 'Next Page', :remote => true) %>
+</p>
