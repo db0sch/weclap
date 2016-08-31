@@ -2,7 +2,7 @@ class Movie < ActiveRecord::Base
   include PgSearch
 
   pg_search_scope :autocomplete_title,
-                  against: { title: 'A', original_title: 'B', fr_title: 'C'},
+                  against: { title: 'A', original_title: 'B'},
                   # associated_against: { people: :name },
                   ignoring: :accents,
                   using: {
@@ -21,7 +21,7 @@ class Movie < ActiveRecord::Base
                     #   only: [:fr_title, :title, :origin_title]
                     # }
                   },
-                  # ranked_by: ":tsearch",
+                  ranked_by: "movies.popularity * (:tsearch / 2.5)",
                   order_within_rank: "movies.popularity DESC"
 
   # *** PREVIOUS PG_SEARCH CONFIG MADE BY NEPHAEST (BUT TOO RESSOURCE CONSUMING) ***
@@ -45,17 +45,17 @@ class Movie < ActiveRecord::Base
                       any_word: true,
                       dictionary: "english",
                       tsvector_column: "tsv"
-                    },
-                    dmetaphone: {
-                      only: [:fr_title, :title, :origin_title],
-                      tsvector_column: "tsv_optional"
-                    },
-                    trigram: {
-                      threshold: 0.3,
-                      only: [:fr_title, :title, :origin_title]
                     }
+                    # dmetaphone: {
+                    #   only: [:fr_title, :title, :origin_title],
+                    #   tsvector_column: "tsv_optional"
+                    # },
+                    # trigram: {
+                    #   threshold: 0.3,
+                    #   only: [:fr_title, :title, :origin_title]
+                    # }
                   },
-                  ranked_by: ":tsearch",
+                  ranked_by: "movies.popularity * (:tsearch / 2.5)",
                   order_within_rank: "movies.popularity DESC"
 
   has_many :interests, dependent: :destroy
