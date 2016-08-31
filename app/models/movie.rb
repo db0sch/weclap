@@ -11,17 +11,17 @@ class Movie < ActiveRecord::Base
                       any_word: true,
                       dictionary: "english",
                       tsvector_column: "tsv"
-                    },
+                    }
                     # dmetaphone: {
                     #   only: [:fr_title, :title, :origin_title],
                     #   tsvector_column: "tsv_optional"
                     # },
-                    trigram: {
-                      threshold: 0.3,
-                      only: [:fr_title, :title, :origin_title]
-                    }
+                    # trigram: {
+                    #   threshold: 0.3,
+                    #   only: [:fr_title, :title, :origin_title]
+                    # }
                   },
-                  ranked_by: ":tsearch",
+                  # ranked_by: ":tsearch",
                   order_within_rank: "movies.popularity DESC"
 
   # *** PREVIOUS PG_SEARCH CONFIG MADE BY NEPHAEST (BUT TOO RESSOURCE CONSUMING) ***
