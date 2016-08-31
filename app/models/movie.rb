@@ -12,10 +12,10 @@ class Movie < ActiveRecord::Base
                       dictionary: "english",
                       tsvector_column: "tsv"
                     },
-                    dmetaphone: {
-                      only: [:fr_title, :title, :origin_title],
-                      tsvector_column: "tsv_optional"
-                    },
+                    # dmetaphone: {
+                    #   only: [:fr_title, :title, :origin_title],
+                    #   tsvector_column: "tsv_optional"
+                    # },
                     trigram: {
                       threshold: 0.3,
                       only: [:fr_title, :title, :origin_title]
