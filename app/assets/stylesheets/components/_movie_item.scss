@@ -1,457 +1,535 @@
-@media (max-width: 768px) {
-  #friend-img {
-    width: 85px;
-  }
-
-  p.sentence {
-    margin: 0;
-  }
-  div.sentence {
-    right: 10px;
-    position: absolute;
-    height: 85px;
-    line-height: 85px;
-  }
-  .floating {
-    display:inline-block;
-  }
-
-  .large {
-    display: none;
-  }
-
-
-  a.movie-added-btn {
-    border: 1px solid #777777;
-    font-size: 12px;
-    opacity: 1;
-    width: 110px;
-  }
-  // .friends-tooltip-global {
-  //   position: fixed;
-  //   top: 31px;
-  //   right: 0;
-  // }
-
-  .list {
-    display: inline-flex;
-  }
-  .movie-item {
-    display: flex;
-    align-items: center;
-    transition: all 0.15s ease;
-    background-color: white;
-    border: 1px solid lightgrey;
-    position: relative;
-    margin: 4px 0px;
-    transition: border-right 0.5s ease;
-    border-radius: 2px;
-    font-size: 13px;
-    h3 {
-      font-size: 15px;
-    }
-    .movie-item-image {
-      margin-right: 15px;
-      width: 10em;
-      box-shadow: 1px 0px 1px #b0bec5;
-      opacity: 0.9;
-      border-top-left-radius: 2px;
-      border-bottom-left-radius: 2px;
-    }
-  }
-  .starrr a {
-    font-size: 43px;
-  }
-  .crew {
-    line-height: 14px;
-  }
-
-  .col-xs-offset-1 {
-    margin-left: 0%;
-  }
-
-  .col-xs-10 {
-    width: 100%;
-  }
-
-  .movie-item-social {
-    position: absolute;
-    top: 1px;
-    right: 1px;
-  }
-  .friends_tooltip.hidden-sm {
-    margin-right: 1px;
-    // position: inherit;
-    // top: 1px;
-    // right: 100px;
-  }
-  .movie-social {
-    position: initial;
-    top: 1px;
-    right: 1px;
-  }
-  .movie-social.hidden-md {
-    position: initial
-  }
-  .movie-item-body {
-    line-height: 9px;
-    h3 {
-      margin-top: 0;
-      margin-bottom: 0;
-      font-size: 19px;
-    }
-  }
-
-  .channel-label-streaming {
-    position: absolute;
-    bottom: 1px;
-    right: 1px;
-  }
-
-  .channel-label-cinema {
-    position: absolute;
-    bottom: 15px;
-    right: 1px;
-  }
-
-  .btn-warning {
-    padding: 3px;
-  }
-  .btn-success {
-    padding: 3px;
-  }
-
-  .fa-times {
-    position: fixed;
-    top: 1px;
-    left: 1px;
-    z-index: 1;
-    background: rgba(128, 128, 128, 0.59);
-    padding: 2px;
-    border-radius: 30%;
-  }
-
-  .rating-text {
-    top: 1px;
-    right: 1px;
-  }
-}
-
-
-@media (min-width: 768px) {
-  .smallxs {
-    display: none;
-  }
-  .friends-tooltip-global {
-    height: 0;
-    position: absolute;
-    top: 3px;
-    right: 20px;
-    line-height: 10px;
-    // margin-top: 8px;
-  }
-  .friends_tooltip.hidden-xs {
-    position: relative;
-    // right: 15px;
-    // position: inherit;
-    // top: 1px;
-    // right: 100px;
-  }
-  .rating-text {
-
-  }
-  .movie-item {
-    display: flex;
-    align-items: center;
-    transition: all 0.15s ease;
-    background-color: white;
-    border: 1px solid lightgrey;
-    position: relative;
-    margin: 4px 0px;
-    transition: border-right 0.5s ease;
-    border-radius: 2px;
-
-    .movie-item-image {
-      margin-right: 20px;
-      width: 70px;
-      box-shadow: 1px 0px 1px #b0bec5;
-      opacity: 0.9;
-      border-top-left-radius: 2px;
-      border-bottom-left-radius: 2px;
-    }
-  }
-
-  .movie-item:hover {
-    cursor: pointer;
-    background-color: white;
-    // border-right: 7px solid #fd986f;
-    h3 a {
-      color: #272822;
-      text-decoration: none;
-    }
-    .movie-item-image {
-       opacity: 1;
-    }
-  }
-
-  .movie-item-right-part {
-    flex: 0 0 20%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-  }
-
-  .movie-item-social {
-    flex: 1 0 15%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s ease;
-    margin: 4px;
-    margin-right: 15px;
-    p {
-      font-size: 12px;
-      margin-bottom: 0px;
-      color: #A7BCBC;
-    }
-  }
-
-  .movie-item-social:hover {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: all 0.15s ease;
-  }
-
-  .movie-rating {
-    display: flex;
-    margin: 0px 4px;
-  }
-  .movie-social.hidden-xs {
-
-  }
-  .movie-social {
-    display: flex;
-    align-self: flex-end;
-    flex-direction: column;
-    align-content: flex-end;
-    justify-content: flex-end;
-    margin-bottom: 5px;
-  }
-
-  .movie-infos {
-    display: flex;
-    margin: 5px 0px;
-  }
-
-  .item-year-released {
-    margin-right: 15px;
-    margin-bottom: 0px;
-    font-size: 12px;
-  }
-
-  .item-clock {
-    margin-top: 2px;
-    margin-right: 5px;
-    font-size: 12px;
-  }
-
-  .item-runtime {
-    margin-bottom: 0px;
-    font-size: 12px;
-  }
-
-  /* Body design */
-  .movie-item-body {
-    flex: 1 1 50%;
-    h3 {
-      font-family: Roboto;
-      font-weight: 500;
-      font-size: 22px;
-      margin-top: 5px;
-      margin-bottom: 5px;
-      a {
-        color: $dark-gray-typo;
-        // font-weight: 500;
-      }
-    }
-    p {
-      font-weight: lighter;
-      font-family: Roboto;
-      font-weight: 300;
-      color: #666666;
-    }
-  }
-
-$width-btn: 110px;
-
-/* Controls design */
-.movie-item-controls {
+.movie-item {
   display: flex;
-  align-items: center;
-  text-align: center;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  .movie-add-btn {
-    width: $width-btn;
+  height: 120px;
+  justify-content: space-between;
+  margin: 3px 0 3px 0;
+  .movie-item-poster {
+    height: 120px;
+    flex: 1 0 10%;
+    background-color: $yellow;
   }
-  a.movie-add-btn {
-    font-size: 13px;
-    // color: white;
-    font-weight: 600;
-    text-decoration: none;
-    // border: 1px solid $yellow;
-    &:hover {
-      color: white;
-      text-decoration: none;
+  .movie-item-infos {
+    padding: 0 5px 0 5px;
+    height: 120px;
+    flex: 1 0 50%;
+    background-color: $blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    .movie-item-title {
+      background-color: #412A7E;
     }
-  }
-}
-
-
-  a.movie-added-btn {
-    font-size: 13px;
-    font-weight: 600;
-    color: $gray-light;
-  }
-
-  .movie-added-btn.btn {
-    border: 1px solid $gray-light;
-    font-size: 12px;
-    opacity: 1;
-    width: $width-btn;
-    padding: 5px;
-    &:hover {
-      color: $gray-dark;
+    .movie-item-director {
+      background-color: #412A7E;
     }
-    .movie-added-btn.btn {
-      border: 1px solid black;
-      font-size: 12px;
-      opacity: 1;
-      // width: 130px;
-      &:hover {
-        color: $gray-dark;
+    .movie-item-cast {
+      background-color: #412A7E;
+    }
+    .movie-item-details {
+      background-color: #412A7E;
+      display: flex;
+      .movie-item-friends-watch {
+
+      }
+      .movie-item-friends-want-to-watch {
+
       }
     }
   }
-
-
-  .movie-item-controls-hidden a {
-    color: transparent;
-    font-size: 15px;
-    transition: all 0.15s ease;
-    border-color: transparent;
-  }
-
-  #add_to_watchlist {
-    font-size: xx-large;
-    color: #528FC1;
-  }
-
-  .crew {
-    font-size: 12px;
-  }
-
-  .item-director {
-    margin-bottom: 0px;
-  }
-
-  .item-cast-crew {
-    margin-bottom: 0px;
-  }
-
-  .modal-item-body {
-    flex: 0 0 auto;
-  }
-
-  #modal-end {
-    margin-right: 10px;
-  }
-
-  .modal-item {
+  .movie-item-social {
+    height: 120px;
+    flex: 1 0 20%;
+    background-color: $green;
     display: flex;
-    align-items: center;
-    transition: all 0.15s ease;
-    background-color: #F4F4F4;
-    border: 1px solid #949494;
-    margin: 4px;
-    justify-content: space-between;
-    .modal-item-group-one {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
+    flex-direction: column;
+    justify-content: flex-end;
+    .movie-item-friends-watched {
+      background-color: #58FF92;
     }
-    .movie-item-image {
-      margin-right: 20px;
-      width: 70px;
-      box-shadow: 4px 0px 3px 0px #B5B5B5;
-      opacity: 0.9;
+    .movie-item-friends-want-to-watch {
+      background-color: #58FF92;
     }
   }
-
-  .movie-channel {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-  }
-
-  .channel-label {
-    display: inline;
-    font-size: 12px;
-    padding: 2px 5px;
-    a {
-      // color: white;
-      font-weight: 500;
-      font-size: 11px;
-    }
-  }
-  .channel-label-cinema {
-    // background-color: #e67e22;
-    a {
-      color: $red;
-    }
-  }
-  .channel-label-streaming {
-    // background-color: #fdd835;
-    a {
-      color: $cyan;
-    }
-  }
-
-  .item-cross {
-    top: 5px;
-    right: 5px;
-    position: absolute;
-    color: #e6e6e6;
-  }
-
-  .watched-movie {
-    opacity: 0.5;
-  }
-
-  #movie-just-been-watched {
-    // background-color: #fd986f;
+  .movie-item-controls {
+    height: 120px;
+    flex: 1 0 20%;
     background-color: $red;
-    color: white;
-    margin-right: 10px;
-    border-radius: 5px;
-    padding: 5px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    .movie-item-close {
+      align-self: flex-end;
+    }
+    .movie-item-action {
+      height: 40px;
+      width: 100px;
+      background-color: red;
+    }
+    .movie-item-tags {
+      display: flex;
+      p {
+        margin: 0px;
+      }
+    }
   }
-
-  .title-seen {
-    color: #ffffff;
-    font-weight: 100;
-    opacity: 0.8;
-  }
-
-  .movie-item-friends-interests-link {
-    text-decoration: none;
-    font-size: 10px;
-    color: #585858;
-    // line-height: 10px;
-  }
-
-
 }
+
+
+// @media (max-width: 768px) {
+//   #friend-img {
+//     width: 85px;
+//   }
+
+//   p.sentence {
+//     margin: 0;
+//   }
+//   div.sentence {
+//     right: 10px;
+//     position: absolute;
+//     height: 85px;
+//     line-height: 85px;
+//   }
+//   .floating {
+//     display:inline-block;
+//   }
+
+//   .large {
+//     display: none;
+//   }
+
+
+//   a.movie-added-btn {
+//     border: 1px solid #777777;
+//     font-size: 12px;
+//     opacity: 1;
+//     width: 110px;
+//   }
+//   // .friends-tooltip-global {
+//   //   position: fixed;
+//   //   top: 31px;
+//   //   right: 0;
+//   // }
+
+//   .list {
+//     display: inline-flex;
+//   }
+//   .movie-item {
+//     display: flex;
+//     align-items: center;
+//     transition: all 0.15s ease;
+//     background-color: white;
+//     border: 1px solid lightgrey;
+//     position: relative;
+//     margin: 4px 0px;
+//     transition: border-right 0.5s ease;
+//     border-radius: 2px;
+//     font-size: 13px;
+//     h3 {
+//       font-size: 15px;
+//     }
+//     .movie-item-image {
+//       margin-right: 15px;
+//       width: 10em;
+//       box-shadow: 1px 0px 1px #b0bec5;
+//       opacity: 0.9;
+//       border-top-left-radius: 2px;
+//       border-bottom-left-radius: 2px;
+//     }
+//   }
+//   .starrr a {
+//     font-size: 43px;
+//   }
+//   .crew {
+//     line-height: 14px;
+//   }
+
+//   .col-xs-offset-1 {
+//     margin-left: 0%;
+//   }
+
+//   .col-xs-10 {
+//     width: 100%;
+//   }
+
+//   .movie-item-social {
+//     position: absolute;
+//     top: 1px;
+//     right: 1px;
+//   }
+//   .friends_tooltip.hidden-sm {
+//     margin-right: 1px;
+//     // position: inherit;
+//     // top: 1px;
+//     // right: 100px;
+//   }
+//   .movie-social {
+//     position: initial;
+//     top: 1px;
+//     right: 1px;
+//   }
+//   .movie-social.hidden-md {
+//     position: initial
+//   }
+//   .movie-item-body {
+//     line-height: 9px;
+//     h3 {
+//       margin-top: 0;
+//       margin-bottom: 0;
+//       font-size: 19px;
+//     }
+//   }
+
+//   .channel-label-streaming {
+//     position: absolute;
+//     bottom: 1px;
+//     right: 1px;
+//   }
+
+//   .channel-label-cinema {
+//     position: absolute;
+//     bottom: 15px;
+//     right: 1px;
+//   }
+
+//   .btn-warning {
+//     padding: 3px;
+//   }
+//   .btn-success {
+//     padding: 3px;
+//   }
+
+//   .fa-times {
+//     position: fixed;
+//     top: 1px;
+//     left: 1px;
+//     z-index: 1;
+//     background: rgba(128, 128, 128, 0.59);
+//     padding: 2px;
+//     border-radius: 30%;
+//   }
+
+//   .rating-text {
+//     top: 1px;
+//     right: 1px;
+//   }
+// }
+
+
+// @media (min-width: 768px) {
+//   .smallxs {
+//     display: none;
+//   }
+//   .friends-tooltip-global {
+//     height: 0;
+//     position: absolute;
+//     top: 3px;
+//     right: 20px;
+//     line-height: 10px;
+//     // margin-top: 8px;
+//   }
+//   .friends_tooltip.hidden-xs {
+//     position: relative;
+//     // right: 15px;
+//     // position: inherit;
+//     // top: 1px;
+//     // right: 100px;
+//   }
+//   .rating-text {
+
+//   }
+//   .movie-item {
+//     display: flex;
+//     align-items: center;
+//     transition: all 0.15s ease;
+//     background-color: white;
+//     border: 1px solid lightgrey;
+//     position: relative;
+//     margin: 4px 0px;
+//     transition: border-right 0.5s ease;
+//     border-radius: 2px;
+
+//     .movie-item-image {
+//       margin-right: 20px;
+//       width: 70px;
+//       box-shadow: 1px 0px 1px #b0bec5;
+//       opacity: 0.9;
+//       border-top-left-radius: 2px;
+//       border-bottom-left-radius: 2px;
+//     }
+//   }
+
+//   .movie-item:hover {
+//     cursor: pointer;
+//     background-color: white;
+//     // border-right: 7px solid #fd986f;
+//     h3 a {
+//       color: #272822;
+//       text-decoration: none;
+//     }
+//     .movie-item-image {
+//        opacity: 1;
+//     }
+//   }
+
+//   .movie-item-right-part {
+//     flex: 0 0 20%;
+//     height: 100%;
+//     display: flex;
+//     align-items: center;
+//   }
+
+//   .movie-item-social {
+//     flex: 1 0 15%;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//     transition: all 0.15s ease;
+//     margin: 4px;
+//     margin-right: 15px;
+//     p {
+//       font-size: 12px;
+//       margin-bottom: 0px;
+//       color: #A7BCBC;
+//     }
+//   }
+
+//   .movie-item-social:hover {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     transition: all 0.15s ease;
+//   }
+
+//   .movie-rating {
+//     display: flex;
+//     margin: 0px 4px;
+//   }
+//   .movie-social.hidden-xs {
+
+//   }
+//   .movie-social {
+//     display: flex;
+//     align-self: flex-end;
+//     flex-direction: column;
+//     align-content: flex-end;
+//     justify-content: flex-end;
+//     margin-bottom: 5px;
+//   }
+
+//   .movie-infos {
+//     display: flex;
+//     margin: 5px 0px;
+//   }
+
+//   .item-year-released {
+//     margin-right: 15px;
+//     margin-bottom: 0px;
+//     font-size: 12px;
+//   }
+
+//   .item-clock {
+//     margin-top: 2px;
+//     margin-right: 5px;
+//     font-size: 12px;
+//   }
+
+//   .item-runtime {
+//     margin-bottom: 0px;
+//     font-size: 12px;
+//   }
+
+//   /* Body design */
+//   .movie-item-body {
+//     flex: 1 1 50%;
+//     h3 {
+//       font-family: Roboto;
+//       font-weight: 500;
+//       font-size: 22px;
+//       margin-top: 5px;
+//       margin-bottom: 5px;
+//       a {
+//         color: $dark-gray-typo;
+//         // font-weight: 500;
+//       }
+//     }
+//     p {
+//       font-weight: lighter;
+//       font-family: Roboto;
+//       font-weight: 300;
+//       color: #666666;
+//     }
+//   }
+
+// $width-btn: 110px;
+
+// /* Controls design */
+// .movie-item-controls {
+//   display: flex;
+//   align-items: center;
+//   text-align: center;
+//   margin-top: 5px;
+//   margin-bottom: 5px;
+//   .movie-add-btn {
+//     width: $width-btn;
+//   }
+//   a.movie-add-btn {
+//     font-size: 13px;
+//     // color: white;
+//     font-weight: 600;
+//     text-decoration: none;
+//     // border: 1px solid $yellow;
+//     &:hover {
+//       color: white;
+//       text-decoration: none;
+//     }
+//   }
+// }
+
+
+//   a.movie-added-btn {
+//     font-size: 13px;
+//     font-weight: 600;
+//     color: $gray-light;
+//   }
+
+//   .movie-added-btn.btn {
+//     border: 1px solid $gray-light;
+//     font-size: 12px;
+//     opacity: 1;
+//     width: $width-btn;
+//     padding: 5px;
+//     &:hover {
+//       color: $gray-dark;
+//     }
+//     .movie-added-btn.btn {
+//       border: 1px solid black;
+//       font-size: 12px;
+//       opacity: 1;
+//       // width: 130px;
+//       &:hover {
+//         color: $gray-dark;
+//       }
+//     }
+//   }
+
+
+//   .movie-item-controls-hidden a {
+//     color: transparent;
+//     font-size: 15px;
+//     transition: all 0.15s ease;
+//     border-color: transparent;
+//   }
+
+//   #add_to_watchlist {
+//     font-size: xx-large;
+//     color: #528FC1;
+//   }
+
+//   .crew {
+//     font-size: 12px;
+//   }
+
+//   .item-director {
+//     margin-bottom: 0px;
+//   }
+
+//   .item-cast-crew {
+//     margin-bottom: 0px;
+//   }
+
+//   .modal-item-body {
+//     flex: 0 0 auto;
+//   }
+
+//   #modal-end {
+//     margin-right: 10px;
+//   }
+
+//   .modal-item {
+//     display: flex;
+//     align-items: center;
+//     transition: all 0.15s ease;
+//     background-color: #F4F4F4;
+//     border: 1px solid #949494;
+//     margin: 4px;
+//     justify-content: space-between;
+//     .modal-item-group-one {
+//       display: flex;
+//       align-items: center;
+//       justify-content: flex-start;
+//     }
+//     .movie-item-image {
+//       margin-right: 20px;
+//       width: 70px;
+//       box-shadow: 4px 0px 3px 0px #B5B5B5;
+//       opacity: 0.9;
+//     }
+//   }
+
+//   .movie-channel {
+//     position: absolute;
+//     bottom: 0px;
+//     right: 0px;
+//   }
+
+//   .channel-label {
+//     display: inline;
+//     font-size: 12px;
+//     padding: 2px 5px;
+//     a {
+//       // color: white;
+//       font-weight: 500;
+//       font-size: 11px;
+//     }
+//   }
+//   .channel-label-cinema {
+//     // background-color: #e67e22;
+//     a {
+//       color: $red;
+//     }
+//   }
+//   .channel-label-streaming {
+//     // background-color: #fdd835;
+//     a {
+//       color: $cyan;
+//     }
+//   }
+
+//   .item-cross {
+//     top: 5px;
+//     right: 5px;
+//     position: absolute;
+//     color: #e6e6e6;
+//   }
+
+//   .watched-movie {
+//     opacity: 0.5;
+//   }
+
+//   #movie-just-been-watched {
+//     // background-color: #fd986f;
+//     background-color: $red;
+//     color: white;
+//     margin-right: 10px;
+//     border-radius: 5px;
+//     padding: 5px 15px;
+//   }
+
+//   .title-seen {
+//     color: #ffffff;
+//     font-weight: 100;
+//     opacity: 0.8;
+//   }
+
+//   .movie-item-friends-interests-link {
+//     text-decoration: none;
+//     font-size: 10px;
+//     color: #585858;
+//     // line-height: 10px;
+//   }
+
+
+// }
 
