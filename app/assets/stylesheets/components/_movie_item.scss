@@ -296,8 +296,6 @@ $width-btn: 110px;
   .movie-add-btn {
     width: $width-btn;
   }
-}
-
   a.movie-add-btn {
     font-size: 13px;
     // color: white;
@@ -309,6 +307,8 @@ $width-btn: 110px;
       text-decoration: none;
     }
   }
+}
+
 
   a.movie-added-btn {
     font-size: 13px;

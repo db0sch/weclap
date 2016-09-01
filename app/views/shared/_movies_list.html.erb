@@ -1,0 +1,7 @@
+<% movies.each do |movie| %>
+  <div class="row">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+        <%= render 'shared/movie_item', movie: movie, friends: friends, interest: interest %>
+    </div>
+  </div>
+<% end %>

@@ -48,6 +48,11 @@
 </div>
 <a href="#" class="back-to-top"><i class="fa fa-arrow-circle-up" id="back_to_top_arrow" ></i></a>
 
+<p class="pagination">
+    <%= link_to_next_page(@movies, 'Next Page', params: { terms: params[:terms] }, remote: true) %>
+    <%= p @movies.last_page? %>
+</p>
+
 <%= content_for(:after_js) do %>
   <script type="text/javascript">
     $('body').prepend('<a href="#" class="back-to-top"></a>');

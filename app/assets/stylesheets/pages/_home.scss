@@ -62,6 +62,7 @@
       text-decoration: none;
       color: $brand-color;
       font-weight: bold;
+      border-radius: 0px;
       &:hover {
         box-shadow: 5px 5px 0px $yellow;
         top: 5px;
@@ -69,6 +70,7 @@
         background-color: $brand-color;
         color: white;
         border: 1px solid $brand-color;
+        border-radius: 0px;
       }
     }
   }

@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  $(function() {
 
+  $(function() {
     $('.selectpicker.checkbox-diff').on('change', function(){
       var selected = $(this).find("option:selected").val();
       if (selected === 'on_vod'){
@@ -53,7 +53,6 @@ $(document).ready(function() {
 
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
-$('.modal').appendTo(".main");
 
 
 

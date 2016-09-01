@@ -1,0 +1,13 @@
+// Append new data
+$("<%=j render 'shared/movies_list', movies: @movies, friends: @friends, interest: nil %>")
+  .appendTo($(".movies-list"));
+
+// Update pagination link
+<% if @movies.last_page? %>
+  $('.pagination').html("<p>That's all, folks!</p>");
+<% else %>
+  $('.pagination')
+    .html("<div class='view-more-link'> <%=j link_to_next_page(@movies, 'View more', :remote => true)%> </div>");
+<% end %>
+
+

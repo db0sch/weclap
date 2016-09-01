@@ -1,4 +1,22 @@
-<%= render 'shared/interests_list', list: @watchlist, friends: @friends %>
+<%# render 'shared/interests_list', list: @watchlist, friends: @friends %>
+
+<div class="container padded">
+  <div class="interests-list">
+    <%= render 'shared/interests_list', interests: @interests, friends: @friends %>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <div class="pagination">
+        <div class="view-more-link">
+          <%= link_to_next_page(@interests, 'View more', :remote => true) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
