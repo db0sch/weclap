@@ -1,0 +1,24 @@
+<% friends_not_seen = ["Estelle<br>","Julien<br>","Paul<br>" ] %>
+<% friends_have_seen = ["Estelle - 2/5<br>","Romain - 4/5<br>","Boris - 5/5<br>" ] %>
+<%# movie.interested_friends_of(current_user).each do |friend, rating| %>
+  <%# if rating.nil? %>
+    <%# friends_not_seen << "#{friend.first_name}<br>" %>
+  <%# else %>
+    <%# friends_have_seen << "#{friend.first_name} - #{rating}/5<br>" %>
+  <%# end %>
+<%# end %>
+
+
+<div class="movie-item-friends">
+  <% if friends_not_seen.size > 0 %>
+    <div class="movie-item-friends-tooltip" data-toggle="tooltip" data-placement="top" title="<%=friends_not_seen.join("")%>">
+      <%= emojify ":wave:" %>
+    </div>
+  <% end %>
+  <% if friends_have_seen.size > 0 %>
+    <div class="movie-item-friends-tooltip" data-toggle="tooltip" data-placement="top" title="<%= friends_have_seen.join("") %>">
+      <%= emojify ":smirk:" %>
+    </div>
+  <% end %>
+</div>
+

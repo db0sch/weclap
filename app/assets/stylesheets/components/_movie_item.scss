@@ -1,79 +1,154 @@
+$break-small: 320px;
+$break-large: 1200px;
+
 .movie-item {
   display: flex;
-  height: 120px;
   justify-content: space-between;
   margin: 3px 0 3px 0;
+  border: 1px solid $gray-lighter-plus;
+  padding-right: 4px;
+  border-radius: 2px;
+  background-color: white;
+  &:hover {
+    padding-right: 0px;
+    border-right: 5px solid $yellow;
+  }
   .movie-item-poster {
-    height: 120px;
-    flex: 1 0 10%;
+    // height: 120px;
+    flex: 0 0 10%;
     background-color: $yellow;
-  }
-  .movie-item-infos {
-    padding: 0 5px 0 5px;
-    height: 120px;
-    flex: 1 0 50%;
-    background-color: $blue;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    .movie-item-title {
-      background-color: #412A7E;
-    }
-    .movie-item-director {
-      background-color: #412A7E;
-    }
-    .movie-item-cast {
-      background-color: #412A7E;
-    }
-    .movie-item-details {
-      background-color: #412A7E;
-      display: flex;
-      .movie-item-friends-watch {
-
-      }
-      .movie-item-friends-want-to-watch {
-
+    .movie-item-image {
+      width: 80px;
+      @media screen and (max-width: 450px) {
+        width: 120px;
       }
     }
   }
-  .movie-item-social {
-    height: 120px;
-    flex: 1 0 20%;
-    background-color: $green;
+  .movie-item-details {
+    flex: 1 0 90%;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    .movie-item-friends-watched {
-      background-color: #58FF92;
-    }
-    .movie-item-friends-want-to-watch {
-      background-color: #58FF92;
-    }
-  }
-  .movie-item-controls {
-    height: 120px;
-    flex: 1 0 20%;
-    background-color: $red;
-    display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    .movie-item-close {
-      align-self: flex-end;
-    }
-    .movie-item-action {
-      height: 40px;
-      width: 100px;
-      background-color: red;
-    }
-    .movie-item-tags {
+    flex-wrap: wrap;
+    .movie-item-infos {
+      height: 120px;
+      padding: 0 5px 0 5px;
+      flex: 1 0 60%;
       display: flex;
-      p {
-        margin: 0px;
+      flex-direction: column;
+      justify-content: space-around;
+      color: $gray-light;
+      font-weight: lighter;
+      .movie-item-title {
+        h3 {
+          margin: 2px;
+          font-weight: bold;
+          font-size: 1.4em;
+          a {
+            color: $dark-gray-typo;
+            text-decoration: none;
+            &:hover {
+              color: $dark-gray-typo;
+            }
+          }
+        }
+      }
+      .movie-item-cast-crew  > p {
+        margin: 2px;
+        font-size: 0.7em;
+      }
+      .movie-item-numbers {
+        margin: 2px;
+        display: flex;
+        .movie-item-year > p {
+          margin: 0 5px 0 0;
+          font-size: 0.7em;
+        }
+        .movie-item-duration  {
+          margin: 0 5px 0 5px;
+          display: flex;
+          p {
+            font-size: 0.7em;
+            margin: 0 1px 0 1px;
+          }
+        }
+      }
+    }
+    .movie-item-right-part {
+      display: flex;
+      flex: 1 0 40%;
+      .movie-item-social {
+        font-size: 0.7em;
+        padding: 2px 10px 2px 10px;
+        flex: 1 0 15%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        .movie-item-friends-watched {
+        }
+        .movie-item-friends-want-to-watch {
+        }
+      }
+      .movie-item-controls {
+        flex: 1 0 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        .movie-item-close {
+          flex: 0 1 5%;
+          align-self: flex-end;
+          margin-right: 4px;
+          a {
+            color: $gray-lighter-plus;
+            font-size: 0.8em;
+            text-decoration: none;
+            &:hover {
+              color: $brand-color;
+            }
+          }
+        }
+        .movie-item-action {
+          flex: 1 1 75%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .item-rate-movie {
+            display: flex;
+            flex-direction: column;
+            align-item: center;
+            justify-content: center;
+            p {
+              font-size: 0.7em;
+              color: $gray-lighter;
+              margin: 0px;
+            }
+          }
+        }
+        .movie-item-tags {
+          flex: 1 0 20%;
+          display: flex;
+          align-items: center;
+          p {
+            font-size: 0.8em;
+            margin: 0px;
+          }
+        }
       }
     }
   }
 }
+
+.movie-item-friends {
+  display: flex;
+  justify-content: center;
+  .movie-item-friends-tooltip > img {
+    margin: 7px;
+    width: 25px;
+    height: 25px;
+  }
+}
+
+
 
 
 // @media (max-width: 768px) {
