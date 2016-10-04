@@ -1,84 +1,83 @@
 <div class="movie-item">
+
   <!-- movie item poster -->
   <div class="movie-item-poster">
-    <%= link_to movie_path(movie.id) do %>
+    <%= link_to movie_path(movie.id), class: "movie-poster" do %>
       <%= image_tag movie.poster_url ? movie.poster_url : "http://placehold.it/40x60", alt: movie.title, class: "movie-item-image" %>
     <% end %>
   </div>
+
   <!-- movie item details with infos, friends, and control btn -->
-  <div class="movie-item-details">
-    <div class="movie-item-infos">
-      <!-- movie title -->
-      <div class="movie-item-title">
+  <div class="movie-item-main">
+    <div class="movie-infos">
+      <div class="movie-title">
         <h3>
           <%= link_to (I18n.locale == :fr && !movie.fr_title.blank? ? movie.fr_title : movie.title), movie %>
         </h3>
       </div>
       <!-- movie cast (actors) and crew (director) -->
-      <div class="movie-item-cast-crew">
-        <p class="movie-item-crew-director"><%= t ('movie-item.directed-by') %>: <%= movie.jobs.select{ |j| j.title == 'Director' }.map(&:person).map(&:name).join(', ') %></p>
+      <div class="movie-cast-crew">
+        <p class="movie-crew-director"><%= t ('movie-item.directed-by') %>: <%= movie.jobs.select{ |j| j.title == 'Director' }.map(&:person).map(&:name).join(', ') %></p>
         <% actors = movie.jobs.select{ |j| j.title == 'Actor' }.reverse.shift(5).map(&:person).map(&:name) %>
-        <p class="movie-item-cast"><%= t 'movie-item.starring' %>: <%= actors.join(', ') %></p>
+        <p class="movie-cast"><%= t 'movie-item.starring' %>: <%= actors.join(', ') %></p>
       </div>
       <!-- movie release date and duration -->
-      <div class="movie-item-numbers">
-        <div class="movie-item-year">
-          <p><%= movie.release_date.to_date.year if movie.release_date %></p>
+      <div class="movie-misc">
+        <div class="movie-numbers">
+          <div class="movie-year">
+            <p><%= movie.release_date.to_date.year if movie.release_date %></p>
+          </div>
+          <div class="movie-duration">
+            <p><%= icon('clock-o') %></p>
+            <p><%= movie.runtime %> min</p>
+          </div>
         </div>
-        <div class="movie-item-duration">
-          <p><%= icon('clock-o') %></p>
-          <p><%= movie.runtime %> min</p>
+        <div class="movie-friends">
+          <%= render 'shared/movie_item_friends', movie: movie %>
         </div>
       </div>
     </div>
+
     <!-- movie item right part with the friends who shares interest with the film, and the ctrl btns -->
-    <div class="movie-item-right-part">
-      <div class="movie-item-social">
-        <%= render 'shared/movie_item_friends', movie: movie %>
-<!--         <div class="movie-item-friends-watched">3 friends want to watch</div>
-        <div class="movie-item-friends-want-to-watch">2 friends have watched it</div> -->
-      </div>
+    <div class="movie-user-controls">
       <!-- movie item ctrl btns : if the film is an interest of the current user, you can access delete interest and rate the film -->
       <!-- if the film isn't an interest of the user, you can add it the watchlist -->
-      <div class="movie-item-controls">
-        <!-- problème d'ajax à résoudre -->
-          <div class="movie-item-close">
-        <% if interest %>
-            <%= link_to icon('times'), interest_path(interest), method: :delete, class: "item-cross", remote: true   %>
-        <% end %>
+      <!-- <div class="movie-controls"> -->
+      <!-- problème d'ajax à résoudre -->
+      <div class="movie-action">
+        <% if current_user.movies.include?(movie) %>
+        <!-- the star control to rate the movie when it's one of users interests -->
+        <% if interest.rating.nil? %>
+        <div class="item-rate-movie">
+          <p class="rating-text"><%= t ('movie-item.rating') %></p>
+          <div class="list-inline movie-rating">
+            <div class='starrr' <%= interest ? "id=#{interest.id} #{'data-rating=' + interest.rating.to_s if interest.rating}" : '' %>>
+            </div>
           </div>
-        <div class="movie-item-action">
-          <% if current_user.movies.include?(movie) %>
-            <!-- the star control to rate the movie when it's one of users interests -->
-            <% if interest.rating.nil? %>
-                <div class="item-rate-movie">
-                  <p class="rating-text"><%= t ('movie-item.rating') %></p>
-                  <div class="list-inline movie-rating">
-                    <div class='starrr' <%= interest ? "id=#{interest.id} #{'data-rating=' + interest.rating.to_s if interest.rating}" : '' %>>
-                    </div>
-                  </div>
-                </div>
-            <% end %>
-          <% else %>
-            <!-- the add to watchlist btn ('want to watch') -->
-            <div class="item-add-to-watchlist">
-              <%= link_to (t ('movie-item.add-to-wl')), interests_path(movie_id: movie), method: :post, remote: true, class: "btn btn-add-to-watchlist", id: "movie-add-#{movie.id}" %>
-            </div>
-          <% end %>
         </div>
-        <!-- these are the tags to indicate on which distribution channel the film is available -->
-        <div class="movie-item-tags">
-          <% unless movie.streamings.empty? %>
-            <div class="tag-label tag-streaming">
-              <a href=<%=movie_path(movie.id)%>><%= t('movie-item.on-vod-tag') %></a>
-            </div>
-          <% end %>
-          <% unless movie.theaters.empty? %>
-            <div class="tag-label tag-theaters">
-              <a href=<%=movie_path(movie.id)%>><%= t('movie-item.on-theater-tag') %></a>
-            </div>
-          <% end %>
+        <% end %>
+        <% else %>
+        <!-- the add to watchlist btn ('want to watch') -->
+        <div class="item-add-to-watchlist">
+          <%= link_to (t ('movie-item.add-to-wl')), interests_path(movie_id: movie), method: :post, remote: true, class: "btn btn-add-to-watchlist", id: "movie-add-#{movie.id}" %>
         </div>
+        <% end %>
+      </div>
+
+      <!-- these are the tags to indicate on which distribution channel the film is available -->
+      <div class="movie-tags">
+        <div class="tag-label tag-streaming">
+          <span><%= t('movie-item.on-vod-tag') %></span>
+        </div>
+        <div class="tag-label tag-theaters">
+          <span><%= t('movie-item.on-theater-tag') %></span>
+        </div>
+      </div>
+      <!-- </div> -->
+      <div class="movie-close">
+        <% if interest %>
+        <%= link_to icon('times'), interest_path(interest), method: :delete, class: "item-cross", remote: true   %>
+        <% end %>
       </div>
     </div>
   </div>

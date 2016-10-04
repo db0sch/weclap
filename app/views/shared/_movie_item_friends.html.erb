@@ -10,15 +10,10 @@
 
 
 <div class="movie-item-friends">
-  <% if friends_not_seen.size > 0 %>
-    <div class="movie-item-friends-tooltip" data-toggle="tooltip" data-placement="top" title="<%=friends_not_seen.join("")%>">
-      <%= emojify ":wave:" %>
-    </div>
-  <% end %>
-  <% if friends_have_seen.size > 0 %>
-    <div class="movie-item-friends-tooltip" data-toggle="tooltip" data-placement="top" title="<%= friends_have_seen.join("") %>">
-      <%= emojify ":smirk:" %>
+  <% if friends_not_seen.size > 0 || friends_have_seen.size > 0 %>
+    <div class="movie-item-friends-tooltip" data-toggle="tooltip" data-placement="top" title="<%=friends_not_seen.join("") + friends_have_seen.join("") %>">
+      <%= icon('users') %>
+      <span><%= friends_not_seen.size + friends_have_seen.size %></span>
     </div>
   <% end %>
 </div>
-

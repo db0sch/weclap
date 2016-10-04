@@ -49,6 +49,9 @@ gem 'sinatra'  # Dependency of sidekiq
 gem 'sidekiq-failures'
 gem 'pusher'
 
+# media queries mixins
+gem 'include_media_rails'
+
 group :development, :test do
   gem 'binding_of_caller'
   gem 'better_errors'
