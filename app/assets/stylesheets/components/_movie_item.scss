@@ -20,7 +20,8 @@ $break-large: 1200px;
     flex: 0 0 10%;
   }
   .movie-item-main {
-    flex: 1 0 80%;
+    position: relative;
+    flex: 1 1 80%;
     display: flex;
     flex-direction: row;
     @include media(">=phone", "<=tablet") {
@@ -36,15 +37,12 @@ $break-large: 1200px;
     @include media(">=phone", "<=tablet") {
       width: 120px;
     }
-    //@media screen and (maxidth: 450px) {
-    //  width: 120px;
-    //}
   }
 }
 
 // CENTER OF THE MOVIE ITEM
 .movie-infos {
-  flex: 1 0 50%;
+  flex: 1 1 50%;
   height: 120px;
   padding: 5px 5px 5px 5px;
   display: flex;
@@ -113,13 +111,18 @@ $break-large: 1200px;
   display: flex;
   flex-direction: column;
   @include media(">=phone", "<=tablet") {
-    flex-direction: row;
+    flex-direction: row-reverse;
   }
   .movie-action {
     flex: 1 1 50%;
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    @include media(">=phone", "<=tablet") {
+      flex: 1 1 auto;
+      justify-content: center;
+      align-items: center;
+    }
     .item-rate-movie {
       display: flex;
       flex-direction: column;
@@ -133,11 +136,16 @@ $break-large: 1200px;
     }
   }
   .movie-tags {
-    flex: 1 0 20%;
+    flex: 1 1 20%;
     display: flex;
-    flex-wrap: wrap;
+    //flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    @include media(">=phone", "<=tablet") {
+      flex: 1 1 auto;
+      flex-direction: column;
+      //justify-content: flex-start;
+    }
     .tag-label {
       margin: 2px 2px;
       background: $green;
@@ -150,24 +158,33 @@ $break-large: 1200px;
         font-weight: bold;
         color: white;
         font-size: 0.5em;
+        @include media(">=phone", "<=tablet") {
+          font-size: 0.4em;
+        }
         margin: 0px;
       }
     }
   }
 
-  .movie-close {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    line-height: 0.8em;
-    a {
-      color: $gray-lighter-plus;
-      font-size: 0.8em;
-      text-decoration: none;
-      &:hover {
-        color: $brand-color;
-      }
+
+}
+
+
+.movie-close {
+  position: absolute;
+  top: 5px;
+  right: 3px;
+  line-height: 0.8em;
+  //@include media(">=phone", "<=tablet") {
+  //  top: -120px;
+  //  right: 5px;
+  //}
+  a {
+    color: $gray-lighter-plus;
+    font-size: 0.8em;
+    text-decoration: none;
+    &:hover {
+      color: $brand-color;
     }
   }
-
 }

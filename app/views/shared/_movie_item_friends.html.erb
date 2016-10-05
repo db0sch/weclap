@@ -9,7 +9,7 @@
 <%# end %>
 
 
-<div class="movie-item-friends">
+<div class="movie-friends">
   <% if friends_not_seen.size > 0 || friends_have_seen.size > 0 %>
     <div class="movie-item-friends-tooltip" data-toggle="tooltip" data-placement="top" title="<%=friends_not_seen.join("") + friends_have_seen.join("") %>">
       <%= icon('users') %>

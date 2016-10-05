@@ -1,4 +1,4 @@
-<div class="movie-item">
+<div class="movie-item" id="movie-<%= movie.id%>" >
 
   <!-- movie item poster -->
   <div class="movie-item-poster">
@@ -19,7 +19,7 @@
       <div class="movie-cast-crew">
         <p class="movie-crew-director"><%= t ('movie-item.directed-by') %>: <%= movie.jobs.select{ |j| j.title == 'Director' }.map(&:person).map(&:name).join(', ') %></p>
         <% actors = movie.jobs.select{ |j| j.title == 'Actor' }.reverse.shift(5).map(&:person).map(&:name) %>
-        <p class="movie-cast"><%= t 'movie-item.starring' %>: <%= actors.join(', ') %></p>
+        <p class="movie-cast"><%= t 'movie-item.starring' %>: <%= truncate(actors.join(', '), length: 50) %></p>
       </div>
       <!-- movie release date and duration -->
       <div class="movie-misc">
@@ -47,15 +47,16 @@
       <div class="movie-action">
         <% if current_user.movies.include?(movie) %>
         <!-- the star control to rate the movie when it's one of users interests -->
-        <% if interest.rating.nil? %>
-        <div class="item-rate-movie">
-          <p class="rating-text"><%= t ('movie-item.rating') %></p>
-          <div class="list-inline movie-rating">
-            <div class='starrr' <%= interest ? "id=#{interest.id} #{'data-rating=' + interest.rating.to_s if interest.rating}" : '' %>>
-            </div>
-          </div>
-        </div>
-        <% end %>
+          <% if interest %>
+            <%# if interest.rating.nil? %>
+              <div class="item-rate-movie">
+                <p class="rating-text"><%= t ('movie-item.rating') %></p>
+                <div class="list-inline movie-rating">
+                  <div class='starrr' <%= interest ? "id=#{interest.id} #{'data-rating=' + interest.rating.to_s if interest.rating}" : '' %>>
+                  </div>
+                </div>
+              </div>
+          <% end %>
         <% else %>
         <!-- the add to watchlist btn ('want to watch') -->
         <div class="item-add-to-watchlist">
@@ -74,11 +75,11 @@
         </div>
       </div>
       <!-- </div> -->
-      <div class="movie-close">
-        <% if interest %>
-        <%= link_to icon('times'), interest_path(interest), method: :delete, class: "item-cross", remote: true   %>
-        <% end %>
-      </div>
+    </div>
+    <div class="movie-close">
+      <% if interest %>
+      <%= link_to icon('times'), interest_path(interest), method: :delete, class: "item-cross", remote: true   %>
+      <% end %>
     </div>
   </div>
 </div>
