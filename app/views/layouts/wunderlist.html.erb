@@ -37,7 +37,8 @@
   <body class="<%= controller_name %>-<%= action_name%>">
    
     <%= yield %>
-  
+    <%= render 'shared/footer' %>
+    
     <%= javascript_include_tag 'application' %>
     <%= yield(:after_js) %>
     <%= yield(:after_js2) %>

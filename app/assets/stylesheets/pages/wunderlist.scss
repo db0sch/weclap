@@ -1,0 +1,33 @@
+#wunderlist-banner {
+  height: 40vh!important;
+}
+#wunderlist-btn {
+  position: fixed;
+  top: 35.6vh;
+  left: 39vw;
+}
+.wunderlist-wrapper {
+  background: #f1f4f8;
+  height: 55vh;
+  display: flex;
+  align-items: center;
+}
+.card {
+  background: white;
+  border-radius: 4px;
+  color: #323a41;
+  box-shadow: 0 8px 14px 0 rgba(0,0,0,.03);
+  margin-top: 7px;
+  .card-head {
+    p {
+      font-size: 20px;
+      padding: 30px 30px 0px;
+    }
+  }
+  .card-body {
+    background: #fbfcfd;
+    padding: 30px;
+    border-radius: 0 0 4px 4px;
+    border-top: 1px solid #eef2f5
+  }
+}
