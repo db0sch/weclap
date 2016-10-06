@@ -1,10 +1,22 @@
 #wunderlist-banner {
-  height: 40vh!important;
+  height: 30vh;
+}
+#wunderlist-banner-content {
+  margin-top: 2.5em;
 }
 #wunderlist-btn {
-  position: fixed;
-  top: 35.6vh;
-  left: 39vw;
+  position: relative;
+  text-align: center;
+  top: 3.4em;
+}
+#wunderlist-card-1 {
+  position: relative;
+  top: -4.5em;
+}
+#wunderlist-card-2 {
+  position: relative;
+  top: 4.5em;
+  margin-bottom: 7px;
 }
 .wunderlist-wrapper {
   background: #f1f4f8;
