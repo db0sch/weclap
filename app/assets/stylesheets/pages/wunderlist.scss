@@ -12,15 +12,42 @@
 #wunderlist-card-1 {
   position: relative;
   top: -4.5em;
+  opacity: 1;
+  animation:load_up 2s forwards;
+  -webkit-animation:load_up 2s forwards;
 }
+@keyframes load_up {
+  0% { opacity: 0; top: 0em; }
+  100% { opacity: 1; top: -4.5em; }  
+}
+// @-webkit-keyframes load_up {
+//   0% { opacity: 0; top: 0em; }
+//   100% { opacity: 1; top: -4.5em; }    
+// }
 #wunderlist-card-2 {
+  position: relative;
+  top: 0em;
+  animation:load_up_two 2s forwards;
+  -webkit-animation:load_up_two 2s forwards;
+}
+@keyframes load_up_two {
+  0% { opacity: 0; top: 4em; }
+  100% { opacity: 1; top: 0em; }  
+}
+#wunderlist-card-3 {
   position: relative;
   top: 4.5em;
   margin-bottom: 7px;
+  animation:load_up_tree 2s forwards;
+  -webkit-animation:load_up_tree 2s forwards;
+}
+@keyframes load_up_tree {
+  0% { opacity: 0; top: 8em; }
+  100% { opacity: 1; top: 4.5em; }  
 }
 .wunderlist-wrapper {
   background: #f1f4f8;
-  height: 55vh;
+  height: 55.7vh;
   display: flex;
   align-items: center;
 }
@@ -39,7 +66,27 @@
   .card-body {
     background: #fbfcfd;
     padding: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     border-radius: 0 0 4px 4px;
     border-top: 1px solid #eef2f5
+  }
+}
+.infos {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3px;
+  .wunderlist-avatar {
+    margin-right: 15px;
+    margin-bottom: 5px;
+  }
+  .tag {
+    font-size: 17px;
+    color: #0097A7;
+    font-weight: 600;
+  }
+  p {
+    font-size: 15px;
+    color: #b2b2b2;
   }
 }
