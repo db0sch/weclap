@@ -1,36 +1,28 @@
-// Your footer style
-
-.footer {
+footer {
+  font-size: 0.8em;
   background-color: $cyan-darker;
-  padding: 10px 0;
-  color: #CCCCCC;
-  height: 5vh;
-  .footer-social-links {
+  .footer-content {
+    height: 60px;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
-    ul {
-      margin-bottom: 0px;
-      a {
-        color: white;
-        font-size: 30px;
-        letter-spacing: 20px;
-        transition: color 1s ease;
-        font-size: 20px;
-        &:hover {
-          color: $yellow;
-        }
+    flex-wrap: wrap-reverse;
+    .footer-credits {
+      flex: 1 1 70%;
+      display: flex;
+      justify-content: flex-start;
+      p {
+        color: $cyan-lighter;
+        margin: 0;
       }
     }
-  }
-  .credits {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    p {
-      color: white;
-      font-size: 14px;
-      margin-bottom: 0px;
+    .footer-links {
+      flex: 1 1 30%;
+      display: flex;
+      justify-content: space-between;
+      a {
+        text-decoration: none;
+        color: $cyan-lighter;
+      }
     }
   }
 }

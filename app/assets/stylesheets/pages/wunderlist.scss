@@ -1,18 +1,24 @@
 #wunderlist-banner {
   position: relative;
-  height: 45vh;
-  background-position-y: 51%;
+  height: 49vh;
   #wunderlist-banner-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
+}
+.wunderlist-wrapper {
+  min-height: 46vh;
+  background: #f1f4f8;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
+  padding: 3em 0 1em 0;
 }
 #wunderlist-btn {
     height: 100px;
-    padding: 20px;
     position: absolute;
-    bottom: -3.5em;
+    bottom: -4.7em;
     a.btn.btn-secondary {
       // il faut modifier la font du bouton.
       font-size: 1.5em;
@@ -35,12 +41,6 @@
       }
     }
   }
-.wunderlist-wrapper {
-  height: 50vh;
-  background: #f1f4f8;
-  display: flex;
-  align-items: center;
-}
 .card {
   background: white;
   border-radius: 4px;
@@ -55,9 +55,7 @@
   }
   .card-body {
     background: #fbfcfd;
-    padding: 30px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding: 15px 30px 15px 30px;
     border-radius: 0 0 4px 4px;
     border-top: 1px solid #eef2f5
   }
@@ -67,8 +65,7 @@
   align-items: center;
   margin-bottom: 3px;
   .wunderlist-avatar {
-    margin-right: 15px;
-    margin-bottom: 5px;
+    margin: 0 15px 5px 0;
   }
   .tag {
     font-size: 17px;
