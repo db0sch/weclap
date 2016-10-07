@@ -52,6 +52,9 @@ gem 'pusher'
 # media queries mixins
 gem 'include_media_rails'
 
+# wunderlist integration
+gem 'omniauth-wunderlist'
+
 group :development, :test do
   gem 'binding_of_caller'
   gem 'better_errors'
