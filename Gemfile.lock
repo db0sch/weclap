@@ -167,6 +167,9 @@ GEM
     omniauth-oauth2 (1.4.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
+    omniauth-wunderlist (0.0.2)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
     orm_adapter (0.5.0)
     pg (0.18.4)
     pg_search (1.0.6)
@@ -333,6 +336,7 @@ DEPENDENCIES
   koala
   nokogiri
   omniauth-facebook
+  omniauth-wunderlist
   pg
   pg_search
   poltergeist

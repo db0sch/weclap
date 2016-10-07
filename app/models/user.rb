@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+    :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook, :wunderlist]
 
   has_many :interests, dependent: :destroy
   has_many :movies, through: :interests
@@ -72,6 +72,28 @@ public
     if User.where(provider: auth.provider, uid: auth.uid).first
       # update
       user = User.where(provider: auth.provider, uid: auth.uid).first
+      user.update(user_params)
+    else
+      # create
+      user = User.create(user_params)
+    end
+    return user
+  end
+
+  def self.find_for_wunderlist_oauth(auth)
+    user_params = {
+      provider: "wunderlist",
+      uid: auth.extra.id,
+      email: auth.info.email,
+      password: Devise.friendly_token[0,20],
+      first_name: auth.info.name.split(/\s/).first,
+      last_name: auth.info.name.split(/\s/).last,
+      fullname: auth.info.name,
+      token: auth.credentials.token
+    }
+    user = User.where(provider: "wunderlist", uid: auth.extra.id).first
+    if user
+      # update
       user.update(user_params)
     else
       # create
