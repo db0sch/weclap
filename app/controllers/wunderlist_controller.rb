@@ -9,4 +9,10 @@ class WunderlistController < ApplicationController
 
   def landing
   end
+
+  def webhook
+    p request
+    # request.headers['Content-Type'] == 'application/json' ? @data = JSON.parse(request.body.read) : @data = params.as_json
+    # render nothing: true, status: 200 if @data == {}
+  end
 end
