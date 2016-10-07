@@ -1,0 +1,93 @@
+#wunderlist-banner {
+  position: relative;
+  height: 49vh;
+  #wunderlist-banner-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+.wunderlist-wrapper {
+  min-height: 46vh;
+  background: #f1f4f8;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 3em 0 1em 0;
+}
+#wunderlist-btn {
+    height: 100px;
+    position: absolute;
+    bottom: -4.7em;
+    a.btn.btn-secondary {
+      // il faut modifier la font du bouton.
+      font-size: 1.5em;
+      letter-spacing: 0.1em;
+      border: 2px solid $yellow;
+      background-color: white;
+      box-shadow: 10px 10px 0px $brand-color;
+      text-decoration: none;
+      color: $brand-color;
+      font-weight: bold;
+      border-radius: 0px;
+      &:hover {
+        box-shadow: 5px 5px 0px $yellow;
+        top: 5px;
+        left: 5px;
+        background-color: $brand-color;
+        color: white;
+        border: 1px solid $brand-color;
+        border-radius: 0px;
+      }
+    }
+  }
+.card {
+  background: white;
+  border-radius: 4px;
+  color: #323a41;
+  box-shadow: 0 8px 14px 0 rgba(0,0,0,.03);
+  margin-top: 7px;
+  .card-head {
+    p {
+      font-size: 20px;
+      padding: 30px 30px 0px;
+    }
+  }
+  .card-body {
+    background: #fbfcfd;
+    padding: 15px 30px 15px 30px;
+    border-radius: 0 0 4px 4px;
+    border-top: 1px solid #eef2f5
+  }
+}
+.infos {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3px;
+  .wunderlist-avatar {
+    margin: 0 15px 5px 0;
+  }
+  .tag {
+    font-size: 17px;
+    color: #0097A7;
+    font-weight: 600;
+  }
+  p {
+    font-size: 15px;
+    color: #b2b2b2;
+  }
+}
+#wunderlist-card {
+  position: relative;
+  top: 0em;
+  animation:load_up 2s forwards;
+  -webkit-animation:load_up 2s forwards;
+}
+@keyframes load_up {
+  0% { opacity: 0; top: 4em; }
+  100% { opacity: 1; top: 0em; }  
+}
+@-webkit-keyframes load_up {
+  0% { opacity: 0; top: 4em; }
+  100% { opacity: 1; top: 0em; }    
+}

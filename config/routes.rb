@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     # It is volontary, as for now, user can access is own profile only
     get '/profile', to: 'users#show', as: 'profile'
 
+    # Landing page for Wunderlist Users
+    get '/wunderlist', to: 'wunderlist#landing'
 
     authenticated :user do
       root 'interests#index', as: :authenticated_root
