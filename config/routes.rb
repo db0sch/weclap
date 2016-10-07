@@ -29,5 +29,8 @@ Rails.application.routes.draw do
     authenticate :user, lambda { |u| u.admin } do
       mount Sidekiq::Web => '/sidekiq'
     end
+
+    match '/wunderlist' => 'wunderlist#webhook', via: :post, defaults: { formats: :json }
+
   end
 end

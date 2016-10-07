@@ -53,7 +53,8 @@ gem 'pusher'
 gem 'include_media_rails'
 
 # wunderlist integration
-gem 'omniauth-wunderlist'
+gem 'omniauth-wunderlist' # to connect users with their wunderlist account.
+gem 'wunderlist-api' # a wunderlist api wrapper (active record style).
 
 group :development, :test do
   gem 'binding_of_caller'
