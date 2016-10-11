@@ -14,6 +14,10 @@ private
   has_many :buddies, through: :inverse_friendships, source: :friend
 public
 
+after_commit :async_update # Run on create & update
+
+
+
   geocoded_by :address do |obj,results|
     if geo = results.first
       obj.city    = geo.city
@@ -101,6 +105,12 @@ public
     end
     return user
   end
+
+  private
+
+  private
+
+  def async_update
+    SetupMoviesListJob.perform_later(self.id)
+  end
 end
-
-

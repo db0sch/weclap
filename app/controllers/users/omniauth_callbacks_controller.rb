@@ -41,6 +41,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user.persisted?
       sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+      # create the "movie" list inside the user wunderlist.
+      # add a webhook to it.
+      # bg job ?
       set_flash_message(:notice, :success, :kind => "Wunderlist") if is_navigational_format?
     else
       session["devise.wunderlist_data"] = request.env["omniauth.auth"]

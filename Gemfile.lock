@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/db0sch/wunderlist-api.git
+  revision: 02fd0bba9340d96bd8772c589963e6678ae2d8b3
+  branch: find_list_by_id
+  specs:
+    wunderlist-api (1.0.5)
+      faraday (~> 0.9.1)
+
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -304,8 +312,6 @@ GEM
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
-    wunderlist-api (1.0.5)
-      faraday (~> 0.9.1)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -365,7 +371,7 @@ DEPENDENCIES
   twemoji
   typedjs-rails (~> 1.0.4)
   uglifier
-  wunderlist-api
+  wunderlist-api!
 
 RUBY VERSION
    ruby 2.3.0p0
