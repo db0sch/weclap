@@ -270,4 +270,8 @@ Devise.setup do |config|
     config.omniauth :wunderlist, ENV["WUNDERLIST_ID"], ENV["WUNDERLIST_SECRET"]
   end
 
+  Warden::Manager.after_set_user except: :fetch do |user, auth, opts|
+    SetupMoviesListJob.perform_later(user.id)
+  end
+
 end

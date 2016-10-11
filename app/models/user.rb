@@ -14,7 +14,7 @@ private
   has_many :buddies, through: :inverse_friendships, source: :friend
 public
 
-after_commit :async_update # Run on create & update
+# after_commit :async_update # Run on create & update
 
 
 
@@ -110,7 +110,7 @@ after_commit :async_update # Run on create & update
 
   private
 
-  def async_update
-    SetupMoviesListJob.perform_later(self.id)
-  end
+  # def async_update
+  #   SetupMoviesListJob.perform_later(self.id)
+  # end
 end
