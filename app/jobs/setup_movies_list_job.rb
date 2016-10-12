@@ -28,8 +28,8 @@ class SetupMoviesListJob < ActiveJob::Base
   end
 
   def create_and_save_user_list(wl, user)
-    create_list(wl)
-    user.wl_list_id = list_id(user, wl)
+    list = create_list(wl)
+    user.wl_list_id = list.id
     user.save
   end
 
@@ -44,22 +44,10 @@ class SetupMoviesListJob < ActiveJob::Base
   private
 
   def create_list(wunderlist)
-    list = wunderlist.new_list("Movies")
-    list.save
-  end
-
-  def list_id(user, wl)
-    list_id = wl.get_list_ids(['Movies']).last
-    unless any_tasks?(wl, list_id)
-      return list_id
-    else
-      return nil
-    end
-    # MIGHT NEED AN IMPROVE
-  end
-
-  def any_tasks?(wl, list_id)
-    wl.tasks_by_list_id(list_id).any?
+    list = wunderlist.new_list("🎥 Movies")
+    callback = list.create
+    list.id = callback['id']
+    list
   end
 
   def set_webhook(wl, list_id)
