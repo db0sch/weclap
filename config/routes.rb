@@ -17,9 +17,6 @@ Rails.application.routes.draw do
     # It is volontary, as for now, user can access is own profile only
     get '/profile', to: 'users#show', as: 'profile'
 
-    # Landing page for Wunderlist Users
-    get '/wunderlist', to: 'wunderlist#landing'
-
     authenticated :user do
       root 'interests#index', as: :authenticated_root
     end
@@ -31,5 +28,12 @@ Rails.application.routes.draw do
     authenticate :user, lambda { |u| u.admin } do
       mount Sidekiq::Web => '/sidekiq'
     end
+
+    # WUNDERLIST INTEGRATION
+    # Landing page for Wunderlist Users
+    get '/wunderlist', to: 'wunderlist#landing'
+    # Wunderlist webhook api
+    match '/wunderlist' => 'wunderlist#webhook', via: :post, defaults: { formats: :json }
+
   end
 end

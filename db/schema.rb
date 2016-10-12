@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829160529) do
+ActiveRecord::Schema.define(version: 20161011160821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,9 +80,13 @@ ActiveRecord::Schema.define(version: 20160829160529) do
     t.string   "fr_tagline"
     t.string   "fr_overview"
     t.date     "fr_release_date"
+    t.tsvector "tsv"
+    t.tsvector "tsv_optional"
   end
 
   add_index "movies", ["fr_title", "original_title", "title"], name: "index_movies_on_fr_title_and_original_title_and_title", using: :btree
+  add_index "movies", ["tsv"], name: "index_movies_on_tsv", using: :gin
+  add_index "movies", ["tsv_optional"], name: "index_movies_on_tsv_optional", using: :gin
 
   create_table "people", force: :cascade do |t|
     t.string   "name"
@@ -161,6 +165,7 @@ ActiveRecord::Schema.define(version: 20160829160529) do
     t.string   "messenger_id"
     t.string   "secondary_email"
     t.boolean  "newsletter",             default: false
+    t.integer  "wl_list_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
