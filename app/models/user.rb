@@ -12,11 +12,8 @@ private
   has_many :friends, through: :friendships, source: :buddy
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'buddy_id', dependent: :destroy
   has_many :buddies, through: :inverse_friendships, source: :friend
+
 public
-
-# after_commit :async_update # Run on create & update
-
-
 
   geocoded_by :address do |obj,results|
     if geo = results.first
@@ -105,12 +102,4 @@ public
     end
     return user
   end
-
-  private
-
-  private
-
-  # def async_update
-  #   SetupMoviesListJob.perform_later(self.id)
-  # end
 end
