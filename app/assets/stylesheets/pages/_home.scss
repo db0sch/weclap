@@ -38,35 +38,54 @@
       font-family: $title-font;
       font-size: 5em;
     }
-    .start-btn {
-      height: 100px;
-      padding: 20px;
-      a.btn.btn-secondary {
-        // il faut modifier la font du bouton.
-        position: relative;
-        font-size: 1.5em;
-        letter-spacing: 0.1em;
-        border: 2px solid $yellow;
-        box-shadow: 10px 10px 0px $brand-color;
-        text-decoration: none;
-        color: $brand-color;
-        font-weight: bold;
-        &:hover {
-          box-shadow: 5px 5px 0px $yellow;
-          top: 5px;
-          left: 5px;
-          background-color: $brand-color;
-          color: white;
-          border: 1px solid $brand-color;
-        }
+    .glyphicon-chevron-down {
+      color: $cyan;
+      top: 2em;
+      font-size: 22px;
+      transition: ease 0.2s;
+      &:hover {
+        color: $yellow;
       }
     }
   }
 }
+.start-btn {
+    height: 100px;
+    padding: 20px;
+    a.btn.btn-secondary {
+      // il faut modifier la font du bouton.
+      position: relative;
+      font-size: 1.5em;
+      letter-spacing: 0.1em;
+      border: 2px solid $yellow;
+      background-color: white;
+      box-shadow: 10px 10px 0px $brand-color;
+      text-decoration: none;
+      color: $brand-color;
+      font-weight: bold;
+      border-radius: 0px;
+      &:hover {
+        box-shadow: 5px 5px 0px $yellow;
+        top: 5px;
+        left: 5px;
+        background-color: $brand-color;
+        color: white;
+        border: 1px solid $brand-color;
+        border-radius: 0px;
+      }
+    }
+  }
 
 .hp-wrapper {
+  background: #F7F7F7;
+  padding: 40px 0 10px 0;
+}
+.wrapper-white {
   background: white;
-  padding: 100px 0;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hp-content {
@@ -74,20 +93,33 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 7px;
   .hp-text {
-    // changer couleur du text
-    // changer police sur h3 et p
     h3 {
+      font-weight: 300;
+      color: black;
+      font-size: 31px;
+      line-height: 44px;
+      letter-spacing: 0.04em;
+    }
+    p, li {
+      color: #808080;
+      font-size: 17px;
+      line-height: 28px;
     }
   }
   .hp-icon {
     display: flex;
     flex-direction: row;
     img.emoji {
-      height: 3em;
+      height: 2em;
       width: 3em;
-      margin: 0 .3em 0 .3em;
+      margin: 0 .5em 0 .5em;
       vertical-align: -0.1em;
     }
   }
 }
+.demo-image {
+  width: 100%;
+}
+

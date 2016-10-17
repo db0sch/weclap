@@ -1,0 +1,26 @@
+.pagination {
+  .view-more-link {
+    color: $brand-color;
+    position: relative;
+    margin-top: 20px;
+    padding: 10px;
+    text-decoration: none;
+    border: 3px solid $brand-color;
+    box-shadow: 8px 8px 0px $brand-color;
+    border-radius: 0;
+    &:hover {
+      top: 5px;
+      left: 5px;
+      box-shadow: 3px 3px 0px $brand-color;
+    }
+    a:hover {
+      text-decoration: none;
+      color: $brand-color;
+    }
+  }
+  p {
+    margin-top: 20px;
+    color: $gray-lighter;
+    font-weight: bold;
+  }
+}

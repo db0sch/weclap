@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+    :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook, :wunderlist]
 
   has_many :interests, dependent: :destroy
   has_many :movies, through: :interests
@@ -12,6 +12,7 @@ private
   has_many :friends, through: :friendships, source: :buddy
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'buddy_id', dependent: :destroy
   has_many :buddies, through: :inverse_friendships, source: :friend
+
 public
 
   geocoded_by :address do |obj,results|
@@ -79,6 +80,26 @@ public
     end
     return user
   end
+
+  def self.find_for_wunderlist_oauth(auth)
+    user_params = {
+      provider: "wunderlist",
+      uid: auth.uid,
+      email: auth.info.email,
+      password: Devise.friendly_token[0,20],
+      first_name: auth.info.name.split(/\s/).first,
+      last_name: auth.info.name.split(/\s/).last,
+      fullname: auth.info.name,
+      token: auth.credentials.token
+    }
+    user = User.where(provider: "wunderlist", uid: auth.uid).first
+    if user
+      # update
+      user.update(user_params)
+    else
+      # create
+      user = User.create(user_params)
+    end
+    return user
+  end
 end
-
-

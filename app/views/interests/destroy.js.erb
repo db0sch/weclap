@@ -3,8 +3,8 @@
   // faire apparaitre une modal ou un popover
 <% else %>
   console.log('success');
-  console.log('#movie-' + <%= @interest_id %>);
-  $('#movie-' + <%= @interest_id %>).slideUp( 500, function() {
-    $(this).remove(); 
+  console.log('#movie-' + <%= @interest.movie.id %>);
+  $('#movie-' + <%= @interest.movie.id %>).slideUp( 500, function() {
+    $(this).remove();
     });
 <% end %>

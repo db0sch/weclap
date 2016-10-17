@@ -36,6 +36,9 @@ gem 'pg_search'
 gem 'capybara', '~> 2.4.4'
 gem 'poltergeist'
 gem "twemoji"
+gem "typedjs-rails", "~> 1.0.4"
+gem 'kaminari'
+gem 'jquery-infinite-pages'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
@@ -45,6 +48,14 @@ gem 'sidekiq'
 gem 'sinatra'  # Dependency of sidekiq
 gem 'sidekiq-failures'
 gem 'pusher'
+
+# media queries mixins
+gem 'include_media_rails'
+
+# wunderlist integration
+gem 'omniauth-wunderlist' # to connect users with their wunderlist account.
+# gem 'wunderlist-api' # a wunderlist api wrapper (active record style).
+gem 'wunderlist-api', git: 'https://github.com/db0sch/wunderlist-api.git', branch: 'master'
 
 group :development, :test do
   gem 'binding_of_caller'

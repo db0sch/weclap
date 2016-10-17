@@ -1,0 +1,74 @@
+<div class="banner" id="wunderlist-banner">
+  <div class="banner-content" id="wunderlist-banner-content">
+    <!-- <h2 class="hidden-xs"><span class="typewunderlist"></span></h2> -->
+    <div>
+      <h1><span id="main-title">Holly</span></h1>
+      <div class="" id= "wunderlist-btn">
+        <%= link_to "Connect to Wunderlist", user_wunderlist_omniauth_authorize_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wunderlist-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="card" id="wunderlist-card">
+          <div class="card-head">
+            <p>Lorem ipsum dolor</p>
+          </div>
+          <div class="card-body">
+            <div class="infos">
+              <div>
+                <%= image_tag(("http://placehold.it/60x60"),class: "avatar wunderlist-avatar") %>
+              </div>
+              <div class="tag">
+                <span>Liquaj</span>
+                <p>Voluptates, eos hic.</p>
+              </div>
+            </div>
+            <p>Lorem dignissimos quae quo, distinctio tempora iure eaque explicabo sed totam vitae? Aliquam corporis, at quisquam!</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="card" id="wunderlist-card">
+          <div class="card-head">
+            <p>Lorem ipsum dolor</p>
+          </div>
+          <div class="card-body">
+            <div class="infos">
+              <div>
+                <%= image_tag(("http://placehold.it/60x60"),class: "avatar wunderlist-avatar") %>
+              </div>
+              <div class="tag">
+                <span>Incidunt</span>
+                <p>distinctio tempora iure.</p>
+              </div>
+            </div>
+            <p>Lorem dignissimos quae quo, distinctio tempora iure eaque explicabo sed totam vitae? Aliquam corporis, at quisquam!</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="card" id="wunderlist-card">
+          <div class="card-head">
+            <p>Lorem ipsum dolor</p>
+          </div>
+          <div class="card-body">
+            <div class="infos">
+              <div>
+                <%= image_tag(("http://placehold.it/60x60"),class: "avatar wunderlist-avatar") %>
+              </div>
+              <div class="tag">
+                <span>Explicabo</span>
+                <p>distinctio tempora iure.</p>
+              </div>
+            </div>
+            <p>Lorem dignissimos quae quo, distinctio tempora iure eaque explicabo sed totam vitae? Aliquam corporis, at quisquam!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

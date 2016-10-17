@@ -1,0 +1,11 @@
+// Append new data
+$("<%=j render 'shared/interests_list', interests: @interests, friends: @friends %>")
+  .appendTo($(".interests-list"));
+
+// Update pagination link
+<% if @interests.last_page? %>
+  $('.pagination').html("<p>That's all, folks!</p>");
+<% else %>
+  $('.pagination')
+    .html("<div class='view-more-link'> <%=j link_to_next_page(@interests, 'View more', :remote => true) %> </div>");
+<% end %>

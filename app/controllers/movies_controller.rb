@@ -9,7 +9,8 @@ class MoviesController < ApplicationController
       when 1 then Movie.includes(jobs: :person, interests: :user).where(id: Show.select(:movie_id)).limit(100)
       when 2 then Movie.includes(jobs: :person, interests: :user).where(id: Streaming.select(:movie_id)).limit(100)
       else
-        Movie.includes(jobs: :person, interests: :user).order('Random()').limit(100)
+        # Movie.includes(jobs: :person, interests: :user).order('Random()').limit(100)
+        Movie.includes(jobs: :person, interests: :user).order('Random()').page(params[:page])
     end
     # @movies = policy_scope(Movie)
     # title = params[:title]

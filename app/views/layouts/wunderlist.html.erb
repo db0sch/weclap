@@ -35,12 +35,10 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
   <body class="<%= controller_name %>-<%= action_name%>">
-    <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
-    <div class="main">
-      <%= yield %>
-    </div>
+   
+    <%= yield %>
     <%= render 'shared/footer' %>
+    
     <%= javascript_include_tag 'application' %>
     <%= yield(:after_js) %>
     <%= yield(:after_js2) %>

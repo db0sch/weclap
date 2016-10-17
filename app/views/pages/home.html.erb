@@ -1,48 +1,57 @@
 <div class="banner">
   <div class="banner-content">
-    <h2>love movies?</h2>
+    <!-- Code visible en Desktop -->
+    <h2 class="hidden-xs"><span class="element"></span></h2>
+    <!-- Code visible en XS uniquement. On retire l'animation Typedjs -->
+    <h2 class="visible-xs">love movies?</h2>
+
     <h1>say hello to <span id="main-title">Holly</span></h1>
     <div class="start-btn">
       <%= link_to "START", new_user_session_path, class: "btn btn-secondary" %>
     </div>
+    <a href="#1" class="hidden-xs">
+      <div class="glyphicon glyphicon-chevron-down"></div>
+    </a>
   </div>
 </div>
-<div class="hp-wrapper">
+<div class="hp-wrapper" id="1">
   <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-sm-4">
+    <div class="row marged-bot">
+      <div class="col-xs-12 col-sm-6 col-sm-push-6">
         <div class="hp-content">
           <div class="hp-icon">
             <%= emojify ":clipboard: :movie_camera: :yum:" %>
           </div>
           <div class="hp-text">
-            <h3 class='text-center'>Fill you watchlist</h3>
-            <p class="text-justify">Holly is a powerful, yet simple, movie watchlist manager:</p>
-            <ul class="list-unstyled">
-              <li>Search and add the movies you want to watch</li>
-              <li>Browse your own watchlist (by filtering by duration, stars...)</li>
-              <li>Access movies info (overview, cast, trailer, poster...)</li>
-              <li>Know how you can watch the film (theaters or streaming)</li>
-            </ul>
+            <h3 class='text-center'>Fill your watchlist</h3>
+            <p class="text-justify">Holly is a powerful, yet simple, movie watchlist manager. Search and add the movies you want to watch. Browse your own watchlist (by filtering by duration, stars...). Access movies info (overview, cast, trailer, poster...). Know how you can watch the film (theaters or streaming)</p>
           </div>
         </div>
       </div>
-      <div class="col-xs-12 col-sm-4">
+      <div class="col-xs-12 col-sm-6 col-sm-pull-6">
+        <%= image_tag "watchlist.png", class: "demo-image" %>
+      </div> 
+    </div>
+    <div class="row marged-bot">
+      <div class="col-xs-12 col-sm-6">
         <div class="hp-content">
           <div class="hp-icon">
             <%= emojify ":mailbox: :e-mail: :grinning:" %>
           </div>
           <div class="hp-text">
             <h3 class='text-center'>Get updates</h3>
-            <p class="text-justify">Each week, we'll send you one email, to let you know :</p>
-            <ul class="list-unstyled">
-              <li>which movies are available (theaters or streaming)</li>
-              <li>which movies you share with your friends watchlist.</li>
-            </ul>
+            <p class="text-justify">Each week, we'll send you one email, to let you know : which movies are available (theaters or streaming). Which movies you share with your friends watchlist.</p>
           </div>
         </div>
       </div>
-      <div class="col-xs-12 col-sm-4">
+       <div class="col-xs-12 col-sm-6">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+      </div>
+      <div class="col-xs-12 col-sm-6">
         <div class="hp-content">
           <div class="hp-icon">
             <%= emojify ":iphone: :speech_balloon: :astonished:" %>
@@ -55,5 +64,10 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+<div class="wrapper-white">
+  <div class="start-btn">
+    <%= link_to "TRY IT NOW", new_user_session_path, class: "btn btn-secondary" %>
   </div>
 </div>
