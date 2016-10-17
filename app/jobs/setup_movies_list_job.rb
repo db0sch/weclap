@@ -57,7 +57,7 @@ class SetupMoviesListJob < ActiveJob::Base
       configuration:""
     }
     webhook = wl.new_webhook_by_list_id(list_id, attrs)
-    webhook.create
+    webhook.save
   end
 
   def check_webhook?(wl, webhooks)
