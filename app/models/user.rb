@@ -84,7 +84,7 @@ public
   def self.find_for_wunderlist_oauth(auth)
     user_params = {
       provider: "wunderlist",
-      uid: auth.extra.id,
+      uid: auth.uid,
       email: auth.info.email,
       password: Devise.friendly_token[0,20],
       first_name: auth.info.name.split(/\s/).first,
@@ -92,7 +92,7 @@ public
       fullname: auth.info.name,
       token: auth.credentials.token
     }
-    user = User.where(provider: "wunderlist", uid: auth.extra.id).first
+    user = User.where(provider: "wunderlist", uid: auth.uid).first
     if user
       # update
       user.update(user_params)
