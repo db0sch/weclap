@@ -2,11 +2,27 @@ class Movie < ActiveRecord::Base
   include PgSearch
 
   pg_search_scope :autocomplete_title,
-                  against: { fr_title: 'A', original_title: 'B', title: 'C' },
+                  against: { title: 'A', original_title: 'B'},
                   # associated_against: { people: :name },
                   ignoring: :accents,
-                  using: { tsearch: { prefix: true, any_word: true } },
-                  order_within_rank: "movies.imdb_score DESC"
+                  using: {
+                    tsearch: {
+                      prefix: true,
+                      any_word: true,
+                      dictionary: "english",
+                      tsvector_column: "tsv"
+                    }
+                    # dmetaphone: {
+                    #   only: [:fr_title, :title, :origin_title],
+                    #   tsvector_column: "tsv_optional"
+                    # },
+                    # trigram: {
+                    #   threshold: 0.3,
+                    #   only: [:fr_title, :title, :origin_title]
+                    # }
+                  },
+                  ranked_by: "movies.popularity * (:tsearch / 2.5)",
+                  order_within_rank: "movies.popularity DESC"
 
   # *** PREVIOUS PG_SEARCH CONFIG MADE BY NEPHAEST (BUT TOO RESSOURCE CONSUMING) ***
   # pg_search_scope :which_title_or_synopsis_contains,
@@ -20,14 +36,27 @@ class Movie < ActiveRecord::Base
   #                 order_within_rank: "movies.imdb_score DESC"
 
   pg_search_scope :which_title_contains,
-                  against: { fr_title: 'A', original_title: 'B', title: 'C' },
+                  against: { title: 'A', original_title: 'B', fr_title: 'C'},
                   # associated_against: { people: :name },
                   ignoring: :accents,
                   using: {
-                            tsearch: { prefix: true },
-                            #dmetaphone: { only: [:fr_title, :title, :origin_title] }
-                         },
-                  order_within_rank: "movies.imdb_score DESC"
+                    tsearch: {
+                      prefix: true,
+                      any_word: true,
+                      dictionary: "english",
+                      tsvector_column: "tsv"
+                    }
+                    # dmetaphone: {
+                    #   only: [:fr_title, :title, :origin_title],
+                    #   tsvector_column: "tsv_optional"
+                    # },
+                    # trigram: {
+                    #   threshold: 0.3,
+                    #   only: [:fr_title, :title, :origin_title]
+                    # }
+                  },
+                  ranked_by: "movies.popularity * (:tsearch / 2.5)",
+                  order_within_rank: "movies.popularity DESC"
 
   has_many :interests, dependent: :destroy
   has_many :users, through: :interests
