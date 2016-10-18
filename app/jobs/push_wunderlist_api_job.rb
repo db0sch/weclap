@@ -3,6 +3,8 @@ class PushWunderlistApiJob < ActiveJob::Base
 
   require 'wunderlist'
 
+  include Emojigenre
+
   def perform(*args)
     attributes = args.first
     movie = Movie.find(attributes["movie_id"])
@@ -14,7 +16,7 @@ class PushWunderlistApiJob < ActiveJob::Base
     # Récupérer la task et la stocker dans une variable
     task = wl.task_by_id(attributes["task_id"])
     # Modifier le titre
-    task.title = movie.title
+    task.title = "#{emojify_genre(movie.genres.first) if movie.genres} #{movie.title}"
     task.save
     # # Appeler le module emoji avec le genre du film en argument
     # # Créer sous-taches avec cast & crew
@@ -27,7 +29,11 @@ class PushWunderlistApiJob < ActiveJob::Base
 Genre: #{movie.genres.join(", ") if movie.genres}
 Year: #{movie.release_date.year if movie.release_date}
 \nSynopsis:
-#{movie.overview if movie.overview}"
+#{movie.overview if movie.overview}
+\n
+=================
+\n
+Your initial search was \"#{attributes['term'] if attributes['term']}\""
     task.update_or_create_note(content: note_content).save
   end
 
