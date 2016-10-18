@@ -28,7 +28,7 @@ class WunderlistController < ApplicationController
         term = params['after']['title']
         task_id = params['after']['id']
         # Trigger a bg job search the movie title
-        MovieSearchJob.perform_later(term, user.id, task_id)
+        MovieSearchJob.perform_later({"term" => term, "user_id" => user.id, "task_id" => task_id})
       when "delete"
         p "DELETE"
         # Trigger a bg job which delete the film in the user watchlist
@@ -36,7 +36,7 @@ class WunderlistController < ApplicationController
         p "UPDATE"
         term = params['after']['title']
         # Trigger a bg job search the movie title
-        MovieSearchJob.perform_later(term)
+        # MovieSearchJob.perform_later(term)
         # if the movie is different, then :
           # Trigger a bg job which adds the movie to the user watchlist
           # Trigger a bg job which sends the movie info to the wunderlist of the user.

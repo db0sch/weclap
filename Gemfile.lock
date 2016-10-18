@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/db0sch/wunderlist-api.git
-  revision: 04127a0687d9e9e8efdd1b736dce6400f7d831cb
+  revision: 8a61c89c18f8071342ea4ef004df6fdf6238fc0b
   branch: master
   specs:
     wunderlist-api (1.0.5)

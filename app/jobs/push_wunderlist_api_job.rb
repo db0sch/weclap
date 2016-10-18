@@ -4,19 +4,28 @@ class PushWunderlistApiJob < ActiveJob::Base
   require 'wunderlist'
 
   def perform(*args)
-    movie = Movie.find(args.first)
+    attributes = args.first
+    movie = Movie.find(attributes["movie_id"])
     p "ready to push the movie #{movie.title} - id: #{movie.id}"
-    user = User.find(args.last)
+    user = User.find(attributes["user_id"])
 
     # Créer instance de Wunderlist
     wl = wunderlist_instance(user)
     # Récupérer la liste et la stocker dans une variable
-    list = wl.list_by_id(user.wl_list_id)
+    # list = wl.list_by_id(user.wl_list_id)
     # Récupérer la task et la stocker dans une variable
-
-    # Modifier le titre (avec emoji)
-    # Appeler le module emoji avec le genre du film en argument
-    # Créer sous-taches avec cast & crew
+    task = wl.task_by_id(attributes["task_id"])
+    p "this is the task we want:"
+    p task
+    # Modifier le titre
+    task.title = movie.title
+    task.save
+    # # Appeler le module emoji avec le genre du film en argument
+    # # Créer sous-taches avec cast & crew
+    director = movie.jobs.where(title: "Director").first.person.name
+    task.new_subtask(title: "directed by: #{director}").save
+    cast = movie.jobs.select{ |j| j.title == 'Actor' }.reverse.shift(2).map(&:person).map(&:name)
+    cast.each { |actor| task.new_subtask(title: actor).save }
     # Créer une note avec durée, année, genre, et synopsis
     # Et envoyer les requêtes à l'API Wunderlist
   end
