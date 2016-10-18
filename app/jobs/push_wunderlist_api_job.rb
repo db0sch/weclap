@@ -11,12 +11,8 @@ class PushWunderlistApiJob < ActiveJob::Base
 
     # Créer instance de Wunderlist
     wl = wunderlist_instance(user)
-    # Récupérer la liste et la stocker dans une variable
-    # list = wl.list_by_id(user.wl_list_id)
     # Récupérer la task et la stocker dans une variable
     task = wl.task_by_id(attributes["task_id"])
-    p "this is the task we want:"
-    p task
     # Modifier le titre
     task.title = movie.title
     task.save
@@ -27,7 +23,12 @@ class PushWunderlistApiJob < ActiveJob::Base
     cast = movie.jobs.select{ |j| j.title == 'Actor' }.reverse.shift(2).map(&:person).map(&:name)
     cast.each { |actor| task.new_subtask(title: actor).save }
     # Créer une note avec durée, année, genre, et synopsis
-    # Et envoyer les requêtes à l'API Wunderlist
+    note_content = "Duration: #{movie.runtime if movie.runtime}mn
+Genre: #{movie.genres.join(", ") if movie.genres}
+Year: #{movie.release_date.year if movie.release_date}
+\nSynopsis:
+#{movie.overview if movie.overview}"
+    task.update_or_create_note(content: note_content).save
   end
 
 
