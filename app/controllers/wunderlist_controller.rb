@@ -17,7 +17,7 @@ class WunderlistController < ApplicationController
 
   def webhook
     render nothing: true, status: 200, content_type: 'json' if params['error']
-    # CHECK The type in another (private) method
+    # Check the type in another (private) method
     # Check if the user is registered in our database with his Wunderlist id.
     # Load him.
     if params['subject']['type'] == "task"
