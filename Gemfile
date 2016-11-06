@@ -58,6 +58,7 @@ gem 'omniauth-wunderlist' # to connect users with their wunderlist account.
 gem 'wunderlist-api', git: 'https://github.com/db0sch/wunderlist-api.git', branch: 'master'
 
 group :development, :test do
+  gem 'rspec-rails', '~> 3.5'
   gem 'binding_of_caller'
   gem 'better_errors'
   gem 'quiet_assets'
