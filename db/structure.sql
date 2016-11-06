@@ -451,7 +451,8 @@ CREATE TABLE users (
     friendslist json,
     messenger_id character varying,
     secondary_email character varying,
-    newsletter boolean DEFAULT false
+    newsletter boolean DEFAULT false,
+    wl_list_id integer
 );
 
 
@@ -891,4 +892,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160829160529');
 INSERT INTO schema_migrations (version) VALUES ('20160830141737');
 
 INSERT INTO schema_migrations (version) VALUES ('20160830175926');
+
+INSERT INTO schema_migrations (version) VALUES ('20161011160821');
 
