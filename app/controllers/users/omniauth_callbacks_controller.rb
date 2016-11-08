@@ -38,7 +38,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def wunderlist
     # find and return the user with the wunderlist params
     p "hello"
-    p request.env
+    p request.env["omniauth.auth"]
     @user = User.find_for_wunderlist_oauth(request.env["omniauth.auth"])
 
     if @user.persisted?
