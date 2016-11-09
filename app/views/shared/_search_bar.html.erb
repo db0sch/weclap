@@ -9,27 +9,27 @@
   </form>
 </div>
 
-<% content_for :after_js2 do %>
-  <script>
-    $("input#search-field").autocomplete({
-      source: function (request, response) {
-        var q = request.term.toLowerCase().trim().replace(/\s/g, "_");
-        $.get('<%= search_autocomplete_path %>?query=' + q, function (data) {
-            response(data);
-            $('.ui-helper-hidden-accessible').hide();
-            $("ul.ui-autocomplete > li.ui-menu-item").on('click', function(mev) {
-              $("input#search-field").val(mev.target.innerText);
-              $('button#search-button').click();
-            });
-          });
-      },
-      appendTo: "#results",
+<%# content_for :after_js2 do %>
+  <!-- <script> -->
+//    $("input#search-field").autocomplete({
+//      source: function (request, response) {
+//        var q = request.term.toLowerCase().trim().replace(/\s/g, "_");
+//        $.get('<%= search_autocomplete_path %>?query=' + q, function (data) {
+//            response(data);
+//            $('.ui-helper-hidden-accessible').hide();
+//            $("ul.ui-autocomplete > li.ui-menu-item").on('click', function(mev) {
+//              $("input#search-field").val(mev.target.innerText);
+//              $('button#search-button').click();
+//            });
+//          });
+//      },
+//      appendTo: "#results",
       // position: {
       //   my : 'top',
       //   at : 'bottom'
       // },
-      minLength: 3,
-      delay: 200
-    });
-  </script>
-<% end %>
+//      minLength: 3,
+//      delay: 200
+//    });
+  <!-- </script> -->
+<%# end %>
