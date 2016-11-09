@@ -1,17 +1,13 @@
 class WunderlistController < ApplicationController
 
   # Don't need to authenticate or authorize user
-  # skip_before_action :authenticate_user!
-  before_action :authenticate_user!, except: [:webhook]
+  skip_before_action :authenticate_user!
   skip_after_action :verify_authorized
   # Disable protect_from_forgery (API)
   protect_from_forgery with: :null_session
 
   # Wunderlist API wrapper (active record style)
   require 'wunderlist'
-
-  # Avoid navbar rendering
-  # layout 'wunderlist'
 
   def webhook
     render nothing: true, status: 200, content_type: 'json' if params['error']
