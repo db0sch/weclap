@@ -2,7 +2,13 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   scope '(:locale)', locale: /fr/ do
-    root to: 'wunderlist#landing'
+    resources :interests, only: [ :index ]
+    # resources :wunderlist, only: [ :index ]
+    authenticated :user do
+      root to: 'wunderlist#index'
+    end
+    root to: 'pages#home'
+
 
     require "sidekiq/web"
     authenticate :user, lambda { |u| u.admin } do
@@ -10,10 +16,8 @@ Rails.application.routes.draw do
     end
 
     # WUNDERLIST INTEGRATION
-    # Landing page for Wunderlist Users
-    get '/wunderlist', to: 'wunderlist#landing'
     # Wunderlist webhook api
     match '/wunderlist' => 'wunderlist#webhook', via: :post, defaults: { formats: :json }
-
+    # should probably use something else for the api endpoint. Match is certainly not the best method.
   end
 end

@@ -1,7 +1,8 @@
 class WunderlistController < ApplicationController
 
   # Don't need to authenticate or authorize user
-  skip_before_action :authenticate_user!
+  # skip_before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:webhook]
   skip_after_action :verify_authorized
   # Disable protect_from_forgery (API)
   protect_from_forgery with: :null_session
@@ -13,6 +14,9 @@ class WunderlistController < ApplicationController
   layout 'wunderlist'
 
   def landing
+  end
+
+  def index
   end
 
   def webhook
