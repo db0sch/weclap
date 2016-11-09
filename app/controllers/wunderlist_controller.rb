@@ -11,13 +11,7 @@ class WunderlistController < ApplicationController
   require 'wunderlist'
 
   # Avoid navbar rendering
-  layout 'wunderlist'
-
-  def landing
-  end
-
-  def index
-  end
+  # layout 'wunderlist'
 
   def webhook
     render nothing: true, status: 200, content_type: 'json' if params['error']

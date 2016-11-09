@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :interests, only: [ :index ]
     # resources :wunderlist, only: [ :index ]
     authenticated :user do
-      root to: 'wunderlist#index'
+      root to: 'pages#howto', as: :authenticated_root
     end
     root to: 'pages#home'
 
