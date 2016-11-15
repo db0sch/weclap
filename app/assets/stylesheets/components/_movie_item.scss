@@ -1,5 +1,5 @@
-$break-small: 320px;
-$break-large: 1200px;
+// $break-small: 320px;
+// $break-large: 1200px;
 
 
 // GLOBAL LAYOUT OF THE MOVIE ITEM
@@ -24,9 +24,9 @@ $break-large: 1200px;
     flex: 1 1 80%;
     display: flex;
     flex-direction: row;
-    @include media(">=phone", "<=tablet") {
-      flex-direction: column;
-    }
+    // @include media(">=phone", "<=tablet") {
+    //   flex-direction: column;
+    // }
   }
 }
 
@@ -34,9 +34,9 @@ $break-large: 1200px;
 .movie-poster {
   .movie-item-image {
     width: 80px;
-    @include media(">=phone", "<=tablet") {
-      width: 120px;
-    }
+    // @include media(">=phone", "<=tablet") {
+    //   width: 120px;
+    // }
   }
 }
 
@@ -110,19 +110,19 @@ $break-large: 1200px;
   position: relative;
   display: flex;
   flex-direction: column;
-  @include media(">=phone", "<=tablet") {
-    flex-direction: row-reverse;
-  }
+  // @include media(">=phone", "<=tablet") {
+  //   flex-direction: row-reverse;
+  // }
   .movie-action {
     flex: 1 1 50%;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    @include media(">=phone", "<=tablet") {
-      flex: 1 1 auto;
-      justify-content: center;
-      align-items: center;
-    }
+    // @include media(">=phone", "<=tablet") {
+    //   flex: 1 1 auto;
+    //   justify-content: center;
+    //   align-items: center;
+    // }
     .item-rate-movie {
       display: flex;
       flex-direction: column;
@@ -141,11 +141,11 @@ $break-large: 1200px;
     //flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    @include media(">=phone", "<=tablet") {
-      flex: 1 1 auto;
-      flex-direction: column;
-      //justify-content: flex-start;
-    }
+    // @include media(">=phone", "<=tablet") {
+    //   flex: 1 1 auto;
+    //   flex-direction: column;
+    //   //justify-content: flex-start;
+    // }
     .tag-label {
       margin: 2px 2px;
       background: $green;
@@ -158,9 +158,9 @@ $break-large: 1200px;
         font-weight: bold;
         color: white;
         font-size: 0.5em;
-        @include media(">=phone", "<=tablet") {
-          font-size: 0.4em;
-        }
+        // @include media(">=phone", "<=tablet") {
+        //   font-size: 0.4em;
+        // }
         margin: 0px;
       }
     }

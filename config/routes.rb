@@ -1,28 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
   scope '(:locale)', locale: /fr/ do
-    resources :sort, only: [:index]
-    resources :movies, only: [:show, :index]
-    resources :users, only: [:index, :update] do
-      resources :friendships, only: [:index]
-      # resources :friendships, only: [:show, :index]
-    end
-    resources :interests, only: [:create, :update, :destroy]
-
-    get '/users/:user_id/watchlist' => 'interests#index', as: 'watchlist'
-    get 'search' => 'search#index'
-    get 'search/autocomplete', to: 'search#autocomplete'
-
-    # No id for the profile route (user#show).
-    # It is volontary, as for now, user can access is own profile only
-    get '/profile', to: 'users#show', as: 'profile'
-
+    resources :interests, only: [ :index ]
+    # resources :wunderlist, only: [ :index ]
     authenticated :user do
-      root 'interests#index', as: :authenticated_root
+      root to: 'pages#howto', as: :authenticated_root
     end
     root to: 'pages#home'
 
-    mount Facebook::Messenger::Server, at: 'bot'
 
     require "sidekiq/web"
     authenticate :user, lambda { |u| u.admin } do
@@ -30,10 +16,8 @@ Rails.application.routes.draw do
     end
 
     # WUNDERLIST INTEGRATION
-    # Landing page for Wunderlist Users
-    get '/wunderlist', to: 'wunderlist#landing'
     # Wunderlist webhook api
     match '/wunderlist' => 'wunderlist#webhook', via: :post, defaults: { formats: :json }
-
+    # should probably use something else for the api endpoint. Match is certainly not the best method.
   end
 end

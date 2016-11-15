@@ -9,7 +9,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'devise'
 gem 'redis'
 gem 'themoviedb'
-gem 'filterrific'
+# gem 'filterrific'
 
 gem 'sass-rails'
 gem 'jquery-rails'
@@ -21,8 +21,8 @@ gem 'autoprefixer-rails'
 gem 'pundit'
 gem 'geocoder'
 gem 'omniauth-facebook'
-gem 'rails-assets-starrr', source: 'https://rails-assets.org'
-gem 'rails-assets-bootstrap-select', source: 'https://rails-assets.org'
+# gem 'rails-assets-starrr', source: 'https://rails-assets.org'
+# gem 'rails-assets-bootstrap-select', source: 'https://rails-assets.org'
 gem 'fb_graph'
 gem 'rest-client'
 gem 'awesome_print'
@@ -30,19 +30,19 @@ gem "koala"
 gem 'nokogiri'
 gem 'facebook-messenger'
 gem "coffee-rails"
-gem "gmaps4rails"
-gem 'jquery-ui-rails'
+# gem "gmaps4rails"
+# gem 'jquery-ui-rails'
 gem 'pg_search'
 gem 'capybara', '~> 2.4.4'
 gem 'poltergeist'
-gem "twemoji"
-gem "typedjs-rails", "~> 1.0.4"
+# gem "twemoji"
+# gem "typedjs-rails", "~> 1.0.4"
 gem 'kaminari'
 gem 'jquery-infinite-pages'
 
-source 'https://rails-assets.org' do
-  gem "rails-assets-underscore"
-end
+# source 'https://rails-assets.org' do
+#   gem "rails-assets-underscore"
+# end
 
 gem 'sidekiq'
 gem 'sinatra'  # Dependency of sidekiq
@@ -50,7 +50,7 @@ gem 'sidekiq-failures'
 gem 'pusher'
 
 # media queries mixins
-gem 'include_media_rails'
+# gem 'include_media_rails'
 
 # wunderlist integration
 gem 'omniauth-wunderlist' # to connect users with their wunderlist account.

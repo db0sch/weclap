@@ -9,12 +9,6 @@ class WunderlistController < ApplicationController
   # Wunderlist API wrapper (active record style)
   require 'wunderlist'
 
-  # Avoid navbar rendering
-  layout 'wunderlist'
-
-  def landing
-  end
-
   def webhook
     render nothing: true, status: 200, content_type: 'json' if params['error']
     # Check the type in another (private) method
