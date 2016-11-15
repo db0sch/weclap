@@ -1,4 +1,4 @@
-class GetMovieDetailsJob < ActiveJob::Base
+class GetMovieDetailsJob < ApplicationJob
   queue_as :default
 
   def perform(imdb_ids)

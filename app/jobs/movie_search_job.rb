@@ -1,4 +1,4 @@
-class MovieSearchJob < ActiveJob::Base
+class MovieSearchJob < ApplicationJob
   queue_as :default
 
   def perform(*args)

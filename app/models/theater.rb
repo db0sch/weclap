@@ -1,4 +1,4 @@
-class Theater < ActiveRecord::Base
+class Theater < ApplicationRecord
   has_many :shows, dependent: :destroy
   has_many :movies, -> { distinct }, through: :shows
 

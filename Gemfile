@@ -1,11 +1,13 @@
 source 'https://rubygems.org'
 ruby '2.3.0'
 
-gem 'rails', '4.2.6'
+# gem 'rails', '4.2.6'
+gem 'rails', '>= 5.0.0.1', '< 5.1'
 gem 'puma'
 gem 'pg'
 gem 'figaro'
-gem 'jbuilder', '~> 2.0'
+# gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 gem 'devise'
 gem 'redis'
 gem 'themoviedb'
@@ -33,7 +35,8 @@ gem "coffee-rails"
 # gem "gmaps4rails"
 # gem 'jquery-ui-rails'
 gem 'pg_search'
-gem 'capybara', '~> 2.4.4'
+# gem 'capybara', '~> 2.4.4'
+gem 'capybara'
 gem 'poltergeist'
 # gem "twemoji"
 # gem "typedjs-rails", "~> 1.0.4"
@@ -45,7 +48,8 @@ gem 'jquery-infinite-pages'
 # end
 
 gem 'sidekiq'
-gem 'sinatra'  # Dependency of sidekiq
+gem 'sinatra', git: 'https://github.com/sinatra/sinatra.git', branch: 'master'
+# Dependency of sidekiq
 gem 'sidekiq-failures'
 gem 'pusher'
 
@@ -60,7 +64,7 @@ gem 'wunderlist-api', git: 'https://github.com/db0sch/wunderlist-api.git', branc
 group :development, :test do
   gem 'binding_of_caller'
   gem 'better_errors'
-  gem 'quiet_assets'
+  # gem 'quiet_assets'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'spring'

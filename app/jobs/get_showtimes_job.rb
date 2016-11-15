@@ -1,4 +1,4 @@
-class GetShowtimesJob < ActiveJob::Base
+class GetShowtimesJob < ApplicationJob
   queue_as :default
 
   def perform(zip_code, city, movie_id, user_id)

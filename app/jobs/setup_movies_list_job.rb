@@ -1,4 +1,4 @@
-class SetupMoviesListJob < ActiveJob::Base
+class SetupMoviesListJob < ApplicationJob
   queue_as :default
 
   require 'wunderlist'

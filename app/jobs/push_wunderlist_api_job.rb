@@ -1,4 +1,4 @@
-class PushWunderlistApiJob < ActiveJob::Base
+class PushWunderlistApiJob < ApplicationJob
   queue_as :default
 
   require 'wunderlist'

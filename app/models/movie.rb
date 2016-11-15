@@ -1,4 +1,4 @@
-class Movie < ActiveRecord::Base
+class Movie < ApplicationRecord
   include PgSearch
 
   pg_search_scope :autocomplete_title,

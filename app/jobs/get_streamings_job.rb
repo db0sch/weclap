@@ -1,4 +1,4 @@
-class GetStreamingsJob < ActiveJob::Base
+class GetStreamingsJob < ApplicationJob
   queue_as :default
 
   def perform(movie_id, user_id)

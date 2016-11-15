@@ -1,4 +1,4 @@
-class GetMovieListJob < ActiveJob::Base
+class GetMovieListJob < ApplicationJob
   queue_as :default
 
   def perform(count, start, desc)

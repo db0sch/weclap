@@ -1,4 +1,4 @@
-class Streaming < ActiveRecord::Base
+class Streaming < ApplicationRecord
   belongs_to :movie
   belongs_to :provider
 end

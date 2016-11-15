@@ -1,4 +1,4 @@
-class GetFrenchXlationNCreditsJob < ActiveJob::Base
+class GetFrenchXlationNCreditsJob < ApplicationJob
   queue_as :default
 
   def perform(movie_id)

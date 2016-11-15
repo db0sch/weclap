@@ -1,4 +1,4 @@
-class GetMovieTrailerFromYoutubeJob < ActiveJob::Base
+class GetMovieTrailerFromYoutubeJob < ApplicationJob
   queue_as :default
 
   def perform(count)
